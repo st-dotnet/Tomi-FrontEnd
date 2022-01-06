@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '@app/_services';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-customer',
@@ -16,14 +18,15 @@ export class CustomerComponent implements OnInit {
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
-      private router: Router
+      private router: Router,
+      private authenticationService: UserService
   ) { 
     
   }
 
   ngOnInit() {
       this.customerForm = this.formBuilder.group({
-        name: ['', Validators.required],
+        name: ['', Validators.required]
          
       });
   }
@@ -37,8 +40,16 @@ export class CustomerComponent implements OnInit {
       if (this.customerForm.invalid) {
           return;
       }
-
+debugger;
       this.loading = true;
+      this.authenticationService.addCustomer(this.customerForm.value)
+      .pipe(first())
+      .subscribe({
+          next: () => {
+              this.router.navigate(["/customer"]);
+          }
+        
+      });
 
   }
 }

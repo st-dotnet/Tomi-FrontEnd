@@ -7,12 +7,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SessionService {
-
-
+  private userSubject$: BehaviorSubject<any>;
+  public user$: Observable<any>;
   constructor(
     private router: Router,
     private spinner: NgxSpinnerService) {
-    
+      this.userSubject$ = new BehaviorSubject<any>(this.getSessionObject('user'));
+      this.user$ = this.userSubject$.asObservable();
+      var user = this.getSessionObject('user');
   }
 
  
@@ -20,8 +22,13 @@ export class SessionService {
     return localStorage.getItem(key);
   }
 
+
+
   setSessionObject(key: any, value: any) {
     localStorage.setItem(key, JSON.stringify(value));
+  }
+  getSessionObject(key: any) {
+    return JSON.parse(localStorage.getItem(key)|| '{}');
   }
 
   setSessionItem(key: any, value: any) {
@@ -35,7 +42,9 @@ export class SessionService {
   clearSession() {
     localStorage.clear();
   }
-
+  userSession(value: any) {
+    this.userSubject$.next(value);
+  }
  
   scrollToTop() {
     // window.scrollTo(0, 0);

@@ -7,6 +7,7 @@ import { AppHeaderComponent } from './Components/layout/app-header/app-header.co
 import { AppFooterComponent } from './Components/layout/app-footer/app-footer.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CustomerComponent } from './Components/customer/customer.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
     AppHeaderComponent,
     AppFooterComponent,
     LoginComponent,
+    CustomerComponent
   ],
   imports: [
     BrowserModule,
