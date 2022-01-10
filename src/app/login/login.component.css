@@ -1,0 +1,84 @@
+
+
+.loginform {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    max-width: 370px;
+    width: 100%;
+}
+
+.loginform h4.card-header {
+    background: transparent;
+    border: none;
+    text-align: center;
+    padding: 20px 0 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+
+.loginform form label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    margin-bottom: 6px;
+    text-transform: capitalize;
+    color: #3c3c3c;
+}
+
+.loginform form .form-group {
+    margin-bottom: 15px;
+}
+
+.loginform form button {
+    background-color: #0a69ca;
+    max-width: 100px;
+    width: 100%;
+    margin: 0 auto 0;
+    display: block;
+    border: 1px solid #0a69ca;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.loginform form button:hover {
+    background: #0e0e0e;
+    border-color: #0e0e0e;
+}
+
+.forgot-det {
+    text-align: right;
+    margin: 0 0 17px 0;
+}
+
+.forgot-det a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    color: #0a69ca;
+}
+
+.other-action {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    margin: 18px 0 0 0;
+}
+
+.other-action a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    color: #6e6e6e;
+}
+
+.other-action a:last-child {
+    color: #0a69ca;
+    margin-top: 6px;
+}
+
+.other-action a:first-child:hover {
+    color: #0a69ca;
+}

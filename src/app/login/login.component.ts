@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '@app/_services';
-//import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 
 @Component({
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       private authenticationService: UserService,
-     // private toastrService: ToastrService
+      private toastrService: ToastrService
   ) { 
       // redirect to home if already logged in
     //   if (this.authenticationService.currentUserValue) { 
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (res: any) => {
           if (!res.token) {
-         //   this.toastrService.error(res.errorMessage);
+            this.toastrService.error(res.error);
             return;
           }
           this.router.navigate(["/customer"]);
@@ -60,9 +60,11 @@ export class LoginComponent implements OnInit {
         },
         error: error => {
          
-        //  this.toastrService.error();
+          this.toastrService.error();
           this.loading = false;
         }
+
+   
       });
   }
 }

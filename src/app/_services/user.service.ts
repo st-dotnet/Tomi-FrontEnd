@@ -12,6 +12,8 @@ export class UserService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
     private readonly customerEndPoint = 'Customer/';
+    private readonly storeEndPoint = 'Store/';
+    private readonly userEndPoint = 'User/';
     constructor(private http: HttpClient,
         private sessionService: SessionService) {
         this.currentUserSubject = new BehaviorSubject<User>(new User());
@@ -23,7 +25,7 @@ export class UserService {
     }
 
     login(model:any) {
-        return this.http.post<any>(`${environment.apiUrl}user/authenticate`,model)
+        return this.http.post<any>(`${environment.apiUrl}${this.userEndPoint}authenticate`,model)
             .pipe(map(res => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 // localStorage.setItem('currentUser', JSON.stringify(user));
@@ -36,13 +38,35 @@ export class UserService {
             }));
     }
 
-
-    addCustomer(model:any){
-        return this.http.post<any>(`${environment.apiUrl}${this.customerEndPoint}AddCustomer`,model);
-    }
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         
     }
+
+    getAllStoreByCustomerId(customerId:string){
+        return this.http.get<any>(`${environment.apiUrl}${this.storeEndPoint}GetStore/${customerId}`);
+   }
+
+   
+   getAllUserByCustomerId(customerId:string){
+    return this.http.get<any>(`${environment.apiUrl}${this.customerEndPoint}GetUsersById/${customerId}`);
+}
+
+
+    addCustomer(model:any){
+        return this.http.post<any>(`${environment.apiUrl}${this.customerEndPoint}AddCustomer`,model);
+    };
+
+    getCustomerList(){
+         return this.http.get<any>(`${environment.apiUrl}${this.customerEndPoint}GetCustomerList`);
+    }
+
+    addUser(model:any){
+        return this.http.post<any>(`${environment.apiUrl}${this.userEndPoint}AddUser`,model);
+    };
+    
+    addStore(model:any){
+        return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}AddStore`,model);
+    };
 }

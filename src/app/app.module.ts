@@ -8,6 +8,12 @@ import { AppFooterComponent } from './Components/layout/app-footer/app-footer.co
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CustomerComponent } from './Components/customer/customer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared';
+import { UserComponent } from './Components/user/user.component';
+import { StoreComponent } from './Components/store/store.component';
+import { SidebarComponent } from './Components/layout/sidebar/sidebar.component';
+
 
 @NgModule({
   declarations: [
@@ -15,13 +21,18 @@ import { CustomerComponent } from './Components/customer/customer.component';
     AppHeaderComponent,
     AppFooterComponent,
     LoginComponent,
-    CustomerComponent
+    CustomerComponent,
+    UserComponent,
+    StoreComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
