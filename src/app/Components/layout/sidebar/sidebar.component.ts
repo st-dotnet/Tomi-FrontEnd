@@ -8,9 +8,8 @@ import { SessionService } from '@app/_services';
 })
 export class SidebarComponent implements OnInit {
   isLoggedIn=false;
-
+  workloader?:string;
   constructor(   private accountService: SessionService) {
-    debugger;
     const user = this.accountService.userValue;
     this.isLoggedIn = user && user.token;
    }
