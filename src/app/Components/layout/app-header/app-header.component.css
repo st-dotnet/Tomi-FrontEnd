@@ -1,51 +1,13 @@
-section.headertop {
-    background: #f5f9ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 9px 0;
-    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+section.header.w-logged .img-no-logged,
+section.header.w-logged .img-no-logged img {
+    width: 100%;
 }
 
-section.headertop a.navbar-brand {
-    color: #0a69ca;
-    padding: 0;
-    margin: 0px 0 0 0;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 600;
-    height: 100%;
-    display: flex;
-    align-items: center;
+section.header.logged .no-logged,
+section.header.logged .no-logged img {
+    width: 100%;
 }
 
-section.headertop ul.rightactions {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-right: 20px;
-}
-
-section.headertop ul.rightactions li a {
-    color: #333;
-    font-family: 'Roboto', sans-serif;
-}
-ul.rightactions li:not(:first-child) {
-    margin-left: 16px;
-}
-
-ul.rightactions {
-    margin: 0;
-}
-
-ul.rightactions li a {
-    text-decoration: none;
-    font-size: 15px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-}
-
-ul.rightactions li a:hover {
-    color: #0a69ca !important;
+section.header.logged {
+    min-height: 56px;
 }

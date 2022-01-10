@@ -1,46 +1,77 @@
-
-<section class="inner-content">
+<section class="inner-content inner-pageview">
     <div class="card">
-    <div class="card-header">Customer Lists 
-<div class="customer-add btn-header">
-    <button class="btn" (click)="open(mymodal)">
-        <span class="plus-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="svg-inline--fa fa-plus fa-w-12 fa-2x"><path fill="currentColor" d="M376 232H216V72c0-4.42-3.58-8-8-8h-32c-4.42 0-8 3.58-8 8v160H8c-4.42 0-8 3.58-8 8v32c0 4.42 3.58 8 8 8h160v160c0 4.42 3.58 8 8 8h32c4.42 0 8-3.58 8-8V280h160c4.42 0 8-3.58 8-8v-32c0-4.42-3.58-8-8-8z" class=""></path></svg></span>
-        Create Customer</button>
-</div>
+        <div class="card-header">
+            <h3>Apartados</h3>
+            <div class="customer-add btn-header">
+                <ul class="right-opt">
+                    <li>
+                        <a (click)="open(mymodal)">
+                            <span class="plus-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="svg-inline--fa fa-plus fa-w-12 fa-2x"><path fill="currentColor" d="M376 232H216V72c0-4.42-3.58-8-8-8h-32c-4.42 0-8 3.58-8 8v160H8c-4.42 0-8 3.58-8 8v32c0 4.42 3.58 8 8 8h160v160c0 4.42 3.58 8 8 8h32c4.42 0 8-3.58 8-8V280h160c4.42 0 8-3.58 8-8v-32c0-4.42-3.58-8-8-8z" class=""></path></svg></span>                            Cargar
+                        </a>
+                    </li>
+                    <li><a class="prof-icon"><span class="prof_alpha">U</span></a></li>
+                </ul>
+
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div class="content-body">
+                <table class="table table-striped table-ui-same" id="datatableexample">
+                    <thead>
+                        <tr>
+                            <th>Archivo</th>
+                            <th>#Registros</th>
+                            <th>#Deptos</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <!-- <tr *ngFor="let customer of customers; let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{customer.name}}</td>
+                            <td>
+                                <ul class="btn-tble">
+                                    <li><button type="button" class="btn btn-primary" (click)="manageUser(customer.id)">Manage User</button></li>
+                                    <li><button type="button" class="btn btn-primary" (click)="manageStore(customer.id)">Manage Store</button></li>
+                                </ul>
+
+
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
     </div>
-    <div class="card-body">
-<div class="content-body">
-    <table class="table table-striped table-ui-same" id="datatableexample">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let customer of customers; let i = index">
-                <td>{{i+1}}</td>
-                <td>{{customer.name}}</td>
-                <td>
-                    <ul class="btn-tble"> 
-                        <li><button type="button" class="btn btn-primary"
-                    (click)="manageUser(customer.id)">Manage User</button></li>
-                        <li><button type="button" class="btn btn-primary"
-                    (click)="manageStore(customer.id)">Manage Store</button></li>
-                    </ul>
-                     
-                    
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-    </div>
 
-</div>
-        
 </section>
 
 <ng-template #mymodal let-modal>
@@ -55,8 +86,7 @@
             <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" formControlName="name" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+                    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
                     <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
                         <div *ngIf="f['name'].errors['required']">Name is required</div>
                     </div>
@@ -68,5 +98,5 @@
             </form>
         </div>
     </div>
-        
-    </ng-template>
+
+</ng-template>

@@ -1,16 +1,15 @@
 <!-- <p>app-header works!</p> -->
-<section class="headertop">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-6">
-        <a href="" class="navbar-brand">TOMI</a>
-        </div>
-        <div class="col-md-6">
-<ul class="rightactions">
-    <li><a href="#">SignUp</a></li>
-    <li><a href="#">Sign out</a></li>
-    </ul>
-        </div>
+
+<section class="header w-logged" *ngIf="!isLoggedIn">
+    <div class="img-no-logged">
+        <img src="/assets/login/top+bar.png" />
     </div>
-</div>
+
+
+</section>
+
+<section class="header logged" *ngIf="isLoggedIn">
+    <div class="no-logged">
+        <img src="/assets/login/inner_top.png" />
+    </div>
 </section>

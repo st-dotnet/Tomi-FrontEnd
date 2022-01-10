@@ -2,61 +2,21 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
-
-.loginform .card {
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
-    padding: 1rem!important;
-    border-radius: 0.25rem!important;
-}
-
-section.inner-content {
-    padding: 20px;
-}
-
-section.inner-content .card-header {
-    background: rgba(0,0,0,.03);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    font-size: 18px;
-    color: #363636;
-}
+/* W-logged header*/
 
 
-section.inner-content .card-header .customer-add.btn-header button span.plus-ico svg {
-    width: 15px;
-    height: 15px;
-}
+/* Footer W-logged header */
 
-section.inner-content .card-header .customer-add.btn-header button.btn {
-    background-color: #0a69ca;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding-left: 30px;
-}
 
-section.inner-content .card-header .customer-add.btn-header button.btn span.plus-ico {
+/** LOGIN PAGE CSS */
+
+.login-centerd form .invalid-feedback {
     position: absolute;
-    left: 10px;
+    font-family: 'Roboto';
+    left: 15px;
+    text-align: left;
+    font-size: 13px;
 }
-
-section.inner-content .card-header .customer-add.btn-header button.btn:hover {
-    background-color: #3a3a3a;
-}
-
-section.inner-content .content-body table {
-    border: none;
-}
-
-section.inner-content .content-body table tr td {
-    border: none;
-}
-
 
 .sidebar-layout {
     width: 100%;
@@ -66,10 +26,11 @@ section.inner-content .content-body table tr td {
 
 .sidenav {
     height: 100%;
-    width: 250px;
-    background-color: #0d66c1;
+    width: 300px;
+    background-color: #fcfcfc;
     transition: .5s;
-    padding-top: 20px;
+    padding: 15px 15px 30px;
+    border-right: 1px solid #eee;
 }
 
 .sidenav .sidebar-links {
@@ -78,9 +39,8 @@ section.inner-content .content-body table tr td {
 
 .sidenav .sidebar-links ul.list-sidebar li a {
     text-decoration: none;
-    color: #fff;
-    padding: 6px 13px;
-    border-bottom: 1px solid #fdfdfd61;
+    color: #646566;
+    padding: 6px 10px;
     display: block;
 }
 
@@ -98,81 +58,146 @@ section.inner-content .content-body table tr td {
 }
 
 .sidenav .sidebar-links ul.list-sidebar li a {
-    font-size: 15px;
+    font-size: 16px;
     font-family: 'Roboto', sans-serif;
     display: flex;
     align-items: center;
+    padding-left: 16px;
+    font-weight: 500;
 }
 
 span.ico svg {
     width: 10px;
 }
 
-span.ico {
+.sidenav .logo_black-tomi {
+    margin-bottom: 30px;
+}
+
+.sidenav select.form-control {
+    -webkit-appearance: listbox;
+    padding-right: 20px;
+    font-weight: 500;
+    font-family: 'Roboto';
+    font-size: 14px;
+    background: #ebebeb;
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+    height: 40px;
+    color: #727272;
+}
+
+.sidenav .listing {
+    margin-top: 20px;
+}
+
+.sidenav .listing h3.head-listing {
+    font-size: 23px;
+    font-family: 'Roboto';
+    font-weight: 600;
+    color: #656667;
+}
+
+.sidenav .listing ul.list-sidebar li:before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #ed1d23;
+    position: absolute;
+    z-index: 1;
+    border-radius: 50%;
+    top: 11px;
+}
+
+
+/* Main Content INNER */
+
+.inner-pageview .card-header {
+    display: flex;
+    justify-content: space-between;
+    min-height: 130px;
+    position: relative;
+    background: #fcfcfc;
+}
+
+.inner-pageview .card-header h3 {
+    font-family: 'Roboto';
+    font-weight: 500;
+    color: #111111;
+    padding-top: 30px;
+}
+
+.inner-pageview .card-header ul.right-opt li span.plus-ico svg {
+    width: 12px;
+    margin-right: 4px;
+}
+
+.inner-pageview .card-header ul.right-opt li:first-child a {
+    background: #308de2;
+    color: #fff;
+    padding: 6px 18px 5px;
+    border-radius: 20px;
+    font-family: 'Roboto';
     display: flex;
     align-items: center;
-    margin-right: 8px;
+    justify-content: center;
+    position: relative;
+    padding-left: 32px;
+    font-size: 16px;
 }
 
-section.inner-content .content-body ul.btn-tble {
+.inner-pageview .card-header ul.right-opt {
     list-style-type: none;
+    padding: 0;
     display: flex;
-    float: right;
-    margin: 0 0 0 0;
+    justify-content: space-between;
 }
 
-section.inner-content .content-body ul.btn-tble button {
-     background: #343434;
-    border-color: #343434;
+.inner-pageview .card-header ul.right-opt li:first-child a span.plus-ico {
+    position: absolute;
+    left: 14px;
+    top: 5px;
+}
+
+.inner-pageview .card-header ul.right-opt li a.prof-icon {
+    background: #14528b;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto';
+    color: #fff;
+    text-decoration: none;
+}
+
+.inner-pageview .card-header ul.right-opt li a.prof-icon {
+    margin-left: 14px;
+}
+
+.inner-pageview .customer-add.btn-header {
+    width: 200px;
+    position: absolute;
+    right: 40px;
+    top: 40px;
+}
+
+section.inner-content.inner-pageview .card-body {
+    padding: 0;
+}
+
+section.inner-content.inner-pageview .card-body .table-ui-same {
+    margin: 0;
+}
+
+section.inner-content.inner-pageview .card-body .table-ui-same thead th {
+    background: #fafafa;
+    font-family: 'Roboto';
     font-size: 14px;
-    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
 }
 
-section.inner-content .content-body ul.btn-tble li:not(:first-child) {
-    margin-left: 6px;
-}
-
-section.inner-content .content-body ul.btn-tble li:last-child button {
-    background: #f5f9ff;
-    border-color: #afbbcf;
-    color:#0d66c1;
-}
-
-section.inner-content .content-body ul.btn-tble li:first-child button:hover {
-    background: #0a69ca;
-    border-color: #0a69ca;
-    color:#fff;
-}
-section.inner-content .content-body ul.btn-tble li:last-child button:hover {
-    
-    background: #0a69ca;
-    border-color: #0a69ca;
-    color:#fff;
-}
-
-
-.modal-ui-same span.close-ico svg {
-    fill: #f9f9f9;
-    width: 12px;
-}
-
-.modal-ui-same .modal-header button {
-    border: none;
-    position: absolute;
-    top: -9px;
-    right: -15px;
-    background: #e9e9e9;
-    border-radius: 40px;
-    padding: 8px;
-    width: 30px;
-    height: 30px;
-    box-shadow: 0px 1px 6px #2a2929;
-}
-
-.modal-ui-same .modal-header button span.close-ico {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    margin: -1px 0 0 0;
+section.inner-content.inner-pageview .card-body .table-ui-same tbody tr td {
+    padding: 11px 10px;
 }

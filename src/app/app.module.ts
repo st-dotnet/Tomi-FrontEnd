@@ -9,12 +9,15 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CustomerComponent } from './Components/customer/customer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from './shared';
-import { UserComponent } from './Components/user/user.component';
-import { StoreComponent } from './Components/store/store.component';
+
+
 import { SidebarComponent } from './Components/layout/sidebar/sidebar.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './_helper';
+import { UserComponent } from './Components/user/user.component';
+import { StoreComponent } from './Components/store/store.component';
+import { SharedModule } from './shared';
+import { MiddleContentComponent } from './Components/layout/middle-content/middle-content.component';
 
 
 @NgModule({
@@ -27,6 +30,7 @@ import { JwtInterceptor } from './_helper';
     UserComponent,
     StoreComponent,
     SidebarComponent,
+    MiddleContentComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from '@app/_services/session.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppFooterComponent implements OnInit {
 
-  constructor() { }
-
+  isLoggedIn=false;
+  constructor(   private accountService: SessionService) {
+    debugger;
+    const user = this.accountService.userValue;
+    if( user && user.token){
+      this.isLoggedIn=true;
+    }
+   }
   ngOnInit(): void {
   }
+
 
 }
