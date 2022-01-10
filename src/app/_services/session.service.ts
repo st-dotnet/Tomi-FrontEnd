@@ -22,7 +22,9 @@ export class SessionService {
     return localStorage.getItem(key);
   }
 
-
+  public get userValue(): any {
+    return this.userSubject$.value;
+  }
 
   setSessionObject(key: any, value: any) {
     localStorage.setItem(key, JSON.stringify(value));

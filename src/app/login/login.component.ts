@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '@app/_services';
+import { SessionService, UserService } from '@app/_services';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 
@@ -16,14 +16,17 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   error = '';
-
+  isLoggedIn= false;
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private router: Router,
       private authenticationService: UserService,
-      private toastrService: ToastrService
+      private toastrService: ToastrService,
+      private accountService: SessionService
   ) { 
+    const user = this.accountService.userValue;
+     this.isLoggedIn = user && user.token;
       // redirect to home if already logged in
     //   if (this.authenticationService.currentUserValue) { 
     //       this.router.navigate(['/']);
@@ -55,7 +58,10 @@ export class LoginComponent implements OnInit {
             this.toastrService.error(res.error);
             return;
           }
-          this.router.navigate(["/customer"]);
+          this.router.navigate(["/customer"]).then(() => {
+            window.location.reload();
+          });
+       
           // this.spinner.hide();         
         },
         error: error => {

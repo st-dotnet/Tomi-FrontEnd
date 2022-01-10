@@ -13,6 +13,8 @@ import { SharedModule } from './shared';
 import { UserComponent } from './Components/user/user.component';
 import { StoreComponent } from './Components/store/store.component';
 import { SidebarComponent } from './Components/layout/sidebar/sidebar.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './_helper';
 
 
 @NgModule({
@@ -34,7 +36,7 @@ import { SidebarComponent } from './Components/layout/sidebar/sidebar.component'
     BrowserAnimationsModule,
     SharedModule
   ],
-  providers: [],
+  providers: [  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
