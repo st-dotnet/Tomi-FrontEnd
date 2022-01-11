@@ -1,1 +1,9 @@
+span.list-ico img {
+    width: 20px;
+}
 
+span.list-ico {
+    display: flex;
+    align-items: center;
+    margin-right: 6px;
+}

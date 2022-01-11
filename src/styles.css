@@ -5,7 +5,68 @@
 /* W-logged header*/
 
 
-/* Footer W-logged header */
+/* spinner Css  */
+
+.svg-loader {
+    display: flex;
+    position: relative;
+    align-content: space-around;
+    justify-content: center;
+}
+
+.loader-svg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    fill: none;
+    stroke-width: 10px;
+    stroke-linecap: round;
+    stroke: #0099ff;
+}
+
+.loader-svg.bg {
+    stroke-width: 10px;
+    stroke: #e5e5e5;
+}
+
+.animate {
+    stroke-dasharray: 242.6;
+    animation: fill-animation 1s cubic-bezier(1, 1, 1, 1) 0s infinite;
+}
+
+@keyframes fill-animation {
+    0% {
+        stroke-dasharray: 40 242.6;
+        stroke-dashoffset: 282.6;
+    }
+    50% {
+        stroke-dasharray: 141.3;
+        stroke-dashoffset: 141.3;
+    }
+    100% {
+        stroke-dasharray: 40 242.6;
+        stroke-dashoffset: 0;
+    }
+}
+
+span.loadr .svg-loader svg.svg-container {
+    width: 38px;
+}
+
+.content-upload-view .noti-file-upload p {
+    display: flex;
+    align-items: center;
+}
+
+.content-upload-view .noti-file-upload p span.loadr {
+    margin-right: 6px;
+}
+
+.content-upload-view .noti-file-upload a {
+    margin-left: 6px;
+}
 
 
 /** LOGIN PAGE CSS */
@@ -21,7 +82,7 @@
 .sidebar-layout {
     width: 100%;
     display: flex;
-    height: calc(100vh - 56px);
+    height: calc(100vh - 114px);
 }
 
 .sidenav {
@@ -62,7 +123,7 @@
     font-family: 'Roboto', sans-serif;
     display: flex;
     align-items: center;
-    padding-left: 16px;
+    padding-left: 20px;
     font-weight: 500;
 }
 
@@ -100,13 +161,13 @@ span.ico svg {
 
 .sidenav .listing ul.list-sidebar li:before {
     content: '';
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     background: #ed1d23;
     position: absolute;
     z-index: 1;
     border-radius: 50%;
-    top: 11px;
+    top: 14px;
 }
 
 
@@ -132,7 +193,7 @@ span.ico svg {
     margin-right: 4px;
 }
 
-.inner-pageview .card-header ul.right-opt li:first-child a {
+.inner-pageview .card-header ul.right-opt li.ico_plus a {
     background: #308de2;
     color: #fff;
     padding: 6px 18px 5px;
@@ -153,10 +214,25 @@ span.ico svg {
     justify-content: space-between;
 }
 
-.inner-pageview .card-header ul.right-opt li:first-child a span.plus-ico {
+.inner-pageview .card-header ul.right-opt li.ico_plus a span.plus-ico {
     position: absolute;
     left: 14px;
     top: 5px;
+}
+
+.inner-pageview .card-header ul.right-opt li a.prof-icon {
+    display: flex;
+    width: 34px;
+    height: 34px;
+    position: relative;
+}
+
+.inner-pageview .card-header ul.right-opt li a.prof-icon span.prof_alpha {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 21px;
 }
 
 .inner-pageview .card-header ul.right-opt li a.prof-icon {
@@ -200,4 +276,147 @@ section.inner-content.inner-pageview .card-body .table-ui-same thead th {
 
 section.inner-content.inner-pageview .card-body .table-ui-same tbody tr td {
     padding: 11px 10px;
+}
+
+.content.full-view .sidebar-layout {
+    height: 100%;
+    display: block;
+}
+
+section.footer.w-logged {
+    position: fixed;
+    bottom: 0;
+}
+
+
+/* workorder css */
+
+.order-selections h3 {
+    font-family: 'Roboto';
+    font-size: 18px;
+    text-transform: capitalize;
+    color: #6d6e6f;
+    font-weight: 600;
+}
+
+.order-selections select {
+    margin-bottom: 12px;
+}
+
+
+/* tabs Workorder CSS */
+
+.workorders-view {
+    width: 100%;
+}
+
+.workorders-view .workorders-head-emp {
+    padding: 20px 0;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.workorders-view .workorders-foot-emp {
+    padding: 20px 0;
+    border-top: 1px solid #dcdcdc;
+}
+
+section.inner-content.inner-pageview.wkloads .card {
+    border-radius: 0px;
+    border-left: none;
+}
+
+section.inner-content.inner-pageview.wkloads .workorders-main ul.nav-tabs {
+    padding: 1px 2px;
+}
+
+section.inner-content.inner-pageview.wkloads .workorders-main ul.nav-tabs li.nav-item a {
+    background: #fafafa;
+    padding: 6px 20px;
+    color: #0e0e0e;
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-weight: 400;
+}
+
+section.inner-content.inner-pageview.wkloads .workorders-main ul.nav-tabs li:not(:first-child) {
+    margin-left: 3px;
+}
+
+.resultwrapper-tab {
+    padding: 20px;
+}
+
+.lod-btn a span.plus-ico svg {
+    width: 11px;
+}
+
+.content-upload-view .lod-btn a {
+    background: #308de3;
+    padding: 5px 5px 3px 13px;
+    border-radius: 29px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.lod-btn {
+    max-width: 90px;
+    width: 100%;
+    margin-bottom: 80px;
+}
+
+.content-upload-view .lod-btn a span.plus-ico {
+    position: absolute;
+    left: 15px;
+    top: 4px;
+}
+
+.content-upload-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto';
+    padding: 30px 15px 30px;
+    min-height: 548px;
+}
+
+.content-upload-view .noti-file-upload {
+    margin-bottom: 30px;
+}
+
+.content-upload-view p {
+    font-weight: 500;
+    color: #6d6e6f;
+    font-size: 16px;
+}
+
+.content-upload-view p a {
+    color: #ea583a;
+}
+
+.content-upload-view .file-upload-results {
+    margin-bottom: 30px;
+}
+
+.content-upload-view .file-upload-results p {
+    margin: 0 0 4px 0;
+}
+
+.content-upload-view .print-btn-report {
+    margin-bottom: 40px;
+}
+
+.content-upload-view .print-btn-report a {
+    background: #308de3;
+    color: #fff;
+    font-weight: 400;
+    text-decoration: none;
+    padding: 9px 20px 8px;
+    border-radius: 20px;
+    font-size: 16px;
 }

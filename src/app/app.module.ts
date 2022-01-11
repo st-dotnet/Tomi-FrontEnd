@@ -18,6 +18,9 @@ import { UserComponent } from './Components/user/user.component';
 import { StoreComponent } from './Components/store/store.component';
 import { SharedModule } from './shared';
 import { MiddleContentComponent } from './Components/layout/middle-content/middle-content.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { WorkloadsComponent } from './Components/workloads/workloads.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -30,7 +33,9 @@ import { MiddleContentComponent } from './Components/layout/middle-content/middl
     UserComponent,
     StoreComponent,
     SidebarComponent,
-    MiddleContentComponent
+    MiddleContentComponent,
+    ForgotPasswordComponent,
+    WorkloadsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,8 @@ import { MiddleContentComponent } from './Components/layout/middle-content/middl
     FormsModule, 
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    NgbModule
   ],
   providers: [  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
