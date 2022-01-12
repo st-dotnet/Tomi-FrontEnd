@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UserService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -15,9 +15,22 @@ import { Observable } from 'rxjs';
 export class WorkloadsComponent implements OnInit {
   workloads$!: Observable<any[]>;
   fileUploading: boolean= false;
- 
+  customers: any;
+  stock:any;
+  customerId:any;
+  stores: any;
+  storeId: any;
+  years: any;
+  year:any;
+  selectedFiles?: FileList;
+  currentFile?: File;
+  progress = 0;
+  message = '';
+  fileUploaded = false;
+  stockRecordCount: any;
+  uploadFiletab:any;
   constructor(     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private authenticationService: UserService,
     private spinner: NgxSpinnerService,
@@ -26,8 +39,13 @@ export class WorkloadsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      
-   
+      debugger;
+      this.authenticationService.customerId.subscribe(user => this.customerId = user);
+      this.authenticationService.storeId.subscribe(user => this.storeId = user);
+      this.authenticationService.stockDate.subscribe(user => this.year = user);
+      this.activatedRoute.params.subscribe((params: Params) => {
+        this.uploadFiletab = params['id'];
+      });
       this.years = [
         {
           value: '2019'
@@ -44,7 +62,7 @@ export class WorkloadsComponent implements OnInit {
       ];
     }
 
-  tabs = [1, 2, 3, 4, 5];
+  tabs = [1];
   counter = this.tabs.length + 1;
   active:any;
 
@@ -58,17 +76,7 @@ export class WorkloadsComponent implements OnInit {
     this.tabs.push(this.counter++);
     event.preventDefault();
   }
-  customers: any;
-  stock:any;
-  customerId:any;
-  stores: any;
-  storeId: any;
-  years: any;
-  year:any;
-  selectedFiles?: FileList;
-  currentFile?: File;
-  progress = 0;
-  message = '';
+
 
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
@@ -90,28 +98,70 @@ export class WorkloadsComponent implements OnInit {
   upload(): void {
     this.progress = 0;
  this.fileUploading = true;
- debugger;
- this.authenticationService.setMasterfileUplaod( this.fileUploading);
+ 
+
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
 
       if (file) {
         this.currentFile = file;
         const formData: FormData = new FormData();
-    
+        // var event = new Date(this.year);
+
+        // let date = JSON.stringify(event)
+        // date = date.slice(1,11)
         formData.append('file', file);
         formData.append('storeId',this.storeId);
         formData.append('customerId',this.customerId);
         formData.append('stockDate',this.year);
-        
+
+        if( this.uploadFiletab=="Stock"){
+          this.authenticationService.setStockUpload(this.fileUploading);
+          this.authenticationService.uploadStockFile(formData).subscribe({
+            next: (event: any) => {
+              debugger;
+              if(event.success){
+                this.fileUploading = false;
+                this.fileUploaded= true;
+                this.authenticationService.setStockUpload(false);
+                  this.stockRecordCount = event.stockRecordCount;
+                  this.selectedFiles = undefined;
+              }
+    
+            },
+            error: (err: any) => {
+              console.log(err);
+              this.progress = 0;
+            
+              if (err.error && err.error.message) {
+                this.message = err.error.message;
+              } else {
+                this.message = 'Could not upload the file!';
+              }
+  
+              this.currentFile = undefined;
+            }
+          });
+        }
+      else   if( this.uploadFiletab=="Master"){
+        this.fileUploading = false;
+        this.authenticationService.setMasterfileUplaod(this.fileUploading);
         this.authenticationService.uploadStockFile(formData).subscribe({
           next: (event: any) => {
-           
+            debugger;
+            if(event.success){
+              this.fileUploading = false;
+              this.fileUploaded= true;
+              this.authenticationService.setStockUpload(false);
+                this.stockRecordCount = event.stockRecordCount;
+                this.selectedFiles = undefined;
+            }
+  
           },
           error: (err: any) => {
             console.log(err);
             this.progress = 0;
-
+          
             if (err.error && err.error.message) {
               this.message = err.error.message;
             } else {
@@ -121,6 +171,7 @@ export class WorkloadsComponent implements OnInit {
             this.currentFile = undefined;
           }
         });
+      }
       }
 
       this.selectedFiles = undefined;

@@ -10,19 +10,28 @@
             <option [value]="undefined" selected="true">Customer</option>
             <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
         </select>
-        <select class="form-control" id="storeId" [(ngModel)]="storeId" name="storeId">
+        <select class="form-control" id="storeId" [(ngModel)]="storeId" name="storeId" (change)="onChange()">
             <option [value]="undefined" selected="true">Store</option>
             <option *ngFor="let store of stores" [value]="store.id">{{store.name}}</option>
         </select>
-        <select class="form-control" id="year" required [(ngModel)]="stockyear" name="year" (change)="onChange()">
+         <!-- <select class="form-control" id="year" required [(ngModel)]="stockyear" name="year" (change)="onChange()">
             <option [value]="undefined" selected="true">Date</option>
             <option *ngFor="let yeardate of years" [value]="yeardate.value">{{yeardate.value}}</option>
-        </select>
+        </select>  -->
+        <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd"
+                   name="dp" [(ngModel)]="stockyear" ngbDatepicker #d="ngbDatepicker"  (ngModelChange)="onChange()">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+          </div>
+
     </div>
     <div class="listing" >
         <h3 class="head-listing">Before Starting</h3>
         <ul class="list-sidebar">
-            <li [className]="masterfileUpload ?  'reddot ' : 'greendot'" (click)="submitFile('master')"><a ><span class="list-ico icon5"><img src="assets/sidebar/icon5.png" /></span>Master File</a></li>
+            <li [className]="masterfileUpload ?  'reddot ' : 'greendot'" (click)="submitFile('master')"><a ><span class="list-ico icon5"><img src="assets/sidebar/icon5.png" /></span>Master File</a>
+</li>
             <li [className]="stockfileUpload ?  'reddot ' : 'greendot'" (click)="submitFile('Stock')"><a ><span class="list-ico icon5"><img src="assets/sidebar/icon4.png" /></span>Stocks</a></li>
             <li [className]="salefileUpload ?  'reddot ' : 'greendot'"  (click)="submitFile('Sales')"><a><span class="list-ico icon5"><img src="assets/sidebar/icon7.png" /></span>Sales</a></li>
         </ul>

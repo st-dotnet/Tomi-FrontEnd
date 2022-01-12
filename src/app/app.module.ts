@@ -18,7 +18,7 @@ import { SharedModule } from './shared';
 import { MiddleContentComponent } from './Components/layout/middle-content/middle-content.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { WorkloadsComponent } from './Components/workloads/workloads.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule,NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { WorkloadComponent } from './workload/workload.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 
@@ -46,7 +46,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     BrowserAnimationsModule,
     SharedModule,
     NgbModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbDatepickerModule
   ],
   providers: [  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]

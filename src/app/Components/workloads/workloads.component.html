@@ -19,7 +19,7 @@
                             <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
                                 <li *ngFor="let id of tabs" [ngbNavItem]="id">
                                     <a ngbNavLink>
-                                    Tab {{ id }}
+                                    Tab {{uploadFiletab }}
                                     <span class="close position-relative pl-2 font-weight-light" (click)="close($event, id)">×</span>
                                   </a>
                                     <ng-template ngbNavContent>
@@ -43,14 +43,14 @@
                                                             <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
                                                         </svg>
                                                     </div>
-                                                </span>File upload successfully/with errors <a href="">see errors</a></p>
+                                                </span>File upload successfully/with errors </p>
                                                 </div>
-                                                <div class="file-upload-results"  *ngIf="fileUploading">
-                                                    <p class="record-uploa">Total of records uploaded: <span class="total-upload-value">1,985</span></p>
-                                                    <p class="record-failed">Total of records failed: <span class="total-failed-value">1,585</span></p>
+                                                <div class="file-upload-results"  *ngIf="fileUploaded">
+                                                    <p class="record-uploa">Total of records uploaded: <span class="total-upload-value">{{stockRecordCount}}</span></p>
+                                                    <p class="record-failed">Total of records failed: <span class="total-failed-value">0</span></p>
                                                 </div>
 
-                                                <div class="print-btn-report" *ngIf="fileUploading">
+                                                <div class="print-btn-report" *ngIf="fileUploaded">
                                                     <a href="">Print report</a>
                                                 </div>
                                             </div>

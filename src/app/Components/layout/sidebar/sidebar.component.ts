@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService, UserService } from '@app/_services';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { NgbCalendar, NgbDate, NgbDateAdapter, NgbDateNativeAdapter, NgbDatepicker, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -69,13 +69,22 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/workorders', file]);
   }
   onChange(){
+    debugger;
     if( this.customerId!=null ||  this.storeId!=null || this.stockyear!=null){
-      this.authenticationService.setCustomerId(this.customerId);
+      let stockdate =new Date(this.stockyear.year,this.stockyear.month-1, this.stockyear.day);
+      var event = new Date(stockdate);
+
+      let date = JSON.stringify(event)
+      date = date.slice(1,11)
+      // this.authenticationService.setCustomerId(this.customerId);
       let workload ={
         customerId: this.customerId,
         storeId: this.storeId,
-        stockDate: this.stockyear
+        stockDate: date
        };
+       this.authenticationService.setCustomerId(this.customerId);
+       this.authenticationService.setStoreId(this.storeId);
+       this.authenticationService.setStockDate(stockdate);
         this.authenticationService.getstockData(workload);
     }
 

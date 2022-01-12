@@ -23,6 +23,9 @@ export class UserService {
     private _storeId: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
     public storeId: Observable<any> = this._storeId.asObservable();
 
+    private _stockDate: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
+    public stockDate: Observable<any> = this._stockDate.asObservable();
+
     private _masterfileUplaod = new BehaviorSubject<boolean>(false);
     masterfileUplaod = this._masterfileUplaod.asObservable();
     
@@ -31,7 +34,7 @@ export class UserService {
     
     private _salefileUpload = new BehaviorSubject<boolean>(false);
     salefileUpload = this._salefileUpload.asObservable();
-    
+
     constructor(private http: HttpClient,
         private sessionService: SessionService) {
         this.currentUserSubject = new BehaviorSubject<User>(new User());
@@ -106,7 +109,24 @@ export class UserService {
         })
       }
 
-      
+      uploadMasterFile(model:any) {
+        
+        return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportStockFile`, model,{
+          reportProgress: true,
+          responseType: 'json'
+        });
+      };
+
+      getMasterData(model:any){
+        return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetStockData`,model).subscribe( res=>{
+            debugger;
+            if(res.length>0)
+            {
+                this._stockList.next(res);
+            };  
+        })
+      }
+   
   setCustomerId(object:any) {
     this._customerId.next(object);
   }
@@ -115,6 +135,9 @@ export class UserService {
     this._storeId.next(object);
   }
 
+  setStockDate(object:any){
+    this._stockDate.next(object);
+  }
   setMasterfileUplaod(object:boolean){
       this._masterfileUplaod.next(object);
   }
