@@ -105,6 +105,10 @@ span.loadr .svg-loader svg.svg-container {
     display: block;
 }
 
+.sidenav .sidebar-links ul.list-sidebar li a:hover {
+    cursor: pointer;
+}
+
 .sidenav .sidebar-links ul.list-sidebar {
     list-style-type: none;
     padding: 0;
@@ -169,8 +173,8 @@ span.ico svg {
     border-radius: 50%;
     top: 14px;
 }
+
 .sidenav .listing ul.list-sidebar li.greendot:before {
- 
     background: #18b432;
     content: '';
     width: 8px;
@@ -179,7 +183,6 @@ span.ico svg {
     z-index: 1;
     border-radius: 50%;
     top: 14px;
-  
 }
 
 
@@ -394,7 +397,7 @@ section.inner-content.inner-pageview.wkloads .workorders-main ul.nav-tabs li:not
     align-items: center;
     font-family: 'Roboto';
     padding: 30px 15px 30px;
-    min-height: 548px;
+    min-height: 516px;
 }
 
 .content-upload-view .noti-file-upload {
@@ -431,4 +434,119 @@ section.inner-content.inner-pageview.wkloads .workorders-main ul.nav-tabs li:not
     padding: 9px 20px 8px;
     border-radius: 20px;
     font-size: 16px;
+}
+
+.pagination-ui {
+    border-top: 1px solid #dfdfdf;
+    margin-top: 30px;
+    padding: 4px 15px;
+}
+
+.pagination-ui ul.ngx-pagination {
+    margin: 0;
+}
+
+.pagination-ui ul.ngx-pagination li.pagination-previous:before {
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='far' data-icon='chevron-left' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512' class='svg-inline--fa fa-chevron-left fa-w-8 fa-2x'%3E%3Cpath fill='%23c5c5c5' d='M231.293 473.899l19.799-19.799c4.686-4.686 4.686-12.284 0-16.971L70.393 256 251.092 74.87c4.686-4.686 4.686-12.284 0-16.971L231.293 38.1c-4.686-4.686-12.284-4.686-16.971 0L4.908 247.515c-4.686 4.686-4.686 12.284 0 16.971L214.322 473.9c4.687 4.686 12.285 4.686 16.971-.001z' class=''%3E%3C/path%3E%3C/svg%3E");
+    content: '';
+    width: 14px;
+    height: 20px;
+    margin: 0;
+}
+
+.pagination-ui ul.ngx-pagination li {
+    border: 1px solid #c5c5c5;
+    padding: 0;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    padding: 0 11px;
+    cursor: pointer;
+    margin: 0 2px;
+}
+
+.pagination-ui ul.ngx-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.pagination-ui ul.ngx-pagination li.small-screen {
+    display: none;
+}
+
+.pagination-ui ul.ngx-pagination li.pagination-next:after {
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='far' data-icon='chevron-right' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 512' class='svg-inline--fa fa-chevron-right fa-w-8 fa-2x'%3E%3Cpath fill='%23c5c5c5' d='M24.707 38.101L4.908 57.899c-4.686 4.686-4.686 12.284 0 16.971L185.607 256 4.908 437.13c-4.686 4.686-4.686 12.284 0 16.971L24.707 473.9c4.686 4.686 12.284 4.686 16.971 0l209.414-209.414c4.686-4.686 4.686-12.284 0-16.971L41.678 38.101c-4.687-4.687-12.285-4.687-16.971 0z' class=''%3E%3C/path%3E%3C/svg%3E");
+    content: '';
+    width: 14px;
+    height: 20px;
+    margin: 0;
+}
+
+li.disabled {
+    cursor: default !important;
+}
+
+.pagination-ui ul.ngx-pagination li.current {
+    border: 1px solid #2199e8;
+    background: transparent;
+    color: #2199e8;
+}
+
+.content.Vsidebar .sidebar-layout {
+    height: 100%;
+}
+
+.content.Vsidebar .sidebar-layout .sidenav {
+    height: revert;
+}
+
+.load-file {
+    background: #f3f3f3;
+    padding: 20px 20px 50px 20px;
+    max-width: 500px;
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px dotted #dddddd;
+    border-radius: 5px;
+}
+
+.load-file label {
+    max-width: 210px;
+    text-align: center;
+    margin: 0 0 15px 0;
+}
+
+.load-file button {
+    background-color: #14528b;
+    border: 1px solid #14528b;
+    font-size: 15px;
+    padding: 7px 20px;
+}
+
+.content-upload-view .load-file .icon-svg-file {
+    background: #e7e7e7;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+    border-radius: 70px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0 22px 0;
+}
+
+.content-upload-view .load-file .icon-svg-file svg {
+    width: 40px;
+    color: #7e7e7e;
 }

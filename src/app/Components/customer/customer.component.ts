@@ -13,6 +13,9 @@ import { first } from 'rxjs';
   styleUrls: ['./customer.component.css']
 })
 export class CustomerComponent implements OnInit {
+
+
+
   customerForm!: FormGroup;
   loading = false;
   submitted = false;

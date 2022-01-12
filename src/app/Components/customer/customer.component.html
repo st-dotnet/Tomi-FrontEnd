@@ -54,7 +54,7 @@
                             <td></td>
                             <td></td>
                         </tr> -->
-                         <tr *ngFor="let stock of stockList| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                        <tr *ngFor="let stock of stockList| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                             <!-- <td>{{i+1}}</td> -->
                             <!-- <td>{{customer.name}}</td> -->
                             <td>{{stock.sku}}</td>
@@ -62,17 +62,20 @@
                             <td>{{stock.date}}</td>
                             <td>{{stock.description}}</td>
                             <td>{{stock.total}}</td>
-                                <!-- <ul class="btn-tble">
+                            <!-- <ul class="btn-tble">
                                     <li><button type="button" class="btn btn-primary" (click)="manageUser(customer.id)">Manage User</button></li>
                                     <li><button type="button" class="btn btn-primary" (click)="manageStore(customer.id)">Manage Store</button></li>
                                 </ul> -->
 
 
-                            
-                        </tr> 
+
+                        </tr>
                     </tbody>
                 </table>
-                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                <div class="pagination-ui">
+                    <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+
             </div>
         </div>
 

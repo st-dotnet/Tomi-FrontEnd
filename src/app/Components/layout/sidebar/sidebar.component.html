@@ -5,8 +5,7 @@
     </div>
     <div class="order-selections">
         <h3>job order</h3>
-        <select class="form-control" id="customerId" required [(ngModel)]="customerId" name="customerId"
-            (change)="getAllStoreByCustomerId(customerId)">
+        <select class="form-control" id="customerId" required [(ngModel)]="customerId" name="customerId" (change)="getAllStoreByCustomerId(customerId)">
             <option [value]="undefined" selected="true">Customer</option>
             <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
         </select>
@@ -19,11 +18,12 @@
             <option *ngFor="let yeardate of years" [value]="yeardate.value">{{yeardate.value}}</option>
         </select>
     </div>
-    <div class="listing" >
+    <div class="listing">
         <h3 class="head-listing">Before Starting</h3>
         <ul class="list-sidebar">
-            <li [className]="masterfileUpload ?  'reddot ' : 'greendot'" (click)="submitFile('master')"><a ><span class="list-ico icon5"><img src="assets/sidebar/icon5.png" /></span>Master File</a></li>
-            <li [className]="stockfileUpload ?  'reddot ' : 'greendot'" (click)="submitFile('Stock')"><a ><span class="list-ico icon5"><img src="assets/sidebar/icon4.png" /></span>Stocks</a></li>
-            <li [className]="salefileUpload ?  'reddot ' : 'greendot'"  (click)="submitFile('Sales')"><a><span class="list-ico icon5"><img src="assets/sidebar/icon7.png" /></span>Sales</a></li>
+            <li [className]="masterfileUpload ?  'reddot ' : 'greendot'" (click)="submitFile('master')"><a><span class="list-ico icon5"><img src="assets/sidebar/icon5.png" /></span>Master File</a></li>
+            <li [className]="stockfileUpload ?  'reddot ' : 'greendot'" (click)="submitFile('Stock')"><a><span class="list-ico icon5"><img src="assets/sidebar/icon4.png" /></span>Stocks</a></li>
+            <li [className]="salefileUpload ?  'reddot ' : 'greendot'" (click)="submitFile('Sales')"><a><span class="list-ico icon5"><img src="assets/sidebar/icon7.png" /></span>Sales</a></li>
+            <li [className]="salefileUpload ?  'reddot ' : 'greendot'" (click)="submitFile('Sales')"><a><span class="list-ico icon5"><img src="assets/sidebar/icon8.png" /></span>Ranges</a></li>
         </ul>
     </div>
