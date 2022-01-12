@@ -1,21 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { WorkLoad } from '@app/_models';
 import { UserService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable } from 'rxjs';
-
 
 @Component({
-  selector: 'app-workloads',
-  templateUrl: './workloads.component.html',
-  styleUrls: ['./workloads.component.css']
+  selector: 'app-workload',
+  templateUrl: './workload.component.html',
+  styleUrls: ['./workload.component.css']
 })
-export class WorkloadsComponent implements OnInit {
-  workloads$!: Observable<any[]>;
-  fileUploading: boolean= false;
- 
+export class WorkloadComponent implements OnInit {
+  customers: any;
+  stock:any;
+  customerId:any;
+  stores: any;
+  storeId: any;
+  years: any;
+  stockyear:any;
+  selectedFiles?: FileList;
+  currentFile?: File;
+  progress = 0;
+  message = '';
   constructor(     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -25,51 +32,22 @@ export class WorkloadsComponent implements OnInit {
       this.getallCustomList();
     }
 
-    ngOnInit(): void {
-      
-   
-      this.years = [
-        {
-          value: '2019'
-        },
-        {
-          value: '2020'
-        },
-        {
-          value: '2021'
-        },
-        {
-           value: '2022'
-        }
-      ];
-    }
-
-  tabs = [1, 2, 3, 4, 5];
-  counter = this.tabs.length + 1;
-  active:any;
-
-  close(event: MouseEvent, toRemove: number) {
-    this.tabs = this.tabs.filter(id => id !== toRemove);
-    event.preventDefault();
-    event.stopImmediatePropagation();
+  ngOnInit(): void {
+    this.years = [
+      {
+        value: '2019'
+      },
+      {
+        value: '2020'
+      },
+      {
+        value: '2021'
+      },
+      {
+         value: '2022'
+      }
+    ];
   }
-
-  add(event: MouseEvent) {
-    this.tabs.push(this.counter++);
-    event.preventDefault();
-  }
-  customers: any;
-  stock:any;
-  customerId:any;
-  stores: any;
-  storeId: any;
-  years: any;
-  year:any;
-  selectedFiles?: FileList;
-  currentFile?: File;
-  progress = 0;
-  message = '';
-
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
   }
@@ -89,9 +67,6 @@ export class WorkloadsComponent implements OnInit {
   }
   upload(): void {
     this.progress = 0;
- this.fileUploading = true;
- debugger;
- this.authenticationService.setMasterfileUplaod( this.fileUploading);
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
 
@@ -102,11 +77,10 @@ export class WorkloadsComponent implements OnInit {
         formData.append('file', file);
         formData.append('storeId',this.storeId);
         formData.append('customerId',this.customerId);
-        formData.append('stockDate',this.year);
+        formData.append('stockDate',this.stockyear);
         
         this.authenticationService.uploadStockFile(formData).subscribe({
           next: (event: any) => {
-           
           },
           error: (err: any) => {
             console.log(err);
@@ -117,12 +91,10 @@ export class WorkloadsComponent implements OnInit {
             } else {
               this.message = 'Could not upload the file!';
             }
-
             this.currentFile = undefined;
           }
         });
       }
-
       this.selectedFiles = undefined;
     }
   }

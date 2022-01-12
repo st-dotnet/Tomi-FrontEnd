@@ -17,7 +17,9 @@ export class CustomerComponent implements OnInit {
   loading = false;
   submitted = false;
   error = '';
+  p: number = 1;
   customers?:Customer[];
+  stockList:any;
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
@@ -31,6 +33,7 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authenticationService.stockList.subscribe(user => this.stockList = user);;
     this.spinner.show();
       this.customerForm = this.formBuilder.group({
         name: ['', Validators.required] 
@@ -68,10 +71,8 @@ export class CustomerComponent implements OnInit {
           next: () => {
             this.modalService.dismissAll();
             this.getallCustomList();
-          }
-        
+          } 
       });
-
   }
 
   manageUser(customerId:any){

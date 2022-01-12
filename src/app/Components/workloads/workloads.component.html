@@ -26,10 +26,16 @@
                                         <div class="resultwrapper-tab">
                                             <div class="content-upload-view">
                                                 <div class="lod-btn">
-                                                    <a href="">
-                                                        <span class="plus-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="svg-inline--fa fa-plus fa-w-12 fa-2x"><path fill="currentColor" d="M376 232H216V72c0-4.42-3.58-8-8-8h-32c-4.42 0-8 3.58-8 8v160H8c-4.42 0-8 3.58-8 8v32c0 4.42 3.58 8 8 8h160v160c0 4.42 3.58 8 8 8h32c4.42 0 8-3.58 8-8V280h160c4.42 0 8-3.58 8-8v-32c0-4.42-3.58-8-8-8z" class=""></path></svg></span>Load</a>
+                                                    <label class="btn btn-default p-0">
+                                                        <input type="file" (change)="selectFile($event)" />
+                                                      </label>
+                                                      <button class="btn btn-success btn-sm"  (click)="upload()">
+                                                        Upload
+                                                      </button>
+                                                    <!-- <a href="">
+                                                        <span class="plus-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="svg-inline--fa fa-plus fa-w-12 fa-2x"><path fill="currentColor" d="M376 232H216V72c0-4.42-3.58-8-8-8h-32c-4.42 0-8 3.58-8 8v160H8c-4.42 0-8 3.58-8 8v32c0 4.42 3.58 8 8 8h160v160c0 4.42 3.58 8 8 8h32c4.42 0 8-3.58 8-8V280h160c4.42 0 8-3.58 8-8v-32c0-4.42-3.58-8-8-8z" class=""></path></svg></span>Load</a> -->
                                                 </div>
-                                                <div class="noti-file-upload">
+                                                <div class="noti-file-upload" *ngIf="fileUploading">
                                                     <p><span class="loadr">
                                                         <div class="svg-loader">
                                                         <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
@@ -39,12 +45,12 @@
                                                     </div>
                                                 </span>File upload successfully/with errors <a href="">see errors</a></p>
                                                 </div>
-                                                <div class="file-upload-results">
+                                                <div class="file-upload-results"  *ngIf="fileUploading">
                                                     <p class="record-uploa">Total of records uploaded: <span class="total-upload-value">1,985</span></p>
                                                     <p class="record-failed">Total of records failed: <span class="total-failed-value">1,585</span></p>
                                                 </div>
 
-                                                <div class="print-btn-report">
+                                                <div class="print-btn-report" *ngIf="fileUploading">
                                                     <a href="">Print report</a>
                                                 </div>
                                             </div>

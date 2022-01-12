@@ -9,12 +9,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class SessionService {
   private userSubject$: BehaviorSubject<any>;
   public user$: Observable<any>;
+  public filterworkLoad$: BehaviorSubject<any>;
+  public filterwork$: Observable<any>;
   constructor(
     private router: Router,
     private spinner: NgxSpinnerService) {
       this.userSubject$ = new BehaviorSubject<any>(this.getSessionObject('user'));
       this.user$ = this.userSubject$.asObservable();
-      var user = this.getSessionObject('user');
+      
+      this.filterworkLoad$ = new BehaviorSubject<any>(this.getSessionObject('user'));
+      this.filterwork$ = this.filterworkLoad$.asObservable();
   }
 
  
@@ -26,6 +30,9 @@ export class SessionService {
     return this.userSubject$.value;
   }
 
+  public get filterValue(): any {
+    return this.filterworkLoad$.value;
+  }
   setSessionObject(key: any, value: any) {
     localStorage.setItem(key, JSON.stringify(value));
   }

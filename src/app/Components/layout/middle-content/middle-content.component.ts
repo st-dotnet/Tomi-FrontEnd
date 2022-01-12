@@ -11,7 +11,7 @@ import { SessionService } from '@app/_services';
 export class MiddleContentComponent implements OnInit {
   isLoggedIn=false;
   constructor(   private accountService: SessionService) {
-    debugger;
+    
     const user = this.accountService.userValue;
     if( user && user.token){
       this.isLoggedIn=true;

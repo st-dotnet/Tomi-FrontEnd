@@ -159,7 +159,7 @@ span.ico svg {
     color: #656667;
 }
 
-.sidenav .listing ul.list-sidebar li:before {
+.sidenav .listing ul.list-sidebar li.reddot:before {
     content: '';
     width: 8px;
     height: 8px;
@@ -168,6 +168,18 @@ span.ico svg {
     z-index: 1;
     border-radius: 50%;
     top: 14px;
+}
+.sidenav .listing ul.list-sidebar li.greendot:before {
+ 
+    background: #18b432;
+    content: '';
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    z-index: 1;
+    border-radius: 50%;
+    top: 14px;
+  
 }
 
 

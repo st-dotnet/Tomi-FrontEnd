@@ -17,19 +17,20 @@
         </div>
         <div class="card-body">
             <div class="content-body">
-                <table class="table table-striped table-ui-same" id="datatableexample">
+                <table class="table table-striped table-ui-same" id="datatableexample" *ngIf="stockList">
                     <thead>
                         <tr>
-                            <th>Archivo</th>
-                            <th>#Registros</th>
+                            <!-- <th>#Registros</th> -->
+                            <th>#SKU</th>
                             <th>#Deptos</th>
                             <th>Fecha</th>
-                            <th>Estado</th>
-                            <th>Accion</th>
+                            <!-- <th>Estado</th> -->
+                            <th>Descripción</th>
+                            <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <!-- <tr>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -52,21 +53,26 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                        </tr>
-                        <!-- <tr *ngFor="let customer of customers; let i = index">
-                            <td>{{i+1}}</td>
-                            <td>{{customer.name}}</td>
-                            <td>
-                                <ul class="btn-tble">
+                        </tr> -->
+                         <tr *ngFor="let stock of stockList| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                            <!-- <td>{{i+1}}</td> -->
+                            <!-- <td>{{customer.name}}</td> -->
+                            <td>{{stock.sku}}</td>
+                            <td>{{stock.departmentname}}</td>
+                            <td>{{stock.date}}</td>
+                            <td>{{stock.description}}</td>
+                            <td>{{stock.total}}</td>
+                                <!-- <ul class="btn-tble">
                                     <li><button type="button" class="btn btn-primary" (click)="manageUser(customer.id)">Manage User</button></li>
                                     <li><button type="button" class="btn btn-primary" (click)="manageStore(customer.id)">Manage Store</button></li>
-                                </ul>
+                                </ul> -->
 
 
-                            </td>
-                        </tr> -->
+                            
+                        </tr> 
                     </tbody>
                 </table>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
             </div>
         </div>
 

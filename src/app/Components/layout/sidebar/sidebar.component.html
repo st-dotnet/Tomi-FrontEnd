@@ -5,29 +5,25 @@
     </div>
     <div class="order-selections">
         <h3>job order</h3>
-        <select class="form-control">
-        <option>Customer</option>
-        <option>Ordern de trabaio</option>
-        <option>Ordern de trabaio</option>
-    </select>
-        <select class="form-control">
-        <option>Store</option>
-        <option>Ordern de trabaio</option>
-        <option>Ordern de trabaio</option>
-    </select>
-        <select class="form-control">
-        <option>Date</option>
-        <option>Ordern de trabaio</option>
-        <option>Ordern de trabaio</option>
-    </select>
+        <select class="form-control" id="customerId" required [(ngModel)]="customerId" name="customerId"
+            (change)="getAllStoreByCustomerId(customerId)">
+            <option [value]="undefined" selected="true">Customer</option>
+            <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
+        </select>
+        <select class="form-control" id="storeId" [(ngModel)]="storeId" name="storeId">
+            <option [value]="undefined" selected="true">Store</option>
+            <option *ngFor="let store of stores" [value]="store.id">{{store.name}}</option>
+        </select>
+        <select class="form-control" id="year" required [(ngModel)]="stockyear" name="year" (change)="onChange()">
+            <option [value]="undefined" selected="true">Date</option>
+            <option *ngFor="let yeardate of years" [value]="yeardate.value">{{yeardate.value}}</option>
+        </select>
     </div>
-
-    <div class="listing">
-        <h3 class="head-listing">Antes de empezar</h3>
+    <div class="listing" >
+        <h3 class="head-listing">Before Starting</h3>
         <ul class="list-sidebar">
-            <li><a href="#"><span class="list-ico icon5"><img src="assets/sidebar/icon5.png"/></span>Master File</a></li>
-            <li><a href="#"><span class="list-ico icon5"><img src="assets/sidebar/icon4.png"/></span>Stocks</a></li>
-            <li><a href="#"><span class="list-ico icon5"><img src="assets/sidebar/icon7.png"/></span>Sales</a></li>
+            <li [className]="masterfileUpload ?  'reddot ' : 'greendot'" (click)="submitFile('master')"><a ><span class="list-ico icon5"><img src="assets/sidebar/icon5.png" /></span>Master File</a></li>
+            <li [className]="stockfileUpload ?  'reddot ' : 'greendot'" (click)="submitFile('Stock')"><a ><span class="list-ico icon5"><img src="assets/sidebar/icon4.png" /></span>Stocks</a></li>
+            <li [className]="salefileUpload ?  'reddot ' : 'greendot'"  (click)="submitFile('Sales')"><a><span class="list-ico icon5"><img src="assets/sidebar/icon7.png" /></span>Sales</a></li>
         </ul>
-
     </div>

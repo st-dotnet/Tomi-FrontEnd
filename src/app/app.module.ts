@@ -9,8 +9,6 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CustomerComponent } from './Components/customer/customer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
 import { SidebarComponent } from './Components/layout/sidebar/sidebar.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './_helper';
@@ -21,6 +19,8 @@ import { MiddleContentComponent } from './Components/layout/middle-content/middl
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { WorkloadsComponent } from './Components/workloads/workloads.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WorkloadComponent } from './workload/workload.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -35,7 +35,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SidebarComponent,
     MiddleContentComponent,
     ForgotPasswordComponent,
-    WorkloadsComponent
+    WorkloadsComponent,
+    WorkloadComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     SharedModule,
-    NgbModule
+    NgbModule,
+    NgxPaginationModule
   ],
   providers: [  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]

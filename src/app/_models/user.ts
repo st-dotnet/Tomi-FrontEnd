@@ -1,4 +1,6 @@
-﻿export class User {
+﻿import { DeclarationListEmitMode } from "@angular/compiler";
+
+export class User {
     id?: number;
     email?: string;
     firstName?: string;
@@ -26,4 +28,33 @@ export class Store {
     phoneNumber?: string;
     customer?: Customer;
     user?: User;
+}
+
+export class WorkLoad{
+    customerId?: string;
+    storeId?: string;
+    date?: Date;
+}
+
+
+export class Stock{
+    Id ? : string;
+    Store? : string;
+    Date? : string;
+    Time? : string;
+    SKU? : string;
+    Description? : string;
+    Quantity? : string;
+    Price? : string;
+    Total? : string;
+    HUA? : string;
+    Area? : string;
+    Family? : string;
+    Lineal? : string;
+    Metro? : string;
+    Department? : string;
+    Departmentname? : string;
+    CustomerId? : string;
+    StoreId? : string;
+    StockDate? : string;
 }
