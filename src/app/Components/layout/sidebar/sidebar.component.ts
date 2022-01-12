@@ -67,6 +67,7 @@ export class SidebarComponent implements OnInit {
   }
   submitFile(file:any){
     this.router.navigate(['/workorders', file]);
+
   }
   onChange(){
     debugger;

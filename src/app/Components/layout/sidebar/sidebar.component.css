@@ -8,3 +8,26 @@ span.list-ico {
     margin-right: 6px;
 }
 
+button.calendar-ico {
+      padding: 0;
+    width: 30px;
+    height: 30px;
+    border: none;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+}
+
+button.calendar-ico svg {
+    width: 18px;
+}
+
+button.calendar-ico:hover svg {
+    color: #0394d9;
+}
+
+button.calendar-ico:hover,button.calendar-ico:focus {
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+}

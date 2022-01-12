@@ -22,7 +22,6 @@ import { NgbModule,NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { WorkloadComponent } from './workload/workload.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 
-
 @NgModule({
   declarations: [
     AppComponent,

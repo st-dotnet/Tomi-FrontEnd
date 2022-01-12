@@ -111,7 +111,7 @@ export class UserService {
 
       uploadMasterFile(model:any) {
         
-        return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportStockFile`, model,{
+        return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportMasterFile`, model,{
           reportProgress: true,
           responseType: 'json'
         });

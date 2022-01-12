@@ -45,6 +45,10 @@ export class WorkloadsComponent implements OnInit {
       this.authenticationService.stockDate.subscribe(user => this.year = user);
       this.activatedRoute.params.subscribe((params: Params) => {
         this.uploadFiletab = params['id'];
+        this.fileUploaded = false;
+        this.fileUploaded = false;
+        this.stockRecordCount=0;
+        this.selectedFiles= new FileList();
       });
       this.years = [
         {
@@ -99,21 +103,21 @@ export class WorkloadsComponent implements OnInit {
     this.progress = 0;
  this.fileUploading = true;
  
-
+debugger;
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
 
       if (file) {
         this.currentFile = file;
         const formData: FormData = new FormData();
-        // var event = new Date(this.year);
+       var event = new Date(this.year);
 
-        // let date = JSON.stringify(event)
-        // date = date.slice(1,11)
+         let date = JSON.stringify(event)
+         date = date.slice(1,11)
         formData.append('file', file);
         formData.append('storeId',this.storeId);
         formData.append('customerId',this.customerId);
-        formData.append('stockDate',this.year);
+        formData.append('stockDate',date);
 
         if( this.uploadFiletab=="Stock"){
           this.authenticationService.setStockUpload(this.fileUploading);
@@ -144,15 +148,16 @@ export class WorkloadsComponent implements OnInit {
           });
         }
       else   if( this.uploadFiletab=="Master"){
-        this.fileUploading = false;
+        this.fileUploading = true;
         this.authenticationService.setMasterfileUplaod(this.fileUploading);
-        this.authenticationService.uploadStockFile(formData).subscribe({
+
+        this.authenticationService.uploadMasterFile(formData).subscribe({
           next: (event: any) => {
             debugger;
             if(event.success){
               this.fileUploading = false;
               this.fileUploaded= true;
-              this.authenticationService.setStockUpload(false);
+              this.authenticationService.setMasterfileUplaod(false);
                 this.stockRecordCount = event.stockRecordCount;
                 this.selectedFiles = undefined;
             }
