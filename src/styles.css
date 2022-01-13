@@ -82,7 +82,7 @@ span.loadr .svg-loader svg.svg-container {
 .sidebar-layout {
     width: 100%;
     display: flex;
-    height: calc(100vh - 114px);
+    height: calc(100vh - 108px);
 }
 
 .sidenav {
@@ -120,6 +120,14 @@ span.loadr .svg-loader svg.svg-container {
 
 .main-content-inner {
     width: 100%;
+}
+
+.inner-pageview .card-header ul.right-opt a.dropdown-toggle.prof-icon:after {
+    display: none;
+}
+
+.inner-pageview .card-header ul.right-opt a.dropdown-toggle.prof-icon:hover {
+    cursor: pointer;
 }
 
 .sidenav .sidebar-links ul.list-sidebar li a {
@@ -498,9 +506,9 @@ li.disabled {
     color: #2199e8;
 }
 
-.content.Vsidebar .sidebar-layout {
+/* .content.Vsidebar .sidebar-layout {
     height: 100%;
-}
+} */
 
 .content.Vsidebar .sidebar-layout .sidenav {
     height: revert;

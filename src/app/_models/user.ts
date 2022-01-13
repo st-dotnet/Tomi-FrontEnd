@@ -58,3 +58,18 @@ export class Stock{
     StoreId? : string;
     StockDate? : string;
 }
+
+
+export class Master{
+      Id ? : string;
+     Store ? : string;
+     SKU ? : string;
+     Filler ? : string;
+     Blank ? : string;
+     RecordId ? : string;
+     Quantity ? : string;
+     Unity ? : string;
+    CustomerId ? : string;
+    StoreId ? : string;
+    StockDate ? : string;
+}

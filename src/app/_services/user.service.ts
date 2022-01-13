@@ -4,8 +4,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { Stock, User, WorkLoad } from '@app/_models';
+import { Master, Stock, User, WorkLoad } from '@app/_models';
 import { SessionService } from '.';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -16,6 +17,8 @@ export class UserService {
     private readonly userEndPoint = 'User/';
     private _stockList: BehaviorSubject<Stock[]> = new BehaviorSubject<Stock[]>([]);
     public stockList: Observable<Stock[]> = this._stockList.asObservable();
+    private _masterList: BehaviorSubject<Stock[]> = new BehaviorSubject<Master[]>([]);
+    public masterList: Observable<Stock[]> = this._masterList.asObservable();
     // private _customerId: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
     // public customerId: Observable<any> = this._customerId.asObservable();
     private _customerId = new BehaviorSubject<any>('');
@@ -36,7 +39,8 @@ export class UserService {
     salefileUpload = this._salefileUpload.asObservable();
 
     constructor(private http: HttpClient,
-        private sessionService: SessionService) {
+        private sessionService: SessionService,
+        private router: Router) {
         this.currentUserSubject = new BehaviorSubject<User>(new User());
         this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -61,8 +65,11 @@ export class UserService {
 
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
-        
+        localStorage.removeItem('user');
+        this.router.navigate(["/"])
+        // this.router.navigate([""]).then(() => {
+        //     window.location.reload();
+        //   });
     }
 
     getAllStoreByCustomerId(customerId:string){
@@ -118,15 +125,21 @@ export class UserService {
       };
 
       getMasterData(model:any){
-        return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetStockData`,model).subscribe( res=>{
+        return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetMasterData`,model).subscribe( res=>{
             debugger;
             if(res.length>0)
             {
-                this._stockList.next(res);
+                this._masterList.next(res);
             };  
         })
       }
-   
+      getMasterList(model:any){
+        return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetMasterData`,model);
+      }
+      getStockList(model:any){
+        return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetStockData`,model);
+      }
+      
   setCustomerId(object:any) {
     this._customerId.next(object);
   }

@@ -23,6 +23,9 @@ export class CustomerComponent implements OnInit {
   p: number = 1;
   customers?:Customer[];
   stockList:any;
+  customerId: any;
+  storeId: any;
+  year: any;
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
@@ -36,7 +39,12 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authenticationService.stockList.subscribe(user => this.stockList = user);;
+    debugger;
+    this.authenticationService.stockList.subscribe(user => this.stockList = user);
+    this.authenticationService.customerId.subscribe(user => this.customerId = user);
+    this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    this.authenticationService.stockDate.subscribe(user => this.year = user);
+    this.getStockFileData();
     this.spinner.show();
       this.customerForm = this.formBuilder.group({
         name: ['', Validators.required] 
@@ -83,5 +91,27 @@ export class CustomerComponent implements OnInit {
   }
   manageStore(customerId:any){
     this.router.navigate([`store/${customerId}`]);
+  }
+  getStockFileData(){
+    var event = new Date(this.year);
+    let date = JSON.stringify(event)
+    date = date.slice(1,11)
+    // this.authenticationService.setCustomerId(this.customerId);
+    let workload ={
+      customerId: this.customerId,
+      storeId: this.storeId,
+      stockDate: date
+     };
+this.authenticationService.getStockList(workload).subscribe({
+  next: (event: any) => {
+ this.stockList=event;
+
+  }
+    
+});
+  }
+
+  onlogout(){
+    this.authenticationService.logout();
   }
 }

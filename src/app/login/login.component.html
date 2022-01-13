@@ -11,13 +11,13 @@
 
             <input type="password" formControlName="password" placeholder="Contrasena" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
             <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                <div *ngIf="f['password'].errors['required']">Contrasena is required</div>
+                <div *ngIf="f['password'].errors['required']">Password is required</div>
             </div>
         </div>
 
-        <button class="btn btn-primary">Ingresar</button>
+        <button class="btn btn-primary">Get Into</button>
         <div class="forgot-det">
-            <a href="">Olvide mi contrasena</a>
+            <a href="">I forgot my password</a>
         </div>
     </form>
 </div>

@@ -19,8 +19,9 @@ import { MiddleContentComponent } from './Components/layout/middle-content/middl
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { WorkloadsComponent } from './Components/workloads/workloads.component';
 import { NgbModule,NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-import { WorkloadComponent } from './workload/workload.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { MasterComponent } from './Components/master/master.component';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     MiddleContentComponent,
     ForgotPasswordComponent,
     WorkloadsComponent,
-    WorkloadComponent
+    MasterComponent,
   ],
   imports: [
     BrowserModule,

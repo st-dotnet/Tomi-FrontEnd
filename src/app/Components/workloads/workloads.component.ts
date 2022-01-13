@@ -28,6 +28,10 @@ export class WorkloadsComponent implements OnInit {
   message = '';
   fileUploaded = false;
   stockRecordCount: any;
+  activeTab ='master';
+  masterfileUpload: boolean = false;
+  stockfileUpload: boolean = false;
+  saleFileUpload : boolean= false;
   uploadFiletab:any;
   constructor(     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -45,10 +49,12 @@ export class WorkloadsComponent implements OnInit {
       this.authenticationService.stockDate.subscribe(user => this.year = user);
       this.activatedRoute.params.subscribe((params: Params) => {
         this.uploadFiletab = params['id'];
+        this.activeTab = this.uploadFiletab;
         this.fileUploaded = false;
         this.fileUploaded = false;
         this.stockRecordCount=0;
-        this.selectedFiles= new FileList();
+        this.masterfileUpload = false;
+        this.stockfileUpload = false;
       });
       this.years = [
         {
@@ -103,7 +109,6 @@ export class WorkloadsComponent implements OnInit {
     this.progress = 0;
  this.fileUploading = true;
  
-debugger;
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
 
@@ -130,6 +135,7 @@ debugger;
                 this.authenticationService.setStockUpload(false);
                   this.stockRecordCount = event.stockRecordCount;
                   this.selectedFiles = undefined;
+                  this.stockfileUpload = true;
               }
     
             },
@@ -150,18 +156,16 @@ debugger;
       else   if( this.uploadFiletab=="Master"){
         this.fileUploading = true;
         this.authenticationService.setMasterfileUplaod(this.fileUploading);
-
         this.authenticationService.uploadMasterFile(formData).subscribe({
           next: (event: any) => {
-            debugger;
             if(event.success){
               this.fileUploading = false;
               this.fileUploaded= true;
               this.authenticationService.setMasterfileUplaod(false);
                 this.stockRecordCount = event.stockRecordCount;
+                this.masterfileUpload = true;
                 this.selectedFiles = undefined;
             }
-  
           },
           error: (err: any) => {
             console.log(err);
@@ -181,5 +185,19 @@ debugger;
 
       this.selectedFiles = undefined;
     }
+  }
+
+  submitFile(){
+    this.router.navigate(['/master']);
+  };
+
+  
+  submitStockFile(){
+    this.router.navigate(['/customer']);
+  };
+
+
+  onlogout(){
+    this.authenticationService.logout();
   }
 }

@@ -4,7 +4,16 @@
 
             <div class="customer-add btn-header">
                 <ul class="right-opt">
-                    <li><a class="prof-icon"><span class="prof_alpha">U</span></a></li>
+                   
+                    <li>
+                        <div ngbDropdown class="d-inline-block">
+                            <a class="prof-icon" ngbDropdownToggle aria-haspopup="true" aria-expanded="false"><span class="prof_alpha" >U</span></a>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                              <button ngbDropdownItem (click)="onlogout()">Logout</button>
+                              
+                            </div>
+                          </div>
+                    </li>
                 </ul>
 
             </div>
@@ -53,8 +62,11 @@
 
                                                 </div>
 
-                                                <div class="print-btn-report" *ngIf="fileUploaded">
-                                                    <a href="">Print report</a>
+                                                <div class="print-btn-report" *ngIf="masterfileUpload">
+                                                    <a (click)="submitFile()" >Print report</a>
+                                                </div>
+                                                <div class="print-btn-report" *ngIf="stockfileUpload">
+                                                    <a (click)="submitStockFile()" >Print report</a>
                                                 </div>
                                             </div>
                                         </div>

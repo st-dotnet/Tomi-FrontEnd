@@ -72,9 +72,9 @@ export class SidebarComponent implements OnInit {
   onChange(){
     debugger;
     if( this.customerId!=null ||  this.storeId!=null || this.stockyear!=null){
-      let stockdate =new Date(this.stockyear.year,this.stockyear.month-1, this.stockyear.day);
+      let stockdate =new Date(this.stockyear.year,this.stockyear.month-1, this.stockyear.day+1);
+      this.stockyear.day= this.stockyear.day+1;
       var event = new Date(stockdate);
-
       let date = JSON.stringify(event)
       date = date.slice(1,11)
       // this.authenticationService.setCustomerId(this.customerId);
@@ -87,6 +87,7 @@ export class SidebarComponent implements OnInit {
        this.authenticationService.setStoreId(this.storeId);
        this.authenticationService.setStockDate(stockdate);
         this.authenticationService.getstockData(workload);
+        this.authenticationService.getMasterData(workload);
     }
 
   

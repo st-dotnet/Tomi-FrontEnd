@@ -7,7 +7,7 @@ import { UserComponent } from './Components/user/user.component';
 import { StoreComponent } from './Components/store/store.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { WorkloadsComponent } from './Components/workloads/workloads.component';
-import { WorkloadComponent } from './workload/workload.component';
+import { MasterComponent } from './Components/master/master.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,8 +17,8 @@ const routes: Routes = [
   {path:'user/:id/:storeId', component:UserComponent},
   { path: 'reset-password', component: ForgotPasswordComponent },
   { path: 'workorders', component: WorkloadsComponent },
-  {path:'workorder',component: WorkloadComponent},
   { path: 'workorders/:id', component: WorkloadsComponent},
+  {path:'master',component: MasterComponent}
 ];
 
 @NgModule({
