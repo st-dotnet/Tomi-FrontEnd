@@ -1,0 +1,13 @@
+section.header.w-logged .img-no-logged,
+section.header.w-logged .img-no-logged img {
+    width: 100%;
+}
+
+section.header.logged .no-logged,
+section.header.logged .no-logged img {
+    width: 100%;
+}
+
+section.header.logged {
+    min-height: 56px;
+}

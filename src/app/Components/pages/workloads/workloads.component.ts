@@ -13,6 +13,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./workloads.component.css']
 })
 export class WorkloadsComponent implements OnInit {
+  headerName: string = '';
+  isMasterFileUpload: boolean = false;
+  isStockFileUpload: boolean = false;
+  isSaleFileUpload: boolean = false;
   workloads$!: Observable<any[]>;
   stockfileUploading: boolean = false;
   masterfileUploading: boolean = false;
@@ -52,10 +56,7 @@ export class WorkloadsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.authenticationService.activeTab.subscribe(activetab => this.activeTab = activetab);
-
-
     this.years = [
       {
         value: '2019'
@@ -264,7 +265,7 @@ export class WorkloadsComponent implements OnInit {
               this.masterfileUploading = false;
               this.fileUploaded = true;
               this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
-              this.saleRecordCount = event.stockRecordCount;
+              this.masterRecordCount = event.stockRecordCount;
               this.masterfileUpload = true;
               this.selectedFiles = undefined;
               this.spinner.hide();

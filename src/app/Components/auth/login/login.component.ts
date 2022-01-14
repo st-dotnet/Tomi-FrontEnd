@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SessionService, UserService } from '@app/_services';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
+import { Pages } from '@app/_helper/enums';
 
 @Component({
   selector: 'app-login',
@@ -16,41 +18,43 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   error = '';
-  isLoggedIn= false;
+  isLoggedIn = false;
   constructor(
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private router: Router,
-      private authenticationService: UserService,
-      private toastrService: ToastrService,
-      private accountService: SessionService
-  ) { 
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: UserService,
+    private toastrService: ToastrService,
+    private accountService: SessionService,
+    private spinner: NgxSpinnerService
+  ) {
     const user = this.accountService.userValue;
-     this.isLoggedIn = user && user.token;
-      // redirect to home if already logged in
+    this.isLoggedIn = user && user.token;
+    // redirect to home if already logged in
     //   if (this.authenticationService.currentUserValue) { 
     //       this.router.navigate(['/']);
     //   }
   }
 
   ngOnInit() {
-      this.loginForm = this.formBuilder.group({
-        email: ['', Validators.required],
-          password: ['', Validators.required]
-      });
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
-      this.submitted = true;
-      // stop here if form is invalid
-      if (this.loginForm.invalid) {
-          return;
-      }
-      this.loading = true;
-      this.authenticationService.login(this.loginForm.value)
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
+    this.loading = true;
+    this.spinner.show();
+    this.authenticationService.login(this.loginForm.value)
       .pipe(first())
       .subscribe({
         next: (res: any) => {
@@ -58,19 +62,19 @@ export class LoginComponent implements OnInit {
             this.toastrService.error(res.error);
             return;
           }
-          this.router.navigate(["/workorders"]).then(() => {
-            window.location.reload();
-          });
-       
-          // this.spinner.hide();         
+          this.router.navigate([`/workorders/${Pages[1]}`]);
+          setTimeout(() => {
+            this.authenticationService.setactiveTab(1);
+            this.spinner.hide();
+          }, 1000);
         },
         error: error => {
-         
           this.toastrService.error();
           this.loading = false;
+          this.spinner.hide();
         }
 
-   
+
       });
   }
 }

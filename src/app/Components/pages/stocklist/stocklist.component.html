@@ -1,30 +1,8 @@
 <section class="inner-content inner-pageview">
-    <div class="card">
-        <div class="card-header">
-            <h3>Master Records</h3>
-            <div class="customer-add btn-header">
-                <ul class="right-opt">
-                    <!-- <li class="ico_plus">
-                        <a (click)="open(mymodal)">
-                            <span class="plus-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="svg-inline--fa fa-plus fa-w-12 fa-2x"><path fill="currentColor" d="M376 232H216V72c0-4.42-3.58-8-8-8h-32c-4.42 0-8 3.58-8 8v160H8c-4.42 0-8 3.58-8 8v32c0 4.42 3.58 8 8 8h160v160c0 4.42 3.58 8 8 8h32c4.42 0 8-3.58 8-8V280h160c4.42 0 8-3.58 8-8v-32c0-4.42-3.58-8-8-8z" class=""></path></svg></span>                            Cargar
-                        </a>
-                    </li> -->
-                    
-                    <li>
-                        <div ngbDropdown class="d-inline-block">
-                            <a class="prof-icon" ngbDropdownToggle aria-haspopup="true" aria-expanded="false"><span class="prof_alpha" >U</span></a>
-                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                              <button ngbDropdownItem (click)="onlogout()">Logout</button>
-                              
-                            </div>
-                          </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <div class="card">        
         <div class="card-body">
             <div class="content-body">
-                <table class="table table-striped table-ui-same" id="datatableexample" *ngIf="masterList">
+                <table class="table table-striped table-ui-same" id="datatableexample" *ngIf="stockList">
                     <thead>
                         <tr>
                             <!-- <th>#Registros</th> -->
@@ -38,7 +16,7 @@
                     </thead>
                     <tbody>
                     
-                        <tr *ngFor="let stock of masterList| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                        <tr *ngFor="let stock of stockList| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                             <!-- <td>{{i+1}}</td> -->
                             <!-- <td>{{customer.name}}</td> -->
                             <td>{{stock.sku}}</td>

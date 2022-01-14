@@ -24,16 +24,16 @@ export class StocklistComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.spinner.show();
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
-    this.authenticationService.stockDate.subscribe(user => this.year = user);
+    this.authenticationService.stockDate.subscribe((year) => {
+      if (year) {
+        this.year = year;
+        this.getSaleFileData();
+      }
+    });
     this.authenticationService.stockList.subscribe(user => this.stockList = user);
-    debugger;
-    
-     this.getsaleFileData();
-    
-     this.spinner.hide();
+
   }
 
   manageUser(customerId: any) {
@@ -43,27 +43,28 @@ export class StocklistComponent implements OnInit {
     this.router.navigate([`store/${customerId}`]);
   }
 
-  getsaleFileData(){
+  getSaleFileData() {
     var event = new Date(this.year);
     this.spinner.show();
     let date = JSON.stringify(event)
-    date = date.slice(1,11)
-    // this.authenticationService.setCustomerId(this.customerId);
-    let workload ={
+    date = date.slice(1, 11)
+
+    let workload = {
       customerId: this.customerId,
       storeId: this.storeId,
       stockDate: date
-     };
-this.authenticationService.getStockList(workload).subscribe({
-  next: (event: any) => {
- this.stockList=event;
- this.spinner.hide();
-  }
-    
-});
+    };
+    this.spinner.show();
+    this.authenticationService.getStockList(workload).subscribe({
+      next: (event: any) => {
+        this.stockList = event;
+        this.spinner.hide();
+      }
+
+    });
   }
 
-  onlogout(){
+  onlogout() {
     this.authenticationService.logout();
   }
 }

@@ -1,23 +1,19 @@
 <section class="inner-content inner-pageview wkloads">
     <div class="card">
-        <div class="card-header">
-
+        <div class="card-header">            
+            <h3>{{activeTab == '1' ? 'Master File' : activeTab == '2' ? 'Stocks File' : 'Sales File'}}</h3>
             <div class="customer-add btn-header">
-                <ul class="right-opt">
-                   
+                <ul class="right-opt">                   
                     <li>
                         <div ngbDropdown class="d-inline-block">
                             <a class="prof-icon" ngbDropdownToggle aria-haspopup="true" aria-expanded="false"><span class="prof_alpha" >U</span></a>
                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                              <button ngbDropdownItem (click)="onlogout()">Logout</button>
-                              
+                              <button ngbDropdownItem (click)="onlogout()">Logout</button>                              
                             </div>
                           </div>
                     </li>
                 </ul>
-
             </div>
-
         </div>
         <div class="card-body">
             <div class="content-body">
@@ -27,14 +23,14 @@
                         <div class="tabs-wkload">
                             <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs">
                                 <li [ngbNavItem]="1">
-                                    <a ngbNavLink>
-                                    Master
-                                    <!-- <span class="close position-relative pl-2 font-weight-light" (click)="close($event, 1)">×</span> -->
-                                  </a>
+                                    <a ngbNavLink class="custom-tabs" (click)="isMasterFileUpload=false">Master</a>                                 
                                     <ng-template ngbNavContent>
-                                        <div class="resultwrapper-tab">
+                                        <div *ngIf="!isMasterFileUpload">                                            
+                                    <button class="btn btn btn-primary btn-upload" (click)="isMasterFileUpload=true">Upload</button>  
+                                            <app-master></app-master>
+                                        </div>
+                                        <div *ngIf="isMasterFileUpload" class="resultwrapper-tab">
                                             <div class="content-upload-view">
-
                                                 <div class="load-file">
                                                     <div class="icon-svg-file">
                                                         <svg aria-hidden="true" focusable="false"  data-prefix="fas" data-icon="cloud-upload-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-cloud-upload-alt fa-w-20 fa-2x"><path fill="currentColor" d="M537.6 226.6c4.1-10.7 6.4-22.4 6.4-34.6 0-53-43-96-96-96-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32c-88.4 0-160 71.6-160 160 0 2.7.1 5.4.2 8.1C40.2 219.8 0 273.2 0 336c0 79.5 64.5 144 144 144h368c70.7 0 128-57.3 128-128 0-61.9-44-113.6-102.4-125.4zM393.4 288H328v112c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V288h-65.4c-14.3 0-21.4-17.2-11.3-27.3l105.4-105.4c6.2-6.2 16.4-6.2 22.6 0l105.4 105.4c10.1 10.1 2.9 27.3-11.3 27.3z" class=""></path></svg>
@@ -42,9 +38,7 @@
                                                     <label class="btn btn-default p-0">
                                                         <input type="file" (change)="selectFile($event,'master')" />
                                                       </label>
-                                                    <button class="btn btn-success btn-sm"   [disabled]="!updatemasterfile" (click)="uploadMasterFile()">Upload</button>
-                                                    <!-- <a href="">
-                                                        <span class="plus-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="svg-inline--fa fa-plus fa-w-12 fa-2x"><path fill="currentColor" d="M376 232H216V72c0-4.42-3.58-8-8-8h-32c-4.42 0-8 3.58-8 8v160H8c-4.42 0-8 3.58-8 8v32c0 4.42 3.58 8 8 8h160v160c0 4.42 3.58 8 8 8h32c4.42 0 8-3.58 8-8V280h160c4.42 0 8-3.58 8-8v-32c0-4.42-3.58-8-8-8z" class=""></path></svg></span>Load</a> -->
+                                                    <button class="btn btn-success btn-sm"   [disabled]="!updatemasterfile" (click)="uploadMasterFile()">Upload</button>                                                    
                                                 </div>
                                                 <div class="noti-file-upload" *ngIf="masterfileUploading">
                                                     <p><span class="loadr">
@@ -59,24 +53,22 @@
                                                 <div class="file-upload-results"  *ngIf="masterfileUpload">
                                                     <p class="record-uploa">Total of records uploaded: <span class="total-upload-value">{{masterRecordCount}}</span></p>
                                                     <p class="record-failed">Total of records failed: <span class="total-failed-value">0</span></p>
-
                                                 </div>
-
                                                 <div class="print-btn-report" *ngIf="masterfileUpload">
                                                     <a (click)="submitFile()" >Print report</a>
-                                                </div>
-                                             
+                                                </div>                                             
                                             </div>
                                         </div>
                                     </ng-template>
                                 </li>
                                 <li [ngbNavItem]="2">
-                                    <a ngbNavLink>
-                                    Stock
-                                    <!-- <span class="close position-relative pl-2 font-weight-light" (click)="close($event, 1)">×</span> -->
-                                  </a>
+                                    <a ngbNavLink class="custom-tabs" (click)="isStockFileUpload=false">Stock</a>
                                     <ng-template ngbNavContent>
-                                        <div class="resultwrapper-tab">
+                                        <div *ngIf="!isStockFileUpload">                                            
+                                            <button class="btn btn btn-primary btn-upload" (click)="isStockFileUpload=true">Upload</button>  
+                                                    <app-stocklist></app-stocklist>
+                                                </div>
+                                        <div *ngIf="isStockFileUpload" class="resultwrapper-tab">
                                             <div class="content-upload-view">
 
                                                 <div class="load-file">
@@ -116,12 +108,13 @@
                                     </ng-template>
                                 </li>
                                 <li [ngbNavItem]="3">
-                                    <a ngbNavLink>
-                                    Sales
-                                    <!-- <span class="close position-relative pl-2 font-weight-light" (click)="close($event, 1)">×</span> -->
-                                  </a>
+                                    <a ngbNavLink class="custom-tabs" (click)="isSaleFileUpload=false">Sales</a>
                                     <ng-template ngbNavContent>
-                                        <div class="resultwrapper-tab">
+                                        <div *ngIf="!isSaleFileUpload">                                            
+                                            <button class="btn btn btn-primary btn-upload" (click)="isSaleFileUpload=true">Upload</button>  
+                                                    <app-customer></app-customer>
+                                                </div>
+                                        <div *ngIf="isSaleFileUpload" class="resultwrapper-tab">
                                             <div class="content-upload-view">
 
                                                 <div class="load-file">

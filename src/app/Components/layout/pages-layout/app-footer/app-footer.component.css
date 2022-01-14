@@ -1,0 +1,13 @@
+section.footer.w-logged .img-no-logged,
+section.footer.w-logged .img-no-logged img {
+    width: 100%;
+}
+
+section.footer.logged .no-logged,
+section.footer.logged .no-logged img {
+    width: 100%;
+}
+
+/* section.footer.logged {
+    min-height: 56px;
+} */

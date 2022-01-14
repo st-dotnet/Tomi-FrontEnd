@@ -23,49 +23,49 @@ export class MasterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.spinner.show();
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
-    this.authenticationService.stockDate.subscribe(user => this.year = user);
+    this.authenticationService.stockDate.subscribe((year)=> {
+      debugger
+      if(year){
+        this.year = year;
+        this.getmasterFileData();
+      }
+    });
     this.authenticationService.masterList.subscribe(user => this.masterList = user);
-
-   if( this.customerId!=undefined && this.storeId != undefined && this.year !=undefined){
-    this.spinner.show();
-    this.getmasterFileData();
-    this.spinner.hide();
-   }
- 
-
+    if (this.customerId != undefined && this.storeId != undefined && this.year != undefined) {
+      this.getmasterFileData();
+    }
   }
 
   manageUser(customerId: any) {
     this.router.navigate([`user/${customerId}`]);
   }
+
   manageStore(customerId: any) {
     this.router.navigate([`store/${customerId}`]);
   }
 
-  getmasterFileData(){
+  getmasterFileData() {
     var event = new Date(this.year);
-
     let date = JSON.stringify(event)
-    date = date.slice(1,11)
+    date = date.slice(1, 11)
     // this.authenticationService.setCustomerId(this.customerId);
-    let workload ={
+    let workload = {
       customerId: this.customerId,
       storeId: this.storeId,
       stockDate: date
-     };
-this.authenticationService.getMasterList(workload).subscribe({
-  next: (event: any) => {
- this.masterList=event;
- this.spinner.hide();
-  }
-    
-});
+    };
+    this.spinner.show();
+    this.authenticationService.getMasterList(workload).subscribe({
+      next: (event: any) => {
+        this.masterList = event;
+        this.spinner.hide();
+      }
+    });
   }
 
-  onlogout(){
+  onlogout() {
     this.authenticationService.logout();
   }
 }

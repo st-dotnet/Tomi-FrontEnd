@@ -60,7 +60,7 @@ export class UserService {
       .pipe(map(res => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         // localStorage.setItem('currentUser', JSON.stringify(user));
-        // this.currentUserSubject.next(user);
+        this.currentUserSubject.next(res);
         if (res.token) {
           this.sessionService.setSessionObject('user', res);
           this.sessionService.userSession(res);
@@ -72,10 +72,10 @@ export class UserService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
-    // this.router.navigate(["/"])
-    this.router.navigate([""]).then(() => {
-        window.location.reload();
-      });
+     this.router.navigate(["/"])
+    // this.router.navigate([""]).then(() => {
+    //     window.location.reload();
+    //   });
   
   }
 
