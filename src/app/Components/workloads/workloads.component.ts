@@ -122,6 +122,7 @@ export class WorkloadsComponent implements OnInit {
     });
   }
   upload(): void {
+    debugger;
     this.spinner.show();
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
@@ -149,7 +150,7 @@ export class WorkloadsComponent implements OnInit {
               if (event.success) {
                 this.stockfileUploading = false;
                 this.authenticationService.setStockUpload(this.stockfileUploading);
-                this.saleRecordCount = event.stockRecordCount;
+                this.stockRecordCount = event.stockRecordCount;
                 this.selectedStockFiles = undefined;
                 this.stockfileUpload = true;
                 this.spinner.hide();
@@ -263,7 +264,7 @@ export class WorkloadsComponent implements OnInit {
               this.masterfileUploading = false;
               this.fileUploaded = true;
               this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
-              this.masterRecordCount = event.stockRecordCount;
+              this.saleRecordCount = event.stockRecordCount;
               this.masterfileUpload = true;
               this.selectedFiles = undefined;
               this.spinner.hide();
@@ -291,6 +292,7 @@ export class WorkloadsComponent implements OnInit {
 
   uploadSaleFile(): void {
     this.spinner.show();
+    debugger;
     this.updateSalefile = false;
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);

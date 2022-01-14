@@ -21,6 +21,7 @@ export class SidebarComponent implements OnInit {
   masterfileUpload =false;
   stockfileUpload =false;
   salefileUpload = false;
+  rangefileUpload= false;
   constructor(   private accountService: SessionService,    private authenticationService: UserService,
     private spinner: NgxSpinnerService,private router: Router) {
       
