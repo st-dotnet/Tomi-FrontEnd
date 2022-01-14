@@ -43,7 +43,6 @@ export class WorkloadsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      debugger;
       this.authenticationService.customerId.subscribe(user => this.customerId = user);
       this.authenticationService.storeId.subscribe(user => this.storeId = user);
       this.authenticationService.stockDate.subscribe(user => this.year = user);
@@ -51,10 +50,10 @@ export class WorkloadsComponent implements OnInit {
         this.uploadFiletab = params['id'];
         this.activeTab = this.uploadFiletab;
         this.fileUploaded = false;
-        this.fileUploaded = false;
         this.stockRecordCount=0;
         this.masterfileUpload = false;
         this.stockfileUpload = false;
+        this.saleFileUpload = false;
       });
       this.years = [
         {
@@ -108,7 +107,7 @@ export class WorkloadsComponent implements OnInit {
   upload(): void {
     this.progress = 0;
  this.fileUploading = true;
- 
+ this.spinner.show();
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
 
@@ -128,7 +127,6 @@ export class WorkloadsComponent implements OnInit {
           this.authenticationService.setStockUpload(this.fileUploading);
           this.authenticationService.uploadStockFile(formData).subscribe({
             next: (event: any) => {
-              debugger;
               if(event.success){
                 this.fileUploading = false;
                 this.fileUploaded= true;
@@ -136,6 +134,7 @@ export class WorkloadsComponent implements OnInit {
                   this.stockRecordCount = event.stockRecordCount;
                   this.selectedFiles = undefined;
                   this.stockfileUpload = true;
+                  this.spinner.hide();
               }
     
             },
@@ -148,8 +147,8 @@ export class WorkloadsComponent implements OnInit {
               } else {
                 this.message = 'Could not upload the file!';
               }
-  
               this.currentFile = undefined;
+              this.spinner.hide();
             }
           });
         }
@@ -165,6 +164,7 @@ export class WorkloadsComponent implements OnInit {
                 this.stockRecordCount = event.stockRecordCount;
                 this.masterfileUpload = true;
                 this.selectedFiles = undefined;
+                this.spinner.hide();
             }
           },
           error: (err: any) => {
@@ -177,6 +177,37 @@ export class WorkloadsComponent implements OnInit {
               this.message = 'Could not upload the file!';
             }
 
+            this.currentFile = undefined;
+            this.spinner.hide();
+          }
+          
+        });
+      }
+      else   if( this.uploadFiletab=="Sales"){
+        this.fileUploading = true;
+        this.authenticationService.setSalefileUpload(this.fileUploading);
+        this.authenticationService.uploadSalesFile(formData).subscribe({
+          next: (event: any) => {
+            if(event.success){
+              this.fileUploading = false;
+              this.fileUploaded= true;
+              this.authenticationService.setSalefileUpload(false);
+                this.stockRecordCount = event.stockRecordCount;
+                this.saleFileUpload = true;
+                this.selectedFiles = undefined;
+                this.spinner.hide();
+            }
+          },
+          error: (err: any) => {
+            console.log(err);
+            this.progress = 0;
+          
+            if (err.error && err.error.message) {
+              this.message = err.error.message;
+            } else {
+              this.message = 'Could not upload the file!';
+            }
+            this.spinner.hide();
             this.currentFile = undefined;
           }
         });
@@ -193,9 +224,12 @@ export class WorkloadsComponent implements OnInit {
 
   
   submitStockFile(){
+    this.router.navigate(['/stockList']);
+  };
+  
+  submitSaleFile(){
     this.router.navigate(['/customer']);
   };
-
 
   onlogout(){
     this.authenticationService.logout();

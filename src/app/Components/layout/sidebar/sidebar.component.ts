@@ -23,15 +23,18 @@ export class SidebarComponent implements OnInit {
   salefileUpload = false;
   constructor(   private accountService: SessionService,    private authenticationService: UserService,
     private spinner: NgxSpinnerService,private router: Router) {
+      
     const user = this.accountService.userValue;
     this.isLoggedIn = user && user.token;
    }
 
   ngOnInit(): void {
+    
     this.authenticationService.customerId.subscribe(user => this.customer = user);
     debugger;
     this.authenticationService.masterfileUplaod.subscribe(file => this.masterfileUpload = file);
     this.authenticationService.stockfileUplaod.subscribe(file => this.stockfileUpload = file);
+    this.authenticationService.salefileUpload.subscribe(file => this.salefileUpload = file);
     if(this.customer!=""){
       this.customerId= this.customer;
     }
@@ -88,8 +91,7 @@ export class SidebarComponent implements OnInit {
        this.authenticationService.setStockDate(stockdate);
         this.authenticationService.getstockData(workload);
         this.authenticationService.getMasterData(workload);
+        this.authenticationService.getSalesList(workload);
     }
-
-  
   }
 }

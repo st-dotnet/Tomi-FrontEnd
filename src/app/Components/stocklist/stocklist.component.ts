@@ -4,12 +4,13 @@ import { UserService } from '@app/_services';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-master',
-  templateUrl: './master.component.html',
-  styleUrls: ['./master.component.css']
+  selector: 'app-stocklist',
+  templateUrl: './stocklist.component.html',
+  styleUrls: ['./stocklist.component.css']
 })
-export class MasterComponent implements OnInit {
-  masterList: any;
+export class StocklistComponent implements OnInit {
+
+  stockList: any;
   customerId: any;
   storeId: any;
   year: any;
@@ -27,15 +28,12 @@ export class MasterComponent implements OnInit {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
-    this.authenticationService.masterList.subscribe(user => this.masterList = user);
-
-   if( this.customerId!=undefined && this.storeId != undefined && this.year !=undefined){
-    this.spinner.show();
-    this.getmasterFileData();
-    this.spinner.hide();
-   }
- 
-
+    this.authenticationService.stockList.subscribe(user => this.stockList = user);
+    debugger;
+    
+     this.getsaleFileData();
+    
+     this.spinner.hide();
   }
 
   manageUser(customerId: any) {
@@ -45,9 +43,9 @@ export class MasterComponent implements OnInit {
     this.router.navigate([`store/${customerId}`]);
   }
 
-  getmasterFileData(){
+  getsaleFileData(){
     var event = new Date(this.year);
-
+    this.spinner.show();
     let date = JSON.stringify(event)
     date = date.slice(1,11)
     // this.authenticationService.setCustomerId(this.customerId);
@@ -56,9 +54,9 @@ export class MasterComponent implements OnInit {
       storeId: this.storeId,
       stockDate: date
      };
-this.authenticationService.getMasterList(workload).subscribe({
+this.authenticationService.getStockList(workload).subscribe({
   next: (event: any) => {
- this.masterList=event;
+ this.stockList=event;
  this.spinner.hide();
   }
     

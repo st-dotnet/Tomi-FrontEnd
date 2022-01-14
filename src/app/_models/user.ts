@@ -37,7 +37,7 @@ export class WorkLoad{
 }
 
 
-export class Stock{
+export class Sales{
     Id ? : string;
     Store? : string;
     Date? : string;
@@ -59,16 +59,16 @@ export class Stock{
     StockDate? : string;
 }
 
-
 export class Master{
-      Id ? : string;
-     Store ? : string;
-     SKU ? : string;
-     Filler ? : string;
-     Blank ? : string;
-     RecordId ? : string;
-     Quantity ? : string;
-     Unity ? : string;
+    Id?:string;
+    SKU?:string;
+    Barcode?:string;
+    RetailPrice?:string;
+    Description?:string;
+    Department?:string;
+    Blank?:string;
+    OHQuantity?:string;
+    Unity?:string;
     CustomerId ? : string;
     StoreId ? : string;
     StockDate ? : string;

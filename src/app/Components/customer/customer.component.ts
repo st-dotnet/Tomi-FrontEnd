@@ -105,7 +105,6 @@ export class CustomerComponent implements OnInit {
 this.authenticationService.getStockList(workload).subscribe({
   next: (event: any) => {
  this.stockList=event;
-
   }
     
 });
