@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
             this.toastrService.error(res.error);
             return;
           }
-          this.router.navigate(["/customer"]).then(() => {
+          this.router.navigate(["/workorders"]).then(() => {
             window.location.reload();
           });
        

@@ -30,6 +30,8 @@ export class UserService {
   private _storeId: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   public storeId: Observable<any> = this._storeId.asObservable();
 
+  private _activeTab: BehaviorSubject<any> = new BehaviorSubject<any>(1);
+  public activeTab: Observable<any> = this._activeTab.asObservable();
   private _stockDate: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   public stockDate: Observable<any> = this._stockDate.asObservable();
 
@@ -70,10 +72,11 @@ export class UserService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
-    this.router.navigate(["/"])
-    // this.router.navigate([""]).then(() => {
-    //     window.location.reload();
-    //   });
+    // this.router.navigate(["/"])
+    this.router.navigate([""]).then(() => {
+        window.location.reload();
+      });
+  
   }
 
   getAllStoreByCustomerId(customerId: string) {
@@ -163,6 +166,9 @@ export class UserService {
     this._storeId.next(object);
   }
 
+  setactiveTab(object: any) {
+    this._activeTab.next(object);
+  }
   setStockDate(object: any) {
     this._stockDate.next(object);
   }

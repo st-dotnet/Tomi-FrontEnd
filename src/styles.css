@@ -558,3 +558,10 @@ li.disabled {
     width: 40px;
     color: #14528b;
 }
+
+a#ngb-nav-0.active,
+a#ngb-nav-1.active,
+a#ngb-nav-2.active {
+    background: #04acee;
+    color: #fff;
+}

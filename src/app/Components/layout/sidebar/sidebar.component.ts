@@ -69,9 +69,16 @@ export class SidebarComponent implements OnInit {
     });
   }
   submitFile(file:any){
-    this.router.navigate(['/workorders', file]);
+    if(file=="Master")
+    this.authenticationService.setactiveTab(1);
+    else if(file=="Stock")
+    this.authenticationService.setactiveTab(2);
+    else if(file=="Sales")
+    this.authenticationService.setactiveTab(3);
+   // this.router.navigate(['/workorders', file]);
 
   }
+
   onChange(){
     debugger;
     if( this.customerId!=null ||  this.storeId!=null || this.stockyear!=null){
