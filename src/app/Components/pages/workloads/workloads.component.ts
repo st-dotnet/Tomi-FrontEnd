@@ -123,7 +123,7 @@ export class WorkloadsComponent implements OnInit {
     });
   }
   upload(): void {
-    debugger;
+    
     this.spinner.show();
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
@@ -293,7 +293,7 @@ export class WorkloadsComponent implements OnInit {
 
   uploadSaleFile(): void {
     this.spinner.show();
-    debugger;
+    
     this.updateSalefile = false;
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);

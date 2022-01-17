@@ -36,7 +36,7 @@ export class RangesComponent implements OnInit {
     this.rangesService.rangeList.subscribe(user => this.rangeList = user);
     this.rangeForm = this.formBuilder.group({
       name: ['', Validators.required],
-      group:['',Validators.required],
+      groupId:['',Validators.required],
       tagTo:['',Validators.required],
       tagFrom:['',Validators.required],
     });
