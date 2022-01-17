@@ -234,7 +234,7 @@ span.ico svg {
     list-style-type: none;
     padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 .inner-pageview .card-header ul.right-opt li.ico_plus a span.plus-ico {
@@ -560,10 +560,14 @@ li.disabled {
 }
 
 .custom-tabs.nav-link.active {
-    background: #04acee !important; 
+    background: #04acee !important;
     color: #fff !important;
 }
 
+auth-header {
+    width: 100%;
+    float: left;
+}
 
 .login-centerd {
     position: absolute;
@@ -572,6 +576,13 @@ li.disabled {
     max-width: 320px;
     width: 100%;
     top: 0px;
+}
+
+app-login {
+    width: 100%;
+    float: left;
+    padding: 0px 0 0 0;
+    position: relative;
 }
 
 .login-centerd form {
@@ -624,4 +635,24 @@ li.disabled {
 
 .forgot-det a:hover {
     color: #14528b;
+}
+
+.btn-upload-files {padding: 0px 0 0 0;}
+
+.btn-upload-files button.btn-upload {
+    display: block;
+    width: 100%;
+    max-width: 114px;
+    float: right;
+    margin: 8px 10px 7px 0;
+    background: #14528b;
+    border: 1px solid #14528b;
+}
+
+.btn-upload-files app-master,
+.btn-upload-files app-stocklist,
+.btn-upload-files app-customer
+{
+    width: 100%;
+    float: left;
 }
