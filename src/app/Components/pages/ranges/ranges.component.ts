@@ -17,9 +17,13 @@ export class RangesComponent implements OnInit {
   submitted = false;
   ranges: any;
   rangeForm!: FormGroup;
+  groupForm!: FormGroup;
   customers?: Customer[];
   p: number = 1;
   rangeList: any;
+  groupsubmitted: boolean=false ;
+  groupList: any;
+  isAddGroup= false;
   constructor( private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -36,7 +40,11 @@ export class RangesComponent implements OnInit {
       tagTo:['',Validators.required],
       tagFrom:['',Validators.required],
     });
+    this.groupForm = this.formBuilder.group({
+      name: ['', Validators.required],
+    });
     this.getallRangeList();
+    this.getallGroupList();
   }
 
   getallCustomList() {
@@ -58,8 +66,11 @@ export class RangesComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.rangeForm.controls; }
   
+  get groupf() { return this.groupForm.controls; }
   open(content: any) {
+    debugger;
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
 
     }, (reason) => {
     });
@@ -81,7 +92,6 @@ export class RangesComponent implements OnInit {
         }
       });
   }
-
   deleteRange(rangeId:any){
     debugger;
     this.rangesService.deleteRange(rangeId)  .pipe(first())
@@ -93,4 +103,43 @@ export class RangesComponent implements OnInit {
     });
     
   }
+  onGroupSubmit() {
+    this.groupsubmitted = true;
+    // stop here if form is invalid
+    if (this.groupForm.invalid) {
+      return;
+    }
+    this.loading = true;
+    this.rangesService.addGroup(this.groupForm.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.modalService.dismissAll();
+          this.getallCustomList();
+        }
+      });
+  }
+  deleteGroup(groupId:any){
+    debugger;
+    this.rangesService.deleteGroup(groupId)  .pipe(first())
+    .subscribe({
+      next: () => {
+     
+        this.getallCustomList();
+      }
+    });
+    
+  }
+
+  getallGroupList() {
+    this.rangesService.getGroupLists().subscribe({
+      next: (event: any) => {
+        debugger;
+        this.groupList = event;
+        this.spinner.hide();
+      }
+    });;
+  
+  }
+  
 }
