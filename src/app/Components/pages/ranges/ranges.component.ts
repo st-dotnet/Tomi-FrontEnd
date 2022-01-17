@@ -55,7 +55,7 @@ export class RangesComponent implements OnInit {
   getallRangeList() {
     this.rangesService.getRangeLists().subscribe({
       next: (event: any) => {
-        debugger;
+        
         this.rangeList = event;
         this.spinner.hide();
       }
@@ -68,9 +68,9 @@ export class RangesComponent implements OnInit {
   
   get groupf() { return this.groupForm.controls; }
   open(content: any) {
-    debugger;
+    
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-
+      this.getallRangeList();
 
     }, (reason) => {
     });
@@ -93,7 +93,6 @@ export class RangesComponent implements OnInit {
       });
   }
   deleteRange(rangeId:any){
-    debugger;
     this.rangesService.deleteRange(rangeId)  .pipe(first())
     .subscribe({
       next: () => {
@@ -114,18 +113,17 @@ export class RangesComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.modalService.dismissAll();
-          this.getallCustomList();
+          this.isAddGroup= false;
+        //  this.modalService.dismissAll();
+          this.getallGroupList();
         }
       });
   }
   deleteGroup(groupId:any){
-    debugger;
     this.rangesService.deleteGroup(groupId)  .pipe(first())
     .subscribe({
       next: () => {
-     
-        this.getallCustomList();
+        this.getallGroupList();
       }
     });
     
@@ -134,7 +132,7 @@ export class RangesComponent implements OnInit {
   getallGroupList() {
     this.rangesService.getGroupLists().subscribe({
       next: (event: any) => {
-        debugger;
+        
         this.groupList = event;
         this.spinner.hide();
       }

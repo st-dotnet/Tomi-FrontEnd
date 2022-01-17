@@ -13,7 +13,7 @@ export class RangesService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
   private readonly rangeEndPoint = 'Ranges/';
-  private readonly groupEndPoint = 'Groups/';
+  private readonly groupEndPoint = 'Group/';
   private _rangeList: BehaviorSubject<Range[]> = new BehaviorSubject<Range[]>([]);
   public rangeList: Observable<Range[]> = this._rangeList.asObservable();
 
@@ -52,6 +52,6 @@ export class RangesService {
     return this.http.get<any>(`${environment.apiUrl}${this.groupEndPoint}GetGroupList`);
   }
   deleteGroup(model: any) {
-    return this.http.delete<any>(`${environment.apiUrl}${this.rangeEndPoint}DeleteGroup/${model}`);
+    return this.http.delete<any>(`${environment.apiUrl}${this.groupEndPoint}DeleteGroup/${model}`);
   };
 }

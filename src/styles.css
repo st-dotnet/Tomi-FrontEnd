@@ -839,16 +839,17 @@ span.close-ico svg {
 }
 
 .modal-ui-same button.close {
-    background: transparent;
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: -13px;
+    top: -14px;
     color: #858585;
-    border: 1px solid #999;
+    border: 1px solid #d1d1d1;
     border-radius: 50%;
     padding: 4px;
     width: 32px;
     height: 32px;
+    background: #ebebeb;
+    box-shadow: 0px 0px 4px #ababab;
 }
 
 .modal-ui-same button.close:hover svg {
@@ -866,10 +867,6 @@ span.close-ico svg {
 .modal-ui-same button.close:hover {
     border-color: #000;
 }
-
-.modal-ui-same.form-ranges-add {}
-
-
 
 .modal-ui-same.form-ranges-add input ,.modal-ui-same.form-ranges-add select {
 height: 45px;
@@ -913,4 +910,23 @@ font-family: 'Roboto';
 
 .modal-ui-same.form-ranges-add form button:hover {
 background: #025677;
+}
+
+.modal-ui-same.form-ranges-add button.add-group {
+    background: #027f02;
+    border: 1px solid #027f02;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    margin-left: 6px;
+    box-shadow: 0px 1px 4px #242424;
+    margin-top: -5px;
+}
+
+.modal-ui-same.form-ranges-add button.add-group span.svg-icon {position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);}
+
+.modal-ui-same.form-ranges-add button.add-group span.svg-icon svg {
+    width: 12px;
+    margin-top: -1px;
 }
