@@ -18,6 +18,4 @@ export class AuthFooterComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-
-
 }
