@@ -147,7 +147,8 @@ span.ico svg {
     margin-bottom: 30px;
 }
 
-.sidenav select.form-control,.order-selections input {
+.sidenav select.form-control,
+.order-selections input {
     -webkit-appearance: listbox;
     padding-right: 20px;
     font-weight: 500;
@@ -506,6 +507,7 @@ li.disabled {
     color: #2199e8;
 }
 
+
 /* .content.Vsidebar .sidebar-layout {
     height: 100%;
 } */
@@ -637,7 +639,9 @@ app-login {
     color: #14528b;
 }
 
-.btn-upload-files {padding: 0px 0 0 0;}
+.btn-upload-files {
+    padding: 0px 0 0 0;
+}
 
 .btn-upload-files button.btn-upload {
     display: block;
@@ -651,8 +655,214 @@ app-login {
 
 .btn-upload-files app-master,
 .btn-upload-files app-stocklist,
-.btn-upload-files app-customer
-{
+.btn-upload-files app-customer,
+.btn-upload-files app-ranges {
     width: 100%;
     float: left;
+}
+
+
+/* Ranges page CSS*/
+
+.searchbar-opt {
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchbar-opt .Searchbar {
+    width: 100%;
+    max-width: 80%;
+}
+
+.searchbar-opt .Searchbar svg {
+    width: 16px;
+}
+
+.searchbar-opt .Searchbar .search-bar {
+    position: relative;
+}
+
+.searchbar-opt .Searchbar .search-bar span.icon-search {
+    position: absolute;
+    top: 14px;
+    left: 10px;
+}
+
+.searchbar-opt .Searchbar svg path {
+    fill: #565656;
+}
+
+.searchbar-opt .Searchbar .search-bar input {
+    width: 100%;
+    height: 54px;
+    border: none;
+    padding-left: 35px;
+}
+
+.searchbar-opt .Searchbar .search-bar {
+    width: 100%;
+}
+
+.searchbar-opt {
+    height: 54px;
+}
+
+.searchbar-opt .Searchbar .search-bar input:focus {
+    box-shadow: none;
+    outline: none;
+    border: none;
+}
+
+.searchbar-opt .Searchbar form {
+    width: 100%;
+}
+
+.searchbar-opt .more-opt {
+    width: 20%;
+    padding: 8px 15px;
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges {
+    list-style-type: none;
+    display: inline-flex;
+    float: right;
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges li a {
+    width: 38px;
+    height: 38px;
+    position: relative;
+    display: block;
+    color: #fff;
+    border-radius: 50%;
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges li:not(:first-child) {
+    margin-left: 12px;
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges li a.print-ico.ico {
+    background: #00a79e;
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges li a svg {
+    width: 18px;
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges li span.svg-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges li a.group-ico.ico {
+    background: #3e9ef8;
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges li a.addplus-ico.ico {
+    background: #027f02;
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges li a.addplus-ico.ico svg {
+    width: 18px;
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges li a:hover {
+    opacity: 0.8;
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges li a.group-ico.ico svg {
+    width: 22px;
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges li a.print-ico.ico svg {
+    width: 18px;
+    margin-top: -2px;
+}
+
+ul.action-cell {
+    list-style-type: none;
+    padding: 0;
+    display: inline-flex;
+    margin: 0 9px 0 0 !important;
+    float: right;
+}
+
+ul.action-cell li svg {
+    width: 16px;
+}
+
+.searchbar-opt .more-opt ul.opt-list-ranges li a.group-ico.ico svg {
+    margin-top: -3px;
+}
+
+ul.action-cell li a.edit-icoo {
+    background: #324e60;
+}
+
+ul.action-cell li a {
+    width: 36px;
+    height: 36px;
+    display: block;
+    position: relative;
+    border-radius: 50%;
+    color: #fff;
+}
+
+ul.action-cell li a.remove-icoo {
+    background: #e21123;
+}
+
+ul.action-cell li a span.icon-cellaction {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+ul.action-cell li a.edit-icoo span.icon-cellaction {
+    margin-top: -2px;
+}
+
+ul.action-cell li:not(:first-child) {
+    margin-left: 10px;
+}
+
+.btn-upload-files.marginset {
+    margin-top: -.5rem!important;
+}
+
+span.close-ico svg {
+    width: 18px;
+    height: 20px;
+}
+
+.modal-ui-same button.close {
+    background: transparent;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #858585;
+    border: 1px solid #999;
+    border-radius: 50%;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+}
+
+.modal-ui-same button.close:hover svg {
+    color: #060606;
+}
+
+.modal-ui-same button.close span.close-ico {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 27px;
+}
+
+.modal-ui-same button.close:hover {
+    border-color: #000;
 }

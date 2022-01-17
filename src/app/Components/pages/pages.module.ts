@@ -18,6 +18,7 @@ import { StocklistComponent } from './stocklist/stocklist.component';
 import { StoreComponent } from './store/store.component';
 import { UserComponent } from './user/user.component';
 import { WorkloadsComponent } from './workloads/workloads.component';
+import { RangesComponent } from './ranges/ranges.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { WorkloadsComponent } from './workloads/workloads.component';
     WorkloadsComponent,
     MasterComponent,
     StocklistComponent,
+    RangesComponent,
   ],
   imports: [
     PageRoutingModule,
