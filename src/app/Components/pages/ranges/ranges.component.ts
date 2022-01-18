@@ -36,12 +36,14 @@ export class RangesComponent implements OnInit {
   ngOnInit(){
     this.rangesService.rangeList.subscribe(user => this.rangeList = user);
     this.rangeForm = this.formBuilder.group({
+      id:[''],
       name: ['', Validators.required],
       groupId:['',Validators.required],
       tagTo:['',Validators.required],
       tagFrom:['',Validators.required],
     });
     this.groupForm = this.formBuilder.group({
+      id:[''],
       name: ['', Validators.required],
     });
     this.getallRangeList();
@@ -68,6 +70,7 @@ export class RangesComponent implements OnInit {
   get f() { return this.rangeForm.controls; }
   
   get groupf() { return this.groupForm.controls; }
+  
   open(content: any) {
     
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -76,7 +79,28 @@ export class RangesComponent implements OnInit {
     }, (reason) => {
     });
   }
+ editmodel(content:any, item:any,name:string){
+   debugger;
+if(name="ranges"){
+  this.rangeForm.controls["id"].setValue(item.id);
+  this.rangeForm.controls["name"].setValue(item.name);
+  this.rangeForm.controls["groupId"].setValue(item.groupId);
+  this.rangeForm.controls["tagTo"].setValue(item.tagTo);
+  this.rangeForm.controls["tagFrom"].setValue(item.tagFrom);
+  this.rangeForm.controls["tagFrom"].setValue(item.tagFrom);
+}
+  this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.getallRangeList();
 
+  }, (reason) => {
+  });
+
+ }
+ editgroup(item:any,){
+  this.groupForm.controls["id"].setValue(item.id);
+  this.groupForm.controls["name"].setValue(item.name);
+ this.isAddGroup = true;
+ }
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
