@@ -17,6 +17,7 @@ export class UserComponent implements OnInit {
    customerId?: string;
    users?:User[];
   customerName: any;
+   StoreId?:string;
   userForm!: FormGroup;
   user:any;
   submitted = false;

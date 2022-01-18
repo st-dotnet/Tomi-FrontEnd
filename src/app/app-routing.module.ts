@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './_helper/auth.guard';
 
-
+import {NgxPrintModule} from 'ngx-print';
 const authModule = () => import('./Components/auth/auth.module').then(x => x.AuthModule);
 const pagesModule = () => import('./Components/pages/pages.module').then(x => x.PageModule);
 

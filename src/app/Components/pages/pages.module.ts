@@ -19,7 +19,7 @@ import { StoreComponent } from './store/store.component';
 import { UserComponent } from './user/user.component';
 import { WorkloadsComponent } from './workloads/workloads.component';
 import { RangesComponent } from './ranges/ranges.component';
-
+import {NgxPrintModule} from 'ngx-print';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -42,7 +42,8 @@ import { RangesComponent } from './ranges/ranges.component';
     SharedModule,
     NgbModule,
     NgxPaginationModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    NgxPrintModule
   ],
   providers: [  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]

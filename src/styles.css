@@ -736,12 +736,21 @@ app-login {
     color: #fff;
     border-radius: 50%;
 }
+.searchbar-opt .more-opt ul.opt-list-ranges li button.print-ico.ico {
+    width: 38px;
+    height: 38px;
+    position: relative;
+    display: block;
+    color: #fff;
+    border-radius: 50%;
+    border: none;
+}
 
 .searchbar-opt .more-opt ul.opt-list-ranges li:not(:first-child) {
     margin-left: 12px;
 }
 
-.searchbar-opt .more-opt ul.opt-list-ranges li a.print-ico.ico {
+.searchbar-opt .more-opt ul.opt-list-ranges li .print-ico.ico {
     background: #00a79e;
 }
 
@@ -776,7 +785,7 @@ app-login {
     width: 22px;
 }
 
-.searchbar-opt .more-opt ul.opt-list-ranges li a.print-ico.ico svg {
+.searchbar-opt .more-opt ul.opt-list-ranges li .print-ico.ico svg {
     width: 18px;
     margin-top: -2px;
 }

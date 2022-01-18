@@ -24,6 +24,7 @@ export class RangesComponent implements OnInit {
   groupsubmitted: boolean=false ;
   groupList: any;
   isAddGroup= false;
+  printDate= new Date();
   constructor( private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,

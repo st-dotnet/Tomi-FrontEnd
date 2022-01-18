@@ -57,9 +57,11 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.loginForm.value)
       .pipe(first())
       .subscribe({
+        
         next: (res: any) => {
           if (!res.token) {
             this.toastrService.error(res.error);
+            this.spinner.hide();
             return;
           }
           this.router.navigate([`/workorders/${Pages[1]}`]);
@@ -69,7 +71,7 @@ export class LoginComponent implements OnInit {
           }, 1000);
         },
         error: error => {
-          this.toastrService.error();
+          this.toastrService.error("user name and password is not correct");
           this.loading = false;
           this.spinner.hide();
         }
