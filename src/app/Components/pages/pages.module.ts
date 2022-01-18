@@ -20,6 +20,7 @@ import { UserComponent } from './user/user.component';
 import { WorkloadsComponent } from './workloads/workloads.component';
 import { RangesComponent } from './ranges/ranges.component';
 import {NgxPrintModule} from 'ngx-print';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -43,7 +44,8 @@ import {NgxPrintModule} from 'ngx-print';
     NgbModule,
     NgxPaginationModule,
     NgbDatepickerModule,
-    NgxPrintModule
+    NgxPrintModule,
+    Ng2SearchPipeModule
   ],
   providers: [  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]

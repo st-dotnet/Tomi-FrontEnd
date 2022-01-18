@@ -54,4 +54,8 @@ export class RangesService {
   deleteGroup(model: any) {
     return this.http.delete<any>(`${environment.apiUrl}${this.groupEndPoint}DeleteGroup/${model}`);
   };
+
+  SearchRange(model: any) {
+    return this.http.delete<any>(`${environment.apiUrl}${this.groupEndPoint}Search`, model);
+  };
 }

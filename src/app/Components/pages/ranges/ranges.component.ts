@@ -24,6 +24,7 @@ export class RangesComponent implements OnInit {
   groupsubmitted: boolean=false ;
   groupList: any;
   isAddGroup= false;
+  searchText:any;
   printDate= new Date();
   constructor( private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -72,7 +73,12 @@ export class RangesComponent implements OnInit {
   get groupf() { return this.groupForm.controls; }
   
   open(content: any) {
-    
+    this.rangeForm.controls["id"].setValue("");
+    this.rangeForm.controls["name"].setValue("");
+    this.rangeForm.controls["groupId"].setValue("");
+    this.rangeForm.controls["tagTo"].setValue("");
+    this.rangeForm.controls["tagFrom"].setValue("");
+    this.rangeForm.controls["tagFrom"].setValue("");
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.getallRangeList();
 
@@ -95,6 +101,12 @@ if(name="ranges"){
   }, (reason) => {
   });
 
+ }
+
+ opencreateGroup(){
+
+  this.groupForm.controls["id"].setValue("");
+  this.groupForm.controls["name"].setValue("");
  }
  editgroup(item:any,){
   this.groupForm.controls["id"].setValue(item.id);
@@ -129,7 +141,6 @@ if(name="ranges"){
   }
   onGroupSubmit() {
     this.groupsubmitted = true;
-    // stop here if form is invalid
     if (this.groupForm.invalid) {
       return;
     }
