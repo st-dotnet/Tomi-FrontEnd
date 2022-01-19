@@ -9,6 +9,7 @@ import { StoreComponent } from './store/store.component';
 import { UserComponent } from './user/user.component';
 import { WorkloadsComponent } from './workloads/workloads.component';
 import { MiddleContentComponent } from '../layout/pages-layout/middle-content/middle-content.component';
+import { AdjustmentsinventoryComponent } from './adjustmentsinventory/adjustmentsinventory.component';
 
 const routes: Routes = [{
   path: '',
@@ -27,7 +28,8 @@ const routes: Routes = [{
     // { path: 'workorders', component: WorkloadsComponent },
     { path: 'workorders/:id', component: WorkloadsComponent },
     { path: 'master', component: MasterComponent },
-    { path: 'stockList', component: StocklistComponent }
+    { path: 'stockList', component: StocklistComponent },
+    {path:'adjustmentsinventory',component: AdjustmentsinventoryComponent }
   ]
 }
 ];

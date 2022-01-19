@@ -143,7 +143,6 @@ export class WorkloadsComponent implements OnInit {
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
 
-        // if (this.uploadFiletab == "Stock") {
           this.stockfileUploading = true;
           this.authenticationService.setStockUpload(this.stockfileUploading);
           this.authenticationService.uploadStockFile(formData).subscribe({
@@ -154,6 +153,18 @@ export class WorkloadsComponent implements OnInit {
                 this.stockRecordCount = event.stockRecordCount;
                 this.selectedStockFiles = undefined;
                 this.stockfileUpload = true;
+                setTimeout(() =>{
+                  let workload = {
+                    customerId: this.customerId,
+                    storeId:this.storeId,
+                    stockDate:this.year,
+                  };
+              
+                  this.authenticationService.getstockData(workload);
+                  this.isStockFileUpload= !this.isStockFileUpload;
+                  this.stockfileUpload = false;
+                  // this.saleFileUpload = false;
+                }, 3000);
                 this.spinner.hide();
               }
 
@@ -171,67 +182,6 @@ export class WorkloadsComponent implements OnInit {
               this.spinner.hide();
             }
           });
-      //  }
-        // else   if( this.uploadFiletab=="Master"){
-        //   this.fileUploading = true;
-        //   this.authenticationService.setMasterfileUplaod(this.fileUploading);
-        //   this.authenticationService.uploadMasterFile(formData).subscribe({
-        //     next: (event: any) => {
-        //       if(event.success){
-        //         this.fileUploading = false;
-        //         this.fileUploaded= true;
-        //         this.authenticationService.setMasterfileUplaod(false);
-        //           this.stockRecordCount = event.stockRecordCount;
-        //           this.masterfileUpload = true;
-        //           this.selectedFiles = undefined;
-        //           this.spinner.hide();
-        //       }
-        //     },
-        //     error: (err: any) => {
-        //       console.log(err);
-        //       this.progress = 0;
-
-        //       if (err.error && err.error.message) {
-        //         this.message = err.error.message;
-        //       } else {
-        //         this.message = 'Could not upload the file!';
-        //       }
-
-        //       this.currentFile = undefined;
-        //       this.spinner.hide();
-        //     }
-
-        //   });
-        // }
-        // else if (this.uploadFiletab == "Sales") {
-        //   this.salefileUploading = true;
-        //   this.authenticationService.setSalefileUpload(this.salefileUploading);
-        //   this.authenticationService.uploadSalesFile(formData).subscribe({
-        //     next: (event: any) => {
-        //       if (event.success) {
-        //         this.salefileUploading = false;
-        //         this.fileUploaded = true;
-        //         this.authenticationService.setSalefileUpload(false);
-        //         this.stockRecordCount = event.stockRecordCount;
-        //         this.saleFileUpload = true;
-        //         this.selectedFiles = undefined;
-        //         this.spinner.hide();
-        //       }
-        //     },
-        //     error: (err: any) => {
-        //       console.log(err);
-        //       this.progress = 0;
-
-        //       if (err.error && err.error.message) {
-        //         this.message = err.error.message;
-        //       } else {
-        //         this.message = 'Could not upload the file!';
-        //       }
-        //       this.spinner.hide();
-        //       this.currentFile = undefined;
-        //     }
-        //   });
-        // }
       }
 
       this.selectedFiles = undefined;
@@ -246,7 +196,6 @@ export class WorkloadsComponent implements OnInit {
     this.authenticationService.stockDate.subscribe(user => this.year = user);
     if (this.selectedMasterFiles) {
       const file: File | null = this.selectedMasterFiles.item(0);
-
       if (file) {
         this.currentFile = file;
         const formData: FormData = new FormData();
@@ -267,7 +216,17 @@ export class WorkloadsComponent implements OnInit {
               this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
               this.masterRecordCount = event.stockRecordCount;
               this.masterfileUpload = true;
-              this.selectedFiles = undefined;
+              setTimeout(() =>{
+                let workload = {
+                  customerId: this.customerId,
+                  storeId:this.storeId,
+                  stockDate:this.year,
+                };
+            
+                this.authenticationService.getMasterData(workload);
+                this.isMasterFileUpload= !this.isMasterFileUpload;
+                this.masterfileUpload = false;
+              }, 1000);
               this.spinner.hide();
             }
           },
@@ -321,7 +280,20 @@ export class WorkloadsComponent implements OnInit {
               this.stockRecordCount = event.stockRecordCount;
               this.saleFileUpload = true;
               this.selectedFiles = undefined;
+              setTimeout(() =>{
+                let workload = {
+                  customerId: this.customerId,
+                  storeId:this.storeId,
+                  stockDate:this.year,
+                };
+            
+                this.authenticationService.getSalesData(workload);
+                this.isSaleFileUpload= !this.isSaleFileUpload;
+                this.saleFileUpload = false;
+                this.saleFileUpload = false;
+              }, 3000);
               this.spinner.hide();
+              
             }
           },
           error: (err: any) => {
@@ -343,13 +315,13 @@ export class WorkloadsComponent implements OnInit {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
       this.authenticationService.storeId.subscribe(user => this.storeId = user);
      this.authenticationService.stockDate.subscribe(user => this.year = user);
-    let workload = {
+     let workload = {
       customerId: this.customerId,
       storeId:this.storeId,
       stockDate:this.year,
     };
     this.authenticationService.getMasterData(workload);
-    this.isMasterFileUpload= !this.isMasterFileUpload;
+    this.isStockFileUpload= !this.isStockFileUpload;
     // this.authenticationService.getSalesList(workload);
   };
 
@@ -363,7 +335,7 @@ export class WorkloadsComponent implements OnInit {
     storeId:this.storeId,
     stockDate:this.year,
   };
-  this.authenticationService.getMasterData(workload);
+  this.authenticationService.getstockData(workload);
   this.isStockFileUpload= !this.isStockFileUpload;
    // this.router.navigate(['/stockList']);
   };
@@ -377,10 +349,14 @@ export class WorkloadsComponent implements OnInit {
     storeId:this.storeId,
     stockDate:this.year,
   };
-  this.authenticationService.getMasterData(workload);
+  this.authenticationService.getSalesData(workload);
   this.isSaleFileUpload= !this.isSaleFileUpload;
   };
 
+
+  submitAdvantoryFile(){
+    this.router.navigate(['/workorders']);
+  }
   onlogout() {
     this.authenticationService.logout();
   }

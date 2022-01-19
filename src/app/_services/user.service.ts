@@ -7,6 +7,7 @@ import { environment } from '@environments/environment';
 import { Master, Sales, User, WorkLoad } from '@app/_models';
 import { SessionService } from '.';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -46,9 +47,11 @@ export class UserService {
 
   constructor(private http: HttpClient,
     private sessionService: SessionService,
-    private router: Router) {
+    private router: Router,
+    private spinner: NgxSpinnerService,) {
     this.currentUserSubject = new BehaviorSubject<User>(new User());
     this.currentUser = this.currentUserSubject.asObservable();
+    
   }
 
   public get currentUserValue(): User {
@@ -113,9 +116,12 @@ export class UserService {
     });
   };
 
-  getstockData(model: any) {
+  getstockData(model: any) {    
+    this.spinner.show();
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetStocksData`, model).subscribe(res => {
       this._stockList.next(res);
+      
+    this.spinner.hide();
     })
   }
 
@@ -128,10 +134,10 @@ export class UserService {
   };
 
   getMasterData(model: any) {
-    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetMasterData`, model).subscribe(res => {
-      
+    this.spinner.show();
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetMasterData`, model).subscribe(res => {      
       this._masterList.next(res);
-
+      this.spinner.hide();
     })
   }
   getMasterList(model: any) {
@@ -145,9 +151,12 @@ export class UserService {
     });
   };
 
-  getSalesData(model: any) {
+  getSalesData(model: any) {    
+    this.spinner.show();
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetSalesData`, model).subscribe(res => {
       this._saleList.next(res);
+      
+    this.spinner.hide();
 
     })
   }

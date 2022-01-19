@@ -904,10 +904,10 @@ margin-left: 10px;
 
 
 
-.modal-ui-same.form-ranges-add form button {
+.modal-ui-same.form-ranges-add form button.save {
 display: block;
 width: 100%;
-max-width: 120px;
+max-width: 80px;
 float: right;
 margin: 0 0 20px 0 !important;
 background: #0a2946;
@@ -917,9 +917,27 @@ font-family: 'Roboto';
 
 
 
-.modal-ui-same.form-ranges-add form button:hover {
+.modal-ui-same.form-ranges-add form button.save:hover  {
 background: #025677;
 }
+
+.modal-ui-same.form-ranges-add form button.cancel {
+    display: block;
+    width: 100%;
+    max-width: 80px;
+    float: right;
+    margin: 0 0 20px 10px !important;
+    background: #dc3545;
+    border-color: #dc3545;
+    font-family: 'Roboto';
+    }
+    
+    
+    
+    .modal-ui-same.form-ranges-add form button.cancel:hover  {
+    background: #dc3545;
+    }
+    
 
 .modal-ui-same.form-ranges-add button.add-group {
     background: #027f02;
@@ -938,4 +956,8 @@ background: #025677;
 .modal-ui-same.form-ranges-add button.add-group span.svg-icon svg {
     width: 12px;
     margin-top: -1px;
+}
+
+.custom-loader .ngx-spinner-overlay{
+    height: 400px !important;
 }

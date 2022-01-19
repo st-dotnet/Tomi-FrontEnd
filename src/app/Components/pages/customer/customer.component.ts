@@ -37,20 +37,20 @@ export class CustomerComponent implements OnInit {
 
   ngOnInit() {
     
-    this.authenticationService.stockList.subscribe(user => this.stockList = user);
-    this.authenticationService.customerId.subscribe(user => this.customerId = user);
-    this.authenticationService.storeId.subscribe(user => this.storeId = user);
-    this.authenticationService.stockDate.subscribe((year) => {
-      if (year) {
-        this.year = year;
-        this.getStockFileData();
-      }
-    });
-    this.getStockFileData();
+    this.authenticationService.saleList.subscribe((user: any) => this.stockList = user);
+    // this.authenticationService.customerId.subscribe(user => this.customerId = user);
+    // this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    // this.authenticationService.stockDate.subscribe((year) => {
+    //   if (year) {
+    //     this.year = year;
+    //     this.getStockFileData();
+    //   }
+    // });
+    // this.getStockFileData();
     this.customerForm = this.formBuilder.group({
       name: ['', Validators.required]
     });
-    this.getallCustomList();
+    // this.getallCustomList();
   }
 
   // convenience getter for easy access to form fields

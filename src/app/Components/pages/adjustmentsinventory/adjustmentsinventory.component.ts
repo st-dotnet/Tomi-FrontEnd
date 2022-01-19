@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./adjustmentsinventory.component.css']
 })
 export class AdjustmentsinventoryComponent implements OnInit {
-
+  adjustmentinventory! :false;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  
 }

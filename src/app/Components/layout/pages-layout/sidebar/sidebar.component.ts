@@ -111,7 +111,7 @@ export class SidebarComponent implements OnInit {
       this.authenticationService.setStockDate(stockdate);
       this.authenticationService.getstockData(workload);
       this.authenticationService.getMasterData(workload);
-      this.authenticationService.getSalesList(workload);
+      this.authenticationService.getSalesData(workload);
     }
   }
 }

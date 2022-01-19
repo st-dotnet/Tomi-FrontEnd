@@ -21,9 +21,9 @@
     <div class="more-opt">
         <ul class="opt-list-ranges">
             <!-- <button printSectionId="print-section" ngxPrint>print</button>  -->
-            <li><button printSectionId="print-section" ngxPrint class="print-ico ico"><span
-                        class="svg-icon"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="print"
-                            role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+            <li><button printSectionId="print-section" ngxPrint class="print-ico ico"><span class="svg-icon"><svg
+                            aria-hidden="true" focusable="false" data-prefix="far" data-icon="print" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                             class="svg-inline--fa fa-print fa-w-16 fa-2x">
                             <path fill="currentColor"
                                 d="M400 264c-13.25 0-24 10.74-24 24 0 13.25 10.75 24 24 24s24-10.75 24-24c0-13.26-10.75-24-24-24zm32-88V99.88c0-12.73-5.06-24.94-14.06-33.94l-51.88-51.88c-9-9-21.21-14.06-33.94-14.06H110.48C93.64 0 80 14.33 80 32v144c-44.18 0-80 35.82-80 80v128c0 8.84 7.16 16 16 16h64v96c0 8.84 7.16 16 16 16h320c8.84 0 16-7.16 16-16v-96h64c8.84 0 16-7.16 16-16V256c0-44.18-35.82-80-80-80zM128 48h192v48c0 8.84 7.16 16 16 16h48v64H128V48zm256 416H128v-64h256v64zm80-112H48v-96c0-17.64 14.36-32 32-32h352c17.64 0 32 14.36 32 32v96z"
@@ -52,7 +52,7 @@
 <section class="inner-content inner-pageview">
     <div class="card">
         <div class="card-body">
-       
+
             <div class="content-body">
                 <table class="table table-ui-same" id="datatableexample" *ngIf="rangeList">
                     <thead>
@@ -70,12 +70,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let range of rangeList| searchFilter:searchText |paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                        <tr
+                            *ngFor="let range of rangeList| searchFilter:searchText |paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                             <td>{{range.name}}</td>
                             <td>{{range.group?.name}}</td>
                             <td>{{range.tagFrom}}</td>
                             <td>{{range.tagTo}}</td>
-
                             <td>
                                 <ul class="action-cell">
                                     <li><a class="edit-icoo" (click)="editmodel(mymodal,range,ranges)"><span
@@ -86,8 +86,10 @@
                                                     <path fill="currentColor"
                                                         d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"
                                                         class=""></path>
-                                                </svg></span></a></li>
-                                    <li><a class="remove-icoo" (click)="deleteRange(range.id)"><span
+                                                </svg></span></a>
+                                    </li>
+                                    <li>
+                                        <a class="remove-icoo" (click)="deleteRange(range.id)"><span
                                                 class="icon-cellaction "><svg aria-hidden="true" focusable="false"
                                                     data-prefix="far" data-icon="times" role="img"
                                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
@@ -95,20 +97,24 @@
                                                     <path fill="currentColor"
                                                         d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"
                                                         class=""></path>
-                                                </svg></span></a></li>
+                                                </svg></span>
+                                            </a>
+                                    </li>
                                 </ul>
                             </td>
-
                         </tr>
                     </tbody>
                 </table>
                 <div class="pagination-ui">
                     <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
                 </div>
-
+                <ngx-spinner class="custom-loader" type="square-jelly-box" size="medium" [fullScreen]="false"
+                    style="top:auto;">
+                    <p style="color: white">Loading...</p>
+                </ngx-spinner>
             </div>
         </div>
-      
+
 
     </div>
 
@@ -117,7 +123,7 @@
 <ng-template #mymodal let-modal>
     <div class="modal-ui-same form-ranges-add">
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Create Range</h4>
+            <h4 class="modal-title" id="modal-basic-title">{{editRange ? 'Edit Range' : 'Create Range'}}</h4>
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                 <span aria-hidden="true" class="close-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal"
                         data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
@@ -150,7 +156,7 @@
                             </select> -->
                             <select class="form-control" formControlName="groupId"
                                 [ngClass]="{ 'is-invalid': submitted && f['groupId'].errors }">
-                                <option value="">Group</option>
+                                <option value="" disabled selected>--Select Group--</option>
                                 <option *ngFor="let group of groupList" [value]="group.id">
                                     {{group.name}}
                                 </option>
@@ -160,8 +166,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <ul class="tags-from-to">
+                    <div class="col-md-6 form-group">
+                        <input type="number" placeholder="Tag From" class="form-control" formControlName="tagFrom"
+                            [ngClass]="{ 'is-invalid': submitted && f['tagFrom'].errors }">
+
+                        <div *ngIf="submitted && f['tagFrom'].errors" class="invalid-feedback">
+                            <div *ngIf="f['tagFrom'].errors['required']">Tag From is required</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <input type="number" placeholder="Tag To" class="form-control" formControlName="tagTo"
+                            [ngClass]="{ 'is-invalid': submitted && f['tagTo'].errors }">
+                        <div *ngIf="submitted && f['tagTo'].errors" class="invalid-feedback">
+                            <div *ngIf="f['tagTo'].errors['required']">Tag To is required</div>
+                        </div>
+                    </div>
+                    <!-- <ul class="tags-from-to">
                             <li>
                                 <div class="form-group">
                                     <input type="number" placeholder="Tag from" class="form-control"
@@ -178,14 +198,12 @@
                                     <input type="number" placeholder="Tag to" class="form-control"
                                         formControlName="tagTo"
                                         [ngClass]="{ 'is-invalid': submitted && f['tagTo'].errors }">
-                                    <!-- <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" /> -->
                                     <div *ngIf="submitted && f['tagTo'].errors" class="invalid-feedback">
                                         <div *ngIf="f['tagTo'].errors['required']">Tag to is required</div>
                                     </div>
                                 </div>
                             </li>
-                        </ul>
-                    </div>
+                        </ul> -->
                 </div>
                 <!-- <div class="row">
                     <div class="col-md-12">
@@ -195,8 +213,8 @@
                         </div>
                     </div>
                 </div> -->
-                <button class="btn btn-primary mt-3">
-                    Save
+                <button class="btn btn-primary save mt-3">
+                    {{editRange ? 'Update' : 'Save'}}
                 </button>
             </form>
         </div>
@@ -208,10 +226,10 @@
 <ng-template #groupModal let-modal>
     <div class="modal-ui-same form-ranges-add">
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Create Group <button class="btn btn btn-primary add-group"
-                    (click)="isAddGroup=!isAddGroup;opencreateGroup()"><span class="svg-icon"><svg aria-hidden="true"
-                            focusable="false" data-prefix="far" data-icon="plus" role="img"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
+            <h4 class="modal-title" id="modal-basic-title">{{editGroup ? 'Edit Group' : 'Create Group'}} <button
+                    class="btn btn btn-primary add-group" (click)="isAddGroup=!isAddGroup;opencreateGroup()"><span
+                        class="svg-icon"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="plus"
+                            role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
                             class="svg-inline--fa fa-plus fa-w-12 fa-2x">
                             <path _ngcontent-iur-c124="" fill="currentColor"
                                 d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z">
@@ -236,16 +254,19 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <input type="text" formControlName="name" placeholder="Name" class="form-control"
-                                [ngClass]="{ 'is-invalid': groupsubmitted && groupf['name'].errors }" />
+                                [ngClass]="{ 'is-invalid': groupSubmitted && groupf['name'].errors }" />
 
-                            <div *ngIf="groupsubmitted && groupf['name'].errors" class="invalid-feedback">
+                            <div *ngIf="groupSubmitted && groupf['name'].errors" class="invalid-feedback">
                                 <div *ngIf="groupf['name'].errors['required']">Name is required</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary mt-3">
-                    Save
+                <button (click)="cancel()" class="btn btn-danger cancel mt-3 ml-2">
+                    Cancel
+                </button>
+                <button class="btn btn-primary save mt-3">
+                    {{editGroup ? 'Update' : 'Save'}}
                 </button>
             </form>
             <div *ngIf="!isAddGroup" class="btn-upload-files">
@@ -254,16 +275,11 @@
                     <thead>
                         <tr>
                             <th>Description</th>
-                            <th style="
-                        width: 120px;
-                        text-align: center;
-                    ">Actions</th>
+                            <th style=" width: 120px;text-align: center;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-
-                        <tr
-                            *ngFor="let group of groupList| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                        <tr *ngFor="let group of groupList| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                             <td>{{group.name}}</td>
                             <td>
                                 <ul class="action-cell">
@@ -284,13 +300,18 @@
                                                     <path fill="currentColor"
                                                         d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"
                                                         class=""></path>
-                                                </svg></span></a></li>
+                                                </svg></span>
+                                            </a>
+                                  </li>
                                 </ul>
                             </td>
 
                         </tr>
                     </tbody>
                 </table>
+                <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
+                    <p style="color: white">Loading...</p>
+                </ngx-spinner>
                 <div class="pagination-ui" *ngIf="!isAddGroup">
                     <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
                 </div>
@@ -303,7 +324,7 @@
 
 
 <section class="inner-content inner-pageview" id="print-section" style="display: none;">
-    <table width="100%" >
+    <table width="100%">
         <tr>
             <td>
                 <table width="100%">
@@ -316,7 +337,7 @@
                     <tr>
                         <td style="font-weight:bold;">Print Date: {{printDate | date:'h:mm'}}</td>
                         <td style="font-weight:bold;">
-                            <p>SODIMAC MEXICO -1170 MONTERREY<br/>Tag RangesAv. Sendero 801</p>
+                            <p>SODIMAC MEXICO -1170 MONTERREY<br />Tag RangesAv. Sendero 801</p>
                         </td>
                     </tr>
 
@@ -325,7 +346,8 @@
         </tr>
         <tr>
             <td>
-                <table style="border:'0'" cellpadding=0 cellspacing=0 width=100% class="" id="datatableexample" *ngIf="rangeList" style="margin-top: 20px;">
+                <table style="border:'0'" cellpadding=0 cellspacing=0 width=100% class="" id="datatableexample"
+                    *ngIf="rangeList" style="margin-top: 20px;">
                     <thead>
                         <tr>
                             <th style="border-top:1px solid #333">Range Name</th>

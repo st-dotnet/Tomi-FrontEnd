@@ -13,7 +13,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let stock of stockList| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                        <tr *ngFor="let stock of stockList| paginate: { itemsPerPage: 8, currentPage: p }; let i = index">
                             <td>{{stock.sku}}</td>
                             <td>{{stock.departmentname}}</td>
                             <td>{{stock.date}}</td>
@@ -22,9 +22,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <ngx-spinner [fullScreen] = "false" type="ball-spin-clockwise" style="top:auto ;">  
-                    <p style="color: white">Please Wait. </p>  
-                    </ngx-spinner>
+                <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
+                    <p style="color: white">Loading...</p>
+                </ngx-spinner>
                 <div class="pagination-ui">
                     <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
                 </div>

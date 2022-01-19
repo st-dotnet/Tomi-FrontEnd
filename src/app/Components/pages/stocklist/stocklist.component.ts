@@ -25,14 +25,14 @@ export class StocklistComponent implements OnInit {
 
   ngOnInit() {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
-    this.authenticationService.storeId.subscribe(user => this.storeId = user);
-    this.authenticationService.stockDate.subscribe((year) => {
-      if (year) {
-        this.year = year;
-        this.getSaleFileData();
-      }
-    });
-    this.authenticationService.stockList.subscribe(user => this.stockList = user);
+    // this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    // this.authenticationService.stockDate.subscribe((year) => {
+    //   if (year) {
+    //     this.year = year;
+    //     this.getSaleFileData();
+    //   }
+    // });
+    this.authenticationService.stockList.subscribe((user: any) => this.stockList = user);
 
   }
 
