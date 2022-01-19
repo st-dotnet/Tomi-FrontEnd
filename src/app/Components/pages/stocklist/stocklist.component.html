@@ -17,21 +17,18 @@
                     <tbody>
                     
                         <tr *ngFor="let stock of stockList| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-                            <!-- <td>{{i+1}}</td> -->
-                            <!-- <td>{{customer.name}}</td> -->
                             <td>{{stock.sku}}</td>
                             <td>{{stock.barcode}}</td>
                             <td>{{stock.description}}</td>
                             <td>{{stock.department}}</td>
                             <td>{{stock.unity}}</td>
-                            <!-- <td>{{stock.total}}</td> -->
-                            <!-- <ul class="btn-tble">
-                                    <li><button type="button" class="btn btn-primary" (click)="manageUser(customer.id)">Manage User</button></li>
-                                    <li><button type="button" class="btn btn-primary" (click)="manageStore(customer.id)">Manage Store</button></li>
-                                </ul> -->
+                          
                         </tr>
                     </tbody>
                 </table>
+                <ngx-spinner [fullScreen] = "false" type="ball-spin-clockwise" style="top:auto ;">  
+                    <p style="color: white">Please Wait. </p>  
+                    </ngx-spinner>
                 <div class="pagination-ui">
                     <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
                 </div>

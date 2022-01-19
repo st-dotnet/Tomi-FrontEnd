@@ -33,6 +33,9 @@
                         </tr>
                     </tbody>
                 </table>
+                <ngx-spinner [fullScreen] = "false" type="ball-spin-clockwise" style="top:auto ;">  
+                    <p style="color: white">Please Wait. </p>  
+                    </ngx-spinner>
                 <div class="pagination-ui">
                     <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
                 </div>

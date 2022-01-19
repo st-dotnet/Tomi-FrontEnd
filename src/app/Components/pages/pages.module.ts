@@ -22,6 +22,7 @@ import { RangesComponent } from './ranges/ranges.component';
 import {NgxPrintModule} from 'ngx-print';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SearchFilterPipe } from './search-filter.pipe';
+import { AdjustmentsinventoryComponent } from './adjustmentsinventory/adjustmentsinventory.component';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -37,6 +38,7 @@ import { SearchFilterPipe } from './search-filter.pipe';
     StocklistComponent,
     RangesComponent,
     SearchFilterPipe,
+    AdjustmentsinventoryComponent,
   ],
   imports: [
     PageRoutingModule,

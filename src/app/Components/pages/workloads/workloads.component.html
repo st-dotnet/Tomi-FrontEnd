@@ -22,12 +22,12 @@
                     <div class="workorders-main">
                         <div class="tabs-wkload">
                             <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs">
-                                <li [ngbNavItem]="1">
+                                <li [ngbNavItem]="1"  position-relative>
                                     <a ngbNavLink class="custom-tabs" (click)="isMasterFileUpload=false">Master</a>
                                     <ng-template ngbNavContent>
                                         <div *ngIf="!isMasterFileUpload" class="btn-upload-files">
                                             <button class="btn btn btn-primary btn-upload" (click)="isMasterFileUpload=true">Upload</button>
-                                            <app-master></app-master>
+                                            <app-master ></app-master>
                                         </div>
                                         <div *ngIf="isMasterFileUpload" class="resultwrapper-tab">
                                             <div class="content-upload-view">
@@ -41,6 +41,7 @@
                                                     <button class="btn btn-success btn-sm" [disabled]="!updatemasterfile" (click)="uploadMasterFile()">Upload</button>
                                                 </div>
                                                 <div class="noti-file-upload" *ngIf="masterfileUploading">
+                                                
                                                     <p><span class="loadr">
                                                         <div class="svg-loader">
                                                         <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
@@ -59,7 +60,10 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     </ng-template>
+                                  
+                                       
                                 </li>
                                 <li [ngbNavItem]="2">
                                     <a ngbNavLink class="custom-tabs" (click)="isStockFileUpload=false">Stock</a>

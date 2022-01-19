@@ -340,16 +340,45 @@ export class WorkloadsComponent implements OnInit {
     }
   }
   submitFile() {
-    this.router.navigate(['/master']);
+    this.authenticationService.customerId.subscribe(user => this.customerId = user);
+      this.authenticationService.storeId.subscribe(user => this.storeId = user);
+     this.authenticationService.stockDate.subscribe(user => this.year = user);
+    let workload = {
+      customerId: this.customerId,
+      storeId:this.storeId,
+      stockDate:this.year,
+    };
+    this.authenticationService.getMasterData(workload);
+    this.isMasterFileUpload= !this.isMasterFileUpload;
+    // this.authenticationService.getSalesList(workload);
   };
 
 
   submitStockFile() {
-    this.router.navigate(['/stockList']);
+    this.authenticationService.customerId.subscribe(user => this.customerId = user);
+    this.authenticationService.storeId.subscribe(user => this.storeId = user);
+   this.authenticationService.stockDate.subscribe(user => this.year = user);
+  let workload = {
+    customerId: this.customerId,
+    storeId:this.storeId,
+    stockDate:this.year,
+  };
+  this.authenticationService.getMasterData(workload);
+  this.isStockFileUpload= !this.isStockFileUpload;
+   // this.router.navigate(['/stockList']);
   };
 
   submitSaleFile() {
-    this.router.navigate(['/customer']);
+    this.authenticationService.customerId.subscribe(user => this.customerId = user);
+    this.authenticationService.storeId.subscribe(user => this.storeId = user);
+   this.authenticationService.stockDate.subscribe(user => this.year = user);
+  let workload = {
+    customerId: this.customerId,
+    storeId:this.storeId,
+    stockDate:this.year,
+  };
+  this.authenticationService.getMasterData(workload);
+  this.isSaleFileUpload= !this.isSaleFileUpload;
   };
 
   onlogout() {
