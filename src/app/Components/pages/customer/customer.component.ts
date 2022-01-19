@@ -36,7 +36,7 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    debugger;
+    
     this.authenticationService.stockList.subscribe(user => this.stockList = user);
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);

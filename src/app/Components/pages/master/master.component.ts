@@ -26,7 +26,6 @@ export class MasterComponent implements OnInit {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
     this.authenticationService.stockDate.subscribe((year)=> {
-      debugger
       if(year){
         this.year = year;
         this.getmasterFileData();

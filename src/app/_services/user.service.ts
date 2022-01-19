@@ -129,7 +129,7 @@ export class UserService {
 
   getMasterData(model: any) {
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetMasterData`, model).subscribe(res => {
-      debugger;
+      
       this._masterList.next(res);
 
     })

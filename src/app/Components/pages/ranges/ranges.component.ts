@@ -24,7 +24,7 @@ export class RangesComponent implements OnInit {
   groupsubmitted: boolean=false ;
   groupList: any;
   isAddGroup= false;
-  searchText:any;
+  searchText:string="";
   printDate= new Date();
   constructor( private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -86,7 +86,7 @@ export class RangesComponent implements OnInit {
     });
   }
  editmodel(content:any, item:any,name:string){
-   debugger;
+   
 if(name="ranges"){
   this.rangeForm.controls["id"].setValue(item.id);
   this.rangeForm.controls["name"].setValue(item.name);

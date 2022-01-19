@@ -21,6 +21,7 @@ import { WorkloadsComponent } from './workloads/workloads.component';
 import { RangesComponent } from './ranges/ranges.component';
 import {NgxPrintModule} from 'ngx-print';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { SearchFilterPipe } from './search-filter.pipe';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -35,6 +36,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MasterComponent,
     StocklistComponent,
     RangesComponent,
+    SearchFilterPipe,
   ],
   imports: [
     PageRoutingModule,

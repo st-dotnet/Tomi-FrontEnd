@@ -52,6 +52,7 @@
 <section class="inner-content inner-pageview">
     <div class="card">
         <div class="card-body">
+       
             <div class="content-body">
                 <table class="table table-ui-same" id="datatableexample" *ngIf="rangeList">
                     <thead>
@@ -69,9 +70,7 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                        <tr
-                            *ngFor="let range of rangeList| filter:searchText|paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                        <tr *ngFor="let range of rangeList| searchFilter:searchText |paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                             <td>{{range.name}}</td>
                             <td>{{range.group?.name}}</td>
                             <td>{{range.tagFrom}}</td>
@@ -109,6 +108,7 @@
 
             </div>
         </div>
+      
 
     </div>
 
@@ -253,7 +253,7 @@
                 <table class="table table-ui-same" id="datatableexample" *ngIf="rangeList">
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Description</th>
                             <th style="
                         width: 120px;
                         text-align: center;
@@ -309,14 +309,14 @@
                 <table width="100%">
                     <tr>
                         <td style="font-weight:bold;">
-                            <p>Inventory Date: {{printDate | date:'dd/mm/yyyy h:mm:ss'}}</p>
+                            <p>Inventory Date: <br>{{printDate | date:'dd/mm/yyyy h:mm:ss'}}</p>
                         </td>
-                        <td style="font-weight:bold;text-align: center;">Ranges</td>
+                        <td style="font-weight:bold; padding-left: 80px;">Tag Ranges</td>
                     </tr>
                     <tr>
                         <td style="font-weight:bold;">Print Date: {{printDate | date:'h:mm'}}</td>
                         <td style="font-weight:bold;">
-                            <p>SODIMAC MEXICO -1170 MONTERREY<br />Tag RangesAv. Sendero 801</p>
+                            <p>SODIMAC MEXICO -1170 MONTERREY<br/>Tag RangesAv. Sendero 801</p>
                         </td>
                     </tr>
 
@@ -328,9 +328,9 @@
                 <table style="border:'0'" cellpadding=0 cellspacing=0 width=100% class="" id="datatableexample" *ngIf="rangeList" style="margin-top: 20px;">
                     <thead>
                         <tr>
-                            <th style="border-top:1px solid #333">Name</th>
-                            <th style="border-top:1px solid #333">Group</th>
-                            <th style="border-top:1px solid #333">Tag from-Tag to</th>
+                            <th style="border-top:1px solid #333">Range Name</th>
+                            <th style="border-top:1px solid #333">GroupName</th>
+                            <th style="border-top:1px solid #333">Tag Range</th>
                         </tr>
                     </thead>
                     <tbody>

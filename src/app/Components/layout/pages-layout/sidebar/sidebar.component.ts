@@ -33,7 +33,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
 
     this.authenticationService.customerId.subscribe(user => this.customer = user);
-    debugger;
+    
     this.authenticationService.masterfileUplaod.subscribe(file => this.masterfileUpload = file);
     this.authenticationService.stockfileUplaod.subscribe(file => this.stockfileUpload = file);
     this.authenticationService.salefileUpload.subscribe(file => this.salefileUpload = file);
@@ -93,7 +93,7 @@ export class SidebarComponent implements OnInit {
   }
 
   onChange() {
-    debugger;
+    
     if (this.customerId != null || this.storeId != null || this.stockyear != null) {
       let stockdate = new Date(this.stockyear.year, this.stockyear.month - 1, this.stockyear.day + 1);
       this.stockyear.day = this.stockyear.day + 1;
