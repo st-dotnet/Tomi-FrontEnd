@@ -82,12 +82,6 @@ export class RangesComponent implements OnInit {
     this.rangeForm.reset();
     this.groupForm.reset();
     this.rangeForm.controls["groupId"].setValue("");
-    // this.rangeForm.controls["id"].setValue("");
-    // this.rangeForm.controls["name"].setValue("");
-    // this.rangeForm.controls["groupId"].setValue("");
-    // this.rangeForm.controls["tagTo"].setValue("");
-    // this.rangeForm.controls["tagFrom"].setValue("");
-    // this.rangeForm.controls["tagFrom"].setValue("");
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.getallRangeList();
     }, (reason) => {
@@ -164,6 +158,7 @@ export class RangesComponent implements OnInit {
           this.editGroup = false;
           //  this.modalService.dismissAll();
           this.getallGroupList();
+          this.getallRangeList();
         }
       });
   }
