@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   error = '';
   isLoggedIn = false;
+  showPassword: boolean= false;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -45,7 +46,9 @@ export class LoginComponent implements OnInit {
 
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
-
+  showHidePassword() {
+    this.showPassword = !this.showPassword;
+  }
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid

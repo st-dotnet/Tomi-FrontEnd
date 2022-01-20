@@ -79,6 +79,20 @@ span.loadr .svg-loader svg.svg-container {
     font-size: 13px;
 }
 
+.pwd-field span.show-pwd {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+}
+
+.pwd-field {
+    position: relative;
+}
+
+.pwd-field input {
+    padding-right: 34px;
+}
+
 .sidebar-layout {
     width: 100%;
     display: flex;
