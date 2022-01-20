@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { first } from 'rxjs';
 import { Customer } from '@app/_models';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-ranges',
@@ -34,7 +35,8 @@ export class RangesComponent implements OnInit {
     private authenticationService: UserService,
     private rangesService: RangesService,
     private spinner: NgxSpinnerService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.rangesService.rangeList.subscribe(user => this.rangeList = user);
@@ -153,7 +155,9 @@ export class RangesComponent implements OnInit {
     this.rangesService.addGroup(this.groupForm.value)
       .pipe(first())
       .subscribe({
-        next: () => {
+        next: (res) => {
+          if(res.error)
+          this.toastrService.error(res.error);
           this.isAddGroup = false;
           this.editGroup = false;
           //  this.modalService.dismissAll();
@@ -165,13 +169,15 @@ export class RangesComponent implements OnInit {
   deleteGroup(groupId: any) {
     this.rangesService.deleteGroup(groupId).pipe(first())
       .subscribe({
-        next: () => {
+        next: (res) => {
+          if(res.error)
+          this.toastrService.error(res.error);
+          else
           this.getallGroupList();
         }
       });
 
   }
-
   getallGroupList() {
     this.rangesService.getGroupLists().subscribe({
       next: (event: any) => {

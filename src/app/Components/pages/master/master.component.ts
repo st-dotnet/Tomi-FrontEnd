@@ -23,20 +23,8 @@ export class MasterComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.authenticationService.customerId.subscribe(user => this.customerId = user);
-    // this.authenticationService.storeId.subscribe(user => this.storeId = user);
-    // this.authenticationService.stockDate.subscribe((year)=> {
-    //   if(year){
-    //     debugger
-    //     this.year = year;
-    //     this.getmasterFileData();
-    //   }
-    // });
+   
     this.authenticationService.masterList.subscribe(user => this.masterList = user);
-    // if (this.customerId != undefined && this.storeId != undefined && this.year != undefined) {
-    //   debugger
-    //   this.getmasterFileData();
-    // }
   }
 
   manageUser(customerId: any) {
