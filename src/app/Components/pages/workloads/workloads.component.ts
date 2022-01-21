@@ -45,7 +45,12 @@ export class WorkloadsComponent implements OnInit {
   updateSalefile: boolean = false;
   updateStockfile: boolean = false;
   masterRecordCount: any;
+  timeElapsed: any;
   saleRecordCount: any;
+  CheckMasterFile: boolean = false;
+  disablemasterfileupdate: boolean = false;
+  disablestockfileupdate: boolean = false;
+  disablesalefileupdate: boolean = false;
   constructor(private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -123,11 +128,13 @@ export class WorkloadsComponent implements OnInit {
     });
   }
   upload(): void {
-    
+
     this.spinner.show();
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
+    this.authenticationService.disablestockfileupdate.subscribe(user => this.disablestockfileupdate = user);
+
     if (this.selectedStockFiles) {
       const file: File | null = this.selectedStockFiles.item(0);
 
@@ -143,45 +150,47 @@ export class WorkloadsComponent implements OnInit {
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
 
-          this.stockfileUploading = true;
-          this.authenticationService.setStockUpload(this.stockfileUploading);
-          this.authenticationService.uploadStockFile(formData).subscribe({
-            next: (event: any) => {
-              if (event.success) {
-                this.stockfileUploading = false;
-                this.authenticationService.setStockUpload(this.stockfileUploading);
-                this.stockRecordCount = event.stockRecordCount;
-                this.selectedStockFiles = undefined;
-                this.stockfileUpload = true;
-                setTimeout(() =>{
-                  let workload = {
-                    customerId: this.customerId,
-                    storeId:this.storeId,
-                    stockDate:this.year,
-                  };
-              
-                  this.authenticationService.getstockData(workload);
-                  this.isStockFileUpload= !this.isStockFileUpload;
-                  this.stockfileUpload = false;
-                  // this.saleFileUpload = false;
-                }, 3000);
-                this.spinner.hide();
-              }
+        this.stockfileUploading = true;
+        this.authenticationService.setStockUpload(this.stockfileUploading);
+        this.authenticationService.setStockfileUploaddisable(false);
+        this.authenticationService.uploadStockFile(formData).subscribe({
+          next: (event: any) => {
+            if (event.success) {
+              this.stockfileUploading = false;
+              this.authenticationService.setStockUpload(this.stockfileUploading);
+              this.stockRecordCount = event.stockRecordCount;
+              this.selectedStockFiles = undefined;
+              this.stockfileUpload = true;
+              this.authenticationService.setStockfileUploaddisable(true);
+              setTimeout(() => {
+                let workload = {
+                  customerId: this.customerId,
+                  storeId: this.storeId,
+                  stockDate: this.year,
+                };
 
-            },
-            error: (err: any) => {
-              console.log(err);
-              this.progress = 0;
-
-              if (err.error && err.error.message) {
-                this.message = err.error.message;
-              } else {
-                this.message = 'Could not upload the file!';
-              }
-              this.currentFile = undefined;
+                this.authenticationService.getstockData(workload);
+                this.isStockFileUpload = !this.isStockFileUpload;
+                this.stockfileUpload = false;
+                // this.saleFileUpload = false;
+              }, 3000);
               this.spinner.hide();
             }
-          });
+
+          },
+          error: (err: any) => {
+            console.log(err);
+            this.progress = 0;
+
+            if (err.error && err.error.message) {
+              this.message = err.error.message;
+            } else {
+              this.message = 'Could not upload the file!';
+            }
+            this.currentFile = undefined;
+            this.spinner.hide();
+          }
+        });
       }
 
       this.selectedFiles = undefined;
@@ -194,10 +203,12 @@ export class WorkloadsComponent implements OnInit {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
+    this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
     if (this.selectedMasterFiles) {
       const file: File | null = this.selectedMasterFiles.item(0);
       if (file) {
         this.currentFile = file;
+        this.disablemasterfileupdate = false;
         const formData: FormData = new FormData();
         var event = new Date(this.year);
         let date = JSON.stringify(event)
@@ -207,7 +218,9 @@ export class WorkloadsComponent implements OnInit {
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
         this.masterfileUploading = true;
+        
         this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
+        this.authenticationService.setMasterfilbrowser(false);
         this.authenticationService.uploadMasterFile(formData).subscribe({
           next: (event: any) => {
             if (event.success) {
@@ -215,18 +228,21 @@ export class WorkloadsComponent implements OnInit {
               this.fileUploaded = true;
               this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
               this.masterRecordCount = event.stockRecordCount;
+              this.timeElapsed = event.timeElapsed;
               this.masterfileUpload = true;
-              setTimeout(() =>{
+              this.disablemasterfileupdate = true;   
+              this.authenticationService.setMasterfilbrowser(true);
+              setTimeout(() => {
                 let workload = {
                   customerId: this.customerId,
-                  storeId:this.storeId,
-                  stockDate:this.year,
+                  storeId: this.storeId,
+                  stockDate: this.year,
                 };
-            
+              
                 this.authenticationService.getMasterData(workload);
-                this.isMasterFileUpload= !this.isMasterFileUpload;
+                this.isMasterFileUpload = !this.isMasterFileUpload;
                 this.masterfileUpload = false;
-              }, 1000);
+              }, 150000);
               this.spinner.hide();
             }
           },
@@ -252,11 +268,12 @@ export class WorkloadsComponent implements OnInit {
 
   uploadSaleFile(): void {
     this.spinner.show();
-    
+
     this.updateSalefile = false;
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
+    this.authenticationService.disablesalefileupdate.subscribe(user => this.disablesalefileupdate = user);
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
 
@@ -272,6 +289,7 @@ export class WorkloadsComponent implements OnInit {
         formData.append('stockDate', date);
         this.salefileUploading = true;
         this.authenticationService.setSalefileUpload(this.salefileUploading);
+        this.authenticationService.setSalefileUploaddisable(false);
         this.authenticationService.uploadSalesFile(formData).subscribe({
           next: (event: any) => {
             if (event.success) {
@@ -280,20 +298,20 @@ export class WorkloadsComponent implements OnInit {
               this.stockRecordCount = event.stockRecordCount;
               this.saleFileUpload = true;
               this.selectedFiles = undefined;
-              setTimeout(() =>{
+              setTimeout(() => {
                 let workload = {
                   customerId: this.customerId,
-                  storeId:this.storeId,
-                  stockDate:this.year,
+                  storeId: this.storeId,
+                  stockDate: this.year,
                 };
-            
+                this.authenticationService.setSalefileUploaddisable(true);
                 this.authenticationService.getSalesData(workload);
-                this.isSaleFileUpload= !this.isSaleFileUpload;
+                this.isSaleFileUpload = !this.isSaleFileUpload;
                 this.saleFileUpload = false;
                 this.saleFileUpload = false;
               }, 3000);
               this.spinner.hide();
-              
+
             }
           },
           error: (err: any) => {
@@ -313,15 +331,15 @@ export class WorkloadsComponent implements OnInit {
   }
   submitFile() {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
-      this.authenticationService.storeId.subscribe(user => this.storeId = user);
-     this.authenticationService.stockDate.subscribe(user => this.year = user);
-     let workload = {
+    this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    this.authenticationService.stockDate.subscribe(user => this.year = user);
+    let workload = {
       customerId: this.customerId,
-      storeId:this.storeId,
-      stockDate:this.year,
+      storeId: this.storeId,
+      stockDate: this.year,
     };
     this.authenticationService.getMasterData(workload);
-    this.isStockFileUpload= !this.isStockFileUpload;
+    this.isStockFileUpload = !this.isStockFileUpload;
     // this.authenticationService.getSalesList(workload);
   };
 
@@ -329,35 +347,50 @@ export class WorkloadsComponent implements OnInit {
   submitStockFile() {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
-   this.authenticationService.stockDate.subscribe(user => this.year = user);
-  let workload = {
-    customerId: this.customerId,
-    storeId:this.storeId,
-    stockDate:this.year,
-  };
-  this.authenticationService.getstockData(workload);
-  this.isStockFileUpload= !this.isStockFileUpload;
-   // this.router.navigate(['/stockList']);
+    this.authenticationService.stockDate.subscribe(user => this.year = user);
+    let workload = {
+      customerId: this.customerId,
+      storeId: this.storeId,
+      stockDate: this.year,
+    };
+    this.authenticationService.getstockData(workload);
+    this.isStockFileUpload = !this.isStockFileUpload;
+    // this.router.navigate(['/stockList']);
   };
 
   submitSaleFile() {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
-   this.authenticationService.stockDate.subscribe(user => this.year = user);
-  let workload = {
-    customerId: this.customerId,
-    storeId:this.storeId,
-    stockDate:this.year,
-  };
-  this.authenticationService.getSalesData(workload);
-  this.isSaleFileUpload= !this.isSaleFileUpload;
+    this.authenticationService.stockDate.subscribe(user => this.year = user);
+    let workload = {
+      customerId: this.customerId,
+      storeId: this.storeId,
+      stockDate: this.year,
+    };
+    this.authenticationService.getSalesData(workload);
+    this.isSaleFileUpload = !this.isSaleFileUpload;
   };
 
 
-  submitAdvantoryFile(){
+  submitAdvantoryFile() {
     this.router.navigate(['/workorders']);
   }
   onlogout() {
     this.authenticationService.logout();
+  }
+  checkSideInputDate() {
+
+  }
+  checkMasterfileUpload() {
+    this.isMasterFileUpload = !this.isMasterFileUpload;
+    this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
+  }
+  onMenuClick(){
+    debugger;
+    this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
+    if(!this.disablemasterfileupdate)
+    this.isMasterFileUpload = true;
+    else
+    this.isMasterFileUpload = false;
   }
 }

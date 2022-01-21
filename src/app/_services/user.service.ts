@@ -24,8 +24,7 @@ export class UserService {
 
   private _masterList: BehaviorSubject<Master[]> = new BehaviorSubject<Master[]>([]);
   public masterList: Observable<Master[]> = this._masterList.asObservable();
-  // private _customerId: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
-  // public customerId: Observable<any> = this._customerId.asObservable();
+
   private _customerId = new BehaviorSubject<any>('');
   customerId = this._customerId.asObservable();
   private _storeId: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
@@ -45,6 +44,17 @@ export class UserService {
   private _salefileUpload = new BehaviorSubject<boolean>(false);
   salefileUpload = this._salefileUpload.asObservable();
 
+  
+  private _disablemasterfileupdate= new BehaviorSubject<boolean>(false);
+  disablemasterfileupdate = this._disablemasterfileupdate.asObservable();
+
+  private _disablestockfileupdate= new BehaviorSubject<boolean>(false);
+  disablestockfileupdate = this._disablestockfileupdate.asObservable();
+
+  private _disablesalefileupdate= new BehaviorSubject<boolean>(false);
+  disablesalefileupdate = this._disablesalefileupdate.asObservable();
+
+  
   constructor(private http: HttpClient,
     private sessionService: SessionService,
     private router: Router,
@@ -191,5 +201,16 @@ export class UserService {
 
   setStockUpload(object: boolean) {
     this._stockfileUplaod.next(object);
+  }
+  setMasterfilbrowser(object: boolean) {
+    this._disablemasterfileupdate.next(object);
+  }
+  
+  setSalefileUploaddisable(object: boolean) {
+    this._disablesalefileupdate.next(object);
+  }
+  
+  setStockfileUploaddisable(object: boolean) {
+    this._disablestockfileupdate.next(object);
   }
 }

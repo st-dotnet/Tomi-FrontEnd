@@ -975,3 +975,7 @@ background: #025677;
 .custom-loader .ngx-spinner-overlay{
     height: 400px !important;
 }
+
+.listing.disable {
+    pointer-events: none;
+}

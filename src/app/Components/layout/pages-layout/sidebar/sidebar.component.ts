@@ -4,6 +4,7 @@ import { SessionService, UserService } from '@app/_services';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbCalendar, NgbDate, NgbDateAdapter, NgbDateNativeAdapter, NgbDatepicker, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Pages } from '@app/_helper/enums';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -23,8 +24,9 @@ export class SidebarComponent implements OnInit {
   stockfileUpload = false;
   salefileUpload = false;
   rangefileUpload = false;
+  isFileUploadOption= false ;
   constructor(private accountService: SessionService, private authenticationService: UserService,
-    private spinner: NgxSpinnerService, private router: Router) {
+    private spinner: NgxSpinnerService, private router: Router,private toastrService: ToastrService) {
 
     const user = this.accountService.userValue;
     this.isLoggedIn = user && user.token;
@@ -73,6 +75,11 @@ export class SidebarComponent implements OnInit {
   }
 
   submitFile(tab: any) {
+    debugger;
+    if (this.customerId==undefined || this.storeId==undefined || this.stockyear ==undefined) 
+      this.toastrService.error("Please select job order first");
+    else
+  {
     switch (tab) {
       case Pages.Master:
         this.authenticationService.setactiveTab(tab);
@@ -92,15 +99,18 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/workorders', Pages[tab]]);
   }
 
+  }
+
   onChange() {
-    
-    if (this.customerId != null || this.storeId != null || this.stockyear != null) {
+    debugger;
+    if (this.customerId!=undefined && this.storeId!=undefined &&  this.stockyear!= undefined) {
+      this.isFileUploadOption= true ;
       let stockdate = new Date(this.stockyear.year, this.stockyear.month - 1, this.stockyear.day + 1);
       this.stockyear.day = this.stockyear.day + 1;
       var event = new Date(stockdate);
       let date = JSON.stringify(event)
       date = date.slice(1, 11)
-      // this.authenticationService.setCustomerId(this.customerId);
+    
       let workload = {
         customerId: this.customerId,
         storeId: this.storeId,
@@ -112,6 +122,9 @@ export class SidebarComponent implements OnInit {
       this.authenticationService.getstockData(workload);
       this.authenticationService.getMasterData(workload);
       this.authenticationService.getSalesData(workload);
+      this.authenticationService.setSalefileUploaddisable(true);
+      this.authenticationService.setMasterfilbrowser(true);
+      this.authenticationService.setStockfileUploaddisable(true);
     }
   }
 }

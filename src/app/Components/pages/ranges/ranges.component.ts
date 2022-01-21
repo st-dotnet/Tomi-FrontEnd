@@ -140,11 +140,9 @@ export class RangesComponent implements OnInit {
     this.rangesService.deleteRange(rangeId).pipe(first())
       .subscribe({
         next: () => {
-
           this.getallCustomList();
         }
       });
-
   }
   onGroupSubmit() {
     this.groupSubmitted = true;
@@ -160,7 +158,6 @@ export class RangesComponent implements OnInit {
           this.toastrService.error(res.error);
           this.isAddGroup = false;
           this.editGroup = false;
-          //  this.modalService.dismissAll();
           this.getallGroupList();
           this.getallRangeList();
         }
@@ -181,7 +178,6 @@ export class RangesComponent implements OnInit {
   getallGroupList() {
     this.rangesService.getGroupLists().subscribe({
       next: (event: any) => {
-
         this.groupList = event;
         this.spinner.hide();
       }

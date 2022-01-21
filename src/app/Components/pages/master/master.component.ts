@@ -14,6 +14,7 @@ export class MasterComponent implements OnInit {
   storeId: any;
   year: any;
   p: number = 1;
+  diasblemasterFile: boolean= false;
   constructor(
     private router: Router,
     private authenticationService: UserService,
@@ -23,8 +24,24 @@ export class MasterComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+    this.authenticationService.disablemasterfileupdate.subscribe(user => this.diasblemasterFile = user);
+   if(!this.diasblemasterFile)
+   {
+     
     this.authenticationService.masterList.subscribe(user => this.masterList = user);
+   }
+   else{
+        this.authenticationService.customerId.subscribe(user => this.customerId = user);
+       this.authenticationService.storeId.subscribe(user => this.storeId = user);
+      this.authenticationService.stockDate.subscribe((year) => {
+      if (year) {
+        this.year = year;
+        this.getmasterFileData();
+      }
+    });
+  
+   }
+
   }
 
   manageUser(customerId: any) {
@@ -38,8 +55,7 @@ export class MasterComponent implements OnInit {
   getmasterFileData() {
     var event = new Date(this.year);
     let date = JSON.stringify(event)
-    date = date.slice(1, 11)
-    // this.authenticationService.setCustomerId(this.customerId);
+    date = date.slice(1, 11);
     let workload = {
       customerId: this.customerId,
       storeId: this.storeId,
