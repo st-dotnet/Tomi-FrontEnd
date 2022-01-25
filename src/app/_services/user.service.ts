@@ -16,6 +16,8 @@ export class UserService {
   private readonly customerEndPoint = 'Customer/';
   private readonly storeEndPoint = 'Store/';
   private readonly userEndPoint = 'User/';
+
+
   private _stockList: BehaviorSubject<Master[]> = new BehaviorSubject<Master[]>([]);
   public stockList: Observable<Master[]> = this._stockList.asObservable();
 
@@ -44,7 +46,7 @@ export class UserService {
   private _salefileUpload = new BehaviorSubject<boolean>(false);
   salefileUpload = this._salefileUpload.asObservable();
 
-  
+
   private _disablemasterfileupdate= new BehaviorSubject<boolean>(false);
   disablemasterfileupdate = this._disablemasterfileupdate.asObservable();
 
@@ -54,14 +56,14 @@ export class UserService {
   private _disablesalefileupdate= new BehaviorSubject<boolean>(false);
   disablesalefileupdate = this._disablesalefileupdate.asObservable();
 
-  
+
   constructor(private http: HttpClient,
     private sessionService: SessionService,
     private router: Router,
     private spinner: NgxSpinnerService,) {
     this.currentUserSubject = new BehaviorSubject<User>(new User());
     this.currentUser = this.currentUserSubject.asObservable();
-    
+
   }
 
   public get currentUserValue(): User {
@@ -89,7 +91,7 @@ export class UserService {
     // this.router.navigate([""]).then(() => {
     //     window.location.reload();
     //   });
-  
+
   }
 
   getAllStoreByCustomerId(customerId: string) {
@@ -126,11 +128,10 @@ export class UserService {
     });
   };
 
-  getstockData(model: any) {    
+  getstockData(model: any) {
     this.spinner.show();
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetStocksData`, model).subscribe(res => {
       this._stockList.next(res);
-      
     this.spinner.hide();
     })
   }
@@ -145,7 +146,7 @@ export class UserService {
 
   getMasterData(model: any) {
     this.spinner.show();
-    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetMasterData`, model).subscribe(res => {      
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetMasterData`, model).subscribe(res => {
       this._masterList.next(res);
       this.spinner.hide();
     })
@@ -161,13 +162,11 @@ export class UserService {
     });
   };
 
-  getSalesData(model: any) {    
+  getSalesData(model: any) {
     this.spinner.show();
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetSalesData`, model).subscribe(res => {
       this._saleList.next(res);
-      
-    this.spinner.hide();
-
+     this.spinner.hide();
     })
   }
   getSalesList(model: any) {
@@ -176,6 +175,8 @@ export class UserService {
   getStockList(model: any) {
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetStocksData`, model);
   }
+
+
 
   setCustomerId(object: any) {
     this._customerId.next(object);
@@ -205,11 +206,11 @@ export class UserService {
   setMasterfilbrowser(object: boolean) {
     this._disablemasterfileupdate.next(object);
   }
-  
+
   setSalefileUploaddisable(object: boolean) {
     this._disablesalefileupdate.next(object);
   }
-  
+
   setStockfileUploaddisable(object: boolean) {
     this._disablestockfileupdate.next(object);
   }

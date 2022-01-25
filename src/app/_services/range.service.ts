@@ -14,6 +14,8 @@ export class RangesService {
   public currentUser: Observable<User>;
   private readonly rangeEndPoint = 'Ranges/';
   private readonly groupEndPoint = 'Group/';
+  private readonly StockAdjustmentEndPoint = 'StockAdjustment/';
+  //StockAdjustment
   private _rangeList: BehaviorSubject<Range[]> = new BehaviorSubject<Range[]>([]);
   public rangeList: Observable<Range[]> = this._rangeList.asObservable();
 
@@ -58,4 +60,27 @@ export class RangesService {
   SearchRange(model: any) {
     return this.http.delete<any>(`${environment.apiUrl}${this.groupEndPoint}Search`, model);
   };
+
+  addAdjustment(model: any) {
+    return this.http.post<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}AddStockAdjustment`, model);
+  };
+  getAdjustment() {
+    return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}GetStockAdjustmentListAsync`);
+  };
+
+  getAdjustmentById(id:any) {
+    return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}GetStockAdjustmentAsync/${id}`);
+  };
+
+  deleteAdjustment(id:any){
+    return this.http.delete<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}DeleteStockAdjustment/${id}`);
+  }
+  recycleAdjustment(model:any){
+    return this.http.post<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}ChangeDeletedRecStatus`,model);
+  }
+
+  getStoreBySku(sku: string) {
+    return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}MasterDataBySku/${sku}`);
+  }
+  //
 }

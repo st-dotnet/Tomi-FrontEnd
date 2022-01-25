@@ -60,18 +60,18 @@ export class Sales {
 }
 
 export class Master {
-    Id?: string;
-    SKU?: string;
-    Barcode?: string;
-    RetailPrice?: string;
-    Description?: string;
-    Department?: string;
-    Blank?: string;
-    OHQuantity?: string;
-    Unity?: string;
-    CustomerId?: string;
-    StoreId?: string;
-    StockDate?: string;
+    id?: string;
+    sku?: string;
+    barcode?: string;
+    retailPrice?: string;
+    description?: string;
+    department?: string;
+    blank?: string;
+    ohQuantity?: string;
+    unity?: string;
+    customerId?: string;
+    storeId?: string;
+    stockDate?: string;
 }
 
 export class Range {
