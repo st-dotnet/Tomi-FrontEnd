@@ -16,16 +16,15 @@ import { first } from 'rxjs';
 export class AdjustmentsinventoryComponent implements OnInit {
 
   adjustmentform!:FormGroup;
+  editStockAdjustment!:FormGroup;
   submitted = false;
+  editsubmitted = false;
   adjustmentList:any;
   searchText: string = "";
   p: number = 1;
   masterData!:Master;
   isSubmit:boolean=false;
   invalidsku:boolean=false;
-
-
-
 
   constructor(private formBuilder: FormBuilder,  private modalService: NgbModal,
     private rangesService: RangesService,
@@ -34,29 +33,37 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAdjustment();
-    this.getAdjustmentById("9FC3863D-28D9-46B1-71BE-08D9DF53FEED");
+   // this.getAdjustmentById("9FC3863D-28D9-46B1-71BE-08D9DF53FEED");
     this.adjustmentform = this.formBuilder.group({
       //id: [''],
-      Rec: ['', Validators.required],
-      Term: ['', Validators.required],
-      Dload: ['', Validators.required],
-      Tag: ['', Validators.required],
-      Shelf: ['',Validators.required],
-      Barcode: ['', Validators.required],
-      SKU: ['',],
-      MSSku: ['',Validators.required ],
-      NOF: [0],
+      rec: ['', Validators.required],
+      term: ['', Validators.required],
+      dload: ['', Validators.required],
+      tag: ['', Validators.required],
+      shelf: ['',Validators.required],
+      barcode: ['', Validators.required],
+      sku: ['',],
+      mssku: ['',Validators.required ],
+      nof: [0],
       //barcode:[''],
       ohquantity:[''],
-      Department: [1],
-      Quantity: ['', Validators.required],
-      Isdeleted: [false],
+      department: [1],
+      quantity: ['', Validators.required],
+      isdeleted: [false],
+    });
+
+    this.editStockAdjustment = this.formBuilder.group({
+      //id: [''],
+      rec1: ['', Validators.required],
+      term1: ['', Validators.required],
+      dload1: ['', Validators.required],
+      tag1: ['', Validators.required],
+      shelf1: ['',Validators.required],
     });
   }
 
 
   open(content: any) {
-
     this.submitted=false;
     this.isSubmit=false;
     this.adjustmentform.reset();
@@ -65,6 +72,8 @@ export class AdjustmentsinventoryComponent implements OnInit {
     });
   }
   get f() { return this.adjustmentform.controls; }
+  get f1() { return this.editStockAdjustment.controls; }
+
 
   onSubmit(){
     debugger;
@@ -72,9 +81,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
     if (this.adjustmentform.invalid) {
       return;
     }
-
-    //this.adjustmentform.setValue["NOF"]=0;
-    this.adjustmentform.controls["NOF"].setValue(0);
+    this.adjustmentform.controls["nof"].setValue(0);
     this.rangesService.addAdjustment(this.adjustmentform.value)
       .pipe(first())
       .subscribe({
@@ -85,18 +92,18 @@ export class AdjustmentsinventoryComponent implements OnInit {
   }
 
   checkSkuData(sku:any){
-    debugger;
+    this.spinner.show();
     this.rangesService.getStoreBySku(sku.target.value)
     .pipe(first())
     .subscribe({
       next: (response) => {
+
        this.masterData=response;
        if(this.masterData)
        {
-        this.adjustmentform.controls["Barcode"].setValue(this.masterData.barcode);
-        this.adjustmentform.controls["Quantity"].setValue(this.masterData.ohQuantity);
-
-        this.adjustmentform.controls["SKU"].setValue(this.masterData.id);
+        this.adjustmentform.controls["barcode"].setValue(this.masterData.barcode);
+        this.adjustmentform.controls["quantity"].setValue(this.masterData.ohQuantity);
+        this.adjustmentform.controls["sku"].setValue(this.masterData.id);
 
         this.isSubmit=true;
         this.invalidsku=false;
@@ -104,8 +111,10 @@ export class AdjustmentsinventoryComponent implements OnInit {
        else{
         this.isSubmit=false;
         this.invalidsku=true;
+        this.adjustmentform.controls["barcode"].setValue('');
+        this.adjustmentform.controls["quantity"].setValue('');
        }
-        console.log(this.masterData);
+       this.spinner.hide();
       }
     });
   }
@@ -122,6 +131,8 @@ export class AdjustmentsinventoryComponent implements OnInit {
     });
   }
 
+
+
   recyle(model:any){
     debugger;
     this.spinner.show();
@@ -132,11 +143,37 @@ export class AdjustmentsinventoryComponent implements OnInit {
         this.getAdjustment();
         this.spinner.hide();
       }
-
     });
   }
 
-  editAdjustment(model:any){
+  editAdjustment(model:any,content:any){
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    }, (reason) => {
+   });
+   this.adjustmentList=model;
+  }
+
+  openFilter(content:any){
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    }, (reason) => {
+   });
+  }
+
+  edit(){
+    this.editsubmitted=true;
+    if (this.editStockAdjustment.invalid) {
+      return;
+    }
+    this.spinner.show();
+    this.rangesService.addAdjustment(this.adjustmentList)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.spinner.hide();
+          this.getAdjustment();
+          this.modalService.dismissAll();
+        }
+      });
 
   }
 
@@ -158,7 +195,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
     .subscribe({
       next: (response) => {
         console.log(response);
-
       }
     });
   }

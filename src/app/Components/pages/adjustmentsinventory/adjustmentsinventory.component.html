@@ -1,6 +1,99 @@
 <div>
   <button class="btn btn-primary" (click)="open(mymodal)">Add</button>
+
+  <button class="btn btn-primary" (click)="openFilter(filter)">Filter</button>
+
 </div>
+
+
+<ng-template #filter let-modal>
+<table class="table table-borderless">
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+
+  </tr>
+  <tbody>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+    <tr>
+      <td>trrm</td>
+      <td><select class="form-control"><option value="=">fdsf</option></select></td>
+      <td><input type="text" class="form-control"></td>
+    </tr>
+  </tbody>
+</table>
+<div class="row text-center">
+  <div class="col-md-4">
+    <button class="btn btn-primary">Ok</button>
+  </div>
+  <div class="col-md-4">
+    <button class="btn btn-primary">Cancel</button>
+  </div>
+  <div class="col-md-4">
+    <button class="btn btn-primary">Reset</button>
+  </div>
+</div>
+</ng-template>
 
 <ng-template #mymodal let-modal>
   <div class="modal-ui-same form-ranges-add">
@@ -19,97 +112,176 @@
     <div class="modal-body">
       <form [formGroup]="adjustmentform" (ngSubmit)="onSubmit()">
         <div class="row">
-
-         <div *ngIf="invalidsku">sku is not Valid</div>
           <div class="col-md-12">
             <div class="form-group">
-              <input type="text" formControlName="MSSku" (change)="checkSkuData($event)"  placeholder="SKU" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['MSSku'].errors }" />
-
-              <div *ngIf="submitted && f['MSSku'].errors" class="invalid-feedback">
-                <div *ngIf="f['MSSku'].errors['required']">SKU is required</div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-md-12">
-            <div class="form-group">
-              <input type="text" formControlName="Rec"  placeholder="Rec" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Rec'].errors }" />
-
-              <div *ngIf="submitted && f['Rec'].errors" class="invalid-feedback">
-                <div *ngIf="f['Rec'].errors['required']">Rec is required</div>
+              <input type="text" formControlName="mssku" (change)="checkSkuData($event)"  placeholder="SKU" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['mssku'].errors }" />
+                <div *ngIf="invalidsku">sku is not Valid</div>
+              <div *ngIf="submitted && f['mssku'].errors" class="invalid-feedback">
+                <div *ngIf="f['mssku'].errors['required']">SKU is required</div>
               </div>
             </div>
           </div>
 
           <div class="col-md-12">
             <div class="form-group">
-              <input type="text" formControlName="Term" placeholder="Term" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Term'].errors }" />
+              <input type="text" formControlName="rec"  placeholder="Rec" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['rec'].errors }" />
 
-              <div *ngIf="submitted && f['Term'].errors" class="invalid-feedback">
-                <div *ngIf="f['Term'].errors['required']">Term is required</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="form-group">
-              <input type="number" formControlName="Dload" placeholder="Dload" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Dload'].errors }" />
-
-              <div *ngIf="submitted && f['Dload'].errors" class="invalid-feedback">
-                <div *ngIf="f['Dload'].errors['required']">Dload is required</div>
+              <div *ngIf="submitted && f['rec'].errors" class="invalid-feedback">
+                <div *ngIf="f['rec'].errors['required']">Rec is required</div>
               </div>
             </div>
           </div>
 
           <div class="col-md-12">
             <div class="form-group">
-              <input type="number" formControlName="Tag"   placeholder="Tag" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Rec'].errors }" />
+              <input type="text" formControlName="term" placeholder="erm" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['term'].errors }" />
 
-              <div *ngIf="submitted && f['Tag'].errors" class="invalid-feedback">
-                <div *ngIf="f['Tag'].errors['required']">Tag is required</div>
+              <div *ngIf="submitted && f['term'].errors" class="invalid-feedback">
+                <div *ngIf="f['term'].errors['required']">Term is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="number" formControlName="dload" placeholder="Dload" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['dload'].errors }" />
+
+              <div *ngIf="submitted && f['dload'].errors" class="invalid-feedback">
+                <div *ngIf="f['dload'].errors['required']">Dload is required</div>
               </div>
             </div>
           </div>
 
           <div class="col-md-12">
             <div class="form-group">
-              <input type="number" formControlName="Shelf" placeholder="Shelf" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Shelf'].errors }" />
+              <input type="number" formControlName="tag"   placeholder="Tag" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['tag'].errors }" />
 
-              <div *ngIf="submitted && f['Shelf'].errors" class="invalid-feedback">
-                <div *ngIf="f['Shelf'].errors['required']">Shelf is required</div>
+              <div *ngIf="submitted && f['tag'].errors" class="invalid-feedback">
+                <div *ngIf="f['tag'].errors['required']">Tag is required</div>
               </div>
             </div>
           </div>
 
           <div class="col-md-12">
             <div class="form-group">
-              <input type="text" formControlName="Barcode" placeholder="Barcode" readonly class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Barcode'].errors }" />
+              <input type="number" formControlName="shelf" placeholder="Shelf" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['shelf'].errors }" />
 
-              <div *ngIf="submitted && f['Barcode'].errors" class="invalid-feedback">
-                <div *ngIf="f['Barcode'].errors['required']">Barcode is required</div>
+              <div *ngIf="submitted && f['shelf'].errors" class="invalid-feedback">
+                <div *ngIf="f['shelf'].errors['required']">Shelf is required</div>
               </div>
             </div>
           </div>
 
           <div class="col-md-12">
             <div class="form-group">
-              <input type="text" formControlName="Quantity" placeholder="Quantity" readonly  class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['Quantity'].errors }" />
+              <input type="text" formControlName="barcode" placeholder="Barcode" readonly class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['barcode'].errors }" />
 
-              <div *ngIf="submitted && f['Quantity'].errors" class="invalid-feedback">
-                <div *ngIf="f['Quantity'].errors['required']">Quantity is required</div>
+              <div *ngIf="submitted && f['barcode'].errors" class="invalid-feedback">
+                <div *ngIf="f['barcode'].errors['required']">Barcode is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="text" formControlName="quantity" placeholder="Quantity" readonly  class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['quantity'].errors }" />
+
+              <div *ngIf="submitted && f['quantity'].errors" class="invalid-feedback">
+                <div *ngIf="f['quantity'].errors['required']">Quantity is required</div>
               </div>
             </div>
           </div>
         </div>
         <button [disabled]="!isSubmit" class="btn btn-primary save mt-3">
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #stockmodel let-modal>
+  <div class="modal-ui-same form-ranges-add">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Adjustments</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" class="close-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal"
+            data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+            class="svg-inline--fa fa-times fa-w-10 fa-2x">
+            <path fill="currentColor"
+              d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"
+              class=""></path>
+          </svg></span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editStockAdjustment" (ngSubmit)="edit()">
+        <div class="row">
+
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="text" formControlName="rec1" [(ngModel)]="adjustmentList.rec"  placeholder="Rec" class="form-control"
+                [ngClass]="{ 'is-invalid': editsubmitted && f1['rec1'].errors }" />
+
+              <div *ngIf="editsubmitted && f1['rec1'].errors" class="invalid-feedback">
+                <div *ngIf="f1['rec1'].errors['required']">Rec is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="text" formControlName="term1"  [(ngModel)]="adjustmentList.term" placeholder="term" class="form-control"
+                [ngClass]="{ 'is-invalid': editsubmitted && f1['term1'].errors }" />
+
+              <div *ngIf="editsubmitted && f1['term1'].errors" class="invalid-feedback">
+                <div *ngIf="f1['term1'].errors['required']">Term is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="number" formControlName="dload1" [(ngModel)]="adjustmentList.dload" placeholder="Dload" class="form-control"
+                [ngClass]="{ 'is-invalid': editsubmitted && f1['dload1'].errors }" />
+
+              <div *ngIf="editsubmitted && f1['dload1'].errors" class="invalid-feedback">
+                <div *ngIf="f1['dload1'].errors['required']">Dload is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="number" formControlName="tag1" [(ngModel)]="adjustmentList.tag"  placeholder="Tag" class="form-control"
+                [ngClass]="{ 'is-invalid': editsubmitted && f1['tag1'].errors }" />
+
+              <div *ngIf="editsubmitted && f1['tag1'].errors" class="invalid-feedback">
+                <div *ngIf="f1['tag1'].errors['required']">Tag is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="number" formControlName="shelf1" [(ngModel)]="adjustmentList.shelf" placeholder="Shelf" class="form-control"
+                [ngClass]="{ 'is-invalid': editsubmitted && f1['shelf1'].errors }" />
+
+              <div *ngIf="editsubmitted && f1['shelf1'].errors" class="invalid-feedback">
+                <div *ngIf="f1['shelf1'].errors['required']">Shelf is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button  class="btn btn-primary save mt-3">
           Save
         </button>
       </form>
@@ -163,7 +335,7 @@
 
                           <td>
                             <ul class="action-cell">
-                                <li><a class="edit-icoo" (click)="editAdjustment(item)"><span
+                                <li><a class="edit-icoo" (click)="editAdjustment(item,stockmodel)"><span
                                             class="icon-cellaction "><svg aria-hidden="true" focusable="false"
                                                 data-prefix="fas" data-icon="pencil-alt" role="img"
                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
