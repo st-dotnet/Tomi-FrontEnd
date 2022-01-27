@@ -96,6 +96,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
+          this.getAdjustment();
           this.modalService.dismissAll();
         }
       });
@@ -116,7 +117,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
         this.adjustmentform.controls["barcode"].setValue(this.masterData.barcode);
         this.adjustmentform.controls["quantity"].setValue(this.masterData.ohQuantity);
         this.adjustmentform.controls["sku"].setValue(this.masterData.id);
-
         this.isSubmit=true;
         this.invalidsku=false;
        }
@@ -139,7 +139,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
     .subscribe({
       next: (response) => {
         this.spinner.hide();
-        //console.log(response);
+        console.log(response);
        this.adjustmentList=response;
         this.modalService.dismissAll();
       }

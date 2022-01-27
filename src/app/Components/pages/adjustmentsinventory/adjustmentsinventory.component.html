@@ -331,7 +331,7 @@
                             <th>Rec #</th>
                             <th>Term</th>
                             <th>Dload</th>
-                            <th>Empno</th>
+                            <!-- <th>Empno</th> -->
                             <th>Tag</th>
                             <th>Shelf</th>
                             <th>barcode</th>
@@ -350,15 +350,15 @@
                         <td>{{item.rec}}</td>
                         <td>{{item.term}}</td>
                         <td>{{item.dload}}</td>
-                        <td>empno</td>
+                        <!-- <td>{{item.master.id}}</td> -->
                         <td>{{item.tag}}</td>
                         <td>{{item.shelf}}</td>
                         <td>{{item.barcode}}</td>
-                        <td>{{item.sku}}</td>
+                        <td>{{item.master.sku}}</td>
                         <td><input type="checkbox" [checked]="item.nof=='0'?false:true"></td>
-                        <td>{{item.department}}</td>
-                        <td>Description</td>
-                        <td>price</td>
+                        <td>{{item.master.department}}</td>
+                        <td>{{item.master.description}}</td>
+                        <td>{{item.master.retailPrice}}</td>
                         <td>{{item.quantity}}</td>
                         <td >{{item.createdAt |date:'MM/dd/yyyy'}}</td>
 
