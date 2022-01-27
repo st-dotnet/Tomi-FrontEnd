@@ -23,6 +23,7 @@ import {NgxPrintModule} from 'ngx-print';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { AdjustmentsinventoryComponent } from './adjustmentsinventory/adjustmentsinventory.component';
+import { ProgramTerminalComponent } from './program-terminal/program-terminal.component';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -39,6 +40,7 @@ import { AdjustmentsinventoryComponent } from './adjustmentsinventory/adjustment
     RangesComponent,
     SearchFilterPipe,
     AdjustmentsinventoryComponent,
+    ProgramTerminalComponent,
   ],
   imports: [
     PageRoutingModule,

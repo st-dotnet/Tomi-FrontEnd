@@ -63,22 +63,19 @@ export class RangesComponent implements OnInit {
   getallRangeList() {
     this.rangesService.getRangeLists().subscribe({
       next: (event: any) => {
-
         this.rangeList = event;
         this.spinner.hide();
       }
-    });;
-
+    });
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.rangeForm.controls; }
-
   get groupf() { return this.groupForm.controls; }
 
   open(content: any) {
     this.editRange = false;
-    this.submitted = false;    
+    this.submitted = false;
     this.groupSubmitted = false;
     this.isAddGroup = false;
     this.rangeForm.reset();
@@ -100,11 +97,10 @@ export class RangesComponent implements OnInit {
       this.rangeForm.controls["tagFrom"].setValue(item.tagFrom);
       this.rangeForm.controls["tagFrom"].setValue(item.tagFrom);
     }
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.getallRangeList();
-    }, (reason) => {
+     }, (reason) => {
     });
-
   }
 
   opencreateGroup() {
@@ -113,7 +109,7 @@ export class RangesComponent implements OnInit {
     this.groupForm.reset();
   }
 
-  editgroup(item: any,) {
+  editgroup(item: any) {
     this.editGroup = true;
     this.groupForm.controls["id"].setValue(item.id);
     this.groupForm.controls["name"].setValue(item.name);
@@ -136,6 +132,7 @@ export class RangesComponent implements OnInit {
         }
       });
   }
+
   deleteRange(rangeId: any) {
     this.rangesService.deleteRange(rangeId).pipe(first())
       .subscribe({
@@ -144,6 +141,7 @@ export class RangesComponent implements OnInit {
         }
       });
   }
+
   onGroupSubmit() {
     this.groupSubmitted = true;
     if (this.groupForm.invalid) {
@@ -163,6 +161,7 @@ export class RangesComponent implements OnInit {
         }
       });
   }
+
   deleteGroup(groupId: any) {
     this.rangesService.deleteGroup(groupId).pipe(first())
       .subscribe({
@@ -173,8 +172,8 @@ export class RangesComponent implements OnInit {
           this.getallGroupList();
         }
       });
-
   }
+
   getallGroupList() {
     this.rangesService.getGroupLists().subscribe({
       next: (event: any) => {
@@ -182,9 +181,7 @@ export class RangesComponent implements OnInit {
         this.spinner.hide();
       }
     });;
-
   }
-
 
   cancel() {
     this.isAddGroup = false;

@@ -30,6 +30,16 @@ export class AdjustmentsinventoryComponent implements OnInit {
     private rangesService: RangesService,
      private spinner: NgxSpinnerService,
      private toastrService: ToastrService,private userservice:UserService) { }
+  adjustmentinventory! :false;
+
+
+
+  // open(content: any) {
+  //   this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+  //   }, (reason) => {
+  //   });
+  // }
 
   ngOnInit(): void {
     this.getAdjustment();
@@ -90,14 +100,16 @@ export class AdjustmentsinventoryComponent implements OnInit {
         }
       });
   }
-
+  cancel()
+  {
+    this.modalService.dismissAll();
+  }
   checkSkuData(sku:any){
     this.spinner.show();
     this.rangesService.getStoreBySku(sku.target.value)
     .pipe(first())
     .subscribe({
       next: (response) => {
-
        this.masterData=response;
        if(this.masterData)
        {
@@ -116,7 +128,9 @@ export class AdjustmentsinventoryComponent implements OnInit {
        }
        this.spinner.hide();
       }
+
     });
+    this.spinner.hide();
   }
 
   getAdjustment(){
@@ -130,7 +144,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
       }
     });
   }
-
 
 
   recyle(model:any){
@@ -174,7 +187,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
           this.modalService.dismissAll();
         }
       });
-
   }
 
   deleteAdjustment(id:any){
