@@ -128,16 +128,17 @@ export class AdjustmentsinventoryComponent implements OnInit {
        }
        this.spinner.hide();
       }
-
     });
     this.spinner.hide();
   }
 
   getAdjustment(){
+    this.spinner.show();
     this.rangesService.getAdjustment()
     .pipe(first())
     .subscribe({
       next: (response) => {
+        this.spinner.hide();
         //console.log(response);
        this.adjustmentList=response;
         this.modalService.dismissAll();

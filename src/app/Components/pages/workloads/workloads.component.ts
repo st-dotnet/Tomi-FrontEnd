@@ -218,7 +218,7 @@ export class WorkloadsComponent implements OnInit {
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
         this.masterfileUploading = true;
-        
+
         this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
         this.authenticationService.setMasterfilbrowser(false);
         this.authenticationService.uploadMasterFile(formData).subscribe({
@@ -230,7 +230,7 @@ export class WorkloadsComponent implements OnInit {
               this.masterRecordCount = event.stockRecordCount;
               this.timeElapsed = event.timeElapsed;
               this.masterfileUpload = true;
-              this.disablemasterfileupdate = true;   
+              this.disablemasterfileupdate = true;
               this.authenticationService.setMasterfilbrowser(true);
               setTimeout(() => {
                 let workload = {
@@ -238,7 +238,7 @@ export class WorkloadsComponent implements OnInit {
                   storeId: this.storeId,
                   stockDate: this.year,
                 };
-              
+
                 this.authenticationService.getMasterData(workload);
                 this.isMasterFileUpload = !this.isMasterFileUpload;
                 this.masterfileUpload = false;
