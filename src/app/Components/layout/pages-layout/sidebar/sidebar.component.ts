@@ -76,7 +76,7 @@ export class SidebarComponent implements OnInit {
   }
 
   submitFile(tab: any) {
-    debugger;
+    
     if (this.customerId==undefined || this.storeId==undefined || this.stockyear ==undefined)
       this.toastrService.error("Please select job order first");
     else
@@ -106,7 +106,7 @@ export class SidebarComponent implements OnInit {
   }
 
   onChange() {
-    debugger;
+    
     if (this.customerId!=undefined && this.storeId!=undefined &&  this.stockyear!= undefined) {
       this.isFileUploadOption= true ;
       let stockdate = new Date(this.stockyear.year, this.stockyear.month - 1, this.stockyear.day + 1);

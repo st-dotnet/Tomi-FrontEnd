@@ -2,3 +2,4 @@
 export * from './session.service';
 export * from './user.service';
 export * from'./range.service';
+export * from './stockAdjustment.service';

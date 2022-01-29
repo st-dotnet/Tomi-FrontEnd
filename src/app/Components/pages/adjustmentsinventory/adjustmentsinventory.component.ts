@@ -2,7 +2,7 @@ import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Master } from '@app/_models';
-import { RangesService, UserService } from '@app/_services';
+import { StockAdjustmentService, UserService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -25,9 +25,11 @@ export class AdjustmentsinventoryComponent implements OnInit {
   masterData!:Master;
   isSubmit:boolean=false;
   invalidsku:boolean=false;
+  gotoRecord!: FormGroup;
+  gotoRecordSubmit: boolean= false;
 
   constructor(private formBuilder: FormBuilder,  private modalService: NgbModal,
-    private rangesService: RangesService,
+    private stockAdjustmentService: StockAdjustmentService,
      private spinner: NgxSpinnerService,
      private toastrService: ToastrService,private userservice:UserService) { }
   adjustmentinventory! :false;
@@ -70,6 +72,9 @@ export class AdjustmentsinventoryComponent implements OnInit {
       tag1: ['', Validators.required],
       shelf1: ['',Validators.required],
     });
+    this.gotoRecord = this.formBuilder.group({
+      rec:['', Validators.required]
+    })
   }
 
 
@@ -83,16 +88,16 @@ export class AdjustmentsinventoryComponent implements OnInit {
   }
   get f() { return this.adjustmentform.controls; }
   get f1() { return this.editStockAdjustment.controls; }
-
+  get gor(){ return this.gotoRecord.controls;}
 
   onSubmit(){
-    debugger;
+    
     this.submitted = true;
     if (this.adjustmentform.invalid) {
       return;
     }
     this.adjustmentform.controls["nof"].setValue(0);
-    this.rangesService.addAdjustment(this.adjustmentform.value)
+    this.stockAdjustmentService.addAdjustment(this.adjustmentform.value)
       .pipe(first())
       .subscribe({
         next: () => {
@@ -107,7 +112,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
   }
   checkSkuData(sku:any){
     this.spinner.show();
-    this.rangesService.getStoreBySku(sku.target.value)
+    this.stockAdjustmentService.getStoreBySku(sku.target.value)
     .pipe(first())
     .subscribe({
       next: (response) => {
@@ -134,10 +139,24 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
   getAdjustment(){
     this.spinner.show();
-    this.rangesService.getAdjustment()
+    this.stockAdjustmentService.getAdjustment()
     .pipe(first())
     .subscribe({
-      next: (response) => {
+      next: (response: any) => {
+        this.spinner.hide();
+        console.log(response);
+       this.adjustmentList=response;
+        this.modalService.dismissAll();
+      }
+    });
+  }
+
+  getDeletedAdjustment(){
+    this.spinner.show();
+    this.stockAdjustmentService.GetDeletedStockAdjustment()
+    .pipe(first())
+    .subscribe({
+      next: (response: any) => {
         this.spinner.hide();
         console.log(response);
        this.adjustmentList=response;
@@ -148,9 +167,9 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
 
   recyle(model:any){
-    debugger;
+    
     this.spinner.show();
-    this.rangesService.recycleAdjustment(model)
+    this.stockAdjustmentService.recycleAdjustment(model)
     .pipe(first())
     .subscribe({
       next: (response) => {
@@ -179,7 +198,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
       return;
     }
     this.spinner.show();
-    this.rangesService.addAdjustment(this.adjustmentList)
+    this.stockAdjustmentService.addAdjustment(this.adjustmentList)
       .pipe(first())
       .subscribe({
         next: () => {
@@ -192,7 +211,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
   deleteAdjustment(id:any){
     this.spinner.show();
-    this.rangesService.deleteAdjustment(id)
+    this.stockAdjustmentService.deleteAdjustment(id)
     .pipe(first())
     .subscribe({
       next: (response) => {
@@ -201,9 +220,34 @@ export class AdjustmentsinventoryComponent implements OnInit {
       }
     });
   }
+ 
+  gotoRecordAdjustment(){
+    this.gotoRecordSubmit = true;
+    if (this.gotoRecord.invalid) {
+      return;
+    }
+    this.spinner.show();
+    this.stockAdjustmentService.gotoRecordId(this.gotoRecord.value.rec)
+    .pipe(first())
+    .subscribe({
+      next: (response: any) => {
+        this.spinner.hide();
+        this.gotoRecordSubmit = false;
+        this.adjustmentList=response;
+        this.gotoRecord.reset();
+        this.modalService.dismissAll();
+      }
+    });
+  }
+  cancelRecordnumber(){
+    debugger;
+        this.modalService.dismissAll();
+    this.gotoRecordSubmit = false;
 
+    this.gotoRecord.reset();
+  }
   getAdjustmentById(id:any){
-    this.rangesService.getAdjustmentById(id)
+    this.stockAdjustmentService.getAdjustmentById(id)
     .pipe(first())
     .subscribe({
       next: (response) => {

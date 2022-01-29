@@ -386,7 +386,7 @@ export class WorkloadsComponent implements OnInit {
     this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
   }
   onMenuClick(){
-    debugger;
+    
     this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
     if(!this.disablemasterfileupdate)
     this.isMasterFileUpload = true;

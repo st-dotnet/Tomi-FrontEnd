@@ -75,12 +75,32 @@ export class Master {
 }
 
 export class Range {
-    Id?: string;
-    Name?: string;
-    Group?: string;
-    TagFrom?: string;
-    TagTo?: string;
-    CustomerId?: string;
-    StoreId?: string;
-    StockDate?: string;
+    id?: string;
+    name?: string;
+    group?: string;
+    tagFrom?: string;
+    tagTo?: string;
+    customerId?: string;
+    storeId?: string;
+    stockDate?: string;
 }
+
+export class stockAdjustment{
+       find(arg0: (value: any, index: any) => any): any {
+         throw new Error('Method not implemented.');
+       }
+       Id?: string;
+       Rec?: string;
+       Term?: string;
+       Dload?: string;
+       Tag?: string;
+       Shelf?: string;
+       Barcode?: string;
+       SKU?: string;
+       NOF?: string;
+       Department?: string;
+       Quantity?: string;
+       Isdeleted?: boolean;
+       Master?: Master;
+}
+
