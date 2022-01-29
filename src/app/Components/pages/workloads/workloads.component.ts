@@ -179,7 +179,6 @@ export class WorkloadsComponent implements OnInit {
 
           },
           error: (err: any) => {
-            console.log(err);
             this.progress = 0;
 
             if (err.error && err.error.message) {
@@ -247,7 +246,6 @@ export class WorkloadsComponent implements OnInit {
             }
           },
           error: (err: any) => {
-            console.log(err);
             if (err.error && err.error.message) {
               this.message = err.error.message;
             } else {
@@ -315,7 +313,6 @@ export class WorkloadsComponent implements OnInit {
             }
           },
           error: (err: any) => {
-            console.log(err);
             if (err.error && err.error.message) {
               this.message = err.error.message;
             } else {

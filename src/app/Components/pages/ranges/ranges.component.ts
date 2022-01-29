@@ -104,7 +104,7 @@ export class RangesComponent implements OnInit {
   }
 
   opencreateGroup() {
-    debugger
+    this.groupSubmitted = false;
     this.editGroup = false;
     this.groupForm.reset();
   }

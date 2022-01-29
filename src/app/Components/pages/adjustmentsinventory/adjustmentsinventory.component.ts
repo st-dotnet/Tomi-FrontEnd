@@ -148,7 +148,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
     .subscribe({
       next: (response: any) => {
         this.spinner.hide();
-        console.log(response);
        this.adjustmentList=response;
         this.modalService.dismissAll();
       }
@@ -162,7 +161,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
     .subscribe({
       next: (response: any) => {
         this.spinner.hide();
-        console.log(response);
        this.adjustmentList=response;
         this.modalService.dismissAll();
       }
@@ -244,7 +242,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
     });
   }
   cancelRecordnumber(){
-    debugger;
+    
         this.modalService.dismissAll();
     this.gotoRecordSubmit = false;
 
@@ -255,7 +253,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
     .pipe(first())
     .subscribe({
       next: (response) => {
-        console.log(response);
       }
     });
   }
