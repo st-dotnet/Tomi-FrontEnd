@@ -1,5 +1,4 @@
-﻿import { DeclarationListEmitMode } from "@angular/compiler";
-
+﻿
 export class User {
     id?: number;
     email?: string;
@@ -85,22 +84,4 @@ export class Range {
     stockDate?: string;
 }
 
-export class stockAdjustment{
-       find(arg0: (value: any, index: any) => any): any {
-         throw new Error('Method not implemented.');
-       }
-       Id?: string;
-       Rec?: string;
-       Term?: string;
-       Dload?: string;
-       Tag?: string;
-       Shelf?: string;
-       Barcode?: string;
-       SKU?: string;
-       NOF?: string;
-       Department?: string;
-       Quantity?: string;
-       Isdeleted?: boolean;
-       Master?: Master;
-}
 

@@ -58,5 +58,8 @@ export class StockAdjustmentService {
     return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}GoToRecord/${id}`);
   };
 
+  searchRecord(model:any){
+    return this.http.post<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}SearchStockAdjustment`, model);
+  }
   //
 }

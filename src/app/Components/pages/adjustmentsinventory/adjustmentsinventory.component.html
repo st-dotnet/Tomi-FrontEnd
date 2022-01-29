@@ -1,119 +1,3 @@
-<!-- <div>
-  <button class="btn btn-primary" (click)="open(mymodal)">Add</button>
-</div> -->
-
-<!-- <ng-template #mymodal let-modal>
-  <div class="modal-ui-same form-ranges-add">
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Add Adjustments</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true" class="close-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal"
-            data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
-            class="svg-inline--fa fa-times fa-w-10 fa-2x">
-            <path fill="currentColor"
-              d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"
-              class=""></path>
-          </svg></span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="adjustmentform" (ngSubmit)="onSubmit()">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <input type="text" formControlName="mssku" (change)="checkSkuData($event)"  placeholder="SKU" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['mssku'].errors }" />
-                <div *ngIf="invalidsku">sku is not Valid</div>
-              <div *ngIf="submitted && f['mssku'].errors" class="invalid-feedback">
-                <div *ngIf="f['mssku'].errors['required']">SKU is required</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-12">
-            <div class="form-group">
-              <input type="text" formControlName="rec"  placeholder="Rec" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['rec'].errors }" />
-
-              <div *ngIf="submitted && f['rec'].errors" class="invalid-feedback">
-                <div *ngIf="f['rec'].errors['required']">Rec is required</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-12">
-            <div class="form-group">
-              <input type="text" formControlName="term" placeholder="term" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['term'].errors }" />
-
-              <div *ngIf="submitted && f['term'].errors" class="invalid-feedback">
-                <div *ngIf="f['term'].errors['required']">Term is required</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="form-group">
-              <input type="number" formControlName="dload" placeholder="Dload" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['dload'].errors }" />
-
-              <div *ngIf="submitted && f['dload'].errors" class="invalid-feedback">
-                <div *ngIf="f['dload'].errors['required']">Dload is required</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-12">
-            <div class="form-group">
-              <input type="number" formControlName="tag"   placeholder="Tag" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['tag'].errors }" />
-
-              <div *ngIf="submitted && f['tag'].errors" class="invalid-feedback">
-                <div *ngIf="f['tag'].errors['required']">Tag is required</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-12">
-            <div class="form-group">
-              <input type="number" formControlName="shelf" placeholder="Shelf" class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['shelf'].errors }" />
-
-              <div *ngIf="submitted && f['shelf'].errors" class="invalid-feedback">
-                <div *ngIf="f['shelf'].errors['required']">Shelf is required</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-12">
-            <div class="form-group">
-              <input type="text" formControlName="barcode" placeholder="Barcode" readonly class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['barcode'].errors }" />
-
-              <div *ngIf="submitted && f['barcode'].errors" class="invalid-feedback">
-                <div *ngIf="f['barcode'].errors['required']">Barcode is required</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-12">
-            <div class="form-group">
-              <input type="text" formControlName="quantity" placeholder="Quantity" readonly  class="form-control"
-                [ngClass]="{ 'is-invalid': submitted && f['quantity'].errors }" />
-
-              <div *ngIf="submitted && f['quantity'].errors" class="invalid-feedback">
-                <div *ngIf="f['quantity'].errors['required']">Quantity is required</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button [disabled]="!isSubmit" class="btn btn-primary save mt-3">
-          Save
-        </button>
-      </form>
-    </div>
-  </div>
-</ng-template> -->
-
 
 <ng-template #stockmodel let-modal>
   <div class="modal-ui-same form-ranges-add">
@@ -323,9 +207,9 @@
         <li>
             <a (click)="open(record)"> <img class="img-fluid" src="assets/adujstment/notes.png" alt=""></a>
         </li>
-        <!-- <li>
+        <li>
             <a (click)="getDeletedAdjustment()"> <img class="img-fluid" src="assets/adujstment/file.png" alt=""></a>
-        </li> -->
+        </li>
         <li>
             <a (click)="open(AddRecord)"> <img class="img-fluid" src="assets/adujstment/add.png" alt=""></a>
         </li>
@@ -464,36 +348,30 @@
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Term:</label>
                     <div class="col-sm-10 adjust-from">
-                        <!-- <select name="text" id="">
-                            <option value="number">=</option>
-                            <option value="number">=</option>
-                            <option value="number">=</option>
-
-                        </select> -->
-                        <input type="password" class="form-control" id="inputPassword" placeholder="">
+                        <input type="text" class="form-control" id="inputPassword" placeholder="" name="term"  [(ngModel)]="stockFilter.term">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Dload:</label>
                     <div class="col-sm-10 adjust-from">
                        
-                        <input type="password" class="form-control" id="inputPassword" placeholder="">
+                        <input type="number" class="form-control" id="inputPassword" placeholder="" name="dload"  [(ngModel)]="stockFilter.dload">
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Empno:</label>
                     <div class="col-sm-10 adjust-from">
                        
                         <input type="password" class="form-control" id="inputPassword" placeholder="">
                     </div>
-                </div>
+                </div> -->
 
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Tag:</label>
                     <div class="col-sm-10 adjust-from">
                        
-                        <input type="password" class="form-control" id="inputPassword" placeholder="">
+                        <input type="number" class="form-control" id="inputPassword" placeholder="" name="tag"  [(ngModel)]="stockFilter.tag">
                     </div>
                 </div>
 
@@ -501,7 +379,7 @@
                     <label for="inputPassword" class="col-sm-2 col-form-label">Shelf:</label>
                     <div class="col-sm-10 adjust-from">
                      
-                        <input type="password" class="form-control" id="inputPassword" placeholder="">
+                        <input type="number" class="form-control" id="inputPassword" placeholder="" name="shelf"  [(ngModel)]="stockFilter.shelf">
                     </div>
                 </div>
 
@@ -509,53 +387,27 @@
                     <label for="inputPassword" class="col-sm-2 col-form-label">barcode:</label>
                     <div class="col-sm-10 adjust-from">
                        
-                        <input type="password" class="form-control" id="inputPassword" placeholder="">
+                        <input type="text" class="form-control" id="inputPassword" placeholder="" name="barcode"  [(ngModel)]="stockFilter.barcode">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-2 col-form-label ">sku:</label>
                     <div class="col-sm-10 adjust-from">
-                        <!-- <select name="text" id="">
-                            <option value="number">=</option>
-                            <option value="number">=</option>
-                            <option value="number">=</option>
-
-                        </select> -->
-                        <input type="password" class="form-control" id="inputPassword" placeholder="">
+                        <input type="text" class="form-control" id="inputPassword" placeholder="" name="sku"  [(ngModel)]="stockFilter.sku">
                     </div>
                 </div>
-
-                <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">nof:</label>
-                    <div class="col-sm-10 adjust-from">
-                        <!-- <select name="text" id="">
-                            <option value="number">=</option>
-                            <option value="number">=</option>
-                            <option value="number">=</option>
-
-                        </select> -->
-                        <input type="password" class="form-control" id="inputPassword" placeholder="">
-                    </div>
-                </div>
-
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-2 col-form-label">dept:</label>
                     <div class="col-sm-10 adjust-from">
-                        <!-- <select name="text" id="">
-                            <option value="number">=</option>
-                            <option value="number">=</option>
-                            <option value="number">=</option>
-
-                        </select> -->
-                        <input type="password" class="form-control" id="inputPassword" placeholder="">
-                    </div>
+                 
+                        <input type="number" class="form-control" id="inputPassword" placeholder="" [ngModelOptions]="{standalone: true}" [(ngModel)]="stockFilter.department"> </div>
                 </div>
             </form>
 
             <div class="popup-btn">
-                <button class="okBtn">Ok</button>
-                <button class="cancelBtn">Cancel</button>
+                <button class="okBtn" (click)="FilterData()">Ok</button>
+                <button class="cancelBtn" (click)="cancelFilterData()">Cancel</button>
                 <button class="resetBtn">Reset</button>
 
             </div>

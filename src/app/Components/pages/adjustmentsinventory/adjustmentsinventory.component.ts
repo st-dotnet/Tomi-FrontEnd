@@ -1,7 +1,7 @@
 import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Master } from '@app/_models';
+import { Master, StockFilterModel } from '@app/_models';
 import { StockAdjustmentService, UserService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -27,11 +27,14 @@ export class AdjustmentsinventoryComponent implements OnInit {
   invalidsku:boolean=false;
   gotoRecord!: FormGroup;
   gotoRecordSubmit: boolean= false;
-
+  stockFilter: StockFilterModel = {};
+  department?:number;
   constructor(private formBuilder: FormBuilder,  private modalService: NgbModal,
     private stockAdjustmentService: StockAdjustmentService,
      private spinner: NgxSpinnerService,
-     private toastrService: ToastrService,private userservice:UserService) { }
+     private toastrService: ToastrService,private userservice:UserService) {
+ 
+      }
   adjustmentinventory! :false;
 
 
@@ -45,6 +48,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAdjustment();
+   
    // this.getAdjustmentById("9FC3863D-28D9-46B1-71BE-08D9DF53FEED");
     this.adjustmentform = this.formBuilder.group({
       //id: [''],
@@ -254,5 +258,26 @@ export class AdjustmentsinventoryComponent implements OnInit {
         console.log(response);
       }
     });
+  }
+
+  FilterData(){
+    this.stockAdjustmentService.searchRecord(this.stockFilter)
+    .pipe(first())
+    .subscribe({
+      next: (response) => {
+        this.adjustmentList=response;
+        this.stockFilter= new StockFilterModel();
+        this.modalService.dismissAll();
+      }
+    });
+  }
+
+  cancelFilterData(){
+    this.stockFilter= new StockFilterModel();
+    this.modalService.dismissAll();
+  }
+  
+  resetFilterData(){
+    this.stockFilter= new StockFilterModel();
   }
 }
