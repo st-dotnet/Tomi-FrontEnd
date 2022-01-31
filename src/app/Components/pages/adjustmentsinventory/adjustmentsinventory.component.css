@@ -1,0 +1,110 @@
+ul.adjust-icons li {
+  width: 36px;
+  list-style: none;
+  margin: 5px;
+}
+
+ul.adjust-icons {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 0px;
+}
+
+ul.adjust-icons button.voidBtn {
+  border: none;
+}
+
+button.voidBtn {
+  margin: 0px 10px;
+  margin: 0px 10px;
+  background-color: #04acee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: white;
+}
+
+button.recountBtn {
+  border: none;
+  margin-top: 6px;
+  /* margin: 0px 10px; */
+  background-color: #14528b;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: white;
+}
+
+.lastBtn {
+  margin-right: 20px;
+}
+
+
+/* pop up css */
+
+.adjust-from {
+  display: flex;
+}
+
+.adjust-from select {
+  width: 100%;
+  margin: 0px 10px;
+}
+
+.popup-btn {
+  text-align: left;
+  padding: 20px;
+  margin-left: 64px;
+}
+
+.popup-btn button {
+  margin: 10px;
+  width: 100px;
+  border: none;
+}
+
+.popup-btn button.okBtn {
+  background-color: #17a8e1;
+  padding: 6px 14px;
+  border-radius: 5px;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.popup-btn button.cancelBtn {
+  background-color: transparent;
+  border: 1.5px solid #17a8e1 !important;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #17a8e1;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.popup-btn button.resetBtn {
+  background-color: transparent;
+  background-color: #000000;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.adjustment-modal .form-group.row label {
+  padding: 5px 0px 0px 20px;
+}
+
+.record-modal .recordForm label.recordd {
+  text-align: center;
+}
+
+.popup-btn.recordes {
+  margin: 4px 35px;
+  text-align: right;
+}
+
+.modal-body.add-records label {
+  text-align: center;
+}
+
+.modal-ui-same.form-ranges-add.record-modal .popup-btn.add-recordds {
+  text-align: right;
+}

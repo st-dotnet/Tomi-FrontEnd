@@ -24,6 +24,7 @@ export class SidebarComponent implements OnInit {
   stockfileUpload = false;
   salefileUpload = false;
   rangefileUpload = false;
+  program_terminal = false;
   isFileUploadOption= false ;
   constructor(private accountService: SessionService, private authenticationService: UserService,
     private spinner: NgxSpinnerService, private router: Router,private toastrService: ToastrService) {
@@ -35,7 +36,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
 
     this.authenticationService.customerId.subscribe(user => this.customer = user);
-    
+
     this.authenticationService.masterfileUplaod.subscribe(file => this.masterfileUpload = file);
     this.authenticationService.stockfileUplaod.subscribe(file => this.stockfileUpload = file);
     this.authenticationService.salefileUpload.subscribe(file => this.salefileUpload = file);
@@ -75,8 +76,8 @@ export class SidebarComponent implements OnInit {
   }
 
   submitFile(tab: any) {
-    debugger;
-    if (this.customerId==undefined || this.storeId==undefined || this.stockyear ==undefined) 
+    
+    if (this.customerId==undefined || this.storeId==undefined || this.stockyear ==undefined)
       this.toastrService.error("Please select job order first");
     else
   {
@@ -93,6 +94,9 @@ export class SidebarComponent implements OnInit {
       case Pages.Ranges:
         this.authenticationService.setactiveTab(tab);
         break;
+        case Pages.programTerm:
+        this.authenticationService.setactiveTab(tab);
+        break;
       default:
         break;
     }
@@ -102,7 +106,7 @@ export class SidebarComponent implements OnInit {
   }
 
   onChange() {
-    debugger;
+    
     if (this.customerId!=undefined && this.storeId!=undefined &&  this.stockyear!= undefined) {
       this.isFileUploadOption= true ;
       let stockdate = new Date(this.stockyear.year, this.stockyear.month - 1, this.stockyear.day + 1);
@@ -110,7 +114,7 @@ export class SidebarComponent implements OnInit {
       var event = new Date(stockdate);
       let date = JSON.stringify(event)
       date = date.slice(1, 11)
-    
+
       let workload = {
         customerId: this.customerId,
         storeId: this.storeId,

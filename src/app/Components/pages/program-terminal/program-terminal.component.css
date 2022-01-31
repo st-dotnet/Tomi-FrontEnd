@@ -1,0 +1,98 @@
+section.term-selec {
+  margin: 0;
+  padding: 25px;
+}
+
+section.term-selec .radio-term-p ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+section.term-selec .radio-term-p ul .custom-radio {
+  font-size: 20px;
+}
+
+section.term-selec .radio-term-p ul .custom-radio label {
+  padding-left: 8px;
+  font-family: 'Roboto';
+}
+
+section.term-selec .radio-term-p ul .custom-radio input {
+  width: 15px;
+  height: 15px;
+}
+
+
+
+.view-content {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.view-content .genr-btn a.btn-gik, .view-content .gvf-files a.btn-gvf {
+  background: #318de3;
+  color: #fff;
+  font-family: 'Roboto';
+  font-size: 15px;
+  min-width: 230px;
+}
+
+
+.view-content {
+  padding-top: 60px;
+}
+
+.view-content .invent-enter {
+  padding: 10px 0;
+}
+
+.view-content .invent-enter input,.view-content .invent-enter input:focus {
+  height: 36px;
+  min-width: 230px;
+  padding: 4px 6px;
+  font-family: 'Roboto';
+  font-size: 15px;
+  background: #ebebeb;
+  border: 1px solid #ebebeb;
+  outline: none;
+}
+
+.verfiled-files {
+  margin: 50px 0 30px;
+}
+
+.verfiled-files ul {
+  list-style-type: none;
+  max-width: 280px;
+  padding: 0;
+  margin: 0;
+}
+
+.verfiled-files ul li {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-right: 28px;
+  font-family: 'Roboto';
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.verfiled-files ul li span.tickGreen svg {
+  width: 24px;
+}
+
+.verfiled-files ul li span.tickGreen {
+  position: absolute;
+  right: 0px;
+}
+
+.verfiled-files ul li span.loadr {
+  margin-right: 12px;
+}
+
+.verfiled-files ul li span.loadr .svg-loader svg {
+  width: 32px;
+  height: 32px;
+}

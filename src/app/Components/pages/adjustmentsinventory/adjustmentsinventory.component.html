@@ -1,0 +1,589 @@
+
+<ng-template #stockmodel let-modal>
+  <div class="modal-ui-same form-ranges-add">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Adjustments</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true" class="close-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal"
+            data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+            class="svg-inline--fa fa-times fa-w-10 fa-2x">
+            <path fill="currentColor"
+              d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"
+              class=""></path>
+          </svg></span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editStockAdjustment" (ngSubmit)="edit()">
+        <div class="row">
+
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="text" formControlName="rec1" [(ngModel)]="adjustmentList.rec"  placeholder="Rec" class="form-control"
+                [ngClass]="{ 'is-invalid': editsubmitted && f1['rec1'].errors }" />
+
+              <div *ngIf="editsubmitted && f1['rec1'].errors" class="invalid-feedback">
+                <div *ngIf="f1['rec1'].errors['required']">Rec is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="text" formControlName="term1"  [(ngModel)]="adjustmentList.term" placeholder="term" class="form-control"
+                [ngClass]="{ 'is-invalid': editsubmitted && f1['term1'].errors }" />
+
+              <div *ngIf="editsubmitted && f1['term1'].errors" class="invalid-feedback">
+                <div *ngIf="f1['term1'].errors['required']">Term is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="number" formControlName="dload1" [(ngModel)]="adjustmentList.dload" placeholder="Dload" class="form-control"
+                [ngClass]="{ 'is-invalid': editsubmitted && f1['dload1'].errors }" />
+
+              <div *ngIf="editsubmitted && f1['dload1'].errors" class="invalid-feedback">
+                <div *ngIf="f1['dload1'].errors['required']">Dload is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="number" formControlName="tag1" [(ngModel)]="adjustmentList.tag"  placeholder="Tag" class="form-control"
+                [ngClass]="{ 'is-invalid': editsubmitted && f1['tag1'].errors }" />
+
+              <div *ngIf="editsubmitted && f1['tag1'].errors" class="invalid-feedback">
+                <div *ngIf="f1['tag1'].errors['required']">Tag is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="number" formControlName="shelf1" [(ngModel)]="adjustmentList.shelf" placeholder="Shelf" class="form-control"
+                [ngClass]="{ 'is-invalid': editsubmitted && f1['shelf1'].errors }" />
+
+              <div *ngIf="editsubmitted && f1['shelf1'].errors" class="invalid-feedback">
+                <div *ngIf="f1['shelf1'].errors['required']">Shelf is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button  class="btn btn-primary save mt-3">
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<!-- <section class="inner-content inner-pageview">
+  <div class="card">
+      <div class="card-body">
+
+          <div class="content-body">
+              <table class="table table-ui-same" id="datatableexample" *ngIf="adjustmentList">
+                  <thead>
+                      <tr style="text-align:center">
+                          <th>Rec</th>
+                          <th>term</th>
+                          <th>dload</th>
+                          <th>empno</th>
+                          <th>tag</th>
+                          <th>shelf</th>
+                          <th>Barcode</th>
+                          <th>SKU</th>
+                          <th>NOF</th>
+                          <th>dept</th>
+                          <th>desc</th>
+                          <th>price</th>
+                          <th>Quantity</th>
+                          <th>Dt</th>
+                          <td >Action</td>
+
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let item of adjustmentList| searchFilter:searchText |paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                          <td>{{item.rec}}</td>
+                          <td>{{item.term}}</td>
+                          <td>{{item.dload}}</td>
+                          <td>empno</td>
+                          <td>{{item.tag}}</td>
+                          <td>{{item.shelf}}</td>
+                          <td>{{item.barcode}}</td>
+                          <td>{{item.sku}}</td>
+                          <td><input type="checkbox" [checked]="item.nof=='0'?false:true"></td>
+                          <td>{{item.department}}</td>
+                          <td>Description</td>
+                          <td>price</td>
+                          <td>{{item.quantity}}</td>
+                          <td >{{item.createdAt |date:'MM/dd/yyyy'}}</td>
+
+
+                          <td>
+                            <ul class="action-cell">
+                                <li><a class="edit-icoo" (click)="editAdjustment(item,stockmodel)"><span
+                                            class="icon-cellaction "><svg aria-hidden="true" focusable="false"
+                                                data-prefix="fas" data-icon="pencil-alt" role="img"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                                class="svg-inline--fa fa-pencil-alt fa-w-16 fa-2x">
+                                                <path fill="currentColor"
+                                                    d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"
+                                                    class=""></path>
+                                            </svg></span></a>
+                                </li>
+                                <li>
+                                    <a class="remove-icoo" (click)="deleteAdjustment(item.id)"><span
+                                            class="icon-cellaction "><svg aria-hidden="true" focusable="false"
+                                                data-prefix="far" data-icon="times" role="img"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                                                class="svg-inline--fa fa-times fa-w-10 fa-2x">
+                                                <path fill="currentColor"
+                                                    d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"
+                                                    class=""></path>
+                                            </svg></span>
+                                        </a>
+                                </li>
+
+                                <li *ngIf="item.isdeleted==true">
+                                  <a class="edit-icoo" (click)="recyle(item)"><span
+                                          class="icon-cellaction "><svg aria-hidden="true" focusable="false"
+                                              data-prefix="far" data-icon="times" role="img"
+                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                                              class="svg-inline--fa fa-times fa-w-10 fa-2x">
+                                              <path fill="currentColor"
+                                                  d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"
+                                                  class=""></path>
+                                          </svg></span>
+                                      </a>
+                              </li>
+                            </ul>
+                        </td>
+                      </tr>
+                  </tbody>
+              </table>
+              <div class="pagination-ui">
+                  <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+              </div>
+              <ngx-spinner class="custom-loader" type="square-jelly-box" size="medium" [fullScreen]="false"
+                  style="top:auto;">
+                  <p style="color: white">Loading...</p>
+              </ngx-spinner>
+          </div>
+      </div>
+  </div>
+</section> -->
+<div class="searchbar-opt">
+<div class="Searchbar">
+  <form>
+      <div class="form-group search-bar">
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+              placeholder="Search...">
+
+          <span class="icon-search">
+              <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="search" role="img"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                  class="svg-inline--fa fa-search fa-w-16 fa-2x">
+                  <path fill="#000"
+                      d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z"
+                      class=""></path>
+              </svg>
+          </span>
+
+      </div>
+  </form>
+  </div>
+
+
+<div class="adjust-head-actions">
+    <ul class="adjust-icons">
+        <li>
+            <a (click)="open(Addfilter)"> <img class="img-fluid" src="assets/adujstment/server.png" alt=""></a>
+        </li>
+        <li>
+            <a (click)="open(record)"> <img class="img-fluid" src="assets/adujstment/notes.png" alt=""></a>
+        </li>
+        <li>
+            <a (click)="getDeletedAdjustment()"> <img class="img-fluid" src="assets/adujstment/file.png" alt=""></a>
+        </li>
+        <li>
+            <a (click)="open(AddRecord)"> <img class="img-fluid" src="assets/adujstment/add.png" alt=""></a>
+        </li>
+        <!-- <li>
+            <a href="#"> <img class="img-fluid" src="assets/adujstment/edit.png" alt=""></a>
+        </li> -->
+        <li>
+            <a (click)="getAdjustment()"> <img class="img-fluid" src="assets/adujstment/refresh.png" alt=""></a>
+        </li>
+        <div class="lastBtn">
+            <button class="voidBtn">VOID TAG</button>
+            <!-- <button class="recountBtn"><input type="checkbox"> Show Recount Data</button> -->
+        </div>
+    </ul>
+</div>
+</div>
+<section class="inner-content inner-pageview">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="content-body">
+                <table class="table table-ui-same" id="datatableexample">
+                    <thead>
+                        <tr>
+                            <!-- <th>#Registros</th> -->
+                            <th>Rec #</th>
+                            <th>Term</th>
+                            <th>Dload</th>
+                            <!-- <th>Empno</th> -->
+                            <th>Tag</th>
+                            <th>Shelf</th>
+                            <th>barcode</th>
+                            <th>sku</th>
+                            <th>nof</th>
+                            <th>dept</th>
+                            <th>desc</th>
+                            <th>Price</th>
+                            <th>Qunty</th>
+                            <th>Dt</th>
+                          <td >Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of adjustmentList| searchFilter:searchText |paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                       
+                        <td>{{item.rec}}</td>
+                        <td>{{item.term}}</td>
+                        <td>{{item.dload}}</td>
+                        <!-- <td>{{item.master.id}}</td> -->
+                        <td>{{item.tag}}</td>
+                        <td>{{item.shelf}}</td>
+                        <td>{{item.barcode}}</td>
+                        <td>{{item.master.sku}}</td>
+                        <td><input type="checkbox" [checked]="item.nof=='0'?false:true"></td>
+                        <td>{{item.master.department}}</td>
+                        <td>{{item.master.description}}</td>
+                        <td>{{item.master.retailPrice}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td >{{item.createdAt |date:'MM/dd/yyyy'}}</td>
+
+
+                        <td>
+                          <ul class="action-cell">
+                              <li *ngIf="!item.isdeleted"><a class="edit-icoo" (click)="editAdjustment(item,stockmodel)"><span
+                                          class="icon-cellaction "><svg aria-hidden="true" focusable="false"
+                                              data-prefix="fas" data-icon="pencil-alt" role="img"
+                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                              class="svg-inline--fa fa-pencil-alt fa-w-16 fa-2x">
+                                              <path fill="currentColor"
+                                                  d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"
+                                                  class=""></path>
+                                          </svg></span></a>
+                              </li>
+                              <li *ngIf="!item.isdeleted">
+                                  <a class="remove-icoo" (click)="deleteAdjustment(item.id)"><span
+                                          class="icon-cellaction "><svg aria-hidden="true" focusable="false"
+                                              data-prefix="far" data-icon="times" role="img"
+                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                                              class="svg-inline--fa fa-times fa-w-10 fa-2x">
+                                              <path fill="currentColor"
+                                                  d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"
+                                                  class=""></path>
+                                          </svg></span>
+                                      </a>
+                              </li>
+
+                              <li *ngIf="item.isdeleted">
+                                <a class="edit-icoo" (click)="recyle(item)"><span
+                                        class="icon-cellaction "><svg aria-hidden="true" focusable="false"
+                                            data-prefix="far" data-icon="times" role="img"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                                            class="svg-inline--fa fa-times fa-w-10 fa-2x">
+                                            <path fill="currentColor"
+                                                d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"
+                                                class=""></path>
+                                        </svg></span>
+                                    </a>
+                            </li>
+                          </ul>
+                      </td>
+                    </tr>
+                    </tbody>
+                </table>
+                 <div class="pagination-ui">
+                    <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+                <ngx-spinner class="custom-loader" type="square-jelly-box" size="medium" [fullScreen]="false" style="top:auto;">
+                    <p style="color: white">Loading...</p>
+                </ngx-spinner>
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<ng-template #Addfilter let-modal>
+    <div class="modal-ui-same form-ranges-add adjustment-modal">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Add Filter</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true" class="close-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal"
+                        data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                        class="svg-inline--fa fa-times fa-w-10 fa-2x">
+                        <path fill="currentColor"
+                            d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"
+                            class=""></path>
+                    </svg></span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form>
+
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Term:</label>
+                    <div class="col-sm-10 adjust-from">
+                        <input type="text" class="form-control" id="inputPassword" placeholder="" name="term"  [(ngModel)]="stockFilter.term">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Dload:</label>
+                    <div class="col-sm-10 adjust-from">
+                       
+                        <input type="number" class="form-control" id="inputPassword" placeholder="" name="dload"  [(ngModel)]="stockFilter.dload">
+                    </div>
+                </div>
+
+                <!-- <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Empno:</label>
+                    <div class="col-sm-10 adjust-from">
+                       
+                        <input type="password" class="form-control" id="inputPassword" placeholder="">
+                    </div>
+                </div> -->
+
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Tag:</label>
+                    <div class="col-sm-10 adjust-from">
+                       
+                        <input type="number" class="form-control" id="inputPassword" placeholder="" name="tag"  [(ngModel)]="stockFilter.tag">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Shelf:</label>
+                    <div class="col-sm-10 adjust-from">
+                     
+                        <input type="number" class="form-control" id="inputPassword" placeholder="" name="shelf"  [(ngModel)]="stockFilter.shelf">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">barcode:</label>
+                    <div class="col-sm-10 adjust-from">
+                       
+                        <input type="text" class="form-control" id="inputPassword" placeholder="" name="barcode"  [(ngModel)]="stockFilter.barcode">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label ">sku:</label>
+                    <div class="col-sm-10 adjust-from">
+                        <input type="text" class="form-control" id="inputPassword" placeholder="" name="sku"  [(ngModel)]="stockFilter.sku">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">dept:</label>
+                    <div class="col-sm-10 adjust-from">
+                 
+                        <input type="number" class="form-control" id="inputPassword" placeholder="" [ngModelOptions]="{standalone: true}" [(ngModel)]="stockFilter.department"> </div>
+                </div>
+            </form>
+
+            <div class="popup-btn">
+                <button class="okBtn" (click)="FilterData()">Ok</button>
+                <button class="cancelBtn" (click)="cancelFilterData()">Cancel</button>
+                <button class="resetBtn" (click)="resetFilterData()">Reset</button>
+
+            </div>
+
+        </div>
+    </div>
+
+</ng-template>
+<!-- Go To Recorder Modal -->
+<ng-template #record let-modal>
+    <div class="modal-ui-same form-ranges-add record-modal">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">GoTo Record</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true" class="close-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal"
+                        data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                        class="svg-inline--fa fa-times fa-w-10 fa-2x">
+                        <path fill="currentColor"
+                            d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"
+                            class=""></path>
+                    </svg></span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="gotoRecord" (ngSubmit)="gotoRecordAdjustment()">
+
+                <div class="form-group row recordForm">
+                    <label for="inputPassword" class="col-sm-4 col-form-label recordd">Record #:</label>
+
+                    <div class="col-sm-7 record-from">
+                        <input type="Number" class="form-control" formControlName="rec" id="inputPassword" placeholder=""
+                        [ngClass]="{ 'is-invalid': gotoRecordSubmit && gor['rec'].errors }">
+                        <div *ngIf="gotoRecordSubmit && gor['rec'].errors" class="invalid-feedback">
+                          <div *ngIf="gor['rec'].errors['required']">Record is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="popup-btn recordes">
+                  <button class="okBtn">Ok</button>
+                  <button class="cancelBtn" (click)="cancelRecordnumber()">Cancel</button>
+                  <!-- <button class="resetBtn">Reset</button> -->
+  
+              </div>
+
+
+            </form>
+
+   
+
+        </div>
+    </div>
+
+</ng-template>
+<!-- Go To Addjust Recorder Modal -->
+<ng-template #AddRecord let-modal>
+    <div class="modal-ui-same form-ranges-add record-modal">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Add Record</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true" class="close-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal"
+                        data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                        class="svg-inline--fa fa-times fa-w-10 fa-2x">
+                        <path fill="currentColor"
+                            d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"
+                            class=""></path>
+                    </svg></span>
+            </button>
+        </div>
+        <div class="modal-body add-records">
+            <form [formGroup]="adjustmentform" (ngSubmit)="onSubmit()">
+
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label ">sku:</label>
+                <div class="col-sm-8 adjust-from">
+                  <input type="text" formControlName="mssku" (change)="checkSkuData($event)"  placeholder="SKU" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['mssku'].errors }" />
+                  <div *ngIf="invalidsku">sku is not Valid</div>
+                <div *ngIf="submitted && f['mssku'].errors" class="invalid-feedback">
+                  <div *ngIf="f['mssku'].errors['required']">SKU is required</div>
+                </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="inputPassword" class="col-sm-4 col-form-label">Rec:</label>
+              <div class="col-sm-8 adjust-from">
+
+                <input type="text" formControlName="rec"  placeholder="Rec" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['rec'].errors }" />
+
+              <div *ngIf="submitted && f['rec'].errors" class="invalid-feedback">
+                <div *ngIf="f['rec'].errors['required']">Rec is required</div>
+              </div>
+              </div>
+          </div>
+
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-4 col-form-label">Term:</label>
+                    <div class="col-sm-8 adjust-from">
+
+                      <input type="text" formControlName="term" placeholder="term" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['term'].errors }" />
+
+              <div *ngIf="submitted && f['term'].errors" class="invalid-feedback">
+                <div *ngIf="f['term'].errors['required']">Term is required</div>
+              </div>
+            </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-4 col-form-label">Dload:</label>
+                    <div class="col-sm-8 adjust-from">
+                      <input type="number" formControlName="dload" placeholder="Dload" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['dload'].errors }" />
+                        <div *ngIf="submitted && f['dload'].errors" class="invalid-feedback">
+                      <div *ngIf="f['dload'].errors['required']">Dload is required</div>
+                    </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-4 col-form-label">Tag:</label>
+                    <div class="col-sm-8 adjust-from">
+
+                      <input type="number" formControlName="tag"   placeholder="Tag" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['tag'].errors }" />
+
+                    <div *ngIf="submitted && f['tag'].errors" class="invalid-feedback">
+                      <div *ngIf="f['tag'].errors['required']">Tag is required</div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-4 col-form-label">Shelf:</label>
+                    <div class="col-sm-8 adjust-from">
+
+                      <input type="number" formControlName="shelf" placeholder="Shelf" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['shelf'].errors }" />
+
+                    <div *ngIf="submitted && f['shelf'].errors" class="invalid-feedback">
+                      <div *ngIf="f['shelf'].errors['required']">Shelf is required</div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-4 col-form-label">barcode:</label>
+                    <div class="col-sm-8 adjust-from">
+
+                      <input type="text" formControlName="barcode" placeholder="Barcode" readonly class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['barcode'].errors }" />
+
+                    <div *ngIf="submitted && f['barcode'].errors" class="invalid-feedback">
+                      <div *ngIf="f['barcode'].errors['required']">Barcode is required</div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="number" class="col-sm-4 col-form-label">Quantity:</label>
+                    <div class="col-sm-8 adjust-from">
+                      <input type="text" formControlName="quantity" placeholder="Quantity" readonly  class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['quantity'].errors }" />
+
+                    <div *ngIf="submitted && f['quantity'].errors" class="invalid-feedback">
+                      <div *ngIf="f['quantity'].errors['required']">Quantity is required</div>
+                    </div>
+                    </div>
+                </div>
+
+
+                <div class="popup-btn add-recordds">
+                  <button  type="button" (click)="cancel()" class="cancelBtn">Cancel</button>
+                  <button [disabled]="!isSubmit" class="okBtn">Ok</button>
+              </div>
+            </form>
+        </div>
+    </div>
+
+</ng-template>

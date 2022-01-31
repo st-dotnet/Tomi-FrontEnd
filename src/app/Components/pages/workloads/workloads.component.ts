@@ -179,7 +179,6 @@ export class WorkloadsComponent implements OnInit {
 
           },
           error: (err: any) => {
-            console.log(err);
             this.progress = 0;
 
             if (err.error && err.error.message) {
@@ -218,7 +217,7 @@ export class WorkloadsComponent implements OnInit {
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
         this.masterfileUploading = true;
-        
+
         this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
         this.authenticationService.setMasterfilbrowser(false);
         this.authenticationService.uploadMasterFile(formData).subscribe({
@@ -230,7 +229,7 @@ export class WorkloadsComponent implements OnInit {
               this.masterRecordCount = event.stockRecordCount;
               this.timeElapsed = event.timeElapsed;
               this.masterfileUpload = true;
-              this.disablemasterfileupdate = true;   
+              this.disablemasterfileupdate = true;
               this.authenticationService.setMasterfilbrowser(true);
               setTimeout(() => {
                 let workload = {
@@ -238,7 +237,7 @@ export class WorkloadsComponent implements OnInit {
                   storeId: this.storeId,
                   stockDate: this.year,
                 };
-              
+
                 this.authenticationService.getMasterData(workload);
                 this.isMasterFileUpload = !this.isMasterFileUpload;
                 this.masterfileUpload = false;
@@ -247,7 +246,6 @@ export class WorkloadsComponent implements OnInit {
             }
           },
           error: (err: any) => {
-            console.log(err);
             if (err.error && err.error.message) {
               this.message = err.error.message;
             } else {
@@ -315,7 +313,6 @@ export class WorkloadsComponent implements OnInit {
             }
           },
           error: (err: any) => {
-            console.log(err);
             if (err.error && err.error.message) {
               this.message = err.error.message;
             } else {
@@ -386,7 +383,7 @@ export class WorkloadsComponent implements OnInit {
     this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
   }
   onMenuClick(){
-    debugger;
+    
     this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
     if(!this.disablemasterfileupdate)
     this.isMasterFileUpload = true;

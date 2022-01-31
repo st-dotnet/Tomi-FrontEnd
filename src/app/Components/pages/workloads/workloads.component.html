@@ -1,7 +1,7 @@
 <section class="inner-content inner-pageview wkloads">
     <div class="card">
         <div class="card-header">
-            <h3>{{activeTab == '1' ? 'Master File' : activeTab == '2' ? 'Stocks File': activeTab == '3' ? 'Sales File' : 'Ranges'}}</h3>
+            <h3>{{activeTab == '1' ? 'Master File' : activeTab == '2' ? 'Stocks File': activeTab == '3' ? 'Sales File' :activeTab == '4'?  'Ranges' :'Program Terminal'}}</h3>
             <div class="customer-add btn-header">
                 <ul class="right-opt">
                     <li>
@@ -41,7 +41,7 @@
                                                     <button class="btn btn-success btn-sm" [disabled]="!updatemasterfile" (click)="uploadMasterFile()">Upload</button>
                                                 </div>
                                                 <div class="noti-file-upload" *ngIf="masterfileUploading">
-                                                
+
                                                     <p><span class="loadr">
                                                         <div class="svg-loader">
                                                         <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
@@ -61,10 +61,10 @@
                                                 </div> -->
                                             </div>
                                         </div>
-                                        
+
                                     </ng-template>
-                                  
-                                       
+
+
                                 </li>
                                 <li [ngbNavItem]="2">
                                     <a ngbNavLink class="custom-tabs" (click)="isStockFileUpload=false">Stock</a>
@@ -202,6 +202,16 @@
                                         </div>
                                     </ng-template>
                                 </li>
+                                <li [ngbNavItem]="5"  position-relative>
+                                  <a ngbNavLink class="custom-tabs" (click)="onMenuClick()">Program Terminal</a>
+                                  <ng-template ngbNavContent>
+                                    <app-program-terminal></app-program-terminal>
+
+
+                                  </ng-template>
+
+
+                              </li>
                             </ul>
 
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>

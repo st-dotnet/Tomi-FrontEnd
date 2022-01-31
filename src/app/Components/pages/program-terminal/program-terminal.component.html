@@ -1,0 +1,109 @@
+<section class="inner-content inner-pageview">
+  <div class="card">
+    <div class="card-body">
+      <div class="content-body">
+        <section class="term-selec row">
+          <div class="col-md-4">
+            <div class="radio-term-p">
+              <ul>
+                <li>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" checked name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">Counting</label>
+                  </div>
+                </li>
+                <li>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Re counting</label>
+                  </div>
+                </li>
+                <li>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Correction</label>
+                  </div>
+                </li>
+                <li>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Audit</label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+          <div class="col-md-8">
+            <div class="view-content">
+              <div class="genr-btn">
+
+               <a  (click)="genratekey()" class="btn btn-gik">Generate inventory key</a>
+              </div>
+              <div class="invent-enter">
+                <div class="form-group">
+                  <input type="form-control" [(ngModel)]="uniqKey" placeholder="inventory key" />
+                </div>
+              </div>
+              <div class="gvf-files">
+                <a  (click)="genrateFiles()" class="btn btn-gvf">Generate validate files</a>
+              </div>
+
+              <div class="verfiled-files" *ngIf="isgenrateFile">
+                <ul>
+                  <li><span class="loadr">
+                      <div class="svg-loader">
+                        <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
+                          <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+                          <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                      </div>
+                    </span>Mf1 Generated:<span class="tickGreen"><svg aria-hidden="true" focusable="false"
+                        data-prefix="fas" data-icon="check-circle" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512" class="svg-inline--fa fa-check-circle fa-w-16 fa-2x">
+                        <path fill="#41e341"
+                          d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+                          class=""></path>
+                      </svg></span></li>
+                  <li><span class="loadr">
+                      <div class="svg-loader">
+                        <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
+                          <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+                          <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                      </div>
+                    </span>Mf2 Generated:<span class="tickGreen"><svg aria-hidden="true" focusable="false"
+                        data-prefix="fas" data-icon="check-circle" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512" class="svg-inline--fa fa-check-circle fa-w-16 fa-2x">
+                        <path fill="#41e341"
+                          d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+                          class=""></path>
+                      </svg></span></li>
+                  <li><span class="loadr">
+                      <div class="svg-loader">
+                        <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
+                          <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+                          <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                      </div>
+                    </span>TCCLIENT generated:<span class="tickGreen"><svg aria-hidden="true" focusable="false"
+                        data-prefix="fas" data-icon="check-circle" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512" class="svg-inline--fa fa-check-circle fa-w-16 fa-2x">
+                        <path fill="#41e341"
+                          d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"
+                          class=""></path>
+                      </svg></span></li>
+                </ul>
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </section>
+
+      </div>
+    </div>
+  </div>
+</section>
