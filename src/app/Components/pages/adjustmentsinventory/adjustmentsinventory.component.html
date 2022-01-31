@@ -400,9 +400,18 @@
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-2 col-form-label">dept:</label>
                     <div class="col-sm-10 adjust-from">
-                 
                         <input type="number" class="form-control" id="inputPassword" placeholder="" [ngModelOptions]="{standalone: true}" [(ngModel)]="stockFilter.department"> </div>
                 </div>
+                <div class="form-group row">
+                  <label for="inputPassword" class="col-sm-2 col-form-label">Quantity:</label>
+                  <div class="col-sm-10 adjust-from">
+                      <input type="number" class="form-control" id="inputPassword" placeholder="" [ngModelOptions]="{standalone: true}" [(ngModel)]="stockFilter.quantity"> </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Price:</label>
+                <div class="col-sm-10 adjust-from">
+                    <input type="number" class="form-control" id="inputPassword" placeholder="" [ngModelOptions]="{standalone: true}" [(ngModel)]="stockFilter.retailPrice"> </div>
+            </div>
             </form>
 
             <div class="popup-btn">
@@ -556,7 +565,7 @@
                     <label for="inputPassword" class="col-sm-4 col-form-label">barcode:</label>
                     <div class="col-sm-8 adjust-from">
 
-                      <input type="text" formControlName="barcode" placeholder="Barcode" readonly class="form-control"
+                      <input type="text" formControlName="barcode" placeholder="Barcode"  class="form-control"
                       [ngClass]="{ 'is-invalid': submitted && f['barcode'].errors }" />
 
                     <div *ngIf="submitted && f['barcode'].errors" class="invalid-feedback">
@@ -568,7 +577,7 @@
                 <div class="form-group row">
                     <label for="number" class="col-sm-4 col-form-label">Quantity:</label>
                     <div class="col-sm-8 adjust-from">
-                      <input type="text" formControlName="quantity" placeholder="Quantity" readonly  class="form-control"
+                      <input type="text" formControlName="quantity" placeholder="Quantity"   class="form-control"
                       [ngClass]="{ 'is-invalid': submitted && f['quantity'].errors }" />
 
                     <div *ngIf="submitted && f['quantity'].errors" class="invalid-feedback">
@@ -576,8 +585,42 @@
                     </div>
                     </div>
                 </div>
+                <div class="form-group row">
+                  <label for="inputPassword" class="col-sm-4 col-form-label">Department:</label>
+                  <div class="col-sm-8 adjust-from">
 
+                    <input type="text" formControlName="department" placeholder="Department" readonly class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['department'].errors }" />
 
+                  <div *ngIf="submitted && f['department'].errors" class="invalid-feedback">
+                    <div *ngIf="f['department'].errors['required']">Department is required</div>
+                  </div>
+                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-4 col-form-label">Description:</label>
+                <div class="col-sm-8 adjust-from">
+
+                  <input type="text" formControlName="description" placeholder="Description" readonly class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" />
+
+                <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                  <div *ngIf="f['description'].errors['required']">Description is required</div>
+                </div>
+                </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword" class="col-sm-4 col-form-label">Price:</label>
+              <div class="col-sm-8 adjust-from">
+
+                <input type="text" formControlName="price" placeholder="Price" readonly class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['price'].errors }" />
+
+              <div *ngIf="submitted && f['price'].errors" class="invalid-feedback">
+                <div *ngIf="f['price'].errors['required']">Price is required</div>
+              </div>
+              </div>
+          </div>
                 <div class="popup-btn add-recordds">
                   <button  type="button" (click)="cancel()" class="cancelBtn">Cancel</button>
                   <button [disabled]="!isSubmit" class="okBtn">Ok</button>
