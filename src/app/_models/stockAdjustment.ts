@@ -29,5 +29,6 @@ export class StockFilterModel{
     retailPrice?: string;
     description?: string;
     searchtext?: string;
+    empno?:number;
 }
 

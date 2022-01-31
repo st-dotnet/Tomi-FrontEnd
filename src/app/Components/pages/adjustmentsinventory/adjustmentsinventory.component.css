@@ -43,6 +43,7 @@ button.recountBtn {
 
 .adjust-from {
   display: flex;
+  flex-direction: column;
 }
 
 .adjust-from select {

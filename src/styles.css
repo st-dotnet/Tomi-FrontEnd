@@ -945,13 +945,13 @@ background: #025677;
     border-color: #dc3545;
     font-family: 'Roboto';
     }
-    
-    
-    
+
+
+
     .modal-ui-same.form-ranges-add form button.cancel:hover  {
     background: #dc3545;
     }
-    
+
 
 .modal-ui-same.form-ranges-add button.add-group {
     background: #027f02;
@@ -978,4 +978,62 @@ background: #025677;
 
 .listing.disable {
     pointer-events: none;
+}
+
+
+ngb-modal-window.modal-filteradd .modal-dialog {
+  width: 100%;
+  max-width: 680px;
+}
+
+ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter input {
+  max-width: 120px;
+}
+
+ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter input,ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter select {
+  border: 1px solid #bfbfbf;
+  border-radius: 4px;
+  font-family: 'Roboto';
+  font-size: 14px;
+  padding: 6px 7px;
+}
+
+
+.btn-search {
+  text-align: right;
+  margin-bottom: 45px;
+}
+
+.btn-search .btn-submit {
+  display: block;
+  width: 100%;
+  max-width: 114px;
+  float: right;
+  margin: 8px 10px 7px 0;
+  background: #14528b;
+  border: 1px solid #14528b;
+  color: #fff;
+}
+
+ngb-modal-window.modal-filteradd .modal-dialog .form-group {
+  padding: 0 4px;
+  margin-bottom: 4px;
+}
+
+ngb-modal-window.modal-filteradd .modal-dialog td,ngb-modal-window.modal-filteradd .modal-dialog tr {
+  border: none;
+}
+
+ngb-modal-window.modal-filteradd .modal-dialog table {
+  margin: 0;
+}
+
+.btn-search .btn-submit:hover {
+  opacity: 0.9;
+}
+
+ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter input:focus,ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter select:focus {
+  outline: none;
+  border: 1px solid #14528b;
+  box-shadow: none;
 }

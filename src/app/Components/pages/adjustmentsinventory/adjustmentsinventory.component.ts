@@ -19,6 +19,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
   editStockAdjustment!:FormGroup;
   submitted = false;
   editsubmitted = false;
+  modalClass: string | undefined;
   adjustmentList:any;
   searchText: string = "";
   p: number = 1;
@@ -33,7 +34,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
     private stockAdjustmentService: StockAdjustmentService,
      private spinner: NgxSpinnerService,
      private toastrService: ToastrService,private userservice:UserService) {
- 
+
       }
   adjustmentinventory! :false;
 
@@ -48,7 +49,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAdjustment();
-   
+
    // this.getAdjustmentById("9FC3863D-28D9-46B1-71BE-08D9DF53FEED");
     this.adjustmentform = this.formBuilder.group({
       //id: [''],
@@ -85,10 +86,14 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
 
   open(content: any) {
+    this.modalClass= 'mymodal',
     this.submitted=false;
     this.isSubmit=false;
     this.adjustmentform.reset();
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(content, {
+       ariaLabelledBy: 'modal-basic-title' ,
+       windowClass:'modal-filteradd'
+      }).result.then((result) => {
      }, (reason) => {
     });
   }
@@ -97,7 +102,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
   get gor(){ return this.gotoRecord.controls;}
 
   onSubmit(){
-    
     this.submitted = true;
     if (this.adjustmentform.invalid) {
       return;
@@ -173,7 +177,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
 
   recyle(model:any){
-    
+
     this.spinner.show();
     this.stockAdjustmentService.recycleAdjustment(model)
     .pipe(first())
@@ -193,6 +197,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
   }
 
   openFilter(content:any){
+
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
     }, (reason) => {
    });
@@ -226,7 +231,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
       }
     });
   }
- 
+
   gotoRecordAdjustment(){
     this.gotoRecordSubmit = true;
     if (this.gotoRecord.invalid) {
@@ -245,11 +250,10 @@ export class AdjustmentsinventoryComponent implements OnInit {
       }
     });
   }
-  cancelRecordnumber(){
-    
-        this.modalService.dismissAll();
-    this.gotoRecordSubmit = false;
 
+  cancelRecordnumber(){
+    this.modalService.dismissAll();
+    this.gotoRecordSubmit = false;
     this.gotoRecord.reset();
   }
   getAdjustmentById(id:any){
@@ -261,6 +265,19 @@ export class AdjustmentsinventoryComponent implements OnInit {
     });
   }
 
+  searchStock(){
+
+   this.stockFilter.searchtext=this.searchText;
+    this.stockAdjustmentService.searchRecord(this.stockFilter)
+    .pipe(first())
+    .subscribe({
+      next: (response) => {
+        debugger;
+        this.adjustmentList=response;
+        this.stockFilter= new StockFilterModel();
+      }
+    });
+  }
   FilterData(){
     this.stockAdjustmentService.searchRecord(this.stockFilter)
     .pipe(first())
@@ -277,7 +294,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
     this.stockFilter= new StockFilterModel();
     this.modalService.dismissAll();
   }
-  
+
   resetFilterData(){
     this.stockFilter= new StockFilterModel();
   }

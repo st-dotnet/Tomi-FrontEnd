@@ -24,6 +24,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { AdjustmentsinventoryComponent } from './adjustmentsinventory/adjustmentsinventory.component';
 import { ProgramTerminalComponent } from './program-terminal/program-terminal.component';
+import { Angular2CsvModule } from 'angular2-csv';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -44,14 +45,15 @@ import { ProgramTerminalComponent } from './program-terminal/program-terminal.co
   ],
   imports: [
     PageRoutingModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     SharedModule,
     NgbModule,
     NgxPaginationModule,
     NgbDatepickerModule,
     NgxPrintModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    Angular2CsvModule,
   ],
   providers: [  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
