@@ -63,7 +63,9 @@ export class AdjustmentsinventoryComponent implements OnInit {
       nof: [0],
       //barcode:[''],
       ohquantity:[''],
-      department: [1],
+      department: ['',Validators.required],
+      description: ['',Validators.required],
+      price: ['',Validators.required],
       quantity: ['', Validators.required],
       isdeleted: [false],
     });
@@ -123,8 +125,9 @@ export class AdjustmentsinventoryComponent implements OnInit {
        this.masterData=response;
        if(this.masterData)
        {
-        this.adjustmentform.controls["barcode"].setValue(this.masterData.barcode);
-        this.adjustmentform.controls["quantity"].setValue(this.masterData.ohQuantity);
+        this.adjustmentform.controls["department"].setValue(this.masterData.department);
+        this.adjustmentform.controls["description"].setValue(this.masterData.description);
+        this.adjustmentform.controls["price"].setValue(this.masterData.retailPrice);
         this.adjustmentform.controls["sku"].setValue(this.masterData.id);
         this.isSubmit=true;
         this.invalidsku=false;
@@ -132,8 +135,9 @@ export class AdjustmentsinventoryComponent implements OnInit {
        else{
         this.isSubmit=false;
         this.invalidsku=true;
-        this.adjustmentform.controls["barcode"].setValue('');
-        this.adjustmentform.controls["quantity"].setValue('');
+        this.adjustmentform.controls["department"].setValue('');
+        this.adjustmentform.controls["description"].setValue('');
+        this.adjustmentform.controls["price"].setValue('');
        }
        this.spinner.hide();
       }
