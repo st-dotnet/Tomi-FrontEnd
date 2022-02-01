@@ -228,7 +228,6 @@
 <section class="inner-content inner-pageview">
   <div class="card">
     <div class="card-body">
-
       <div class="content-body">
         <table class="table table-ui-same" id="datatableexample">
           <thead>
@@ -254,7 +253,6 @@
           <tbody>
             <tr
               *ngFor="let item of adjustmentList |paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-
               <td>{{item.rec}}</td>
               <td>{{item.term}}</td>
               <td>{{item.dload}}</td>
@@ -269,8 +267,6 @@
               <td>{{item.master.retailPrice}}</td>
               <td>{{item.quantity}}</td>
               <td>{{item.createdAt |date:'MM/dd/yyyy'}}</td>
-
-
               <td>
                 <ul class="action-cell">
                   <li *ngIf="!item.isdeleted"><a class="edit-icoo" (click)="editAdjustment(item,stockmodel)"><span
@@ -324,7 +320,6 @@
 
 <ng-template #Addfilter let-modal>
   <div class="modal-ui-same form-ranges-add adjustment-modal">
-
     <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">Add Filter</h4>
             <button type="button" class="close" aria-label="Close" (click)="cancelFilterData()">
@@ -397,7 +392,7 @@
 
             <td>
               <div class="form-group">
-                <input type="form-control" placeholder="dept"  [ngModelOptions]="{standalone: true}" [(ngModel)]="stockFilter.department"/>
+                <input type="form-control" placeholder="dept"   [(ngModel)]="stockFilter.department"/>
               </div>
             </td>
           </tr>
@@ -417,13 +412,11 @@
                 <input type="form-control" placeholder="qty" [(ngModel)]="stockFilter.quantity" />
               </div>
             </td>
-
            <!-- <td colspan="2">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="dt" >
               </div>
             </td> -->
-
              <td colspan="2">
               <div class="form-group">
                 <select class="form-control">
@@ -550,10 +543,8 @@
     </div>
     <div class="modal-body">
       <form [formGroup]="gotoRecord" (ngSubmit)="gotoRecordAdjustment()">
-
         <div class="form-group row recordForm">
           <label for="inputPassword" class="col-sm-4 col-form-label recordd">Record #:</label>
-
           <div class="col-sm-7 record-from">
             <input type="Number" class="form-control" formControlName="rec" id="inputPassword" placeholder=""
               [ngClass]="{ 'is-invalid': gotoRecordSubmit && gor['rec'].errors }">
@@ -566,14 +557,8 @@
           <button class="okBtn">Ok</button>
           <button class="cancelBtn" (click)="cancelRecordnumber()">Cancel</button>
           <!-- <button class="resetBtn">Reset</button> -->
-
         </div>
-
-
       </form>
-
-
-
     </div>
   </div>
 
@@ -599,7 +584,7 @@
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label ">sku:</label>
           <div class="col-sm-8 adjust-from">
-            <input type="text" formControlName="mssku" (change)="checkSkuData($event)" placeholder="SKU"
+            <input type="text" formControlName="mssku"  (change)="checkSkuData($event)" placeholder="SKU"
               class="form-control" [ngClass]="{ 'is-invalid': submitted && f['mssku'].errors }" />
             <div *ngIf="invalidsku">sku is not Valid</div>
             <div *ngIf="submitted && f['mssku'].errors" class="invalid-feedback">
@@ -611,10 +596,8 @@
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">Rec:</label>
           <div class="col-sm-8 adjust-from">
-
             <input type="number" formControlName="rec" placeholder="Rec" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['rec'].errors }" />
-
             <div *ngIf="submitted && f['rec'].errors" class="invalid-feedback">
               <div *ngIf="f['rec'].errors['required']">Rec is required</div>
             </div>
@@ -624,15 +607,14 @@
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">Term:</label>
           <div class="col-sm-8 adjust-from">
-
             <input type="text" formControlName="term" placeholder="term" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['term'].errors }" />
-
             <div *ngIf="submitted && f['term'].errors" class="invalid-feedback">
               <div *ngIf="f['term'].errors['required']">Term is required</div>
             </div>
           </div>
         </div>
+
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">Dload:</label>
           <div class="col-sm-8 adjust-from">
@@ -643,13 +625,12 @@
             </div>
           </div>
         </div>
+
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">Tag:</label>
           <div class="col-sm-8 adjust-from">
-
             <input type="number" formControlName="tag" placeholder="Tag" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['tag'].errors }" />
-
             <div *ngIf="submitted && f['tag'].errors" class="invalid-feedback">
               <div *ngIf="f['tag'].errors['required']">Tag is required</div>
             </div>
@@ -659,11 +640,9 @@
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">Shelf:</label>
           <div class="col-sm-8 adjust-from">
-
             <input type="number" formControlName="shelf" placeholder="Shelf" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['shelf'].errors }" />
-
-            <div *ngIf="submitted && f['shelf'].errors" class="invalid-feedback">
+              <div *ngIf="submitted && f['shelf'].errors" class="invalid-feedback">
               <div *ngIf="f['shelf'].errors['required']">Shelf is required</div>
             </div>
           </div>
@@ -672,11 +651,9 @@
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">barcode:</label>
           <div class="col-sm-8 adjust-from">
-
             <input type="text" formControlName="barcode" placeholder="Barcode"  class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['barcode'].errors }" />
-
-            <div *ngIf="submitted && f['barcode'].errors" class="invalid-feedback">
+               <div *ngIf="submitted && f['barcode'].errors" class="invalid-feedback">
               <div *ngIf="f['barcode'].errors['required']">Barcode is required</div>
             </div>
           </div>
@@ -687,8 +664,7 @@
           <div class="col-sm-8 adjust-from">
             <input type="text" formControlName="quantity" placeholder="Quantity"  class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['quantity'].errors }" />
-
-            <div *ngIf="submitted && f['quantity'].errors" class="invalid-feedback">
+               <div *ngIf="submitted && f['quantity'].errors" class="invalid-feedback">
               <div *ngIf="f['quantity'].errors['required']">Quantity is required</div>
             </div>
           </div>
@@ -732,5 +708,4 @@
       </form>
     </div>
   </div>
-
 </ng-template>

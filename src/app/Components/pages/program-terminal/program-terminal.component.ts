@@ -24,8 +24,8 @@ export class ProgramTerminalComponent implements OnInit {
 
   ngOnInit(): void {
     this.options = {
-    fieldSeparator: ',',
-    quoteStrings: '"',
+    fieldSeparator: ' ',
+    quoteStrings: '',
     decimalseparator: '.',
     showLabels: false,
     showTitle: false,
@@ -37,8 +37,8 @@ export class ProgramTerminalComponent implements OnInit {
     };
 
     this.options2 = {
-      fieldSeparator: ',',
-      quoteStrings: '"',
+      fieldSeparator: ' ',
+      quoteStrings: '',
       decimalseparator: '.',
       showLabels: false,
       showTitle: false,
@@ -51,20 +51,19 @@ export class ProgramTerminalComponent implements OnInit {
     const user = this.accountService.userValue;
     this.genratecsvFiles(user.user.customerId);
     //this.genratecsvFiles("B74DDD14-6340-4840-95C2-DB12554843E8");
-
   }
 
   genratekey(){
+    Guid
     this.uniqKey = Guid.create();
   }
 
   genrateFiles(){
-    debugger;
     if(this.data.length>0)
     {
     this.isgenrateFile=true;
-    new AngularCsv(this.data,'MF1.csv',this.options);
-    new AngularCsv(this.data,'MF2.csv',this.options2);
+    new AngularCsv(this.data,'TerminalSMF.csv',this.options);
+    new AngularCsv(this.data,'TerminalDepartments .csv',this.options2);
     this.isgenrateFile=false;
     }
     else{

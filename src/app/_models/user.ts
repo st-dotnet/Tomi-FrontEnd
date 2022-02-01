@@ -52,7 +52,7 @@ export class Sales {
     Lineal?: string;
     Metro?: string;
     Department?: string;
-    Departmentname?: string;
+    Departmentname?:string;
     CustomerId?: string;
     StoreId?: string;
     StockDate?: string;

@@ -15,28 +15,28 @@ import { first } from 'rxjs';
 })
 export class AdjustmentsinventoryComponent implements OnInit {
 
-  adjustmentform!:FormGroup;
-  editStockAdjustment!:FormGroup;
+  adjustmentform!: FormGroup;
+  editStockAdjustment!: FormGroup;
   submitted = false;
   editsubmitted = false;
   modalClass: string | undefined;
-  adjustmentList:any;
+  adjustmentList: any;
   searchText: string = "";
   p: number = 1;
-  masterData!:Master;
-  isSubmit:boolean=false;
-  invalidsku:boolean=false;
+  masterData!: Master;
+  isSubmit: boolean = false;
+  invalidsku: boolean = false;
   gotoRecord!: FormGroup;
-  gotoRecordSubmit: boolean= false;
+  gotoRecordSubmit: boolean = false;
   stockFilter: StockFilterModel = {};
-  department?:number;
-  constructor(private formBuilder: FormBuilder,  private modalService: NgbModal,
-    private stockAdjustmentService: StockAdjustmentService,
-     private spinner: NgxSpinnerService,
-     private toastrService: ToastrService,private userservice:UserService) {
+  department?: number;
+  constructor(private formBuilder: FormBuilder, private modalService: NgbModal,
+  private stockAdjustmentService: StockAdjustmentService,
+  private spinner: NgxSpinnerService,
+  private toastrService: ToastrService, private userservice: UserService) {
 
-      }
-  adjustmentinventory! :false;
+  }
+  adjustmentinventory!: false;
 
 
 
@@ -50,23 +50,23 @@ export class AdjustmentsinventoryComponent implements OnInit {
   ngOnInit(): void {
     this.getAdjustment();
 
-   // this.getAdjustmentById("9FC3863D-28D9-46B1-71BE-08D9DF53FEED");
+    // this.getAdjustmentById("9FC3863D-28D9-46B1-71BE-08D9DF53FEED");
     this.adjustmentform = this.formBuilder.group({
       //id: [''],
       rec: ['', Validators.required],
       term: ['', Validators.required],
       dload: ['', Validators.required],
       tag: ['', Validators.required],
-      shelf: ['',Validators.required],
+      shelf: ['', Validators.required],
       barcode: ['', Validators.required],
       sku: ['',],
-      mssku: ['',Validators.required ],
+      mssku: ['', Validators.required],
       nof: [0],
       //barcode:[''],
-      ohquantity:[''],
-      department: ['',Validators.required],
-      description: ['',Validators.required],
-      price: ['',Validators.required],
+      ohquantity: [''],
+      department: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', Validators.required],
       quantity: ['', Validators.required],
       isdeleted: [false],
     });
@@ -77,31 +77,32 @@ export class AdjustmentsinventoryComponent implements OnInit {
       term1: ['', Validators.required],
       dload1: ['', Validators.required],
       tag1: ['', Validators.required],
-      shelf1: ['',Validators.required],
+      shelf1: ['', Validators.required],
     });
     this.gotoRecord = this.formBuilder.group({
-      rec:['', Validators.required]
+      rec: ['', Validators.required]
     })
   }
 
-
   open(content: any) {
-    this.modalClass= 'mymodal',
-    this.submitted=false;
-    this.isSubmit=false;
+    this.modalClass = 'mymodal',
+    this.submitted = false;
+    this.isSubmit = false;
     this.adjustmentform.reset();
     this.modalService.open(content, {
-       ariaLabelledBy: 'modal-basic-title' ,
-       windowClass:'modal-filteradd'
-      }).result.then((result) => {
-     }, (reason) => {
+      ariaLabelledBy: 'modal-basic-title',
+      windowClass: 'modal-filteradd'
+    }).result.then((result) => {
+    }, (reason) => {
     });
   }
+
   get f() { return this.adjustmentform.controls; }
   get f1() { return this.editStockAdjustment.controls; }
-  get gor(){ return this.gotoRecord.controls;}
+  get gor() { return this.gotoRecord.controls; }
 
-  onSubmit(){
+
+  onSubmit() {
     this.submitted = true;
     if (this.adjustmentform.invalid) {
       return;
@@ -116,95 +117,95 @@ export class AdjustmentsinventoryComponent implements OnInit {
         }
       });
   }
-  cancel()
-  {
+
+  cancel() {
     this.modalService.dismissAll();
   }
-  checkSkuData(sku:any){
+
+  checkSkuData(sku: any) {
+    debugger;
     this.spinner.show();
     this.stockAdjustmentService.getStoreBySku(sku.target.value)
-    .pipe(first())
-    .subscribe({
-      next: (response) => {
-       this.masterData=response;
-       if(this.masterData)
-       {
-        this.adjustmentform.controls["department"].setValue(this.masterData.department);
-        this.adjustmentform.controls["description"].setValue(this.masterData.description);
-        this.adjustmentform.controls["price"].setValue(this.masterData.retailPrice);
-        this.adjustmentform.controls["sku"].setValue(this.masterData.id);
-        this.isSubmit=true;
-        this.invalidsku=false;
-       }
-       else{
-        this.isSubmit=false;
-        this.invalidsku=true;
-        this.adjustmentform.controls["department"].setValue('');
-        this.adjustmentform.controls["description"].setValue('');
-        this.adjustmentform.controls["price"].setValue('');
-       }
-       this.spinner.hide();
-      }
-    });
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.masterData = response.master;
+          if (this.masterData) {
+            this.adjustmentform.controls["department"].setValue(this.masterData.department);
+            this.adjustmentform.controls["description"].setValue(this.masterData.description);
+            this.adjustmentform.controls["price"].setValue(this.masterData.retailPrice);
+            this.adjustmentform.controls["sku"].setValue(this.masterData.id);
+            this.isSubmit = true;
+            this.invalidsku = false;
+          }
+          else {
+            this.isSubmit = false;
+            this.invalidsku = true;
+            this.adjustmentform.controls["department"].setValue('');
+            this.adjustmentform.controls["description"].setValue('');
+            this.adjustmentform.controls["price"].setValue('');
+          }
+          this.spinner.hide();
+        }
+      });
     this.spinner.hide();
   }
 
-  getAdjustment(){
+  getAdjustment() {
     this.spinner.show();
     this.stockAdjustmentService.getAdjustment()
-    .pipe(first())
-    .subscribe({
-      next: (response: any) => {
-        this.spinner.hide();
-       this.adjustmentList=response;
-        this.modalService.dismissAll();
-      }
-    });
+      .pipe(first())
+      .subscribe({
+        next: (response: any) => {
+          this.spinner.hide();
+          this.adjustmentList = response;
+          this.modalService.dismissAll();
+        }
+      });
   }
 
-  getDeletedAdjustment(){
+  getDeletedAdjustment() {
     this.spinner.show();
     this.stockAdjustmentService.GetDeletedStockAdjustment()
-    .pipe(first())
-    .subscribe({
-      next: (response: any) => {
-        this.spinner.hide();
-       this.adjustmentList=response;
-        this.modalService.dismissAll();
-      }
-    });
+      .pipe(first())
+      .subscribe({
+        next: (response: any) => {
+          this.spinner.hide();
+          this.adjustmentList = response;
+          this.modalService.dismissAll();
+        }
+      });
   }
 
 
-  recyle(model:any){
-
+  recyle(model: any) {
     this.spinner.show();
     this.stockAdjustmentService.recycleAdjustment(model)
-    .pipe(first())
-    .subscribe({
-      next: (response) => {
-        this.getAdjustment();
-        this.spinner.hide();
-      }
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          this.getAdjustment();
+          this.spinner.hide();
+        }
+      });
+  }
+
+  editAdjustment(model: any, content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    }, (reason) => {
+    });
+    this.adjustmentList = model;
+  }
+
+  openFilter(content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    }, (reason) => {
     });
   }
 
-  editAdjustment(model:any,content:any){
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-    }, (reason) => {
-   });
-   this.adjustmentList=model;
-  }
-
-  openFilter(content:any){
-
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-    }, (reason) => {
-   });
-  }
-
-  edit(){
-    this.editsubmitted=true;
+  edit() {
+    this.editsubmitted = true;
     if (this.editStockAdjustment.invalid) {
       return;
     }
@@ -220,82 +221,85 @@ export class AdjustmentsinventoryComponent implements OnInit {
       });
   }
 
-  deleteAdjustment(id:any){
+  deleteAdjustment(id: any) {
     this.spinner.show();
     this.stockAdjustmentService.deleteAdjustment(id)
-    .pipe(first())
-    .subscribe({
-      next: (response) => {
-        this.getAdjustment();
-        this.spinner.hide();
-      }
-    });
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          this.getAdjustment();
+          this.spinner.hide();
+        }
+      });
   }
 
-  gotoRecordAdjustment(){
+  gotoRecordAdjustment() {
     this.gotoRecordSubmit = true;
     if (this.gotoRecord.invalid) {
       return;
     }
     this.spinner.show();
     this.stockAdjustmentService.gotoRecordId(this.gotoRecord.value.rec)
-    .pipe(first())
-    .subscribe({
-      next: (response: any) => {
-        this.spinner.hide();
-        this.gotoRecordSubmit = false;
-        this.adjustmentList=response;
-        this.gotoRecord.reset();
-        this.modalService.dismissAll();
-      }
-    });
+      .pipe(first())
+      .subscribe({
+        next: (response: any) => {
+          this.spinner.hide();
+          this.gotoRecordSubmit = false;
+          this.adjustmentList = response;
+          this.gotoRecord.reset();
+          this.modalService.dismissAll();
+        }
+      });
   }
 
-  cancelRecordnumber(){
+  cancelRecordnumber() {
     this.modalService.dismissAll();
     this.gotoRecordSubmit = false;
     this.gotoRecord.reset();
   }
-  getAdjustmentById(id:any){
+  getAdjustmentById(id: any) {
     this.stockAdjustmentService.getAdjustmentById(id)
-    .pipe(first())
-    .subscribe({
-      next: (response) => {
-      }
-    });
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+        }
+      });
   }
 
-  searchStock(){
-
-   this.stockFilter.searchtext=this.searchText;
+  searchStock() {
+    this.spinner.show();
+    this.stockFilter = new StockFilterModel();
+    this.stockFilter.searchtext = this.searchText;
     this.stockAdjustmentService.searchRecord(this.stockFilter)
-    .pipe(first())
-    .subscribe({
-      next: (response) => {
-        debugger;
-        this.adjustmentList=response;
-        this.stockFilter= new StockFilterModel();
-      }
-    });
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          debugger;
+          this.spinner.hide();
+          this.adjustmentList = response;
+          this.stockFilter = new StockFilterModel();
+        }
+      });
   }
-  FilterData(){
+  FilterData() {
+    debugger;
     this.stockAdjustmentService.searchRecord(this.stockFilter)
-    .pipe(first())
-    .subscribe({
-      next: (response) => {
-        this.adjustmentList=response;
-        this.stockFilter= new StockFilterModel();
-        this.modalService.dismissAll();
-      }
-    });
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          this.adjustmentList = response;
+          this.stockFilter = new StockFilterModel();
+          this.modalService.dismissAll();
+        }
+      });
   }
 
-  cancelFilterData(){
-    this.stockFilter= new StockFilterModel();
+  cancelFilterData() {
+    this.stockFilter = new StockFilterModel();
     this.modalService.dismissAll();
   }
 
-  resetFilterData(){
-    this.stockFilter= new StockFilterModel();
+  resetFilterData() {
+    this.stockFilter = new StockFilterModel();
   }
 }

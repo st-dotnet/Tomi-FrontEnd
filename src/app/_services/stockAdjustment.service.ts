@@ -54,7 +54,6 @@ export class StockAdjustmentService {
   }
 
   gotoRecordId(id:any) {
-
     return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}GoToRecord/${id}`);
   };
 
