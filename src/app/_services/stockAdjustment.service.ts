@@ -42,8 +42,8 @@ export class StockAdjustmentService {
   deleteAdjustment(id:any){
     return this.http.delete<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}DeleteStockAdjustment/${id}`);
   }
-  recycleAdjustment(model:any){
-    return this.http.post<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}ChangeDeletedRecStatus`,model);
+  recycleAdjustment(id:any){
+    return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}ChangeDeletedRecStatus/${id}`);
   }
 
   GetDeletedStockAdjustment(){
