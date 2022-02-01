@@ -307,7 +307,7 @@
           </tbody>
         </table>
         <div class="pagination-ui">
-          <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+          <pagination-controls (pageChange)="p =$event" previousLabel="" nextLabel=""></pagination-controls>
         </div>
         <ngx-spinner class="custom-loader" type="square-jelly-box" size="medium" [fullScreen]="false" style="top:auto;">
           <p style="color: white">Loading...</p>
@@ -339,40 +339,42 @@
           <tr>
             <td>
               <div class="form-group">
-                <input type="form-control" placeholder="term" [(ngModel)]="stockFilter.term" />
+                <input type="form-control" placeholder="term" name="term" [(ngModel)]="stockFilter.term" />
               </div>
             </td>
             <td>
               <div class="form-group">
-                <input type="form-control" placeholder="dload" [(ngModel)]="stockFilter.dload" />
+                <input type="form-control" placeholder="dload" name="dload" [(ngModel)]="stockFilter.dload" />
               </div>
             </td>
             <td>
               <div class="form-group">
-                <input type="form-control" placeholder="empno" [(ngModel)]="stockFilter.empno" />
+                <input type="form-control" placeholder="empno" name="empno" [(ngModel)]="stockFilter.empno" />
               </div>
             </td>
             <td>
               <div class="form-group">
-                <input type="form-control" placeholder="tag" [(ngModel)]="stockFilter.tag" />
+                <input type="form-control" placeholder="tag" name="tag" [(ngModel)]="stockFilter.tag" />
               </div>
             </td>
             <td>
               <div class="form-group">
-                <input type="form-control" placeholder="shelf" [(ngModel)]="stockFilter.shelf" />
+                <input type="form-control" placeholder="shelf" name="shelf" [(ngModel)]="stockFilter.shelf" />
               </div>
             </td>
           </tr>
           <tr>
             <td>
               <div class="form-group">
-                <input type="form-control" placeholder="barcode" [(ngModel)]="stockFilter.barcode" />
+                <input type="form-control" placeholder="barcode" name="barcode" [(ngModel)]="stockFilter.barcode" />
               </div>
             </td>
             <td>
               <div class="form-group">
-                <input type="form-control" placeholder="sku2" [(ngModel)]="stockFilter.sku"/>
+                <input type="form-control" placeholder="sku2" name="sku" [(ngModel)]="stockFilter.sku"/>
               </div>
+
+
             </td>
 
             <!-- <td colspan="2">
@@ -392,24 +394,24 @@
 
             <td>
               <div class="form-group">
-                <input type="form-control" placeholder="dept"   [(ngModel)]="stockFilter.department"/>
+                <input type="form-control" placeholder="dept"  name="department"  [(ngModel)]="stockFilter.department"/>
               </div>
             </td>
           </tr>
           <tr>
             <td>
               <div class="form-group">
-                <input type="form-control" placeholder="desc" [(ngModel)]="stockFilter.description" />
+                <input type="form-control" placeholder="desc" name="description" [(ngModel)]="stockFilter.description" />
               </div>
             </td>
             <td>
               <div class="form-group">
-                <input type="form-control" placeholder="price" [(ngModel)]="stockFilter.retailPrice" />
+                <input type="form-control" placeholder="price" name="retailPrice" [(ngModel)]="stockFilter.retailPrice" />
               </div>
             </td>
             <td>
               <div class="form-group">
-                <input type="form-control" placeholder="qty" [(ngModel)]="stockFilter.quantity" />
+                <input type="form-control" placeholder="qty" name="quantity" [(ngModel)]="stockFilter.quantity" />
               </div>
             </td>
            <!-- <td colspan="2">
@@ -434,96 +436,6 @@
       </form>
     </div>
   </div>
-
-
-  <!-- <div class="modal-ui-same form-ranges-add adjustment-modal">
-        <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Add Filter</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <span aria-hidden="true" class="close-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal"
-                        data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
-                        class="svg-inline--fa fa-times fa-w-10 fa-2x">
-                        <path fill="currentColor"
-                            d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"
-                            class=""></path>
-                    </svg></span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form>
-
-                <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Term:</label>
-                    <div class="col-sm-10 adjust-from">
-                        <input type="text" class="form-control" id="inputPassword" placeholder="" name="term"  [(ngModel)]="stockFilter.term">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Dload:</label>
-                    <div class="col-sm-10 adjust-from">
-
-                        <input type="number" class="form-control" id="inputPassword" placeholder="" name="dload"  [(ngModel)]="stockFilter.dload">
-                    </div>
-                </div>
-
-
-
-                <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Tag:</label>
-                    <div class="col-sm-10 adjust-from">
-
-                        <input type="number" class="form-control" id="inputPassword" placeholder="" name="tag"  [(ngModel)]="stockFilter.tag">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Shelf:</label>
-                    <div class="col-sm-10 adjust-from">
-
-                        <input type="number" class="form-control" id="inputPassword" placeholder="" name="shelf"  [(ngModel)]="stockFilter.shelf">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">barcode:</label>
-                    <div class="col-sm-10 adjust-from">
-
-                        <input type="text" class="form-control" id="inputPassword" placeholder="" name="barcode"  [(ngModel)]="stockFilter.barcode">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label ">sku:</label>
-                    <div class="col-sm-10 adjust-from">
-                        <input type="text" class="form-control" id="inputPassword" placeholder="" name="sku"  [(ngModel)]="stockFilter.sku">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">dept:</label>
-                    <div class="col-sm-10 adjust-from">
-                        <input type="number" class="form-control" id="inputPassword" placeholder="" [ngModelOptions]="{standalone: true}" [(ngModel)]="stockFilter.department"> </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-2 col-form-label">Quantity:</label>
-                  <div class="col-sm-10 adjust-from">
-                      <input type="number" class="form-control" id="inputPassword" placeholder="" [ngModelOptions]="{standalone: true}" [(ngModel)]="stockFilter.quantity"> </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputPassword" class="col-sm-2 col-form-label">Price:</label>
-                <div class="col-sm-10 adjust-from">
-                    <input type="number" class="form-control" id="inputPassword" placeholder="" [ngModelOptions]="{standalone: true}" [(ngModel)]="stockFilter.retailPrice"> </div>
-            </div>
-            </form>
-
-            <div class="popup-btn">
-                <button class="okBtn" (click)="FilterData()">Ok</button>
-                <button class="cancelBtn" (click)="cancelFilterData()">Cancel</button>
-                <button class="resetBtn" (click)="resetFilterData()">Reset</button>
-
-            </div>
-
-        </div>
-    </div> -->
 
 </ng-template>
 <!-- Go To Recorder Modal -->
@@ -709,3 +621,56 @@
     </div>
   </div>
 </ng-template>
+
+
+<ng-template #groupModal let-modal>
+  <div class="modal-ui-same form-ranges-add">
+      <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">{{'Mass Changes'}}
+                 
+          </h4>
+
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true" class="close-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal"
+                      data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                      class="svg-inline--fa fa-times fa-w-10 fa-2x">
+                      <path fill="currentColor"
+                          d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"
+                          class=""></path>
+                  </svg></span>
+          </button>
+      </div>
+      <div class="modal-body">
+
+        
+          <div class="btn-upload-files">
+
+              <table class="table table-ui-same" id="datatableexample">
+                  <thead>
+                      <tr>
+                          <th>Description</th>
+                          <th style=" width: 120px;text-align: center;">Actions</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let group of adjustmentList| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                          <td>{{group.name}}</td>
+                        
+
+                      </tr>
+                  </tbody>
+              </table>
+              <!-- <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
+                  <p style="color: white">Loading...</p>
+              </ngx-spinner> -->
+              <div class="pagination-ui" >
+                  <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+              </div>
+          </div>
+
+      </div>
+  </div>
+
+</ng-template>
+
+
