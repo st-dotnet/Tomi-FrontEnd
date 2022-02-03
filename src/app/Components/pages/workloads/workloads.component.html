@@ -1,7 +1,7 @@
 <section class="inner-content inner-pageview wkloads">
     <div class="card">
         <div class="card-header">
-            <h3>{{activeTab == '1' ? 'Master File' : activeTab == '2' ? 'Stocks File': activeTab == '3' ? 'Sales File' :activeTab == '4'?  'Ranges' :'Program Terminal'}}</h3>
+            <h3>{{activeTab == '1' ? 'Master File' : activeTab == '2' ? 'Stocks File': activeTab == '3' ? 'Sales File' :activeTab == '4'? 'Ranges' :'Program Terminal'}}</h3>
             <div class="customer-add btn-header">
                 <ul class="right-opt">
                     <li>
@@ -22,12 +22,12 @@
                     <div class="workorders-main">
                         <div class="tabs-wkload">
                             <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs">
-                                <li [ngbNavItem]="1"  position-relative>
+                                <li [ngbNavItem]="1" position-relative>
                                     <a ngbNavLink class="custom-tabs" (click)="onMenuClick()">Master</a>
                                     <ng-template ngbNavContent>
                                         <div *ngIf="!isMasterFileUpload" class="btn-upload-files">
                                             <button class="btn btn btn-primary btn-upload" (click)="checkMasterfileUpload()">Upload</button>
-                                            <app-master ></app-master>
+                                            <app-master></app-master>
                                         </div>
                                         <div *ngIf="isMasterFileUpload" class="resultwrapper-tab">
                                             <div class="content-upload-view">
@@ -202,16 +202,16 @@
                                         </div>
                                     </ng-template>
                                 </li>
-                                <li [ngbNavItem]="5"  position-relative>
-                                  <a ngbNavLink class="custom-tabs" (click)="onMenuClick()">Program Terminal</a>
-                                  <ng-template ngbNavContent>
-                                    <app-program-terminal></app-program-terminal>
+                                <li [ngbNavItem]="5" position-relative>
+                                    <a ngbNavLink class="custom-tabs" (click)="onMenuClick()">Program Terminal</a>
+                                    <ng-template ngbNavContent>
+                                        <app-program-terminal></app-program-terminal>
 
 
-                                  </ng-template>
+                                    </ng-template>
 
 
-                              </li>
+                                </li>
                             </ul>
 
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
