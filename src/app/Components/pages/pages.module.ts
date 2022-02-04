@@ -26,6 +26,8 @@ import { AdjustmentsinventoryComponent } from './adjustmentsinventory/adjustment
 import { ProgramTerminalComponent } from './program-terminal/program-terminal.component';
 import { Angular2CsvModule } from 'angular2-csv';
 import { DepartmentComponent } from './department/department.component';
+import { CategoryComponent } from './category/category.component';
+import { ReservedComponent } from './reserved/reserved.component';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -44,6 +46,8 @@ import { DepartmentComponent } from './department/department.component';
     AdjustmentsinventoryComponent,
     ProgramTerminalComponent,
     DepartmentComponent,
+    CategoryComponent,
+    ReservedComponent,
   ],
   imports: [
     PageRoutingModule,

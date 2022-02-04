@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { Department, Master, Sales, User, WorkLoad } from '@app/_models';
+import { Category, Department, Master, Reserved, Sales, User, WorkLoad } from '@app/_models';
 import { SessionService } from '.';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -29,6 +29,12 @@ export class UserService {
 
   private _departmentList: BehaviorSubject<Department[]> = new BehaviorSubject<Department[]>([]);
   public departmentList: Observable<Department[]> = this._departmentList.asObservable();
+
+  private _categoryList: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
+  public categoryList: Observable<Department[]> = this._categoryList.asObservable();
+
+  private _reservedList: BehaviorSubject<Category[]> = new BehaviorSubject<Reserved[]>([]);
+  public reservedList: Observable<Reserved[]> = this._reservedList.asObservable();
 
   private _customerId = new BehaviorSubject<any>('');
   customerId = this._customerId.asObservable();
@@ -64,6 +70,12 @@ export class UserService {
 
   private _disabledepartmentfileupdate= new BehaviorSubject<boolean>(false);
   disabledepartmentfileupdate = this._disabledepartmentfileupdate.asObservable();
+
+  private _disablecategoryfileupdate= new BehaviorSubject<boolean>(false);
+  disablecategoryfileupdate = this._disablecategoryfileupdate.asObservable();
+
+  private _disablereservedfileupdate= new BehaviorSubject<boolean>(false);
+  disablereservedfileupdate = this._disablereservedfileupdate.asObservable();
 
   constructor(private http: HttpClient,
     private sessionService: SessionService,
@@ -174,13 +186,37 @@ export class UserService {
   getDepartmentData(model: any) {
     this.spinner.show();
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetDepartmentsData`, model).subscribe(res => {
-      this._masterList.next(res);
+      this._departmentList.next(res);
       this.spinner.hide();
     })
   }
   getDepartmentList(model: any) {
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetDepartmentsData`, model);
   }
+
+  getCategoryData(model: any) {
+    this.spinner.show();
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetCategoriesData`, model).subscribe(res => {
+      this._categoryList.next(res);
+      this.spinner.hide();
+    })
+  }
+  getReservedList(model: any) {
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetReservedData`, model);
+  }
+  
+  getReservedData(model: any) {
+    this.spinner.show();
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetReservedData`, model).subscribe(res => {
+      this._reservedList.next(res);
+      this.spinner.hide();
+    })
+  }
+  getCategoryList(model: any) {
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetCategoriesData`, model);
+  }
+
+
   uploadSalesFile(model: any) {
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportSalesFile`, model, {
       reportProgress: true,

@@ -94,3 +94,25 @@ export class Department {
     storeId?: string;
     stockDate?: string;
 }
+
+export class Category {
+    id?: string;
+    division?: string;
+    divisionname?: string;
+    category?: string;
+    categoryname?: string;
+    customerId?: string;
+    storeId?: string;
+    stockDate?: string;
+}
+
+export class Reserved {
+    id?: string;
+    store?: string;
+    code?: string;
+    quantity?: string;
+    filler?: string;
+    customerId?: string;
+    storeId?: string;
+    stockDate?: string;
+}
