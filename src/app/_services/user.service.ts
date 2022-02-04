@@ -62,6 +62,14 @@ export class UserService {
   private _salefileUpload = new BehaviorSubject<boolean>(false);
   salefileUpload = this._salefileUpload.asObservable();
 
+    //
+    private _reservedfileUpload = new BehaviorSubject<boolean>(false);
+    reservedfileUpload = this._reservedfileUpload.asObservable();
+    private _parametersByDepartmentfileUpload = new BehaviorSubject<boolean>(false);
+    parametersByDepartmentfileUpload = this._parametersByDepartmentfileUpload.asObservable();
+    private _categoriesfileUpload = new BehaviorSubject<boolean>(false);
+    categoriesfileUpload = this._categoriesfileUpload.asObservable();
+    //
 
   private _disablemasterfileupdate= new BehaviorSubject<boolean>(false);
   disablemasterfileupdate = this._disablemasterfileupdate.asObservable();
@@ -165,7 +173,6 @@ export class UserService {
   }
 
   uploadMasterFile(model: any) {
-
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportOrderJobFile`, model, {
       reportProgress: true,
       responseType: 'json'
@@ -184,7 +191,6 @@ export class UserService {
   }
 
   uploadDepartmentFile(model: any) {
-
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportDepartmentFile`, model, {
       reportProgress: true,
       responseType: 'json'
@@ -212,7 +218,7 @@ export class UserService {
   getReservedList(model: any) {
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetReservedData`, model);
   }
-  
+
   getReservedData(model: any) {
     this.spinner.show();
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetReservedData`, model).subscribe(res => {
@@ -232,6 +238,27 @@ export class UserService {
     });
   };
 
+  //
+  uploadReservedFile(model: any) {
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportReservedFile`, model, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+  };
+  uploadParameterByDepartmentFile(model: any) {
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportParaMeterByDepartmentFile`, model, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+  };
+  uploadCategoriesFile(model: any) {
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportCategoriesFile`, model, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+  };
+  //
+
   getSalesData(model: any) {
     this.spinner.show();
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetSalesData`, model).subscribe(res => {
@@ -247,7 +274,7 @@ export class UserService {
   getParametersByDepartmentList(model: any) {
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetParametersByDepartmentData`, model);
   }
-  
+
   getParametersByDepartmentData(model: any) {
     this.spinner.show();
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetParametersByDepartmentData`, model).subscribe(res => {
@@ -258,8 +285,6 @@ export class UserService {
   getStockList(model: any) {
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetStocksData`, model);
   }
-
-
 
   setCustomerId(object: any) {
     this._customerId.next(object);
@@ -284,6 +309,17 @@ export class UserService {
   setSalefileUpload(object: boolean) {
     this._salefileUpload.next(object);
   }
+  //
+    setReservedfileUpload(object: boolean) {
+      this._reservedfileUpload.next(object);
+    }
+    setParameterBydepartmentfileUpload(object: boolean) {
+      this._parametersByDepartmentfileUpload.next(object);
+    }
+    setCategoriesfileUpload(object: boolean) {
+      this._categoriesfileUpload.next(object);
+    }
+  //
 
   setStockUpload(object: boolean) {
     this._stockfileUplaod.next(object);
@@ -297,8 +333,9 @@ export class UserService {
   setSalefileUploaddisable(object: boolean) {
     this._disablesalefileupdate.next(object);
   }
-
   setStockfileUploaddisable(object: boolean) {
     this._disablestockfileupdate.next(object);
   }
+
+
 }
