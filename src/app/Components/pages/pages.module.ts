@@ -25,6 +25,7 @@ import { SearchFilterPipe } from './search-filter.pipe';
 import { AdjustmentsinventoryComponent } from './adjustmentsinventory/adjustmentsinventory.component';
 import { ProgramTerminalComponent } from './program-terminal/program-terminal.component';
 import { Angular2CsvModule } from 'angular2-csv';
+import { DepartmentComponent } from './department/department.component';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -42,6 +43,7 @@ import { Angular2CsvModule } from 'angular2-csv';
     SearchFilterPipe,
     AdjustmentsinventoryComponent,
     ProgramTerminalComponent,
+    DepartmentComponent,
   ],
   imports: [
     PageRoutingModule,

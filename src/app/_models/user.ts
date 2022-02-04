@@ -84,4 +84,13 @@ export class Range {
     stockDate?: string;
 }
 
-
+export class Department {
+    id?: string;
+    division?: string;
+    divisionname?: string;
+    department?: string;
+    departmentname?: string;
+    customerId?: string;
+    storeId?: string;
+    stockDate?: string;
+}

@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { Master, Sales, User, WorkLoad } from '@app/_models';
+import { Department, Master, Sales, User, WorkLoad } from '@app/_models';
 import { SessionService } from '.';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -26,6 +26,9 @@ export class UserService {
 
   private _masterList: BehaviorSubject<Master[]> = new BehaviorSubject<Master[]>([]);
   public masterList: Observable<Master[]> = this._masterList.asObservable();
+
+  private _departmentList: BehaviorSubject<Department[]> = new BehaviorSubject<Department[]>([]);
+  public departmentList: Observable<Department[]> = this._departmentList.asObservable();
 
   private _customerId = new BehaviorSubject<any>('');
   customerId = this._customerId.asObservable();
