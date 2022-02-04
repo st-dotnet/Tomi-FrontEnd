@@ -26,6 +26,7 @@ export class SidebarComponent implements OnInit {
   rangefileUpload = false;
   program_terminal = false;
   isFileUploadOption= false ;
+  departmentfileUpload: boolean= false;
   constructor(private accountService: SessionService, private authenticationService: UserService,
     private spinner: NgxSpinnerService, private router: Router,private toastrService: ToastrService) {
 
@@ -38,25 +39,14 @@ export class SidebarComponent implements OnInit {
     this.authenticationService.customerId.subscribe(user => this.customer = user);
 
     this.authenticationService.masterfileUplaod.subscribe(file => this.masterfileUpload = file);
+    
+    this.authenticationService.departmentfileUplaod.subscribe(file => this.departmentfileUpload = file);
     this.authenticationService.stockfileUplaod.subscribe(file => this.stockfileUpload = file);
     this.authenticationService.salefileUpload.subscribe(file => this.salefileUpload = file);
     if (this.customer != "") {
       this.customerId = this.customer;
     }
-    this.years = [
-      {
-        value: '2019'
-      },
-      {
-        value: '2020'
-      },
-      {
-        value: '2021'
-      },
-      {
-        value: '2022'
-      }
-    ];
+   
     this.getallCustomList();
   }
   getallCustomList() {
@@ -88,6 +78,18 @@ export class SidebarComponent implements OnInit {
       case Pages.Stocks:
         this.authenticationService.setactiveTab(tab);
         break;
+      case Pages.Department:
+        this.authenticationService.setactiveTab(tab);
+        break;
+      case Pages.Categories:
+        this.authenticationService.setactiveTab(tab);
+        break;
+      case Pages.Reserved:
+        this.authenticationService.setactiveTab(tab);
+        break;
+      case Pages.ParametersbyDepartments:
+        this.authenticationService.setactiveTab(tab);
+        break;    
       case Pages.Sales:
         this.authenticationService.setactiveTab(tab);
         break;
@@ -128,6 +130,7 @@ export class SidebarComponent implements OnInit {
       this.authenticationService.getSalesData(workload);
       this.authenticationService.setSalefileUploaddisable(true);
       this.authenticationService.setMasterfilbrowser(true);
+      this.authenticationService.setDepartmentfilebrowser(true);
       this.authenticationService.setStockfileUploaddisable(true);
     }
   }

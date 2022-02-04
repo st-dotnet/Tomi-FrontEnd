@@ -40,6 +40,9 @@ export class UserService {
   private _masterfileUplaod = new BehaviorSubject<boolean>(false);
   masterfileUplaod = this._masterfileUplaod.asObservable();
 
+  private _departmentfileUplaod = new BehaviorSubject<boolean>(false);
+  departmentfileUplaod = this._departmentfileUplaod.asObservable();
+
   private _stockfileUplaod = new BehaviorSubject<boolean>(false);
   stockfileUplaod = this._stockfileUplaod.asObservable();
 
@@ -56,6 +59,8 @@ export class UserService {
   private _disablesalefileupdate= new BehaviorSubject<boolean>(false);
   disablesalefileupdate = this._disablesalefileupdate.asObservable();
 
+  private _disabledepartmentfileupdate= new BehaviorSubject<boolean>(false);
+  disabledepartmentfileupdate = this._disabledepartmentfileupdate.asObservable();
 
   constructor(private http: HttpClient,
     private sessionService: SessionService,
@@ -138,7 +143,7 @@ export class UserService {
 
   uploadMasterFile(model: any) {
 
-    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportMasterFile`, model, {
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportOrderJobFile`, model, {
       reportProgress: true,
       responseType: 'json'
     });
@@ -146,15 +151,33 @@ export class UserService {
 
   getMasterData(model: any) {
     this.spinner.show();
-    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetMasterData`, model).subscribe(res => {
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetOrderJob`, model).subscribe(res => {
       this._masterList.next(res);
       this.spinner.hide();
     })
   }
   getMasterList(model: any) {
-    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetMasterData`, model);
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetOrderJob`, model);
   }
 
+  uploadDepartmentFile(model: any) {
+
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportDepartmentFile`, model, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+  };
+
+  getDepartmentData(model: any) {
+    this.spinner.show();
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetDepartmentsData`, model).subscribe(res => {
+      this._masterList.next(res);
+      this.spinner.hide();
+    })
+  }
+  getDepartmentList(model: any) {
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetDepartmentsData`, model);
+  }
   uploadSalesFile(model: any) {
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportSalesFile`, model, {
       reportProgress: true,
@@ -195,7 +218,9 @@ export class UserService {
   setMasterfileUplaod(object: boolean) {
     this._masterfileUplaod.next(object);
   }
-
+  setDepartmentfileUplaod(object: boolean) {
+    this._masterfileUplaod.next(object);
+  }
   setSalefileUpload(object: boolean) {
     this._salefileUpload.next(object);
   }
@@ -206,7 +231,9 @@ export class UserService {
   setMasterfilbrowser(object: boolean) {
     this._disablemasterfileupdate.next(object);
   }
-
+  setDepartmentfilebrowser(object: boolean) {
+    this._disabledepartmentfileupdate.next(object);
+  }
   setSalefileUploaddisable(object: boolean) {
     this._disablesalefileupdate.next(object);
   }
