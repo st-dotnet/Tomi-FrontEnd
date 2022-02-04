@@ -4,10 +4,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { Category, Department, Master, Reserved, Sales, User, WorkLoad } from '@app/_models';
+import { Category, Department, Master, ParametersByDepartment, Reserved, Sales, User, WorkLoad } from '@app/_models';
 import { SessionService } from '.';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ParameterPropertyModifier } from 'typescript';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -31,10 +32,13 @@ export class UserService {
   public departmentList: Observable<Department[]> = this._departmentList.asObservable();
 
   private _categoryList: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
-  public categoryList: Observable<Department[]> = this._categoryList.asObservable();
+  public categoryList: Observable<Category[]> = this._categoryList.asObservable();
 
-  private _reservedList: BehaviorSubject<Category[]> = new BehaviorSubject<Reserved[]>([]);
+  private _reservedList: BehaviorSubject<Reserved[]> = new BehaviorSubject<Reserved[]>([]);
   public reservedList: Observable<Reserved[]> = this._reservedList.asObservable();
+
+  private _parametersbydepartmentList: BehaviorSubject<ParametersByDepartment[]> = new BehaviorSubject<ParametersByDepartment[]>([]);
+  public parametersbydepartmentList: Observable<ParametersByDepartment[]> = this._parametersbydepartmentList.asObservable();
 
   private _customerId = new BehaviorSubject<any>('');
   customerId = this._customerId.asObservable();
@@ -76,6 +80,10 @@ export class UserService {
 
   private _disablereservedfileupdate= new BehaviorSubject<boolean>(false);
   disablereservedfileupdate = this._disablereservedfileupdate.asObservable();
+
+  private _disableparametersbydepartmentfileupdate= new BehaviorSubject<boolean>(false);
+  disableparametersbydepartmentfileupdate = this._disableparametersbydepartmentfileupdate.asObservable();
+
 
   constructor(private http: HttpClient,
     private sessionService: SessionService,
@@ -231,8 +239,21 @@ export class UserService {
      this.spinner.hide();
     })
   }
+
   getSalesList(model: any) {
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetSalesData`, model);
+  }
+
+  getParametersByDepartmentList(model: any) {
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetParametersByDepartmentData`, model);
+  }
+  
+  getParametersByDepartmentData(model: any) {
+    this.spinner.show();
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetParametersByDepartmentData`, model).subscribe(res => {
+      this._parametersbydepartmentList.next(res);
+      this.spinner.hide();
+    })
   }
   getStockList(model: any) {
     return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetStocksData`, model);

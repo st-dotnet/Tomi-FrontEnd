@@ -116,3 +116,14 @@ export class Reserved {
     storeId?: string;
     stockDate?: string;
 }
+
+export class ParametersByDepartment {
+    id?: string;
+    department?: string;
+    quantity?: string;
+    pesos?: string;
+    percentageInPieces?: string;
+    customerId?: string;
+    storeId?: string;
+    stockDate?: string;
+}

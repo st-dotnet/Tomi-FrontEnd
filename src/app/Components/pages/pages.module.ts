@@ -28,6 +28,7 @@ import { Angular2CsvModule } from 'angular2-csv';
 import { DepartmentComponent } from './department/department.component';
 import { CategoryComponent } from './category/category.component';
 import { ReservedComponent } from './reserved/reserved.component';
+import { ParametersbydepartmentComponent } from './parametersbydepartment/parametersbydepartment.component';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -48,6 +49,7 @@ import { ReservedComponent } from './reserved/reserved.component';
     DepartmentComponent,
     CategoryComponent,
     ReservedComponent,
+    ParametersbydepartmentComponent,
   ],
   imports: [
     PageRoutingModule,
