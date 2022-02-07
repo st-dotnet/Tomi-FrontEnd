@@ -1,1 +1,37 @@
-<p>reserved works!</p>
+<section class="inner-content inner-pageview">
+    <div class="card">
+        <div class="card-body">
+            <div class="content-body">
+                <table class="table table-striped table-ui-same" id="datatableexample" *ngIf="reservedList">
+                    <thead>
+                        <tr>
+                            <!-- <th>#Registros</th> -->
+                            <th>Code</th>
+                            <th>Store</th>
+                            <th>Quantity</th>
+                            <th>Filler</th>
+                            <!-- <th>Total</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr
+                            *ngFor="let stock of reservedList| paginate: { itemsPerPage: 8, currentPage: p }; let i = index">
+                            <td>{{stock.code}}</td>
+                            <td>{{stock.store}}</td>
+                            <td>{{stock.quantity}}</td>
+                            <td>{{stock.filler}}</td>
+                           
+                        </tr>
+                    </tbody>
+                </table>
+                <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
+                    <p style="color: white">Loading...</p>
+                </ngx-spinner>
+                <div class="pagination-ui">
+                    <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

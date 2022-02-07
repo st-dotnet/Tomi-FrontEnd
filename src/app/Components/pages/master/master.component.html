@@ -7,10 +7,11 @@
                         <tr>
                             <!-- <th>#Registros</th> -->
                             <th>#SKU</th>
-                            <th>#Barcode</th>
+                            <th>#Code</th>
                             <th>Description</th>
                             <th>Department</th>
-                            <th>Unity</th>
+                            <th>PriceWithoutTaxes</th>
+                            <th>Sale Price</th>
                             <!-- <th>Total</th> -->
                         </tr>
                     </thead>
@@ -19,10 +20,11 @@
                         <tr
                             *ngFor="let stock of masterList| paginate: { itemsPerPage: 8, currentPage: p }; let i = index">
                             <td>{{stock.sku}}</td>
-                            <td>{{stock.barcode}}</td>
+                            <td>{{stock.code}}</td>
                             <td>{{stock.description}}</td>
                             <td>{{stock.department}}</td>
-                            <td>{{stock.unity}}</td>
+                            <td>{{stock.priceWithoutTaxes}}</td>
+                            <td>{{stock.salePrice}}</td>
                         </tr>
                     </tbody>
                 </table>

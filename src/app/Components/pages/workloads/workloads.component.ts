@@ -88,6 +88,14 @@ export class WorkloadsComponent implements OnInit {
   //
   disableReservedfileupdate: boolean=false;
   disableCategoryfileupdate: boolean=false;
+  disableparametersbydepartmentfileupdate: boolean= false;
+  reserveRecordCount: any;
+  parameterRecordCount: any;
+  categoryRecordCount: any;
+  departmenttimeElapsed: any;
+  CategorytimeElapsed: any;
+  parametertimeElapsed: any;
+  reservetimeElapsed: any;
 
  //
   constructor(private formBuilder: FormBuilder,
@@ -353,9 +361,9 @@ export class WorkloadsComponent implements OnInit {
               this.departmentfileUploading = false;
               this.fileUploaded = true;
               this.authenticationService.setDepartmentfileUplaod(this.departmentfileUploading);
-              this.masterRecordCount = event.stockRecordCount;
-              this.timeElapsed = event.timeElapsed;
-              this.masterfileUpload = true;
+              this.departmentRecordCount = event.stockRecordCount;
+              this.departmenttimeElapsed = event.timeElapsed;
+              this.departmentFileUpload = true;
               this.disabledepartmentfileupdate = true;
               this.authenticationService.setDepartmentfilebrowser(true);
               setTimeout(() => {
@@ -476,7 +484,8 @@ export class WorkloadsComponent implements OnInit {
             if (event.success) {
               this.reservefileUploading = false;
               this.authenticationService.setSalefileUpload(false);
-              this.stockRecordCount = event.stockRecordCount;
+              this.reserveRecordCount = event.stockRecordCount;
+              this.reservetimeElapsed = event.timeElapsed;
               this.reserveFileUpload = true;
               this.selectedFiles = undefined;
               setTimeout(() => {
@@ -509,13 +518,13 @@ export class WorkloadsComponent implements OnInit {
   }
 
 
-  uploadPerameterByDepartmenntFile(): void {
+  uploadPerameterByDepartmentFile(): void {
     this.spinner.show();
     this.updateParametrsDepartmentFile = false;
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
-    this.authenticationService.disablesalefileupdate.subscribe(user => this.disablesalefileupdate = user);
+    this.authenticationService.disabledepartmentfileupdate.subscribe(user => this.disabledepartmentfileupdate = user);
     if (this.selectedPerametrsByDepartmentsFiles) {
       const file: File | null = this.selectedPerametrsByDepartmentsFiles.item(0);
       if (file) {
@@ -530,13 +539,14 @@ export class WorkloadsComponent implements OnInit {
         formData.append('stockDate', date);
         this.perametesByDepartmentfileUploading = true;
         this.authenticationService.setParameterBydepartmentfileUpload(this.perametesByDepartmentfileUploading);
-        this.authenticationService.setSalefileUploaddisable(false);
+        this.authenticationService.setparameterfileUploadDisable(false);
         this.authenticationService.uploadParameterByDepartmentFile(formData).subscribe({
           next: (event: any) => {
             if (event.success) {
               this.perametesByDepartmentfileUploading = false;
-              this.authenticationService.setSalefileUpload(false);
-              this.stockRecordCount = event.stockRecordCount;
+              this.authenticationService.setParameterBydepartmentfileUpload(false);
+              this.parameterRecordCount = event.stockRecordCount;
+              this.parametertimeElapsed = event.timeElapsed;
               this.perametersByDepartmentFileUpload = true;
               this.selectedFiles = undefined;
               setTimeout(() => {
@@ -574,7 +584,7 @@ export class WorkloadsComponent implements OnInit {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
-    this.authenticationService.disablestockfileupdate.subscribe(user => this.disableCategoryfileupdate = user);
+    this.authenticationService.disablecategoryfileupdate.subscribe(user => this.disableCategoryfileupdate = user);
     if (this.selectedCategoriesFiles) {
       const file: File | null = this.selectedCategoriesFiles.item(0);
         if (file) {
@@ -589,13 +599,14 @@ export class WorkloadsComponent implements OnInit {
         formData.append('stockDate', date);
         this.categoriesfileUploading = true;
         this.authenticationService.setCategoriesfileUpload(this.categoriesfileUploading);
-        this.authenticationService.setSalefileUploaddisable(false);
+        this.authenticationService.setCategoryfileUploadDisable(false);
         this.authenticationService.uploadCategoriesFile(formData).subscribe({
           next: (event: any) => {
             if (event.success) {
               this.categoriesfileUploading = false;
-              this.authenticationService.setSalefileUpload(false);
-              this.stockRecordCount = event.stockRecordCount;
+              this.authenticationService.setCategoriesfileUpload(false);
+              this.categoryRecordCount = event.stockRecordCount;
+              this.CategorytimeElapsed = event.timeElapsed;
               this.categoriesFileUpload = true;
               this.selectedFiles = undefined;
               setTimeout(() => {
@@ -604,7 +615,7 @@ export class WorkloadsComponent implements OnInit {
                   storeId: this.storeId,
                   stockDate: this.year,
                 };
-                this.authenticationService.setSalefileUploaddisable(true);
+                this.authenticationService.setCategoryfileUploadDisable(true);
                 this.authenticationService.getSalesData(workload);
                 this.isCategoriesFileUpload = !this.isCategoriesFileUpload;
                 this.categoriesFileUpload = false;
@@ -683,10 +694,23 @@ export class WorkloadsComponent implements OnInit {
   checkMasterfileUpload() {
     this.isMasterFileUpload = !this.isMasterFileUpload;
     this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
-  }
+  }                                                 
   checkDepartmentFileupload(){
     this.isDepartmentFileUpload= !this.isDepartmentFileUpload;
     this.authenticationService.disabledepartmentfileupdate.subscribe(user => this.disabledepartmentfileupdate = user);
+  }
+
+  checkReservedFileupload(){
+    this.isReservedFileUpload= !this.isReservedFileUpload;
+    this.authenticationService.disablereservedfileupdate.subscribe(user => this.disableReservedfileupdate = user);
+  }
+  checkParameterFileupload(){
+    this.isParametersFilesUpload= !this.isParametersFilesUpload;
+    this.authenticationService.disableparametersbydepartmentfileupdate.subscribe(user => this.disableparametersbydepartmentfileupdate = user);
+  }
+  checkCategoryFileupload(){
+    this.isCategoriesFileUpload= !this.isCategoriesFileUpload;
+    this.authenticationService.disablecategoryfileupdate.subscribe(user => this.disableCategoryfileupdate = user);
   }
   onDepartmentClick(){
     this.authenticationService.disabledepartmentfileupdate.subscribe(user => this.disabledepartmentfileupdate = user);
@@ -702,5 +726,27 @@ export class WorkloadsComponent implements OnInit {
     this.isMasterFileUpload = true;
     else
     this.isMasterFileUpload = false;
+  }
+
+  onReservedClick(){
+    this.authenticationService.disablereservedfileupdate.subscribe(user => this.disableReservedfileupdate = user);
+    if(!this.disableReservedfileupdate)
+    this.isReservedFileUpload = true;
+    else
+    this.isReservedFileUpload = false;
+  }
+  onParametrByDepartmentClick(){
+    this.authenticationService.disableparametersbydepartmentfileupdate.subscribe(user => this.disableparametersbydepartmentfileupdate = user);
+    if(!this.disableparametersbydepartmentfileupdate)
+    this.isParametersFilesUpload = true;
+    else
+    this.isParametersFilesUpload = false;
+  }
+  onCategoriesClick(){
+    this.authenticationService.disablecategoryfileupdate.subscribe(user => this.disableCategoryfileupdate = user);
+    if(!this.disableCategoryfileupdate)
+    this.isCategoriesFileUpload = true;
+    else
+    this.isCategoriesFileUpload = false;
   }
 }

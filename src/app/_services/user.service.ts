@@ -304,7 +304,7 @@ export class UserService {
     this._masterfileUplaod.next(object);
   }
   setDepartmentfileUplaod(object: boolean) {
-    this._masterfileUplaod.next(object);
+    this._departmentfileUplaod.next(object);
   }
   setSalefileUpload(object: boolean) {
     this._salefileUpload.next(object);
@@ -326,6 +326,16 @@ export class UserService {
   }
   setMasterfilbrowser(object: boolean) {
     this._disablemasterfileupdate.next(object);
+  }
+  setparameterfileUploadDisable(object: boolean) {
+    this._disableparametersbydepartmentfileupdate.next(object);
+  }
+  setCategoryfileUploadDisable(object: boolean) {
+    this._disablecategoryfileupdate.next(object);
+  }
+
+  setReservefileUploadDisable(object: boolean) {
+    this._disablereservedfileupdate.next(object);
   }
   setDepartmentfilebrowser(object: boolean) {
     this._disabledepartmentfileupdate.next(object);

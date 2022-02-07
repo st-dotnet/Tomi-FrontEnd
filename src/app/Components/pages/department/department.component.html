@@ -18,9 +18,9 @@
                         <tr
                             *ngFor="let stock of departmentList| paginate: { itemsPerPage: 8, currentPage: p }; let i = index">
                             <td>{{stock.division}}</td>
-                            <td>{{stock.divisionname}}</td>
+                            <td>{{stock.divisionName}}</td>
                             <td>{{stock.department}}</td>
-                            <td>{{stock.departmentname}}</td>
+                            <td>{{stock.departmentName}}</td>
                            
                         </tr>
                     </tbody>

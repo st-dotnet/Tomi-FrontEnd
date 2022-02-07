@@ -27,6 +27,9 @@ export class SidebarComponent implements OnInit {
   program_terminal = false;
   isFileUploadOption= false ;
   departmentfileUpload: boolean= false;
+  reservedfileUpload: boolean= false;
+  parametersByDepartmentfileUpload: boolean= false;
+  categoriesfileUpload: boolean= false;
   constructor(private accountService: SessionService, private authenticationService: UserService,
     private spinner: NgxSpinnerService, private router: Router,private toastrService: ToastrService) {
 
@@ -39,8 +42,10 @@ export class SidebarComponent implements OnInit {
     this.authenticationService.customerId.subscribe(user => this.customer = user);
 
     this.authenticationService.masterfileUplaod.subscribe(file => this.masterfileUpload = file);
-    
+    this.authenticationService.categoriesfileUpload.subscribe(file => this.categoriesfileUpload = file);
     this.authenticationService.departmentfileUplaod.subscribe(file => this.departmentfileUpload = file);
+    this.authenticationService.reservedfileUpload.subscribe(file => this.reservedfileUpload = file);
+    this.authenticationService.parametersByDepartmentfileUpload.subscribe(file => this.parametersByDepartmentfileUpload = file);
     this.authenticationService.stockfileUplaod.subscribe(file => this.stockfileUpload = file);
     this.authenticationService.salefileUpload.subscribe(file => this.salefileUpload = file);
     if (this.customer != "") {
@@ -128,10 +133,18 @@ export class SidebarComponent implements OnInit {
       this.authenticationService.getstockData(workload);
       this.authenticationService.getMasterData(workload);
       this.authenticationService.getSalesData(workload);
+      this.authenticationService.getCategoryData(workload);
+      this.authenticationService.getDepartmentData(workload);
+      this.authenticationService.getParametersByDepartmentData(workload);
+      this.authenticationService.getReservedData(workload);
+
       this.authenticationService.setSalefileUploaddisable(true);
       this.authenticationService.setMasterfilbrowser(true);
       this.authenticationService.setDepartmentfilebrowser(true);
       this.authenticationService.setStockfileUploaddisable(true);
+      this.authenticationService.setparameterfileUploadDisable(true);
+      this.authenticationService.setReservefileUploadDisable(true);
+      this.authenticationService.setCategoryfileUploadDisable(true);
     }
   }
 }

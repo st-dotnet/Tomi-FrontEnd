@@ -66,12 +66,12 @@
 
 
                                 </li>
-                                <li [ngbNavItem]="2" position-relative>
+                                <li [ngbNavItem]="2">
                                     <a ngbNavLink class="custom-tabs" (click)="onDepartmentClick()">Department</a>
                                     <ng-template ngbNavContent>
                                         <div *ngIf="!isDepartmentFileUpload" class="btn-upload-files">
                                             <button class="btn btn btn-primary btn-upload" (click)="checkDepartmentFileupload()">Upload</button>
-                                            <app-master></app-master>
+                                          <app-department></app-department>
                                         </div>
                                         <div *ngIf="isDepartmentFileUpload" class="resultwrapper-tab">
                                             <div class="content-upload-view">
@@ -84,7 +84,7 @@
                                                       </label>
                                                     <button class="btn btn-success btn-sm" [disabled]="!updateDepartmentfile" (click)="uploadDepartmentFile()">Upload</button>
                                                 </div>
-                                                <div class="noti-file-upload" *ngIf="masterfileUploading">
+                                                <div class="noti-file-upload" *ngIf="departmentfileUploading">
 
                                                     <p><span class="loadr">
                                                         <div class="svg-loader">
@@ -95,9 +95,9 @@
                                                     </div>
                                                 </span>File upload successfully/with errors </p>
                                                 </div>
-                                                <div class="file-upload-results" *ngIf="masterfileUpload">
-                                                    <p class="record-uploa">Total of records uploaded: <span class="total-upload-value">{{masterRecordCount}}</span></p>
-                                                    <p class="record-uploa">Total Time Elapsed in Seconds: <span class="total-upload-value">{{timeElapsed}} Seconds</span></p>
+                                                <div class="file-upload-results" *ngIf="departmentFileUpload">
+                                                    <p class="record-uploa">Total of records uploaded: <span class="total-upload-value">{{departmentRecordCount}}</span></p>
+                                                    <p class="record-uploa">Total Time Elapsed in Seconds: <span class="total-upload-value">{{departmenttimeElapsed}} Seconds</span></p>
                                                     <p class="record-failed">Total of records failed: <span class="total-failed-value">0</span></p>
                                                 </div>
                                                 <!-- <div class="print-btn-report" *ngIf="masterfileUpload">
@@ -110,7 +110,48 @@
 
 
                                 </li>
-                                <li [ngbNavItem]="3">
+                                <li [ngbNavItem]="3" position-relative>
+                                    <a ngbNavLink class="custom-tabs" (click)="onReservedClick()">Reserved</a>
+                                    <ng-template ngbNavContent>
+                                        <div *ngIf="!isReservedFileUpload" class="btn-upload-files">
+                                            <button class="btn btn btn-primary btn-upload" (click)="checkReservedFileupload()">Upload</button>
+                                           <app-reserved></app-reserved>
+                                        </div>
+                                        <div *ngIf="isReservedFileUpload" class="resultwrapper-tab">
+                                            <div class="content-upload-view">
+                                                <div class="load-file">
+                                                    <div class="icon-svg-file">
+                                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cloud-upload-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-cloud-upload-alt fa-w-20 fa-2x"><path fill="currentColor" d="M537.6 226.6c4.1-10.7 6.4-22.4 6.4-34.6 0-53-43-96-96-96-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32c-88.4 0-160 71.6-160 160 0 2.7.1 5.4.2 8.1C40.2 219.8 0 273.2 0 336c0 79.5 64.5 144 144 144h368c70.7 0 128-57.3 128-128 0-61.9-44-113.6-102.4-125.4zM393.4 288H328v112c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V288h-65.4c-14.3 0-21.4-17.2-11.3-27.3l105.4-105.4c6.2-6.2 16.4-6.2 22.6 0l105.4 105.4c10.1 10.1 2.9 27.3-11.3 27.3z" class=""></path></svg>
+                                                    </div>
+                                                    <label class="btn btn-default p-0">
+                                                        <input type="file" [disabled]="!disableReservedfileupdate" (change)="selectFile($event,'reserved')" />
+                                                      </label>
+                                                    <button class="btn btn-success btn-sm" [disabled]="!updateReservedFile" (click)="uploadReservedFile()">Upload</button>
+                                                </div>
+                                                <div class="noti-file-upload" *ngIf="reservefileUploading">
+
+                                                    <p><span class="loadr">
+                                                        <div class="svg-loader">
+                                                        <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
+                                                            <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+                                                            <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+                                                        </svg>
+                                                    </div>
+                                                </span>File upload successfully/with errors </p>
+                                                </div>
+                                                <div class="file-upload-results" *ngIf="reserveFileUpload">
+                                                    <p class="record-uploa">Total of records uploaded: <span class="total-upload-value">{{reserveRecordCount}}</span></p>
+                                                    <p class="record-uploa">Total Time Elapsed in Seconds: <span class="total-upload-value">{{reservetimeElapsed}} Seconds</span></p>
+                                                    <p class="record-failed">Total of records failed: <span class="total-failed-value">0</span></p>
+                                                </div>
+                                                <!-- <div class="print-btn-report" *ngIf="masterfileUpload">
+                                                    <a (click)="submitFile()">Print report</a>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </li>
+                                <li [ngbNavItem]="4">
                                     <a ngbNavLink class="custom-tabs" (click)="isStockFileUpload=false">Stock</a>
                                     <ng-template ngbNavContent>
                                         <div *ngIf="!isStockFileUpload" class="btn-upload-files">
@@ -156,7 +197,89 @@
                                         </div>
                                     </ng-template>
                                 </li>
-                                <li [ngbNavItem]="3">
+                                <li [ngbNavItem]="5" position-relative>
+                                    <a ngbNavLink class="custom-tabs" (click)="onParametrByDepartmentClick()">Parameter by Departments</a>
+                                    <ng-template ngbNavContent>
+                                        <div *ngIf="!isParametersFilesUpload" class="btn-upload-files">
+                                            <button class="btn btn btn-primary btn-upload" (click)="checkParameterFileupload()">Upload</button>
+                                           <app-parametersbydepartment></app-parametersbydepartment>
+                                        </div>
+                                        <div *ngIf="isParametersFilesUpload" class="resultwrapper-tab">
+                                            <div class="content-upload-view">
+                                                <div class="load-file">
+                                                    <div class="icon-svg-file">
+                                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cloud-upload-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-cloud-upload-alt fa-w-20 fa-2x"><path fill="currentColor" d="M537.6 226.6c4.1-10.7 6.4-22.4 6.4-34.6 0-53-43-96-96-96-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32c-88.4 0-160 71.6-160 160 0 2.7.1 5.4.2 8.1C40.2 219.8 0 273.2 0 336c0 79.5 64.5 144 144 144h368c70.7 0 128-57.3 128-128 0-61.9-44-113.6-102.4-125.4zM393.4 288H328v112c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V288h-65.4c-14.3 0-21.4-17.2-11.3-27.3l105.4-105.4c6.2-6.2 16.4-6.2 22.6 0l105.4 105.4c10.1 10.1 2.9 27.3-11.3 27.3z" class=""></path></svg>
+                                                    </div>
+                                                    <label class="btn btn-default p-0">
+                                                        <input type="file" [disabled]="!disableparametersbydepartmentfileupdate" (change)="selectFile($event,'parametersByDepartment')" />
+                                                      </label>
+                                                    <button class="btn btn-success btn-sm" [disabled]="!updateParametrsDepartmentFile" (click)="uploadPerameterByDepartmentFile()">Upload</button>
+                                                </div>
+                                                <div class="noti-file-upload" *ngIf="perametesByDepartmentfileUploading">
+
+                                                    <p><span class="loadr">
+                                                        <div class="svg-loader">
+                                                        <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
+                                                            <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+                                                            <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+                                                        </svg>
+                                                    </div>
+                                                </span>File upload successfully/with errors </p>
+                                                </div>
+                                                <div class="file-upload-results" *ngIf="perametersByDepartmentFileUpload">
+                                                    <p class="record-uploa">Total of records uploaded: <span class="total-upload-value">{{parameterRecordCount}}</span></p>
+                                                    <p class="record-uploa">Total Time Elapsed in Seconds: <span class="total-upload-value">{{parametertimeElapsed}} Seconds</span></p>
+                                                    <p class="record-failed">Total of records failed: <span class="total-failed-value">0</span></p>
+                                                </div>
+                                                <!-- <div class="print-btn-report" *ngIf="masterfileUpload">
+                                                    <a (click)="submitFile()">Print report</a>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </li>
+                                <li [ngbNavItem]="6" position-relative>
+                                    <a ngbNavLink class="custom-tabs" (click)="onCategoriesClick()">Categories</a>
+                                    <ng-template ngbNavContent>
+                                        <div *ngIf="!isCategoriesFileUpload" class="btn-upload-files">
+                                            <button class="btn btn btn-primary btn-upload" (click)="checkCategoryFileupload()">Upload</button>
+                                            <app-category></app-category>
+                                        </div>
+                                        <div *ngIf="isCategoriesFileUpload" class="resultwrapper-tab">
+                                            <div class="content-upload-view">
+                                                <div class="load-file">
+                                                    <div class="icon-svg-file">
+                                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cloud-upload-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-cloud-upload-alt fa-w-20 fa-2x"><path fill="currentColor" d="M537.6 226.6c4.1-10.7 6.4-22.4 6.4-34.6 0-53-43-96-96-96-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32c-88.4 0-160 71.6-160 160 0 2.7.1 5.4.2 8.1C40.2 219.8 0 273.2 0 336c0 79.5 64.5 144 144 144h368c70.7 0 128-57.3 128-128 0-61.9-44-113.6-102.4-125.4zM393.4 288H328v112c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V288h-65.4c-14.3 0-21.4-17.2-11.3-27.3l105.4-105.4c6.2-6.2 16.4-6.2 22.6 0l105.4 105.4c10.1 10.1 2.9 27.3-11.3 27.3z" class=""></path></svg>
+                                                    </div>
+                                                    <label class="btn btn-default p-0">
+                                                        <input type="file" [disabled]="!disableCategoryfileupdate" (change)="selectFile($event,'categories')" />
+                                                      </label>
+                                                    <button class="btn btn-success btn-sm" [disabled]="!updateCategoriesFile" (click)="uploadCategoriesFile()">Upload</button>
+                                                </div>
+                                                <div class="noti-file-upload" *ngIf="categoriesfileUploading">
+
+                                                    <p><span class="loadr">
+                                                        <div class="svg-loader">
+                                                        <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
+                                                            <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+                                                            <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+                                                        </svg>
+                                                    </div>
+                                                </span>File upload successfully/with errors </p>
+                                                </div>
+                                                <div class="file-upload-results" *ngIf="categoriesFileUpload">
+                                                    <p class="record-uploa">Total of records uploaded: <span class="total-upload-value">{{categoryRecordCount}}</span></p>
+                                                    <p class="record-uploa">Total Time Elapsed in Seconds: <span class="total-upload-value">{{CategorytimeElapsed}} Seconds</span></p>
+                                                    <p class="record-failed">Total of records failed: <span class="total-failed-value">0</span></p>
+                                                </div>
+                                                <!-- <div class="print-btn-report" *ngIf="masterfileUpload">
+                                                    <a (click)="submitFile()">Print report</a>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </li>
+                                <!-- <li [ngbNavItem]="3">
                                     <a ngbNavLink class="custom-tabs" (click)="isSaleFileUpload=false">Sales</a>
                                     <ng-template ngbNavContent>
                                         <div *ngIf="!isSaleFileUpload" class="btn-upload-files">
@@ -174,9 +297,7 @@
                                                         <input type="file" (change)="selectFile($event,'sales')" />
                                                       </label>
                                                     <button class="btn btn-success btn-sm" [disabled]="!updateSalefile" (click)="uploadSaleFile()">Upload</button>
-                                                    <!-- <a href="">
-                                                        <span class="plus-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="svg-inline--fa fa-plus fa-w-12 fa-2x"><path fill="currentColor" d="M376 232H216V72c0-4.42-3.58-8-8-8h-32c-4.42 0-8 3.58-8 8v160H8c-4.42 0-8 3.58-8 8v32c0 4.42 3.58 8 8 8h160v160c0 4.42 3.58 8 8 8h32c4.42 0 8-3.58 8-8V280h160c4.42 0 8-3.58 8-8v-32c0-4.42-3.58-8-8-8z" class=""></path></svg></span>Load</a> -->
-                                                </div>
+                                                   </div>
                                                 <div class="noti-file-upload" *ngIf="salefileUploading">
                                                     <p><span class="loadr">
                                                         <div class="svg-loader">
@@ -193,60 +314,21 @@
 
                                                 </div>
 
-
-                                                <!-- <div class="print-btn-report" *ngIf="saleFileUpload">
-                                                    <a (click)="submitSaleFile()">Print report</a>
-                                                </div> -->
                                             </div>
                                         </div>
                                     </ng-template>
-                                </li>
-                                <li [ngbNavItem]="4">
+                                </li> -->
+                                <li [ngbNavItem]="8">
                                     <a ngbNavLink class="custom-tabs" (click)="isSaleFileUpload=false">Ranges</a>
                                     <ng-template ngbNavContent>
                                         <div class="btn-upload-files marginset">
 
                                             <app-ranges></app-ranges>
                                         </div>
-                                        <div *ngIf="isSaleFileUpload" class="resultwrapper-tab">
-                                            <div class="content-upload-view">
-
-                                                <div class="load-file">
-                                                    <div class="icon-svg-file">
-                                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="cloud-upload-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-cloud-upload-alt fa-w-20 fa-2x"><path fill="currentColor" d="M537.6 226.6c4.1-10.7 6.4-22.4 6.4-34.6 0-53-43-96-96-96-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32c-88.4 0-160 71.6-160 160 0 2.7.1 5.4.2 8.1C40.2 219.8 0 273.2 0 336c0 79.5 64.5 144 144 144h368c70.7 0 128-57.3 128-128 0-61.9-44-113.6-102.4-125.4zM393.4 288H328v112c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V288h-65.4c-14.3 0-21.4-17.2-11.3-27.3l105.4-105.4c6.2-6.2 16.4-6.2 22.6 0l105.4 105.4c10.1 10.1 2.9 27.3-11.3 27.3z" class=""></path></svg>
-                                                    </div>
-                                                    <label class="btn btn-default p-0">
-                                                        <input type="file" (change)="selectFile($event,'sales')" />
-                                                      </label>
-                                                    <button class="btn btn-success btn-sm" [disabled]="!updateSalefile" (click)="uploadSaleFile()">Upload</button>
-                                                    <!-- <a href="">
-                                                        <span class="plus-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="svg-inline--fa fa-plus fa-w-12 fa-2x"><path fill="currentColor" d="M376 232H216V72c0-4.42-3.58-8-8-8h-32c-4.42 0-8 3.58-8 8v160H8c-4.42 0-8 3.58-8 8v32c0 4.42 3.58 8 8 8h160v160c0 4.42 3.58 8 8 8h32c4.42 0 8-3.58 8-8V280h160c4.42 0 8-3.58 8-8v-32c0-4.42-3.58-8-8-8z" class=""></path></svg></span>Load</a> -->
-                                                </div>
-                                                <div class="noti-file-upload" *ngIf="salefileUploading">
-                                                    <p><span class="loadr">
-                                                        <div class="svg-loader">
-                                                        <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
-                                                            <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
-                                                            <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
-                                                        </svg>
-                                                    </div>
-                                                </span>File upload successfully/with errors </p>
-                                                </div>
-                                                <div class="file-upload-results" *ngIf="saleFileUpload">
-                                                    <p class="record-uploa">Total of records uploaded: <span class="total-upload-value">{{stockRecordCount}}</span></p>
-                                                    <p class="record-failed">Total of records failed: <span class="total-failed-value">0</span></p>
-
-                                                </div>
-
-
-                                                <!-- <div class="print-btn-report" *ngIf="saleFileUpload">
-                                                    <a (click)="submitSaleFile()">Print report</a>
-                                                </div> -->
-                                            </div>
-                                        </div>
+                                      
                                     </ng-template>
                                 </li>
-                                <li [ngbNavItem]="5" position-relative>
+                                <li [ngbNavItem]="9" position-relative>
                                     <a ngbNavLink class="custom-tabs" (click)="onMenuClick()">Program Terminal</a>
                                     <ng-template ngbNavContent>
                                         <app-program-terminal></app-program-terminal>

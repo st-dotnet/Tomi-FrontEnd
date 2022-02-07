@@ -668,6 +668,10 @@ app-login {
 }
 
 .btn-upload-files app-master,
+.btn-upload-files app-department,
+.btn-upload-files app-category,
+.btn-upload-files app-reserved,
+.btn-upload-files app-parametersbydepartment,
 .btn-upload-files app-stocklist,
 .btn-upload-files app-customer,
 .btn-upload-files app-ranges {
