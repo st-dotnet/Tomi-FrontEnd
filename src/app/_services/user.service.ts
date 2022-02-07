@@ -246,7 +246,7 @@ export class UserService {
     });
   };
   uploadParameterByDepartmentFile(model: any) {
-    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportParaMeterByDepartmentFile`, model, {
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportParametersByDepartmentFile`, model, {
       reportProgress: true,
       responseType: 'json'
     });

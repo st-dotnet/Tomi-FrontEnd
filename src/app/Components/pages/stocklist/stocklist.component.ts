@@ -15,6 +15,7 @@ export class StocklistComponent implements OnInit {
   storeId: any;
   year: any;
   p: number = 1;
+  disablestockfileupdate: boolean= false;
   constructor(
     private router: Router,
     private authenticationService: UserService,
@@ -33,6 +34,24 @@ export class StocklistComponent implements OnInit {
     //   }
     // });
     this.authenticationService.stockList.subscribe((user: any) => this.stockList = user);
+
+    this.authenticationService.disablestockfileupdate.subscribe(user => this.disablestockfileupdate = user);
+    if(!this.disablestockfileupdate)
+    {
+      
+     this.authenticationService.stockList.subscribe(user => this.stockList = user);
+    }
+    else{
+         this.authenticationService.customerId.subscribe(user => this.customerId = user);
+        this.authenticationService.storeId.subscribe(user => this.storeId = user);
+       this.authenticationService.stockDate.subscribe((year) => {
+       if (year) {
+         this.year = year;
+         this.getSaleFileData();
+       }
+     });
+   
+    }
 
   }
 
