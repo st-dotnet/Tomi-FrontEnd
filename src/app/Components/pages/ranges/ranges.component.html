@@ -167,15 +167,18 @@
                         </div>
                     </div>
                     <div class="col-md-6 form-group">
-                        <input type="number" placeholder="Tag From" class="form-control" formControlName="tagFrom"
+                        <input type="number" placeholder="Tag From" class="form-control" formControlName="tagFrom" (change)="tagfromValue()"
                             [ngClass]="{ 'is-invalid': submitted && f['tagFrom'].errors }">
 
                         <div *ngIf="submitted && f['tagFrom'].errors" class="invalid-feedback">
                             <div *ngIf="f['tagFrom'].errors['required']">Tag From is required</div>
                         </div>
+                        <div *ngIf="rangeError" class="tagerror">
+                            <div *ngIf="rangeError">{{rangeErrorMessage}}</div>
+                        </div>
                     </div>
                     <div class="col-md-6 form-group">
-                        <input type="number" placeholder="Tag To" class="form-control" formControlName="tagTo"
+                        <input type="number" placeholder="Tag To" class="form-control" formControlName="tagTo"(change)="tagfromValue()"
                             [ngClass]="{ 'is-invalid': submitted && f['tagTo'].errors }">
                         <div *ngIf="submitted && f['tagTo'].errors" class="invalid-feedback">
                             <div *ngIf="f['tagTo'].errors['required']">Tag To is required</div>

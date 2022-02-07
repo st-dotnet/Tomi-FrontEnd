@@ -85,5 +85,9 @@ export class RangesService {
   getStoreBySku(sku: string) {
     return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}MasterDataBySku/${sku}`);
   }
+
+  getMaximumRanges(){
+    return this.http.get<any>(`${environment.apiUrl}${this.rangeEndPoint}GetMinMaxRange`);
+  }
   //
 }

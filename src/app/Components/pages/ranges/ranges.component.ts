@@ -29,6 +29,9 @@ export class RangesComponent implements OnInit {
   printDate = new Date();
   editRange: boolean = false;
   editGroup: boolean = false;
+  maximumRange: any;
+  rangeError: boolean= false;
+  rangeErrorMessage: string="";
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -53,6 +56,7 @@ export class RangesComponent implements OnInit {
     });
     this.getallRangeList();
     this.getallGroupList();
+    this.getMaximumRange();
   }
 
   getallCustomList() {
@@ -60,6 +64,15 @@ export class RangesComponent implements OnInit {
     this.rangesService.rangeList.subscribe(user => this.rangeList = user);
   }
 
+  getMaximumRange(){
+    this.rangesService.getMaximumRanges().subscribe({
+      next: (event: any) => {
+        this.maximumRange = event;
+        if(this.maximumRange>0)
+        this.rangeForm.controls["tagFrom"].setValue(this.maximumRange);
+      }
+    })
+  }
   getallRangeList() {
     this.rangesService.getRangeLists().subscribe({
       next: (event: any) => {
@@ -81,6 +94,8 @@ export class RangesComponent implements OnInit {
     this.rangeForm.reset();
     this.groupForm.reset();
     this.rangeForm.controls["groupId"].setValue("");
+    if(this.maximumRange>0)
+    this.rangeForm.controls["tagFrom"].setValue(this.maximumRange);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.getallRangeList();
     }, (reason) => {
@@ -122,6 +137,7 @@ export class RangesComponent implements OnInit {
     if (this.rangeForm.invalid) {
       return;
     }
+
     this.loading = true;
     this.rangesService.addRange(this.rangeForm.value)
       .pipe(first())
@@ -190,4 +206,15 @@ export class RangesComponent implements OnInit {
     this.groupSubmitted = false;
   }
 
+  tagfromValue(){
+    this.rangeError= false;
+      if(this.rangeForm.value.tagFrom != null && this.maximumRange>this.rangeForm.value.tagFrom)
+      { this.rangeError= true;
+        this.rangeErrorMessage='Tag From is not less than '+this.maximumRange;
+        return;
+      }   
+      if(this.rangeForm.value.tagFrom !=null && this.rangeForm.value.tagTo&& this.rangeForm.value.tagFrom>this.rangeForm.value.tagTo)
+      {this.rangeError = true;
+      this.rangeErrorMessage="Tag From is not greater than tag to value";}
+  }
 }

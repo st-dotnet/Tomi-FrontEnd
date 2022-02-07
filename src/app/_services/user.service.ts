@@ -158,7 +158,7 @@ export class UserService {
 
   uploadStockFile(model: any) {
 
-    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportStockFile`, model, {
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}ImportNewStockFile`, model, {
       reportProgress: true,
       responseType: 'json'
     });
@@ -166,7 +166,7 @@ export class UserService {
 
   getstockData(model: any) {
     this.spinner.show();
-    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetStocksData`, model).subscribe(res => {
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetNewStockData`, model).subscribe(res => {
       this._stockList.next(res);
     this.spinner.hide();
     })
@@ -283,7 +283,7 @@ export class UserService {
     })
   }
   getStockList(model: any) {
-    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetStocksData`, model);
+    return this.http.post<any>(`${environment.apiUrl}${this.storeEndPoint}GetNewStockData`, model);
   }
 
   setCustomerId(object: any) {

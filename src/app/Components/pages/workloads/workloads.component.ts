@@ -478,12 +478,12 @@ export class WorkloadsComponent implements OnInit {
         formData.append('stockDate', date);
         this.reservefileUploading = true;
         this.authenticationService.setReservedfileUpload(this.reservefileUploading);
-        this.authenticationService.setSalefileUploaddisable(false);
+        this.authenticationService.setReservefileUploadDisable(false);
         this.authenticationService.uploadReservedFile(formData).subscribe({
           next: (event: any) => {
             if (event.success) {
               this.reservefileUploading = false;
-              this.authenticationService.setSalefileUpload(false);
+              this.authenticationService.setReservedfileUpload(false);
               this.reserveRecordCount = event.stockRecordCount;
               this.reservetimeElapsed = event.timeElapsed;
               this.reserveFileUpload = true;
@@ -494,8 +494,8 @@ export class WorkloadsComponent implements OnInit {
                   storeId: this.storeId,
                   stockDate: this.year,
                 };
-                this.authenticationService.setSalefileUploaddisable(true);
-                this.authenticationService.getSalesData(workload);
+                this.authenticationService.setReservefileUploadDisable(true);
+                this.authenticationService.getReservedData(workload);
                 this.isReservedFileUpload = !this.isReservedFileUpload;
                 this.reserveFileUpload = false;
               }, 3000);
