@@ -64,7 +64,9 @@ export class StockAdjustmentService {
   searchRecord(model:any){
     return this.http.post<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}SearchStockAdjustment`, model);
   }
-
+  VoidTag(model:any){
+    return this.http.post<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}VoidTag`, model);
+  }
   getAdjustmentByCustomerId(custid:any) {
     return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}GetMasterByCustomerId/${custid}`);
   };

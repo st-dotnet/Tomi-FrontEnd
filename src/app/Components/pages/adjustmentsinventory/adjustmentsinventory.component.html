@@ -121,7 +121,7 @@
         <a (click)="getAdjustment()"> <img class="img-fluid" src="assets/adujstment/refresh.png" alt=""></a>
       </li>
       <div class="lastBtn">
-        <button class="voidBtn">VOID TAG</button>
+        <button class="voidBtn"  (click)="open(voidTagModal)">VOID TAG</button>
         <!-- <button class="recountBtn"><input type="checkbox"> Show Recount Data</button> -->
       </div>
     </ul>
@@ -528,10 +528,11 @@
 </ng-template>
 
 
-<ng-template #groupModal let-modal>
+
+<ng-template #MassChangeModal let-modal>
   <div class="modal-ui-same form-ranges-add">
       <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">{{'Mass Changes'}}
+          <h4 class="modal-title" id="modal-basic-title">{{'Mass Change'}}
                  
           </h4>
 
@@ -546,31 +547,30 @@
           </button>
       </div>
       <div class="modal-body">
-
-        
           <div class="btn-upload-files">
-
+            <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+            
               <table class="table table-ui-same" id="datatableexample">
-                  <thead>
-                      <tr>
-                          <th>Description</th>
-                          <th style=" width: 120px;text-align: center;">Actions</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr *ngFor="let group of adjustmentList| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-                          <td>{{group.name}}</td>
-                        
-
-                      </tr>
-                  </tbody>
-              </table>
-              <!-- <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
-                  <p style="color: white">Loading...</p>
-              </ngx-spinner> -->
-              <div class="pagination-ui" >
-                  <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
-              </div>
+                <thead>
+                    <tr>
+                        <th></th>
+                      <th> Tag</th>
+                      <th>Bar Code</th>
+                      <th>Desc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of adjustmentList; let i = index">
+                        <td>  <input type="checkbox" [value]="item.tag" (change)="onCheckboxChange($event)" />
+                          </td>
+                          <td>{{item.tag}}</td>
+                          <td> <input type="text" [(ngModel)]="item.tag" /></td>
+                          <td>{{item.orderJob.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+              <input type="submit" value="Submit">
+            </form>
           </div>
 
       </div>
@@ -578,4 +578,53 @@
 
 </ng-template>
 
+
+<ng-template #voidTagModal let-modal>
+  <div class="modal-ui-same form-ranges-add">
+      <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">{{'Void Tag'}}
+                 
+          </h4>
+
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true" class="close-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal"
+                      data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                      class="svg-inline--fa fa-times fa-w-10 fa-2x">
+                      <path fill="currentColor"
+                          d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"
+                          class=""></path>
+                  </svg></span>
+          </button>
+      </div>
+      <div class="modal-body">
+          <div class="btn-upload-files">
+            <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+            
+              <table class="table table-ui-same" id="datatableexample">
+                <thead>
+                    <tr>
+                        <th></th>
+                      <th> Tag</th>
+                      <th>Bar Code</th>
+                      <th>Desc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of adjustmentList; let i = index">
+                        <td>  <input type="checkbox" [value]="item.tag" (change)="onCheckboxChange($event)" />
+                          </td>
+                          <td>{{item.tag}}</td>
+                          <td>{{item.barcode}}</td>
+                          <td>{{item.orderJob.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+              <input type="submit" value="Submit">
+            </form>
+          </div>
+
+      </div>
+  </div>
+
+</ng-template>
 

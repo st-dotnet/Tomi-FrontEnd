@@ -1,6 +1,6 @@
 import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Master, StockFilterModel } from '@app/_models';
 import { StockAdjustmentService, UserService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -33,10 +33,21 @@ export class AdjustmentsinventoryComponent implements OnInit {
   invalidbarcode: boolean= false;
   editadjust: boolean= false;
   isTagvalueExist:  boolean= false;
+  form: FormGroup;
+  Data: Array<any> = [
+    { name: 'Pear', value: 'pear' },
+    { name: 'Plum', value: 'plum' },
+    { name: 'Kiwi', value: 'kiwi' },
+    { name: 'Apple', value: 'apple' },
+    { name: 'Lime', value: 'lime' }
+  ];
   constructor(private formBuilder: FormBuilder, private modalService: NgbModal,
   private stockAdjustmentService: StockAdjustmentService,
   private spinner: NgxSpinnerService,
-  private toastrService: ToastrService, private userservice: UserService) {
+  private toastrService: ToastrService, private userservice: UserService,private fb: FormBuilder) {
+    this.form = this.fb.group({
+      checkArray: this.fb.array([])
+    })
 
   }
   adjustmentinventory!: false;
@@ -352,5 +363,32 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
   resetFilterData() {
     this.stockFilter = new StockFilterModel();
+  }
+
+  onCheckboxChange(e:any) {
+    const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+    if (e.target.checked) {
+      checkArray.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray.controls.forEach((item: any) => {
+        if (item.value == e.target.value) {
+          checkArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
+
+  submitForm() {
+    this.stockAdjustmentService.VoidTag(this.form.value.checkArray)
+    .pipe(first())
+    .subscribe({
+      next: (response) => {
+        this.getAdjustment();
+        this.modalService.dismissAll();
+      }
+    });
   }
 }
