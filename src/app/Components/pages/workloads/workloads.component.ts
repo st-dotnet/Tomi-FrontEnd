@@ -555,7 +555,7 @@ export class WorkloadsComponent implements OnInit {
                   storeId: this.storeId,
                   stockDate: this.year,
                 };
-                this.authenticationService.setParameterBydepartmentfileUpload(true);
+                this.authenticationService.setparameterfileUploadDisable(true);
                 this.authenticationService.getParametersByDepartmentData(workload);
                 this.isParametersFilesUpload = !this.isParametersFilesUpload;
                 this.perametersByDepartmentFileUpload = false;
