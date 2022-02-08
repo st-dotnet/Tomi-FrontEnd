@@ -79,103 +79,6 @@
   </div>
 </ng-template>
 
-<!-- <section class="inner-content inner-pageview">
-  <div class="card">
-      <div class="card-body">
-
-          <div class="content-body">
-              <table class="table table-ui-same" id="datatableexample" *ngIf="adjustmentList">
-                  <thead>
-                      <tr style="text-align:center">
-                          <th>Rec</th>
-                          <th>term</th>
-                          <th>dload</th>
-                          <th>empno</th>
-                          <th>tag</th>
-                          <th>shelf</th>
-                          <th>Barcode</th>
-                          <th>SKU</th>
-                          <th>NOF</th>
-                          <th>dept</th>
-                          <th>desc</th>
-                          <th>price</th>
-                          <th>Quantity</th>
-                          <th>Dt</th>
-                          <td >Action</td>
-
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr *ngFor="let item of adjustmentList| searchFilter:searchText |paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-                          <td>{{item.rec}}</td>
-                          <td>{{item.term}}</td>
-                          <td>{{item.dload}}</td>
-                          <td>empno</td>
-                          <td>{{item.tag}}</td>
-                          <td>{{item.shelf}}</td>
-                          <td>{{item.barcode}}</td>
-                          <td>{{item.sku}}</td>
-                          <td><input type="checkbox" [checked]="item.nof=='0'?false:true"></td>
-                          <td>{{item.department}}</td>
-                          <td>Description</td>
-                          <td>price</td>
-                          <td>{{item.quantity}}</td>
-                          <td >{{item.createdAt |date:'MM/dd/yyyy'}}</td>
-
-
-                          <td>
-                            <ul class="action-cell">
-                                <li><a class="edit-icoo" (click)="editAdjustment(item,stockmodel)"><span
-                                            class="icon-cellaction "><svg aria-hidden="true" focusable="false"
-                                                data-prefix="fas" data-icon="pencil-alt" role="img"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                                class="svg-inline--fa fa-pencil-alt fa-w-16 fa-2x">
-                                                <path fill="currentColor"
-                                                    d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"
-                                                    class=""></path>
-                                            </svg></span></a>
-                                </li>
-                                <li>
-                                    <a class="remove-icoo" (click)="deleteAdjustment(item.id)"><span
-                                            class="icon-cellaction "><svg aria-hidden="true" focusable="false"
-                                                data-prefix="far" data-icon="times" role="img"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
-                                                class="svg-inline--fa fa-times fa-w-10 fa-2x">
-                                                <path fill="currentColor"
-                                                    d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"
-                                                    class=""></path>
-                                            </svg></span>
-                                        </a>
-                                </li>
-
-                                <li *ngIf="item.isdeleted==true">
-                                  <a class="edit-icoo" (click)="recyle(item)"><span
-                                          class="icon-cellaction "><svg aria-hidden="true" focusable="false"
-                                              data-prefix="far" data-icon="times" role="img"
-                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
-                                              class="svg-inline--fa fa-times fa-w-10 fa-2x">
-                                              <path fill="currentColor"
-                                                  d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"
-                                                  class=""></path>
-                                          </svg></span>
-                                      </a>
-                              </li>
-                            </ul>
-                        </td>
-                      </tr>
-                  </tbody>
-              </table>
-              <div class="pagination-ui">
-                  <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
-              </div>
-              <ngx-spinner class="custom-loader" type="square-jelly-box" size="medium" [fullScreen]="false"
-                  style="top:auto;">
-                  <p style="color: white">Loading...</p>
-              </ngx-spinner>
-          </div>
-      </div>
-  </div>
-</section> -->
 <div class="searchbar-opt">
   <div class="Searchbar">
     <form>
@@ -240,7 +143,7 @@
               <th>Tag</th>
               <th>Shelf</th>
               <th>barcode</th>
-              <th>sku</th>
+              <!-- <th>sku</th> -->
               <th>nof</th>
               <th>dept</th>
               <th>desc</th>
@@ -260,16 +163,16 @@
               <td>{{item.tag}}</td>
               <td>{{item.shelf}}</td>
               <td>{{item.barcode}}</td>
-              <td>{{item.master.sku}}</td>
+              <!-- <td>{{item.orderJob.code}}</td> -->
               <td><input type="checkbox" [checked]="item.nof=='0'?false:true"></td>
-              <td>{{item.master.department}}</td>
-              <td>{{item.master.description}}</td>
-              <td>{{item.master.retailPrice}}</td>
+              <td>{{item.orderJob.department}}</td>
+              <td>{{item.orderJob.description}}</td>
+              <td>{{item.orderJob.salePrice}}</td>
               <td>{{item.quantity}}</td>
               <td>{{item.createdAt |date:'MM/dd/yyyy'}}</td>
               <td>
                 <ul class="action-cell">
-                  <li *ngIf="!item.isdeleted"><a class="edit-icoo" (click)="editAdjustment(item,stockmodel)"><span
+                  <li *ngIf="!item.isdeleted"><a class="edit-icoo" (click)="editAdjustment(item,AddRecord)"><span
                         class="icon-cellaction "><svg aria-hidden="true" focusable="false" data-prefix="fas"
                           data-icon="pencil-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                           class="svg-inline--fa fa-pencil-alt fa-w-16 fa-2x">
@@ -479,7 +382,7 @@
 <ng-template #AddRecord let-modal>
   <div class="modal-ui-same form-ranges-add record-modal">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Add Record</h4>
+      <h4 class="modal-title" id="modal-basic-title" >{{editadjust? 'Edit Record':'Add Record' }}</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true" class="close-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal"
             data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
@@ -492,7 +395,7 @@
     </div>
     <div class="modal-body add-records">
       <form [formGroup]="adjustmentform" (ngSubmit)="onSubmit()">
-
+<!-- 
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label ">sku:</label>
           <div class="col-sm-8 adjust-from">
@@ -503,9 +406,9 @@
               <div *ngIf="f['mssku'].errors['required']">SKU is required</div>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="form-group row">
+        <!-- <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">Rec:</label>
           <div class="col-sm-8 adjust-from">
             <input type="number" formControlName="rec" placeholder="Rec" class="form-control"
@@ -514,7 +417,7 @@
               <div *ngIf="f['rec'].errors['required']">Rec is required</div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">Term:</label>
@@ -563,8 +466,9 @@
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">barcode:</label>
           <div class="col-sm-8 adjust-from">
-            <input type="text" formControlName="barcode" placeholder="Barcode"  class="form-control"
+            <input type="text" formControlName="barcode" placeholder="Barcode"  (change)="checkBarCodeData($event)"  class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['barcode'].errors }" />
+              <div *ngIf="invalidbarcode">BarCode is not Valid</div>
                <div *ngIf="submitted && f['barcode'].errors" class="invalid-feedback">
               <div *ngIf="f['barcode'].errors['required']">Barcode is required</div>
             </div>

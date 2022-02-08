@@ -61,8 +61,8 @@ export class Sales {
 export class Master {
     id?: string;
     sku?: string;
-    barcode?: string;
-    retailPrice?: string;
+    code?: string;
+    salePrice?:string;
     description?: string;
     department?: string;
     blank?: string;

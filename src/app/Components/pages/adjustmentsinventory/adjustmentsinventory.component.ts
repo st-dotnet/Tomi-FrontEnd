@@ -30,6 +30,8 @@ export class AdjustmentsinventoryComponent implements OnInit {
   gotoRecordSubmit: boolean = false;
   stockFilter: StockFilterModel = {};
   department?: number;
+  invalidbarcode: boolean= false;
+  editadjust: boolean= false;
   constructor(private formBuilder: FormBuilder, private modalService: NgbModal,
   private stockAdjustmentService: StockAdjustmentService,
   private spinner: NgxSpinnerService,
@@ -53,14 +55,14 @@ export class AdjustmentsinventoryComponent implements OnInit {
     // this.getAdjustmentById("9FC3863D-28D9-46B1-71BE-08D9DF53FEED");
     this.adjustmentform = this.formBuilder.group({
       //id: [''],
-      rec: ['', Validators.required],
+      // rec: ['', Validators.required],
       term: ['', Validators.required],
       dload: ['', Validators.required],
       tag: ['', Validators.required],
       shelf: ['', Validators.required],
       barcode: ['', Validators.required],
       sku: ['',],
-      mssku: ['', Validators.required],
+      // mssku: ['', Validators.required],
       nof: [0],
       //barcode:[''],
       ohquantity: [''],
@@ -88,6 +90,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
     this.modalClass = 'mymodal',
     this.submitted = false;
     this.isSubmit = false;
+    this.editadjust = false;
     this.adjustmentform.reset();
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
@@ -134,7 +137,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
           if (this.masterData) {
             this.adjustmentform.controls["department"].setValue(this.masterData.department);
             this.adjustmentform.controls["description"].setValue(this.masterData.description);
-            this.adjustmentform.controls["price"].setValue(this.masterData.retailPrice);
+            this.adjustmentform.controls["price"].setValue(this.masterData.salePrice);
             this.adjustmentform.controls["sku"].setValue(this.masterData.id);
             this.isSubmit = true;
             this.invalidsku = false;
@@ -151,13 +154,42 @@ export class AdjustmentsinventoryComponent implements OnInit {
       });
     this.spinner.hide();
   }
-
+  checkBarCodeData(sku: any) {
+    debugger;
+    this.spinner.show();
+    this.stockAdjustmentService.getStoreByBarCode(sku.target.value)
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          this.masterData = response.orderJob;
+          if (this.masterData) {
+            this.adjustmentform.controls["department"].setValue(this.masterData.department);
+            this.adjustmentform.controls["description"].setValue(this.masterData.description);
+            this.adjustmentform.controls["price"].setValue(this.masterData.salePrice);
+            this.adjustmentform.controls["sku"].setValue(this.masterData.id);
+            this.isSubmit = true;
+            this.invalidbarcode = false;
+          }
+          else {
+            this.isSubmit = false;
+            this.invalidbarcode = true;
+            this.adjustmentform.controls["department"].setValue('');
+            this.adjustmentform.controls["description"].setValue('');
+            this.adjustmentform.controls["price"].setValue('');
+          }
+          this.spinner.hide();
+        }
+      });
+    this.spinner.hide();
+  }
   getAdjustment() {
     this.spinner.show();
     this.stockAdjustmentService.getAdjustment()
       .pipe(first())
       .subscribe({
         next: (response: any) => {
+          debugger;
           this.spinner.hide();
           this.adjustmentList = response;
           this.modalService.dismissAll();
@@ -191,11 +223,22 @@ export class AdjustmentsinventoryComponent implements OnInit {
       });
   }
 
-  editAdjustment(model: any, content: any) {
+  editAdjustment(item: any, content: any) {
+  this.editadjust= true;
+    this.adjustmentform.controls["department"].setValue(item.department);
+    this.adjustmentform.controls["description"].setValue(item.orderJob.description);
+    this.adjustmentform.controls["price"].setValue(item.orderJob.salePrice);
+    this.adjustmentform.controls["sku"].setValue(item.id);
+    this.adjustmentform.controls["barcode"].setValue(item.barcode);
+    this.adjustmentform.controls["term"].setValue(item.term);
+    this.adjustmentform.controls["dload"].setValue(item.dload);
+    this.adjustmentform.controls["tag"].setValue(item.tag);
+    this.adjustmentform.controls["shelf"].setValue(item.shelf);
+    this.adjustmentform.controls["quantity"].setValue(item.quantity);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
     }, (reason) => {
     });
-    this.adjustmentList = model;
+   
   }
 
   openFilter(content: any) {

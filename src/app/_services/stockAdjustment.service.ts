@@ -52,6 +52,9 @@ export class StockAdjustmentService {
   getStoreBySku(sku: string) {
     return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}MasterDataBySku/${sku}`);
   }
+  getStoreByBarCode(sku: string) {
+    return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}MasterDataByBarCode/${sku}`);
+  }
 
   gotoRecordId(id:any) {
     return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}GoToRecord/${id}`);
