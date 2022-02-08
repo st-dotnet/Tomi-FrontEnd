@@ -13,6 +13,7 @@ export class StockAdjustmentService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
   private readonly StockAdjustmentEndPoint = 'StockAdjustment/';
+  private readonly rangeEndPoint = 'Ranges/';
   //StockAdjustment
   private _rangeList: BehaviorSubject<Range[]> = new BehaviorSubject<Range[]>([]);
   public rangeList: Observable<Range[]> = this._rangeList.asObservable();
@@ -67,5 +68,9 @@ export class StockAdjustmentService {
   getAdjustmentByCustomerId(custid:any) {
     return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}GetMasterByCustomerId/${custid}`);
   };
+
+  getTagValue(tagValue:any){
+    return this.http.get<any>(`${environment.apiUrl}${this.rangeEndPoint}GetTagValue/${tagValue}`);
+  }
   //
 }

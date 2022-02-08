@@ -444,8 +444,9 @@
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">Tag:</label>
           <div class="col-sm-8 adjust-from">
-            <input type="number" formControlName="tag" placeholder="Tag" class="form-control"
+            <input type="number" formControlName="tag" placeholder="Tag" class="form-control"  (change)="checkTagValue($event)" 
               [ngClass]="{ 'is-invalid': submitted && f['tag'].errors }" />
+              <div *ngIf="isTagvalueExist" style="color: red;">Tag value  is not exist in ranges</div>
             <div *ngIf="submitted && f['tag'].errors" class="invalid-feedback">
               <div *ngIf="f['tag'].errors['required']">Tag is required</div>
             </div>
@@ -468,7 +469,7 @@
           <div class="col-sm-8 adjust-from">
             <input type="text" formControlName="barcode" placeholder="Barcode"  (change)="checkBarCodeData($event)"  class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['barcode'].errors }" />
-              <div *ngIf="invalidbarcode">BarCode is not Valid</div>
+              <div *ngIf="invalidbarcode" style="color: red;">Barcode is not Valid</div>
                <div *ngIf="submitted && f['barcode'].errors" class="invalid-feedback">
               <div *ngIf="f['barcode'].errors['required']">Barcode is required</div>
             </div>

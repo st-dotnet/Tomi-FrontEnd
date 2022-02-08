@@ -32,6 +32,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
   department?: number;
   invalidbarcode: boolean= false;
   editadjust: boolean= false;
+  isTagvalueExist:  boolean= false;
   constructor(private formBuilder: FormBuilder, private modalService: NgbModal,
   private stockAdjustmentService: StockAdjustmentService,
   private spinner: NgxSpinnerService,
@@ -91,6 +92,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
     this.submitted = false;
     this.isSubmit = false;
     this.editadjust = false;
+    this.isTagvalueExist= false;
     this.adjustmentform.reset();
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
@@ -126,7 +128,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
   }
 
   checkSkuData(sku: any) {
-    debugger;
     this.spinner.show();
     this.stockAdjustmentService.getStoreBySku(sku.target.value)
       .pipe(first())
@@ -155,7 +156,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
     this.spinner.hide();
   }
   checkBarCodeData(sku: any) {
-    debugger;
     this.spinner.show();
     this.stockAdjustmentService.getStoreByBarCode(sku.target.value)
       .pipe(first())
@@ -183,13 +183,22 @@ export class AdjustmentsinventoryComponent implements OnInit {
       });
     this.spinner.hide();
   }
+
+  checkTagValue(tagValue: any){
+    this.isTagvalueExist= false;
+    this.stockAdjustmentService.getTagValue(tagValue.target.value)
+    .pipe(first())
+    .subscribe({
+      next: (response) => {
+        this.isTagvalueExist= response;
+      }});
+  }
   getAdjustment() {
     this.spinner.show();
     this.stockAdjustmentService.getAdjustment()
       .pipe(first())
       .subscribe({
         next: (response: any) => {
-          debugger;
           this.spinner.hide();
           this.adjustmentList = response;
           this.modalService.dismissAll();
@@ -225,6 +234,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
   editAdjustment(item: any, content: any) {
   this.editadjust= true;
+  this.isTagvalueExist= false;
     this.adjustmentform.controls["department"].setValue(item.department);
     this.adjustmentform.controls["description"].setValue(item.orderJob.description);
     this.adjustmentform.controls["price"].setValue(item.orderJob.salePrice);
@@ -317,7 +327,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: (response) => {
-          debugger;
           this.spinner.hide();
           this.adjustmentList = response;
           this.stockFilter = new StockFilterModel();
@@ -325,7 +334,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
       });
   }
   FilterData() {
-    debugger;
     this.stockAdjustmentService.searchRecord(this.stockFilter)
       .pipe(first())
       .subscribe({
