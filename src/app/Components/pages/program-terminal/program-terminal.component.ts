@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService, StockAdjustmentService } from '@app/_services';
+import { SessionService, StockAdjustmentService, UserService } from '@app/_services';
 import { Guid } from 'guid-typescript';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -17,10 +17,13 @@ export class ProgramTerminalComponent implements OnInit {
   options:any;
   options2:any;
   data:any[]=[];
+  customerId: undefined;
+  storeId: undefined;
+  stockyear: undefined;
   constructor( private stockadjustment: StockAdjustmentService,
     private spinner: NgxSpinnerService,
     private toastrService: ToastrService,
-    private accountService: SessionService) { }
+    private accountService: SessionService, private authenticationService: UserService) { }
 
   ngOnInit(): void {
     this.options = {
@@ -59,7 +62,12 @@ export class ProgramTerminalComponent implements OnInit {
   }
 
   genrateFiles(){
-    if(this.data.length>0)
+    this.authenticationService.customerId.subscribe(user => this.customerId = user);
+    this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    this.authenticationService.stockDate.subscribe(user => this.stockyear = user);
+    if (this.customerId==undefined || this.storeId==undefined || this.stockyear ==undefined)
+    this.toastrService.error("Please select job order first");
+   else if(this.data.length>0)
     {
     this.isgenrateFile=true;
     new AngularCsv(this.data,'TerminalSMF.csv',this.options);
