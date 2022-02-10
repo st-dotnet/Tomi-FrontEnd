@@ -29,6 +29,7 @@ import { DepartmentComponent } from './department/department.component';
 import { CategoryComponent } from './category/category.component';
 import { ReservedComponent } from './reserved/reserved.component';
 import { ParametersbydepartmentComponent } from './parametersbydepartment/parametersbydepartment.component';
+import { LoadinformationComponent } from './loadinformation/loadinformation.component';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -50,6 +51,7 @@ import { ParametersbydepartmentComponent } from './parametersbydepartment/parame
     CategoryComponent,
     ReservedComponent,
     ParametersbydepartmentComponent,
+    LoadinformationComponent,
   ],
   imports: [
     PageRoutingModule,

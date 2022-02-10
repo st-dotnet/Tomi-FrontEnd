@@ -754,6 +754,7 @@ app-login {
     color: #fff;
     border-radius: 50%;
 }
+
 .searchbar-opt .more-opt ul.opt-list-ranges li button.print-ico.ico {
     width: 38px;
     height: 38px;
@@ -895,48 +896,39 @@ span.close-ico svg {
     border-color: #000;
 }
 
-.modal-ui-same.form-ranges-add input ,.modal-ui-same.form-ranges-add select {
-height: 45px;
+.modal-ui-same.form-ranges-add input,
+.modal-ui-same.form-ranges-add select {
+    height: 45px;
 }
-
-
 
 .modal-ui-same.form-ranges-add .form-group {
-margin-bottom: 15px;
+    margin-bottom: 15px;
 }
-
-
 
 .modal-ui-same.form-ranges-add ul.tags-from-to {
-list-style-type: none;
-padding: 0;
-display: flex;
-margin-bottom: 0px;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    margin-bottom: 0px;
 }
-
-
 
 .modal-ui-same.form-ranges-add ul.tags-from-to li:not(:first-child) {
-margin-left: 10px;
+    margin-left: 10px;
 }
-
-
 
 .modal-ui-same.form-ranges-add form button.save {
-display: block;
-width: 100%;
-max-width: 80px;
-float: right;
-margin: 0 0 20px 0 !important;
-background: #0a2946;
-border-color: #0a2946;
-font-family: 'Roboto';
+    display: block;
+    width: 100%;
+    max-width: 80px;
+    float: right;
+    margin: 0 0 20px 0 !important;
+    background: #0a2946;
+    border-color: #0a2946;
+    font-family: 'Roboto';
 }
 
-
-
-.modal-ui-same.form-ranges-add form button.save:hover  {
-background: #025677;
+.modal-ui-same.form-ranges-add form button.save:hover {
+    background: #025677;
 }
 
 .modal-ui-same.form-ranges-add form button.cancel {
@@ -948,14 +940,11 @@ background: #025677;
     background: #dc3545;
     border-color: #dc3545;
     font-family: 'Roboto';
-    }
+}
 
-
-
-    .modal-ui-same.form-ranges-add form button.cancel:hover  {
+.modal-ui-same.form-ranges-add form button.cancel:hover {
     background: #dc3545;
-    }
-
+}
 
 .modal-ui-same.form-ranges-add button.add-group {
     background: #027f02;
@@ -969,14 +958,19 @@ background: #025677;
     margin-top: -5px;
 }
 
-.modal-ui-same.form-ranges-add button.add-group span.svg-icon {position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);}
+.modal-ui-same.form-ranges-add button.add-group span.svg-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
 
 .modal-ui-same.form-ranges-add button.add-group span.svg-icon svg {
     width: 12px;
     margin-top: -1px;
 }
 
-.custom-loader .ngx-spinner-overlay{
+.custom-loader .ngx-spinner-overlay {
     height: 400px !important;
 }
 
@@ -984,60 +978,92 @@ background: #025677;
     pointer-events: none;
 }
 
-
 ngb-modal-window.modal-filteradd .modal-dialog {
-  width: 100%;
-  max-width: 680px;
+    width: 100%;
+    max-width: 680px;
 }
 
 ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter input {
-  max-width: 120px;
+    max-width: 120px;
 }
 
-ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter input,ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter select {
-  border: 1px solid #bfbfbf;
-  border-radius: 4px;
-  font-family: 'Roboto';
-  font-size: 14px;
-  padding: 6px 7px;
+ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter input,
+ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter select {
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+    font-family: 'Roboto';
+    font-size: 14px;
+    padding: 6px 7px;
 }
-
 
 .btn-search {
-  text-align: right;
-  margin-bottom: 45px;
+    text-align: right;
+    margin-bottom: 45px;
 }
 
 .btn-search .btn-submit {
-  display: block;
-  width: 100%;
-  max-width: 114px;
-  float: right;
-  margin: 8px 10px 7px 0;
-  background: #14528b;
-  border: 1px solid #14528b;
-  color: #fff;
+    display: block;
+    width: 100%;
+    max-width: 114px;
+    float: right;
+    margin: 8px 10px 7px 0;
+    background: #14528b;
+    border: 1px solid #14528b;
+    color: #fff;
 }
 
 ngb-modal-window.modal-filteradd .modal-dialog .form-group {
-  padding: 0 4px;
-  margin-bottom: 4px;
+    padding: 0 4px;
+    margin-bottom: 4px;
 }
 
-ngb-modal-window.modal-filteradd .modal-dialog td,ngb-modal-window.modal-filteradd .modal-dialog tr {
-  border: none;
+ngb-modal-window.modal-filteradd .modal-dialog td,
+ngb-modal-window.modal-filteradd .modal-dialog tr {
+    border: none;
 }
 
 ngb-modal-window.modal-filteradd .modal-dialog table {
-  margin: 0;
+    margin: 0;
 }
 
 .btn-search .btn-submit:hover {
-  opacity: 0.9;
+    opacity: 0.9;
 }
 
-ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter input:focus,ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter select:focus {
-  outline: none;
-  border: 1px solid #14528b;
-  box-shadow: none;
+ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter input:focus,
+ngb-modal-window.modal-filteradd .modal-dialog form.form-addfilter select:focus {
+    outline: none;
+    border: 1px solid #14528b;
+    box-shadow: none;
+}
+
+
+/** Load Information CSS **/
+
+ul.action-dupli {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.action-dupli a {
+    display: block;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #3fc53f;
+    position: relative;
+}
+
+ul.action-dupli a span.icon-undo-trash {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 26px;
+}
+
+ul.action-dupli a span.icon-undo-trash img {
+    width: 100%;
 }

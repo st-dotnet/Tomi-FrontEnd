@@ -1,7 +1,8 @@
 <section class="inner-content inner-pageview wkloads">
     <div class="card">
         <div class="card-header">
-            <h3>{{activeTab == '1' ? 'Master File' : activeTab == '2' ? 'Department File': activeTab == '3' ?'Reserve File':activeTab == '4' ?'Stocks File':activeTab == '5'? 'perameters By Department File':activeTab == '6'? 'Categories File'  : activeTab == '8'? 'Ranges' :'Program Terminal'}}</h3>
+            <h3>{{activeTab == '1' ? 'Master File' : activeTab == '2' ? 'Department File': activeTab == '3' ?'Reserve File':activeTab == '4' ?'Stocks File':activeTab == '5'? 'perameters By Department File':activeTab == '6'? 'Categories File' : activeTab ==
+                '8'? 'Ranges' :'Program Terminal'}}</h3>
             <div class="customer-add btn-header">
                 <ul class="right-opt">
                     <li>
@@ -71,7 +72,7 @@
                                     <ng-template ngbNavContent>
                                         <div *ngIf="!isDepartmentFileUpload" class="btn-upload-files">
                                             <button class="btn btn btn-primary btn-upload" (click)="checkDepartmentFileupload()">Upload</button>
-                                          <app-department></app-department>
+                                            <app-department></app-department>
                                         </div>
                                         <div *ngIf="isDepartmentFileUpload" class="resultwrapper-tab">
                                             <div class="content-upload-view">
@@ -115,7 +116,7 @@
                                     <ng-template ngbNavContent>
                                         <div *ngIf="!isReservedFileUpload" class="btn-upload-files">
                                             <button class="btn btn btn-primary btn-upload" (click)="checkReservedFileupload()">Upload</button>
-                                           <app-reserved></app-reserved>
+                                            <app-reserved></app-reserved>
                                         </div>
                                         <div *ngIf="isReservedFileUpload" class="resultwrapper-tab">
                                             <div class="content-upload-view">
@@ -202,7 +203,7 @@
                                     <ng-template ngbNavContent>
                                         <div *ngIf="!isParametersFilesUpload" class="btn-upload-files">
                                             <button class="btn btn btn-primary btn-upload" (click)="checkParameterFileupload()">Upload</button>
-                                           <app-parametersbydepartment></app-parametersbydepartment>
+                                            <app-parametersbydepartment></app-parametersbydepartment>
                                         </div>
                                         <div *ngIf="isParametersFilesUpload" class="resultwrapper-tab">
                                             <div class="content-upload-view">
@@ -322,21 +323,21 @@
                                     <a ngbNavLink class="custom-tabs" (click)="isSaleFileUpload=false">Ranges</a>
                                     <ng-template ngbNavContent>
                                         <div class="btn-upload-files marginset">
-
                                             <app-ranges></app-ranges>
                                         </div>
-                                      
                                     </ng-template>
                                 </li>
                                 <li [ngbNavItem]="9" position-relative>
                                     <a ngbNavLink class="custom-tabs" (click)="onMenuClick()">Program Terminal</a>
                                     <ng-template ngbNavContent>
                                         <app-program-terminal></app-program-terminal>
-
-
                                     </ng-template>
-
-
+                                </li>
+                                <li [ngbNavItem]="10" position-relative>
+                                    <a ngbNavLink class="custom-tabs">Load Information</a>
+                                    <ng-template ngbNavContent>
+                                        <app-loadinformation></app-loadinformation>
+                                    </ng-template>
                                 </li>
                             </ul>
 

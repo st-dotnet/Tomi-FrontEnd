@@ -1,0 +1,89 @@
+<div class="load-information searchbar-opt">
+    <div class="more-opt">
+        <ul class="opt-list-ranges">
+            <li>
+                <a class="addplus-ico ico" (click)="open(mymodal)">
+                    <span class="svg-icon">
+                        <svg aria-hidden="true"
+                            focusable="false" data-prefix="far" data-icon="plus" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
+                            class="svg-inline--fa fa-plus fa-w-12 fa-2x">
+                            <path fill="currentColor"
+                                d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"
+                                class=""></path>
+                        </svg>
+                    </span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<section class="inner-content inner-pageview">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="content-body">
+                <table class="table table-ui-same">
+                    <thead>
+                        <tr>
+                            <th>Terminal</th>
+                            <th>Send</th>
+                            <th>Employee</th>
+                            <th>Date</th>
+                            <th>Lines</th>
+                            <th>Qty</th>
+                            <th>ExtPrice</th>
+                            <th>Duplicates</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>A881</td>
+                            <td>1</td>
+                            <td>123456</td>
+                            <td>01 Ene 2022 10:33:00</td>
+                            <td>30</td>
+                            <td>313</td>
+                            <td>$42,565.23</td>
+                            <td>
+                                <ul class="action-dupli">
+                                    <li><a href=""><span class="icon-undo-trash"><img src="/assets/trash_undo.png"/></span></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<ng-template #mymodal let-modal>
+    <div class="modal-ui-same form-loadinfo">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title"></h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true" class="close-ico"><svg aria-hidden="true" focusable="false" data-prefix="fal"
+                        data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                        class="svg-inline--fa fa-times fa-w-10 fa-2x">
+                        <path fill="currentColor"
+                            d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"
+                            class=""></path>
+                    </svg></span>
+            </button>
+        </div>
+        <div class="modal-body">
+            this is demo modal
+        </div>
+    </div>
+
+</ng-template>

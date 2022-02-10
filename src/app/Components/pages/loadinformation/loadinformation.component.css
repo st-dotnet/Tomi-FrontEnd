@@ -1,0 +1,9 @@
+.load-information.searchbar-opt {
+    float: right;
+    width: 100%;
+    justify-content: end;
+}
+
+.load-information.searchbar-opt .more-opt {
+    width: auto;
+}
