@@ -73,6 +73,21 @@ export class Master {
     stockDate?: string;
 }
 
+export class Stock {
+    id?: string;
+    store?: string;
+    sKU?: string;
+    department?:string;
+    description?: string;
+    precVtaNorm?: string;
+    precVtaNorm_SImpto?: string;
+    SOH?: string;
+    Category?: string;
+    customerId?: string;
+    storeId?: string;
+    stockDate?: string;
+}
+
 export class Range {
     id?: string;
     name?: string;
