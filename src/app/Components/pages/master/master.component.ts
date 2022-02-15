@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '@app/_services';
+// import { fileStoreServices } from '@app/_services/fileStore.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-master',
@@ -15,39 +17,51 @@ export class MasterComponent implements OnInit {
   year: any;
   p: number = 1;
   diasblemasterFile: boolean= false;
+  storeName: any;
+  printDate = new Date();
+  modalService: any;
   constructor(
     private router: Router,
+    // private fileStoreServices:fileStoreServices,
     private authenticationService: UserService,
     private spinner: NgxSpinnerService,
-  ) {
+  ){ }
 
-  }
 
   ngOnInit() {
     this.authenticationService.disablemasterfileupdate.subscribe(user => this.diasblemasterFile = user);
    if(!this.diasblemasterFile)
-   {
-     
+   { 
     this.authenticationService.masterList.subscribe(user => this.masterList = user);
    }
-   else{
+   else
+   {
         this.authenticationService.customerId.subscribe(user => this.customerId = user);
        this.authenticationService.storeId.subscribe(user => this.storeId = user);
+       this.authenticationService.storeName.subscribe(user => this.storeName = user);
       this.authenticationService.stockDate.subscribe((year) => {
       if (year) {
         this.year = year;
         this.getmasterFileData();
       }
     });
-  
    }
-
   }
-
+  // getInformation(){
+  //   this.spinner.show();
+  //   this.fileStoreServices.getInformation()
+  //   .pipe(first())
+  //   .subscribe({
+  //     next: (response: any) => {
+  //       this.spinner.hide();
+  //      this.masterList=response;
+  //       this.modalService.dismissAll();
+  //     }
+  //   });
+  // }
   manageUser(customerId: any) {
     this.router.navigate([`user/${customerId}`]);
   }
-
   manageStore(customerId: any) {
     this.router.navigate([`store/${customerId}`]);
   }
@@ -59,6 +73,7 @@ export class MasterComponent implements OnInit {
     let workload = {
       customerId: this.customerId,
       storeId: this.storeId,
+      storeName:this.storeName,
       stockDate: date
     };
     this.spinner.show();

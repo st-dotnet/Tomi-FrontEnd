@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UserService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -96,20 +97,22 @@ export class WorkloadsComponent implements OnInit {
   CategorytimeElapsed: any;
   parametertimeElapsed: any;
   reservetimeElapsed: any;
+  storeName: any;
 
- //
+  printDate = new Date();
+
   constructor(private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private authenticationService: UserService,
     private spinner: NgxSpinnerService,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    private toastrService : ToastrService) {
     this.getallCustomList();
   }
 
   ngOnInit(): void {
     this.authenticationService.activeTab.subscribe(activetab => this.activeTab = activetab);
-
   }
 
   tabs = [1];
@@ -203,6 +206,7 @@ export class WorkloadsComponent implements OnInit {
     this.spinner.show();
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
     this.authenticationService.disablestockfileupdate.subscribe(user => this.disablestockfileupdate = user);
 
@@ -220,13 +224,16 @@ export class WorkloadsComponent implements OnInit {
         formData.append('storeId', this.storeId);
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
+        formData.append('storeName', this.storeName);
 
         this.stockfileUploading = true;
         this.authenticationService.setStockUpload(this.stockfileUploading);
         this.authenticationService.setStockfileUploaddisable(false);
         this.authenticationService.uploadStockFile(formData).subscribe({
           next: (event: any) => {
-            if (event.success) {
+            debugger
+            if (event.success) 
+            {
               this.stockfileUploading = false;
               this.authenticationService.setStockUpload(this.stockfileUploading);
               this.stockRecordCount = event.stockRecordCount;
@@ -247,7 +254,12 @@ export class WorkloadsComponent implements OnInit {
               }, 3000);
               this.spinner.hide();
             }
-
+            else{
+              debugger;
+                 this.stockfileUploading = false;
+                 this.authenticationService.setStockUpload(this.stockfileUploading);
+                 this.toastrService.error(event.error);
+               }
           },
           error: (err: any) => {
             this.progress = 0;
@@ -272,6 +284,7 @@ export class WorkloadsComponent implements OnInit {
     this.updatemasterfile = false;
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
     this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
     if (this.selectedMasterFiles) {
@@ -285,6 +298,7 @@ export class WorkloadsComponent implements OnInit {
         date = date.slice(1, 11)
         formData.append('file', file);
         formData.append('storeId', this.storeId);
+        formData.append('storeName', this.storeName);
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
         this.masterfileUploading = true;
@@ -315,6 +329,15 @@ export class WorkloadsComponent implements OnInit {
               }, 150000);
               this.spinner.hide();
             }
+            else{
+              // debugger;
+                  this.masterfileUploading = false;
+                  this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
+                  this.toastrService.error(event.error);
+                  this.masterfileUpload = true;
+                  this.disablemasterfileupdate = true;
+                  this.authenticationService.setMasterfilbrowser(true);
+                }
           },
           error: (err: any) => {
             if (err.error && err.error.message) {
@@ -336,6 +359,7 @@ export class WorkloadsComponent implements OnInit {
     this.updateDepartmentfile = false;
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
     this.authenticationService.disabledepartmentfileupdate.subscribe(user => this.disabledepartmentfileupdate = user);
     if (this.selectedDepartmentFiles) {
@@ -349,6 +373,7 @@ export class WorkloadsComponent implements OnInit {
         date = date.slice(1, 11)
         formData.append('file', file);
         formData.append('storeId', this.storeId);
+        formData.append('storeName', this.storeName);
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
         this.departmentfileUploading = true;
@@ -363,6 +388,7 @@ export class WorkloadsComponent implements OnInit {
               this.authenticationService.setDepartmentfileUplaod(this.departmentfileUploading);
               this.departmentRecordCount = event.stockRecordCount;
               this.departmenttimeElapsed = event.timeElapsed;
+
               this.departmentFileUpload = true;
               this.disabledepartmentfileupdate = true;
               this.authenticationService.setDepartmentfilebrowser(true);
@@ -378,6 +404,15 @@ export class WorkloadsComponent implements OnInit {
               }, 15000);
               this.spinner.hide();
             }
+            else{
+              // debugger;
+                  this.departmentfileUploading = false;
+                  this.authenticationService.setDepartmentfileUplaod(this.departmentfileUploading);
+                  this.toastrService.error(event.error);
+                  this.departmentFileUpload = true;
+                  this.disabledepartmentfileupdate = true;
+                  this.authenticationService.setDepartmentfilebrowser(true);
+                }
           },
           error: (err: any) => {
             if (err.error && err.error.message) {
@@ -400,6 +435,7 @@ export class WorkloadsComponent implements OnInit {
     this.updateSalefile = false;
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
     this.authenticationService.disablesalefileupdate.subscribe(user => this.disablesalefileupdate = user);
     if (this.selectedFiles) {
@@ -412,6 +448,7 @@ export class WorkloadsComponent implements OnInit {
         date = date.slice(1, 11)
         formData.append('file', file);
         formData.append('storeId', this.storeId);
+        formData.append('storeName', this.storeName);
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
         this.salefileUploading = true;
@@ -423,6 +460,9 @@ export class WorkloadsComponent implements OnInit {
               this.salefileUploading = false;
               this.authenticationService.setSalefileUpload(false);
               this.stockRecordCount = event.stockRecordCount;
+              this.stockfileUpload = true;
+              this.disablestockfileupdate = true;
+              this.authenticationService.setSalefileUploaddisable(true);
               this.saleFileUpload = true;
               this.selectedFiles = undefined;
               setTimeout(() => {
@@ -440,6 +480,15 @@ export class WorkloadsComponent implements OnInit {
               this.spinner.hide();
 
             }
+            else{
+              // debugger;
+                  this.salefileUploading = false;
+                  this.authenticationService.setSalefileUpload(this.salefileUploading);
+                  this.toastrService.error(event.error);
+                  this.saleFileUpload = true;
+                  this.disablestockfileupdate = true;
+                  this.authenticationService.setSalefileUploaddisable(true);
+                }
           },
           error: (err: any) => {
             if (err.error && err.error.message) {
@@ -462,6 +511,7 @@ export class WorkloadsComponent implements OnInit {
     this.updateReservedFile = false;
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
     this.authenticationService.disablereservedfileupdate.subscribe(user => this.disableReservedfileupdate = user);
     if (this.selectedReservedFiles) {
@@ -474,6 +524,7 @@ export class WorkloadsComponent implements OnInit {
         date = date.slice(1, 11)
         formData.append('file', file);
         formData.append('storeId', this.storeId);
+        formData.append('storeName', this.storeName);
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
         this.reservefileUploading = true;
@@ -481,7 +532,8 @@ export class WorkloadsComponent implements OnInit {
         this.authenticationService.setReservefileUploadDisable(false);
         this.authenticationService.uploadReservedFile(formData).subscribe({
           next: (event: any) => {
-            if (event.success) {
+            if (event.success) 
+            {
               this.reservefileUploading = false;
               this.authenticationService.setReservedfileUpload(false);
               this.reserveRecordCount = event.stockRecordCount;
@@ -501,6 +553,14 @@ export class WorkloadsComponent implements OnInit {
               }, 3000);
               this.spinner.hide();
             }
+            else{
+              // debugger;
+                  this.reservefileUploading = false;
+                  this.authenticationService.setReservedfileUpload(this.reservefileUploading);
+                  this.toastrService.error(event.error);
+                  this.reserveFileUpload = true;
+                  this.authenticationService.setReservefileUploadDisable(true);
+                }
           },
           error: (err: any) => {
             if (err.error && err.error.message) {
@@ -535,6 +595,7 @@ export class WorkloadsComponent implements OnInit {
         date = date.slice(1, 11)
         formData.append('file', file);
         formData.append('storeId', this.storeId);
+        formData.append('storeName', this.storeName);
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
         this.perametesByDepartmentfileUploading = true;
@@ -562,6 +623,15 @@ export class WorkloadsComponent implements OnInit {
               }, 3000);
               this.spinner.hide();
             }
+            else{
+              // debugger;
+                  this.perametesByDepartmentfileUploading = false;
+                  this.authenticationService.setParameterBydepartmentfileUpload(this.perametesByDepartmentfileUploading);
+                  this.toastrService.error(event.error);
+                  this.perametersByDepartmentFileUpload = true;
+                  this.authenticationService.setparameterfileUploadDisable(true);
+                }
+
           },
           error: (err: any) => {
             if (err.error && err.error.message) {
@@ -595,12 +665,15 @@ export class WorkloadsComponent implements OnInit {
         date = date.slice(1, 11)
         formData.append('file', file);
         formData.append('storeId', this.storeId);
+        formData.append('storeName', this.storeName);
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
         this.categoriesfileUploading = true;
+
         this.authenticationService.setCategoriesfileUpload(this.categoriesfileUploading);
         this.authenticationService.setCategoryfileUploadDisable(false);
         this.authenticationService.uploadCategoriesFile(formData).subscribe({
+
           next: (event: any) => {
             if (event.success) {
               this.categoriesfileUploading = false;
@@ -622,6 +695,14 @@ export class WorkloadsComponent implements OnInit {
               }, 3000);
               this.spinner.hide();
             }
+            else{
+              // debugger;
+                  this.categoriesfileUploading = false;
+                  this.authenticationService.setCategoriesfileUpload(this.categoriesfileUploading);
+                  this.toastrService.error(event.error);
+                  this.categoriesFileUpload = true;
+                  this.authenticationService.setCategoryfileUploadDisable(true);
+                }
           },
           error: (err: any) => {
             if (err.error && err.error.message) {
@@ -642,6 +723,7 @@ export class WorkloadsComponent implements OnInit {
   submitFile() {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
     let workload = {
       customerId: this.customerId,
@@ -657,6 +739,7 @@ export class WorkloadsComponent implements OnInit {
   submitStockFile() {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
     let workload = {
       customerId: this.customerId,
@@ -671,6 +754,7 @@ export class WorkloadsComponent implements OnInit {
   submitSaleFile() {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
     let workload = {
       customerId: this.customerId,
@@ -691,6 +775,10 @@ export class WorkloadsComponent implements OnInit {
   checkSideInputDate() {
 
   }
+ // getInformation() {
+  //  this.isMasterFileUpload = !this.isMasterFileUpload;
+  //  this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
+ // } 
   checkMasterfileUpload() {
     this.isMasterFileUpload = !this.isMasterFileUpload;
     this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);

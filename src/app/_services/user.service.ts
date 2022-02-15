@@ -45,6 +45,9 @@ export class UserService {
   private _storeId: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   public storeId: Observable<any> = this._storeId.asObservable();
 
+  private _storeName: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
+  public storeName: Observable<any> = this._storeName.asObservable();
+
   private _activeTab: BehaviorSubject<any> = new BehaviorSubject<any>(1);
   public activeTab: Observable<any> = this._activeTab.asObservable();
   private _stockDate: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
@@ -320,7 +323,9 @@ export class UserService {
       this._categoriesfileUpload.next(object);
     }
   //
-
+ setStoreName(object: any) {
+    this._storeName.next(object);
+ }
   setStockUpload(object: boolean) {
     this._stockfileUplaod.next(object);
   }

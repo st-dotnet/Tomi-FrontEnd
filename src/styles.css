@@ -1067,3 +1067,16 @@ ul.action-dupli a span.icon-undo-trash {
 ul.action-dupli a span.icon-undo-trash img {
     width: 100%;
 }
+
+button.print-ico.ico {
+    width: 38px;
+    height: 38px;
+    /* position: absolute; */
+    display: block;
+    color: #fff;
+    border-radius: 50%;
+    border: none;
+    background-color: green;
+    float: right;
+    margin: 10px;
+}

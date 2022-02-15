@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit {
   customerId: any;
   stockyear: any;
   customer: any;
+  storeName: any;
   masterfileUpload = false;
   stockfileUpload = false;
   salefileUpload = false;
@@ -65,6 +66,7 @@ export class SidebarComponent implements OnInit {
       if (result) {
         this.stores = result.store;
         this.storeId = this.stores[0].id;
+        this.storeName=this.stores[0].name;
       }
       this.spinner.hide();
     });
@@ -125,10 +127,12 @@ export class SidebarComponent implements OnInit {
       let workload = {
         customerId: this.customerId,
         storeId: this.storeId,
-        stockDate: date
+        stockDate: date,
+        storeName:this.storeName,
       };
       this.authenticationService.setCustomerId(this.customerId);
       this.authenticationService.setStoreId(this.storeId);
+      this.authenticationService.setStoreName(this.storeName);
       this.authenticationService.setStockDate(stockdate);
       this.authenticationService.getstockData(workload);
       this.authenticationService.getMasterData(workload);
