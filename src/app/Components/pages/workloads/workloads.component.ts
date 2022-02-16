@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { UserService } from '@app/_services';
+import { formStore } from '@app/_models/stockAdjustment';
+import { fileStoreService, UserService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { bufferToggle, first, Observable } from 'rxjs';
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-workloads',
@@ -100,18 +102,19 @@ export class WorkloadsComponent implements OnInit {
   storeName: any;
 
   printDate = new Date();
+  rangeList: any=formStore;
+  printSectionId: any;
 
-  constructor(private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
+  constructor(private router: Router, private datepipe: DatePipe,
     private authenticationService: UserService,
     private spinner: NgxSpinnerService,
-    private modalService: NgbModal,
-    private toastrService : ToastrService) {
+    private toastrService : ToastrService, 
+    private fileservice : fileStoreService) {
     this.getallCustomList();
   }
 
   ngOnInit(): void {
+    
     this.authenticationService.activeTab.subscribe(activetab => this.activeTab = activetab);
   }
 
@@ -231,7 +234,6 @@ export class WorkloadsComponent implements OnInit {
         this.authenticationService.setStockfileUploaddisable(false);
         this.authenticationService.uploadStockFile(formData).subscribe({
           next: (event: any) => {
-            debugger
             if (event.success) 
             {
               this.stockfileUploading = false;
@@ -775,10 +777,46 @@ export class WorkloadsComponent implements OnInit {
   checkSideInputDate() {
 
   }
- // getInformation() {
-  //  this.isMasterFileUpload = !this.isMasterFileUpload;
-  //  this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
- // } 
+  // getInformation() {
+  //   debugger;
+  //   this.authenticationService.storeName.subscribe(user => this.storeName = user);
+  //   this.authenticationService.stockDate.subscribe(user => this.year = user);
+  //   this.fileservice.getInformation(this.storeName,this.datepipe.transform(this.year, 'MMyy')).subscribe({
+  //     next: (event: any) => {
+  //       debugger;
+  //       this.rangeList = event;
+  //       this.spinner.hide();
+  //     }});
+  // }
+
+  print(){
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
+    this.authenticationService.stockDate.subscribe(user => this.year = user);
+    //this.fileservice.getInformation(this.storeName,this.datepipe.transform(this.year, 'MMyy')).subscribe({
+      this.fileservice.getInformation(this.storeName,'0920').subscribe({
+      next: (response: any) => {
+       this.rangeList=response;
+      }})
+
+      debugger;
+       let printContents, popupWin;
+       printContents = document.getElementById('printSectionId')?.innerHTML;
+      
+      popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+      popupWin?.document.open();
+      popupWin?.document.write(`
+        <html>
+          <head>
+            <title>Print tab</title>
+            <style>
+            //........Customized style.......
+            </style>
+          </head>
+      <body onload="window.print();window.close()">${printContents}</body>
+        </html>`
+      );
+      popupWin?.document.close();
+    }
   checkMasterfileUpload() {
     this.isMasterFileUpload = !this.isMasterFileUpload;
     this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);

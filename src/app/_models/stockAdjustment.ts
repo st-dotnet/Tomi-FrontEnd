@@ -31,4 +31,13 @@ export class StockFilterModel{
     searchtext?: string;
     empno?:number;
 }
-
+export class formStore{
+   
+    header?: string;
+    fileName?: string;
+    fileDate?: string;
+    storeNumber?: string;
+    category?: string;
+    recordCount?: string;
+    status?:string;
+}

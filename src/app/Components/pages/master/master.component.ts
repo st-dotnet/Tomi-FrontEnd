@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '@app/_services';
-// import { fileStoreServices } from '@app/_services/fileStore.service';
+import {fileStoreService, UserService } from '@app/_services';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { first } from 'rxjs';
 
@@ -22,8 +21,8 @@ export class MasterComponent implements OnInit {
   modalService: any;
   constructor(
     private router: Router,
-    // private fileStoreServices:fileStoreServices,
     private authenticationService: UserService,
+    private fileStore:fileStoreService,
     private spinner: NgxSpinnerService,
   ){ }
 
@@ -47,18 +46,7 @@ export class MasterComponent implements OnInit {
     });
    }
   }
-  // getInformation(){
-  //   this.spinner.show();
-  //   this.fileStoreServices.getInformation()
-  //   .pipe(first())
-  //   .subscribe({
-  //     next: (response: any) => {
-  //       this.spinner.hide();
-  //      this.masterList=response;
-  //       this.modalService.dismissAll();
-  //     }
-  //   });
-  // }
+
   manageUser(customerId: any) {
     this.router.navigate([`user/${customerId}`]);
   }

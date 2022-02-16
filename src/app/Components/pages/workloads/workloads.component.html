@@ -28,7 +28,7 @@
                                     <ng-template ngbNavContent>
                                         <div *ngIf="!isMasterFileUpload" class="btn-upload-files">
                                             <button class="btn btn btn-primary btn-upload" (click)="checkMasterfileUpload()">Upload</button>
-                                            <button printSectionId="print-section" ngxPrint class="print-ico ico"><span class="svg-icon"><svg
+                                            <button (click)="print()"  class="print-ico ico"><span class="svg-icon"><svg
                                                 aria-hidden="true" focusable="false" data-prefix="far" data-icon="print" role="img"
                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                                 class="svg-inline--fa fa-print fa-w-16 fa-2x">
@@ -72,7 +72,6 @@
                                         </div>
 
                                     </ng-template>
-
 
                                 </li>
                                 <li [ngbNavItem]="2">
@@ -360,4 +359,56 @@
     </div>
 
 </section>
-
+ 
+<section class="inner-content inner-pageview" id="printSectionId">
+    <table width="100%">
+        <tr>
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td style="font-weight:bold;">
+                            <p>Inventory Date: <br>{{printDate | date:'dd/mm/yyyy h:mm:ss'}}</p>
+                        </td>
+                        <td style="font-weight:bold; padding-left: 80px;">Import Totals Reports</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight:bold;">Print Date: {{printDate | date:'h:mm'}}</td>
+                        <td style="font-weight:bold;">
+                            <p>SORIANA 362 LAURO VILLAR PALMA</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table cellpadding=0 cellspacing=0 width=100% class="" id="datatableexample" style="margin-top: 20px; border: 1px solid black;">
+                    <thead >
+                        <tr>
+                            <th align="center">File Name</th>
+                            <th align="center">File Date</th>
+                            <th align="center">Store Report</th>
+                            <th align="center">Header</th>
+                            <th align="center">Header Date</th>
+                            <th align="center">Header Store Number</th>
+                            <th align="center">Records</th>
+                            <th align="center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody style="border: 1px solid black;">
+                        <tr>
+                        <td align="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">{{rangeList?.fileName}}</td>
+                        <td align="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">{{rangeList?.fileDate}}</td>
+                        <td align="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">{{rangeList?.storeNumber}}</td>fileDate
+                        <td align="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">{{rangeList?.header}}</td>
+                        <td align="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">{{rangeList?.fileDate}}</td>
+                        <td align="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">{{rangeList?.storeNumber}}</td>
+                        <td align="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">{{rangeList?.recordCount}}</td>
+                        <td align="center" style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">{{rangeList?.status}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+</section>

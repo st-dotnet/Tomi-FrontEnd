@@ -30,6 +30,7 @@ import { CategoryComponent } from './category/category.component';
 import { ReservedComponent } from './reserved/reserved.component';
 import { ParametersbydepartmentComponent } from './parametersbydepartment/parametersbydepartment.component';
 import { LoadinformationComponent } from './loadinformation/loadinformation.component';
+import { DatePipe } from '@angular/common'
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -65,7 +66,7 @@ import { LoadinformationComponent } from './loadinformation/loadinformation.comp
     Ng2SearchPipeModule,
     Angular2CsvModule,
   ],
-  providers: [  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+  providers: [  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},DatePipe],
   bootstrap: [AppComponent]
 })
 export class PageModule { }

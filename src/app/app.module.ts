@@ -8,7 +8,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './_helper';
 import { SharedModule } from './Components/shared';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-
+import { DatePipe } from '@angular/common'
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +22,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     SharedModule,
     Ng2SearchPipeModule
   ],
-  providers: [  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+  providers: [  { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
