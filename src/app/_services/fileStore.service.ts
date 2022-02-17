@@ -22,8 +22,8 @@ export class fileStoreService
             this.currentUserSubject = new BehaviorSubject<User>(new User());
             this.currentUser = this.currentUserSubject.asObservable();
         }
-        getInformation(id:any,year:any) { 
+        getInformation(model:any) { 
             debugger;
-            return this.http.get<any>(`${environment.apiUrl}${this.fileServicesEndPoint}GetInfoFileLoadedListAsync/${id}/${year}`);
+            return this.http.get<any>(`${environment.apiUrl}${this.fileServicesEndPoint}GetInfoFileLoadedListAsync`, model);
         };
 }

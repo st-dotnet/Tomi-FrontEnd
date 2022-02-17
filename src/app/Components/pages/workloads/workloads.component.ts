@@ -104,6 +104,7 @@ export class WorkloadsComponent implements OnInit {
   printDate = new Date();
   rangeList: any=formStore;
   printSectionId: any;
+  category: any;
 
   constructor(private router: Router, private datepipe: DatePipe,
     private authenticationService: UserService,
@@ -789,11 +790,19 @@ export class WorkloadsComponent implements OnInit {
   //     }});
   // }
 
-  print(){
+  print(item:any)
+  {
+    debugger;
+
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
-    //this.fileservice.getInformation(this.storeName,this.datepipe.transform(this.year, 'MMyy')).subscribe({
-      this.fileservice.getInformation(this.storeName,'0920').subscribe({
+    var print ={
+      Store: this.storeName,
+      date:this.datepipe.transform(this.year, 'MMyy'),
+      Category:item
+    }
+    this.fileservice.getInformation(print).subscribe({
+     // this.fileservice.getInformation(this.storeName,'0920',).subscribe({
       next: (response: any) => {
        this.rangeList=response;
       }})
