@@ -104,6 +104,7 @@ export class RangesComponent implements OnInit {
 
   editmodel(content: any, item: any, name: string) {
     this.editRange = true;
+    this.rangeError= false;
     if (name = "ranges") {
       this.rangeForm.controls["id"].setValue(item.id);
       this.rangeForm.controls["name"].setValue(item.name);
