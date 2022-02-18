@@ -32,6 +32,8 @@ export class RangesComponent implements OnInit {
   maximumRange: any;
   rangeError: boolean= false;
   rangeErrorMessage: string="";
+  tagformValue:  string = "";
+  tagToValue:  string = "";
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -111,7 +113,8 @@ export class RangesComponent implements OnInit {
       this.rangeForm.controls["groupId"].setValue(item.groupId);
       this.rangeForm.controls["tagTo"].setValue(item.tagTo);
       this.rangeForm.controls["tagFrom"].setValue(item.tagFrom);
-      this.rangeForm.controls["tagFrom"].setValue(item.tagFrom);
+      this.tagformValue= this.rangeForm.value.tagFrom;
+      this.tagToValue= this.rangeForm.value.tagTo;
     }
      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.getallRangeList();
@@ -209,13 +212,29 @@ export class RangesComponent implements OnInit {
 
   tagfromValue(){
     this.rangeError= false;
+    if(this.editRange){
+      debugger;
+      if(this.tagformValue!="" && this.tagToValue !=""&& this.rangeForm.value.tagFrom !=null && this.rangeForm.value.tagTo)
+      {
+        if(this.rangeForm.value.tagFrom > this.tagToValue ||this.rangeForm.value.tagFrom>this.rangeForm.value.tagTo)
+        { this.rangeErrorMessage="Tag From is not greater than tag to value";
+        this.rangeError = true;}
+     
+      else if(this.rangeForm.value.tagFrom >this.tagformValue && this.rangeForm.value.tagFrom <this.tagToValue)
+           this.rangeError= false;
+      return;
+      }
+    }
+    if(this.rangeForm.value.tagFrom !=null && this.rangeForm.value.tagTo&& this.rangeForm.value.tagFrom>this.rangeForm.value.tagTo)
+    {this.rangeError = true;
+    this.rangeErrorMessage="Tag From is not greater than tag to value";
+  return;
+}
       if(this.rangeForm.value.tagFrom != null && this.maximumRange>this.rangeForm.value.tagFrom)
       { this.rangeError= true;
         this.rangeErrorMessage='Tag From is not less than '+this.maximumRange;
         return;
       }   
-      if(this.rangeForm.value.tagFrom !=null && this.rangeForm.value.tagTo&& this.rangeForm.value.tagFrom>this.rangeForm.value.tagTo)
-      {this.rangeError = true;
-      this.rangeErrorMessage="Tag From is not greater than tag to value";}
+    
   }
 }
