@@ -587,6 +587,7 @@ export class WorkloadsComponent implements OnInit {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.disabledepartmentfileupdate.subscribe(user => this.disabledepartmentfileupdate = user);
     if (this.selectedPerametrsByDepartmentsFiles) {
       const file: File | null = this.selectedPerametrsByDepartmentsFiles.item(0);
@@ -657,6 +658,7 @@ export class WorkloadsComponent implements OnInit {
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.disablecategoryfileupdate.subscribe(user => this.disableCategoryfileupdate = user);
     if (this.selectedCategoriesFiles) {
       const file: File | null = this.selectedCategoriesFiles.item(0);
