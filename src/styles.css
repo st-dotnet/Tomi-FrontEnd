@@ -763,6 +763,7 @@ app-login {
     color: #fff;
     border-radius: 50%;
     border: none;
+    margin: 0 !important;
 }
 
 .searchbar-opt .more-opt ul.opt-list-ranges li:not(:first-child) {
@@ -1076,7 +1077,7 @@ button.print-ico.ico {
     color: #fff;
     border-radius: 50%;
     border: none;
-    background-color: green;
+    background-color: #00a79e;
     float: right;
     margin: 10px;
 }
