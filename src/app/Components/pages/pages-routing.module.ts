@@ -11,6 +11,8 @@ import { WorkloadsComponent } from './workloads/workloads.component';
 import { MiddleContentComponent } from '../layout/pages-layout/middle-content/middle-content.component';
 import { AdjustmentsinventoryComponent } from './adjustmentsinventory/adjustmentsinventory.component';
 import { ProgramTerminalComponent } from './program-terminal/program-terminal.component';
+import { reportOptionComponents } from './reportoption/reportoption.component';
+
 
 const routes: Routes = [{
   path: '',
@@ -31,7 +33,8 @@ const routes: Routes = [{
     { path: 'master', component: MasterComponent },
     { path: 'stockList', component: StocklistComponent },
     {path:'adjustmentsinventory',component: AdjustmentsinventoryComponent },
-    {path:'program',component: ProgramTerminalComponent }
+    {path:'program',component: ProgramTerminalComponent },
+    {path:'reportoption',component:reportOptionComponents}
   ]
 }
 ];

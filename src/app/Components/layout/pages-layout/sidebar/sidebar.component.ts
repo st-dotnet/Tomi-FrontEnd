@@ -115,7 +115,8 @@ export class SidebarComponent implements OnInit {
   }
 
   onChange() {
-    
+    debugger;
+    this.storeName = this.stores.find((x: { id: any; })=>x.id == this.storeId)?.name;
     if (this.customerId!=undefined && this.storeId!=undefined &&  this.stockyear!= undefined) {
       this.isFileUploadOption= true ;
       let stockdate = new Date(this.stockyear.year, this.stockyear.month - 1, this.stockyear.day + 1);

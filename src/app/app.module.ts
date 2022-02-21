@@ -8,10 +8,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './_helper';
 import { SharedModule } from './Components/shared';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

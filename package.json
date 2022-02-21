@@ -26,6 +26,7 @@
     "file-saver": "^2.0.5",
     "guid-typescript": "^1.0.9",
     "jquery": "^3.6.0",
+    "jspdf": "^2.5.1",
     "ng-bootstrap": "^1.6.3",
     "ngx-pagination": "^5.1.1",
     "ngx-print": "^1.2.1",

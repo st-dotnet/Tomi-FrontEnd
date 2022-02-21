@@ -349,20 +349,20 @@
         </tr>
         <tr>
             <td>
-                <table style="border:'0'" cellpadding=0 cellspacing=0 width=100% class="" id="datatableexample"
-                    *ngIf="rangeList" style="margin-top: 20px;">
+                <table cellpadding=0 cellspacing=0 width=100% class="" id="datatableexample"
+                    *ngIf="rangeList"  style="margin-top: 20px; border: 1px solid black;">
                     <thead>
                         <tr>
-                            <th style="border-top:1px solid #333">Range Name</th>
-                            <th style="border-top:1px solid #333">GroupName</th>
-                            <th style="border-top:1px solid #333">Tag Range</th>
+                            <th  align="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">Range Name</th>
+                            <th  align="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">GroupName</th>
+                            <th  align="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">Tag Range</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="border: 1px solid black;">
                         <tr *ngFor="let range of rangeList; let i = index">
-                            <td align="center" style="border-top:1px solid #333">{{range.name}}</td>
-                            <td align="center" style="border-top:1px solid #333">{{range.group?.name}}</td>
-                            <td align="center" style="border-top:1px solid #333">{{range.tagFrom}}-{{range.tagTo}}</td>
+                            <td aalign="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">{{range.name}}</td>
+                            <td align="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">{{range.group?.name}}</td>
+                            <td align="center"  style="border-top:1px #333; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size:12px;">{{range.tagFrom}}-{{range.tagTo}}</td>
 
                         </tr>
                     </tbody>

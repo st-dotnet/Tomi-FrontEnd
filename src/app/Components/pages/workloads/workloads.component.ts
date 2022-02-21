@@ -334,10 +334,12 @@ export class WorkloadsComponent implements OnInit {
             }
             else{
               // debugger;
-                  this.masterfileUploading = false;
+              debugger;
+              this.masterfileUploading = false;
                   this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
                   this.toastrService.error(event.error);
-                  this.masterfileUpload = true;
+                  this.masterfileUpload = false;
+                  
                   this.disablemasterfileupdate = true;
                   this.authenticationService.setMasterfilbrowser(true);
                 }
@@ -653,9 +655,11 @@ export class WorkloadsComponent implements OnInit {
   }
 
   uploadCategoriesFile(): void {
+    debugger;
     this.spinner.show();
     this.updateCategoriesFile = false;
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.storeId.subscribe(user => this.storeId = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
@@ -798,13 +802,16 @@ export class WorkloadsComponent implements OnInit {
 
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
+
     var print ={
       Store: this.storeName,
       date:this.datepipe.transform(this.year, 'MMyy'),
       Category:item
     }
+
     this.fileservice.getInformation(print).subscribe({
-     // this.fileservice.getInformation(this.storeName,'0920',).subscribe({
+    //  this.fileservice.getInformation(this.storeName,'0920').subscribe({
+
       next: (response: any) => {
        this.rangeList=response;
       }})
