@@ -34,6 +34,7 @@ export class RangesComponent implements OnInit {
   rangeErrorMessage: string="";
   tagformValue:  string = "";
   tagToValue:  string = "";
+  storeName: any;
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -45,6 +46,7 @@ export class RangesComponent implements OnInit {
 
   ngOnInit() {
     this.rangesService.rangeList.subscribe(user => this.rangeList = user);
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.rangeForm = this.formBuilder.group({
       id: [''],
       name: ['', Validators.required],
@@ -149,17 +151,27 @@ export class RangesComponent implements OnInit {
         next: () => {
           this.modalService.dismissAll();
           this.getallCustomList();
+          this.getMaximumRange();
         }
       });
   }
 
   deleteRange(rangeId: any) {
+
     this.rangesService.deleteRange(rangeId).pipe(first())
       .subscribe({
-        next: () => {
+        next: (res) => {
+          if(res.error)
+          this.toastrService.error(res.error);
+
+          else
+
           this.getallCustomList();
+
         }
+
       });
+
   }
 
   onGroupSubmit() {

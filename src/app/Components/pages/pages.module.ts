@@ -32,6 +32,7 @@ import { ParametersbydepartmentComponent } from './parametersbydepartment/parame
 import { LoadinformationComponent } from './loadinformation/loadinformation.component';
 import { DatePipe } from '@angular/common'
 import { reportOptionComponents } from './reportoption/reportoption.component';
+import { ReportCodeNotFoundComponent } from './report-code-not-found/report-code-not-found.component';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -54,7 +55,8 @@ import { reportOptionComponents } from './reportoption/reportoption.component';
     ReservedComponent,
     ParametersbydepartmentComponent,
     LoadinformationComponent,
-    reportOptionComponents
+    reportOptionComponents,
+    ReportCodeNotFoundComponent
   ],
   imports: [
     PageRoutingModule,

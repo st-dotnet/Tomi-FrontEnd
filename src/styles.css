@@ -96,7 +96,8 @@ span.loadr .svg-loader svg.svg-container {
 .sidebar-layout {
     width: 100%;
     display: flex;
-    height: calc(100vh - 108px);
+    /* height: calc(100vh - 108px); */
+    height: 100%;
 }
 
 .sidenav {

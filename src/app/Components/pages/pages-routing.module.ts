@@ -12,6 +12,7 @@ import { MiddleContentComponent } from '../layout/pages-layout/middle-content/mi
 import { AdjustmentsinventoryComponent } from './adjustmentsinventory/adjustmentsinventory.component';
 import { ProgramTerminalComponent } from './program-terminal/program-terminal.component';
 import { reportOptionComponents } from './reportoption/reportoption.component';
+import { ReportCodeNotFoundComponent } from './report-code-not-found/report-code-not-found.component';
 
 
 const routes: Routes = [{
@@ -34,7 +35,8 @@ const routes: Routes = [{
     { path: 'stockList', component: StocklistComponent },
     {path:'adjustmentsinventory',component: AdjustmentsinventoryComponent },
     {path:'program',component: ProgramTerminalComponent },
-    {path:'reportoption',component:reportOptionComponents}
+    {path:'reportoption',component:reportOptionComponents},
+    {path:'reportcode',component:ReportCodeNotFoundComponent}
   ]
 }
 ];

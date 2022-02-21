@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild,ElementRef  } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '@app/_services';
 import { reportOptionLoadingServices } from '@app/_services/reportOptionLoadingServices';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
+
 import jsPDF from 'jspdf';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -11,20 +9,17 @@ import { first } from 'rxjs';
 import html2canvas from 'html2canvas';
 
 @Component({
-  selector: 'app-getLabelDetailsOption',
-  templateUrl: './reportoption.component.html',
-  styleUrls: ['./reportoption.component.css']
- 
-
+  selector: 'app-report-code-not-found',
+  templateUrl: './report-code-not-found.component.html',
+  styleUrls: ['./report-code-not-found.component.css']
 })
-export class reportOptionComponents implements OnInit 
-{
-  reportOptionLoadingServicesform!:FormGroup;
+export class ReportCodeNotFoundComponent implements OnInit {
+
   reportList: any;
   p: number = 1;
   options:any;
   printDate = new Date();
-  constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
+  constructor(private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.getLabelInformation();
 
 
@@ -58,7 +53,7 @@ this.options = {
 }
   getLabelInformation(){
     this.spinner.show();
-    this.reportOptionLoadingServices.getLabelDetailsInformation()
+    this.reportOptionLoadingServices.getCodeNotFoundInformation()
     .pipe(first())
     .subscribe({
       next: (response: any) => {

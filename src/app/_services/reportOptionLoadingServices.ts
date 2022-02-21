@@ -30,10 +30,13 @@ export class reportOptionLoadingServices
         return this.currentUserSubject.value;
       }
 
+      getCodeNotFoundInformation() {
+        return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetCodeNotFoundAsync`);
+      };
+      
       getLabelDetailsInformation() {
         return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetLabelDetailsAsync`);
       };
-      
     //   autoProcessing() {
     //     return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetAdjustmentInfoAsync`);
     //   };
