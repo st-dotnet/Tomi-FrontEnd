@@ -24,6 +24,6 @@ export class fileStoreService
         }
         getInformation(model:any) { 
             debugger;
-            return this.http.get<any>(`${environment.apiUrl}${this.fileServicesEndPoint}GetInfoFileLoadedListAsync`, model);
+            return this.http.post<any>(`${environment.apiUrl}${this.fileServicesEndPoint}GetInfoFileLoadedListAsync`, model);
         };
 }
