@@ -1,0 +1,75 @@
+
+<div id="read_more_right">
+    <a (click)="openPDF()"><img class="img" src="assets/adujstment/server.png" alt="autoProcessing"></a>
+    
+</div>
+<section class="inner-content inner-pageview"  >
+    <div class="card carddetails" >     
+        <div class="card carddetails" >        
+            <div class="card-body">
+                <div class="content-body"  id="htmlData">
+                    <table width="100%">
+                        <tr>
+                            <td style="font-weight:bold;">
+                                <p>Inventory Date: <br>{{printDate | date:'dd/mm/yyyy'}}</p>
+                            </td>
+                            <td style="font-weight:bold; padding-left: 80px;">Variation by SKU</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">Print Time: {{printDate | date:'h:mm'}}</td>
+                            <td  style="font-weight:bold; padding-left: 80px;">
+                              
+                            </td>
+                        </tr>
+    
+                    </table>
+                    <table class="table table-striped table-ui-same" id="datatableexample" >
+                        <thead>
+                            <tr>
+                                <!-- <th>#Registros</th> -->
+                                <th>Tag</th>
+                                <th>Shelf</th>
+                                <th>Rec#</th>
+                                <th>Codigo</th> 
+                                <th>Description</th> 
+                                <th>NoF</th>
+                                <th>Dept</th>
+                                <th>Precio</th>
+                                <th>Cantid</th>
+                                <th>Importe</th>
+                                <!-- <th>AuditId</th> -->
+                                <!-- <th>Total</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let reportData of reportList | paginate: { itemsPerPage: 10, currentPage: p };; let i = index">
+                              <td>{{reportData.tag}}</td>
+                              <td>{{reportData.shelf}}</td>
+                              <td>{{reportData.rec}}</td>
+                              <td>{{reportData.barcode}}</td>
+                              <td>{{reportData.orderJob.description}}</td>
+                              <td>{{reportData.nof}}</td>
+                              <td>{{reportData.department}}</td>
+                              <td>{{reportData.orderJob.salePrice}}</td>
+                              <td>{{reportData.quantity}}</td>
+                              <td>{{reportData.orderJob.salePrice * reportData.quantity}}</td>
+                             
+                              <!-- <td>{{reportData.id}}</td> -->
+                              <!--<td> {{information.DownloadError}}</td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+                  
+                 
+                </div>
+                <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
+                    <p style="color: white">Loading...</p>
+                </ngx-spinner>
+                <div class="pagination-ui">
+                    <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
+            </div>
+        </div>   
+  </div>
+</section>
+

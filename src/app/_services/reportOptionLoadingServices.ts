@@ -37,6 +37,10 @@ export class reportOptionLoadingServices
       getLabelDetailsInformation() {
         return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetLabelDetailsAsync`);
       };
+
+      getExtendedPricesInformation() {
+        return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetExtendedPricesAsync`);
+      };
     //   autoProcessing() {
     //     return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetAdjustmentInfoAsync`);
     //   };

@@ -7,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { bufferToggle, first, Observable } from 'rxjs';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-workloads',
@@ -115,7 +115,6 @@ export class WorkloadsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
     this.authenticationService.activeTab.subscribe(activetab => this.activeTab = activetab);
   }
 
@@ -175,7 +174,6 @@ export class WorkloadsComponent implements OnInit {
         this.updateCategoriesFile = true;
         break;
    //
-
     }
     // if (file == "master") {
     //   this.updatemasterfile = true;
@@ -191,11 +189,13 @@ export class WorkloadsComponent implements OnInit {
 
 
   }
+
   getallCustomList() {
     this.authenticationService.getCustomerList().subscribe(result => {
       this.customers = result;
     })
   };
+
   getAllStoreByCustomerId(customerId: any) {
     ;
     this.authenticationService.getAllStoreByCustomerId(customerId).subscribe(result => {
@@ -206,6 +206,7 @@ export class WorkloadsComponent implements OnInit {
       this.spinner.hide();
     });
   }
+
   upload(): void {
     this.spinner.show();
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
@@ -334,8 +335,7 @@ export class WorkloadsComponent implements OnInit {
             }
             else{
               // debugger;
-              debugger;
-              this.masterfileUploading = false;
+                  this.masterfileUploading = false;
                   this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
                   this.toastrService.error(event.error);
                   this.masterfileUpload = false;
@@ -798,8 +798,7 @@ export class WorkloadsComponent implements OnInit {
 
   print(item:any)
   {
-    debugger;
-
+    
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe(user => this.year = user);
 

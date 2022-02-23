@@ -11,8 +11,10 @@ import { WorkloadsComponent } from './workloads/workloads.component';
 import { MiddleContentComponent } from '../layout/pages-layout/middle-content/middle-content.component';
 import { AdjustmentsinventoryComponent } from './adjustmentsinventory/adjustmentsinventory.component';
 import { ProgramTerminalComponent } from './program-terminal/program-terminal.component';
-import { reportOptionComponents } from './reportoption/reportoption.component';
-import { ReportCodeNotFoundComponent } from './report-code-not-found/report-code-not-found.component';
+import { ReportCodeNotFoundComponent } from './reports/report-code-not-found/report-code-not-found.component';
+import { reportOptionComponents } from './reports/reportoption/reportoption.component';
+import { VariationbySKUComponent } from './reports/variationby-sku/variationby-sku.component';
+import { SummarybyDepartmentComponent } from './reports/summaryby-department/summaryby-department.component';
 
 
 const routes: Routes = [{
@@ -36,7 +38,9 @@ const routes: Routes = [{
     {path:'adjustmentsinventory',component: AdjustmentsinventoryComponent },
     {path:'program',component: ProgramTerminalComponent },
     {path:'reportoption',component:reportOptionComponents},
-    {path:'reportcode',component:ReportCodeNotFoundComponent}
+    {path:'reportcode',component:ReportCodeNotFoundComponent},
+    {path:'variationbySKU',component:VariationbySKUComponent},
+    {path:'summarybyDepartment',component:SummarybyDepartmentComponent}
   ]
 }
 ];

@@ -31,8 +31,11 @@ import { ReservedComponent } from './reserved/reserved.component';
 import { ParametersbydepartmentComponent } from './parametersbydepartment/parametersbydepartment.component';
 import { LoadinformationComponent } from './loadinformation/loadinformation.component';
 import { DatePipe } from '@angular/common'
-import { reportOptionComponents } from './reportoption/reportoption.component';
-import { ReportCodeNotFoundComponent } from './report-code-not-found/report-code-not-found.component';
+import { ReportCodeNotFoundComponent } from './reports/report-code-not-found/report-code-not-found.component';
+import { reportOptionComponents } from './reports/reportoption/reportoption.component';
+import { ExtendedPricesComponent } from './reports/extended-prices/extended-prices.component';
+import { VariationbySKUComponent } from './reports/variationby-sku/variationby-sku.component';
+import { SummarybyDepartmentComponent } from './reports/summaryby-department/summaryby-department.component';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -56,7 +59,10 @@ import { ReportCodeNotFoundComponent } from './report-code-not-found/report-code
     ParametersbydepartmentComponent,
     LoadinformationComponent,
     reportOptionComponents,
-    ReportCodeNotFoundComponent
+    ReportCodeNotFoundComponent,
+    ExtendedPricesComponent,
+    VariationbySKUComponent,
+    SummarybyDepartmentComponent
   ],
   imports: [
     PageRoutingModule,
