@@ -41,6 +41,13 @@ export class reportOptionLoadingServices
       getExtendedPricesInformation() {
         return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetExtendedPricesAsync`);
       };
+
+      getUncountedItemsInformation() {
+        return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetUncountedItemsAsync`);
+      };
+      getVariationBySKUInformation() {
+        return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetVariationBySKUAsync`);
+      };
     //   autoProcessing() {
     //     return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetAdjustmentInfoAsync`);
     //   };

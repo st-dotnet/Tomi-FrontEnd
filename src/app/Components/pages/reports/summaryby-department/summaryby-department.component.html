@@ -13,12 +13,11 @@
                             <td style="font-weight:bold;">
                                 <p>Inventory Date: <br>{{printDate | date:'dd/mm/yyyy'}}</p>
                             </td>
-                            <td style="font-weight:bold; padding-left: 80px;">Summary by Department</td>
+                            <td style="font-weight:bold; padding-left: 80px;">Reporte de Artículos NO Contados</td>
                         </tr>
                         <tr>
                             <td style="font-weight:bold;">Print Time: {{printDate | date:'h:mm'}}</td>
                             <td  style="font-weight:bold; padding-left: 80px;">
-                              
                             </td>
                         </tr>
     
@@ -27,40 +26,27 @@
                         <thead>
                             <tr>
                                 <!-- <th>#Registros</th> -->
-                                <th>Tag</th>
-                                <th>Shelf</th>
-                                <th>Rec#</th>
-                                <th>Codigo</th> 
-                                <th>Description</th> 
-                                <th>NoF</th>
-                                <th>Dept</th>
-                                <th>Precio</th>
-                                <th>Cantid</th>
-                                <th>Importe</th>
-                                <!-- <th>AuditId</th> -->
-                                <!-- <th>Total</th> -->
+                                <th>SKU</th>
+                                <th>Description</th>
+                                <th>SOH</th>
+                                <th>PrecVtaNorm</th> 
+                                <th>Valuación</th>
+                                <th>Code</th> 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let reportData of reportList | paginate: { itemsPerPage: 10, currentPage: p };; let i = index">
-                              <td>{{reportData.tag}}</td>
-                              <td>{{reportData.shelf}}</td>
-                              <td>{{reportData.rec}}</td>
-                              <td>{{reportData.barcode}}</td>
-                              <td>{{reportData.orderJob.description}}</td>
-                              <td>{{reportData.nof}}</td>
-                              <td>{{reportData.department}}</td>
-                              <td>{{reportData.orderJob.salePrice}}</td>
-                              <td>{{reportData.quantity}}</td>
-                              <td>{{reportData.orderJob.salePrice * reportData.quantity}}</td>
-                             
-                              <!-- <td>{{reportData.id}}</td> -->
-                              <!--<td> {{information.DownloadError}}</td>-->
+                            <tr *ngFor="let reportData of reportList; let i = index">
+                              <td>{{reportData.sku}}</td>
+                              <td>{{reportData.description}}</td>
+                              <td>{{reportData.soh}}</td>
+                              <td>{{reportData.precVtaNorm}}</td>
+                              <td>{{reportData.precVtaNorm*reportData.soh*-1}}</td>
+                              <td>{{reportData.code}}</td>
+                          
                             </tr>
                         </tbody>
                     </table>
                   
-                 
                 </div>
                 <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
                     <p style="color: white">Loading...</p>

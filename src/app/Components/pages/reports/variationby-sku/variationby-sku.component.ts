@@ -56,7 +56,7 @@ this.options = {
 }
   getLabelInformation(){
     this.spinner.show();
-    this.reportOptionLoadingServices.getLabelDetailsInformation()
+    this.reportOptionLoadingServices.getVariationBySKUInformation()
     .pipe(first())
     .subscribe({
       next: (response: any) => {

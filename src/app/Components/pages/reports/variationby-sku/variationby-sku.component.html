@@ -27,32 +27,34 @@
                         <thead>
                             <tr>
                                 <!-- <th>#Registros</th> -->
-                                <th>Tag</th>
-                                <th>Shelf</th>
-                                <th>Rec#</th>
-                                <th>Codigo</th> 
-                                <th>Description</th> 
-                                <th>NoF</th>
-                                <th>Dept</th>
+                                <th>SKU</th>
+                                <th>Description </th>
+                                <th>Teórico</th>
+                                <th>Contado</th> 
+                                <th>Dif</th>
                                 <th>Precio</th>
-                                <th>Cantid</th>
-                                <th>Importe</th>
+                                <th>UPC</th>
+                                <th>Marbete</th>
+                                <th>Pzas</th>
+                                <th>Valuación</th>
+                                <th>Rec#</th>
                                 <!-- <th>AuditId</th> -->
                                 <!-- <th>Total</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let reportData of reportList | paginate: { itemsPerPage: 10, currentPage: p };; let i = index">
-                              <td>{{reportData.tag}}</td>
-                              <td>{{reportData.shelf}}</td>
-                              <td>{{reportData.rec}}</td>
-                              <td>{{reportData.barcode}}</td>
-                              <td>{{reportData.orderJob.description}}</td>
-                              <td>{{reportData.nof}}</td>
-                              <td>{{reportData.department}}</td>
-                              <td>{{reportData.orderJob.salePrice}}</td>
+                            <tr *ngFor="let reportData of reportList; let i = index">
+                              <td>{{reportData.sku}}</td>
+                              <td>{{reportData.description}}</td>
+                              <td>{{reportData.soh}}</td>
                               <td>{{reportData.quantity}}</td>
-                              <td>{{reportData.orderJob.salePrice * reportData.quantity}}</td>
+                              <td>{{reportData.quantity-reportData.soh}}</td>
+                              <td>{{reportData.precVtaNorm}}</td>
+                              <td>{{reportData.barcode}}</td>
+                              <td>{{reportData.tag}}</td>
+                              <td>{{reportData.quantity}}</td>
+                              <td>{{(reportData.quantity-reportData.soh) * reportData.precVtaNorm}}</td>
+                             <td>{{reportData.id}}</td>
                              
                               <!-- <td>{{reportData.id}}</td> -->
                               <!--<td> {{information.DownloadError}}</td>-->
@@ -65,9 +67,9 @@
                 <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
                     <p style="color: white">Loading...</p>
                 </ngx-spinner>
-                <div class="pagination-ui">
+                <!-- <div class="pagination-ui">
                     <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
-                </div>
+                </div> -->
             </div>
         </div>   
   </div>

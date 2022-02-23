@@ -15,6 +15,7 @@ import { ReportCodeNotFoundComponent } from './reports/report-code-not-found/rep
 import { reportOptionComponents } from './reports/reportoption/reportoption.component';
 import { VariationbySKUComponent } from './reports/variationby-sku/variationby-sku.component';
 import { SummarybyDepartmentComponent } from './reports/summaryby-department/summaryby-department.component';
+import { ExtendedPricesComponent } from './reports/extended-prices/extended-prices.component';
 
 
 const routes: Routes = [{
@@ -39,8 +40,9 @@ const routes: Routes = [{
     {path:'program',component: ProgramTerminalComponent },
     {path:'reportoption',component:reportOptionComponents},
     {path:'reportcode',component:ReportCodeNotFoundComponent},
+    {path:'extendedPriceException',component:ExtendedPricesComponent},
     {path:'variationbySKU',component:VariationbySKUComponent},
-    {path:'summarybyDepartment',component:SummarybyDepartmentComponent}
+    {path:'summarybyDepartment',component:SummarybyDepartmentComponent},
   ]
 }
 ];

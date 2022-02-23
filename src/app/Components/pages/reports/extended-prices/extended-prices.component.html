@@ -13,7 +13,13 @@
                             <td style="font-weight:bold;">
                                 <p>Inventory Date: <br>{{printDate | date:'dd/mm/yyyy'}}</p>
                             </td>
-                            <td style="font-weight:bold; padding-left: 80px;">Tag Ranges</td>
+                            <td style="font-weight:bold; padding-left: 80px;">Excepción de Precios Extendidos</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">Print Date: {{printDate |date:'dd/mm/yyyy'}}</td>
+                            <td  style="font-weight:bold; padding-left: 80px;">
+                              
+                            </td>
                         </tr>
                         <tr>
                             <td style="font-weight:bold;">Print Time: {{printDate | date:'h:mm'}}</td>
@@ -27,22 +33,22 @@
                         <thead>
                             <tr>       
                                 <th>Tag</th>
-                                <th>Shelf</th>
-                                <th>Rec#</th>
-                                <th>Codigo</th> 
+                                <th>Area (Shelf)</th>
                                 <th>Dept</th>
-                                <th>Precio</th>
-                                <th>Cantid</th>
-                                <th>Importe</th>
+                                <th>UPC/EAN</th>
+                                <th>Descrption</th> 
+                                <th>Precio Con</th>
+                                <th>Cantididad </th>
+                                <th>Totals</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let reportData of reportList | paginate: { itemsPerPage: 10, currentPage: p };; let i = index">
+                            <tr *ngFor="let reportData of reportList ; let i = index">
                               <td>{{reportData.tag}}</td>
                               <td>{{reportData.shelf}}</td>
-                              <td>{{reportData.rec}}</td>
-                              <td>{{reportData.barcode}}</td>
                               <td>{{reportData.department}}</td>
+                              <td>{{reportData.barcode}}</td>
+                              <td>{{reportData.orderJob.descrption}}</td>
                               <td>{{reportData.orderJob.salePrice}}</td>
                               <td>{{reportData.quantity}}</td>
                               <td>{{reportData.orderJob.salePrice * reportData.quantity}}</td>
@@ -53,9 +59,9 @@
                 <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
                     <p style="color: white">Loading...</p>
                 </ngx-spinner>
-                <div class="pagination-ui">
+                <!-- <div class="pagination-ui">
                     <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
-                </div>
+                </div> -->
             </div>
         </div>   
   </div>
