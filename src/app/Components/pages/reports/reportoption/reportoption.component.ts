@@ -24,10 +24,11 @@ export class reportOptionComponents implements OnInit
   p: number = 1;
   options:any;
   printDate = new Date();
-  constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
+  storeName: any;
+  constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private authenticationService: UserService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.getLabelInformation();
 
-
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
    }
 
   ngOnInit(): void 

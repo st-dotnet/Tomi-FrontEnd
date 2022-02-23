@@ -10,26 +10,27 @@ import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 import html2canvas from 'html2canvas';
 
-@Component({
-  selector: 'app-summaryby-department',
-  templateUrl: './summaryby-department.component.html',
-  styleUrls: ['./summaryby-department.component.css']
-})
-export class SummarybyDepartmentComponent implements OnInit {
 
+@Component({
+  selector: 'app-correctionbydepart',
+  templateUrl: './correctionbydepart.component.html',
+  styleUrls: ['./correctionbydepart.component.css']
+})
+export class CorrectionbydepartComponent implements OnInit {
   reportOptionLoadingServicesform!:FormGroup;
   reportList: any;
   p: number = 1;
   options:any;
   printDate = new Date();
-  storeName: any;
-  constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private authenticationService: UserService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
+  constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.getLabelInformation();
-    this.authenticationService.storeName.subscribe(user => this.storeName = user);
+
+
    }
 
   ngOnInit(): void 
   {
+
 this.options = {
   fieldSeparator: ' ',
   quoteStrings: '',
@@ -45,7 +46,7 @@ this.options = {
 }
   getLabelInformation(){
     this.spinner.show();
-    this.reportOptionLoadingServices.getUncountedItemsInformation()
+    this.reportOptionLoadingServices.getCorrectionsReportInformation()
     .pipe(first())
     .subscribe({
       next: (response: any) => {

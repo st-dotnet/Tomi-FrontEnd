@@ -36,6 +36,10 @@ import { reportOptionComponents } from './reports/reportoption/reportoption.comp
 import { ExtendedPricesComponent } from './reports/extended-prices/extended-prices.component';
 import { VariationbySKUComponent } from './reports/variationby-sku/variationby-sku.component';
 import { SummarybyDepartmentComponent } from './reports/summaryby-department/summaryby-department.component';
+import { CorrectionbydepartComponent } from './reports/correctionbydepart/correctionbydepart.component';
+import { DepsummaryComponent } from './reports/depsummary/depsummary.component';
+import { RangeComponent } from './reports/ranges/ranges.component';
+import { CheckDateTImeComponent } from './reports/check-date-time/check-date-time.component';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -62,7 +66,11 @@ import { SummarybyDepartmentComponent } from './reports/summaryby-department/sum
     ReportCodeNotFoundComponent,
     ExtendedPricesComponent,
     VariationbySKUComponent,
-    SummarybyDepartmentComponent
+    SummarybyDepartmentComponent,
+    CorrectionbydepartComponent,
+    DepsummaryComponent,
+    RangeComponent,
+    CheckDateTImeComponent
   ],
   imports: [
     PageRoutingModule,

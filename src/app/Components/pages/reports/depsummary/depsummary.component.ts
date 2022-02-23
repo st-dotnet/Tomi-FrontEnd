@@ -10,12 +10,13 @@ import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 import html2canvas from 'html2canvas';
 
+
 @Component({
-  selector: 'app-summaryby-department',
-  templateUrl: './summaryby-department.component.html',
-  styleUrls: ['./summaryby-department.component.css']
+  selector: 'app-depsummary',
+  templateUrl: './depsummary.component.html',
+  styleUrls: ['./depsummary.component.css']
 })
-export class SummarybyDepartmentComponent implements OnInit {
+export class DepsummaryComponent implements OnInit {
 
   reportOptionLoadingServicesform!:FormGroup;
   reportList: any;
@@ -23,14 +24,14 @@ export class SummarybyDepartmentComponent implements OnInit {
   options:any;
   printDate = new Date();
   storeName: any;
-  constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private authenticationService: UserService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
-    this.getLabelInformation();
+  constructor(private formbuilder:FormBuilder,private authenticationService: UserService, private modalService:NgbModal,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
+    this.getLabelInformation();
    }
 
   ngOnInit(): void 
   {
-this.options = {
+  this.options = {
   fieldSeparator: ' ',
   quoteStrings: '',
   decimalseparator: '.',
@@ -45,7 +46,7 @@ this.options = {
 }
   getLabelInformation(){
     this.spinner.show();
-    this.reportOptionLoadingServices.getUncountedItemsInformation()
+    this.reportOptionLoadingServices.getBreakDownReportInformation()
     .pipe(first())
     .subscribe({
       next: (response: any) => {

@@ -10,27 +10,27 @@ import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 import html2canvas from 'html2canvas';
 
-@Component({
-  selector: 'app-summaryby-department',
-  templateUrl: './summaryby-department.component.html',
-  styleUrls: ['./summaryby-department.component.css']
-})
-export class SummarybyDepartmentComponent implements OnInit {
 
+@Component({
+  selector: 'app-check-date-time',
+  templateUrl: './check-date-time.component.html',
+  styleUrls: ['./check-date-time.component.css']
+})
+export class CheckDateTImeComponent implements OnInit {
   reportOptionLoadingServicesform!:FormGroup;
   reportList: any;
   p: number = 1;
   options:any;
   printDate = new Date();
   storeName: any;
-  constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private authenticationService: UserService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
+  constructor(private formbuilder:FormBuilder,   private authenticationService: UserService,private modalService:NgbModal,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.getLabelInformation();
-    this.authenticationService.storeName.subscribe(user => this.storeName = user);
    }
 
   ngOnInit(): void 
   {
-this.options = {
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
+  this.options = {
   fieldSeparator: ' ',
   quoteStrings: '',
   decimalseparator: '.',
@@ -45,7 +45,8 @@ this.options = {
 }
   getLabelInformation(){
     this.spinner.show();
-    this.reportOptionLoadingServices.getUncountedItemsInformation()
+  
+    this.reportOptionLoadingServices.getCheckDateTimeInformation()
     .pipe(first())
     .subscribe({
       next: (response: any) => {

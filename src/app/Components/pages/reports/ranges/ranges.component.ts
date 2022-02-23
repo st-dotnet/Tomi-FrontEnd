@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild,ElementRef  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '@app/_services';
+import { RangesService, UserService } from '@app/_services';
 import { reportOptionLoadingServices } from '@app/_services/reportOptionLoadingServices';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
@@ -11,21 +11,19 @@ import { first } from 'rxjs';
 import html2canvas from 'html2canvas';
 
 @Component({
-  selector: 'app-summaryby-department',
-  templateUrl: './summaryby-department.component.html',
-  styleUrls: ['./summaryby-department.component.css']
+  selector: 'app-ranges',
+  templateUrl: './ranges.component.html',
+  styleUrls: ['./ranges.component.css']
 })
-export class SummarybyDepartmentComponent implements OnInit {
+export class RangeComponent implements OnInit {
 
   reportOptionLoadingServicesform!:FormGroup;
   reportList: any;
   p: number = 1;
   options:any;
   printDate = new Date();
-  storeName: any;
-  constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private authenticationService: UserService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
+  constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private rangesService: RangesService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.getLabelInformation();
-    this.authenticationService.storeName.subscribe(user => this.storeName = user);
    }
 
   ngOnInit(): void 
@@ -45,7 +43,7 @@ this.options = {
 }
   getLabelInformation(){
     this.spinner.show();
-    this.reportOptionLoadingServices.getUncountedItemsInformation()
+    this.rangesService.getRangeLists()
     .pipe(first())
     .subscribe({
       next: (response: any) => {

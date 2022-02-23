@@ -48,6 +48,18 @@ export class reportOptionLoadingServices
       getVariationBySKUInformation() {
         return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetVariationBySKUAsync`);
       };
+      getCorrectionsReportInformation() {
+        return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetCorrectionsReportAsync`);
+      };
+
+      getBreakDownReportInformation() {
+        return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetBreakDownReportAsync`);
+      };
+
+      
+      getCheckDateTimeInformation() {
+        return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetDateTimeCheckReport`);
+      };
     //   autoProcessing() {
     //     return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetAdjustmentInfoAsync`);
     //   };

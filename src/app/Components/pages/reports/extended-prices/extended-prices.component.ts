@@ -18,7 +18,9 @@ export class ExtendedPricesComponent implements OnInit {
   p: number = 1;
   options:any;
   printDate = new Date();
-  constructor(private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
+  storeName: any;
+  constructor(private reportOptionLoadingServices:reportOptionLoadingServices,private authenticationService: UserService,  private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.getLabelInformation();
     }
 

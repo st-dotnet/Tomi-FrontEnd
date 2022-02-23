@@ -16,6 +16,11 @@ import { reportOptionComponents } from './reports/reportoption/reportoption.comp
 import { VariationbySKUComponent } from './reports/variationby-sku/variationby-sku.component';
 import { SummarybyDepartmentComponent } from './reports/summaryby-department/summaryby-department.component';
 import { ExtendedPricesComponent } from './reports/extended-prices/extended-prices.component';
+import { CorrectionbydepartComponent } from './reports/correctionbydepart/correctionbydepart.component';
+import { DepsummaryComponent } from './reports/depsummary/depsummary.component';
+import { RangesComponent } from './ranges/ranges.component';
+import { RangeComponent } from './reports/ranges/ranges.component';
+import { CheckDateTImeComponent } from './reports/check-date-time/check-date-time.component';
 
 
 const routes: Routes = [{
@@ -43,6 +48,10 @@ const routes: Routes = [{
     {path:'extendedPriceException',component:ExtendedPricesComponent},
     {path:'variationbySKU',component:VariationbySKUComponent},
     {path:'summarybyDepartment',component:SummarybyDepartmentComponent},
+    {path:'correctionsbyDepartment',component:CorrectionbydepartComponent},
+    {path:'reportdep',component:DepsummaryComponent},
+    {path:'ranges',component:RangeComponent},
+    {path:'checkDateTime',component:CheckDateTImeComponent},
   ]
 }
 ];
