@@ -11,7 +11,7 @@ import { first } from 'rxjs';
 import html2canvas from 'html2canvas';
 
 @Component({
-  selector: 'app-ranges',
+  selector: 'app-range',
   templateUrl: './ranges.component.html',
   styleUrls: ['./ranges.component.css']
 })
@@ -22,7 +22,10 @@ export class RangeComponent implements OnInit {
   p: number = 1;
   options:any;
   printDate = new Date();
+  storeName: any;
   constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private rangesService: RangesService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
+    this.userService.storeName.subscribe(user => this.storeName = user);
+
     this.getLabelInformation();
    }
 
