@@ -48,11 +48,14 @@ export class UserService {
   private _storeName: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   public storeName: Observable<any> = this._storeName.asObservable();
 
+ 
+
   private _category: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   public category: Observable<any> = this._category.asObservable();
 
   private _activeTab: BehaviorSubject<any> = new BehaviorSubject<any>(1);
   public activeTab: Observable<any> = this._activeTab.asObservable();
+
   private _stockDate: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   public stockDate: Observable<any> = this._stockDate.asObservable();
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { formStore } from '@app/_models/stockAdjustment';
@@ -17,13 +17,13 @@ import { DatePipe } from '@angular/common';
 export class WorkloadsComponent implements OnInit {
   headerName: string = '';
   isMasterFileUpload: boolean = false;
-  isDepartmentFileUpload:boolean= false;
+  isDepartmentFileUpload: boolean = false;
   isStockFileUpload: boolean = false;
   isSaleFileUpload: boolean = false;
   //
-  isReservedFileUpload:boolean=false;
-  isParametersFilesUpload:boolean=false;
-  isCategoriesFileUpload:boolean=false;
+  isReservedFileUpload: boolean = false;
+  isParametersFilesUpload: boolean = false;
+  isCategoriesFileUpload: boolean = false;
   //
   workloads$!: Observable<any[]>;
   stockfileUploading: boolean = false;
@@ -62,36 +62,36 @@ export class WorkloadsComponent implements OnInit {
   departmentFileUpload: boolean = false;
 
   //
-  reserveFileUpload:boolean=false;
-  perametersByDepartmentFileUpload:boolean=false;
-  categoriesFileUpload:boolean=false;
+  reserveFileUpload: boolean = false;
+  perametersByDepartmentFileUpload: boolean = false;
+  categoriesFileUpload: boolean = false;
   //
 
   uploadFiletab: any;
   updatemasterfile: boolean = false;
   updateSalefile: boolean = false;
   updateStockfile: boolean = false;
-  updateDepartmentfile:boolean=false;
+  updateDepartmentfile: boolean = false;
   //
-  updateReservedFile:boolean=false;
-  updateParametrsDepartmentFile:boolean=false;
-  updateCategoriesFile:boolean=false;
+  updateReservedFile: boolean = false;
+  updateParametrsDepartmentFile: boolean = false;
+  updateCategoriesFile: boolean = false;
 
   //
   masterRecordCount: any;
-  departmentRecordCount:any;
+  departmentRecordCount: any;
   timeElapsed: any;
   saleRecordCount: any;
   CheckMasterFile: boolean = false;
   disablemasterfileupdate: boolean = false;
   disablestockfileupdate: boolean = false;
   disablesalefileupdate: boolean = false;
-  disabledepartmentfileupdate: boolean=false;
-  departmentfileUploading: boolean= false;
+  disabledepartmentfileupdate: boolean = false;
+  departmentfileUploading: boolean = false;
   //
-  disableReservedfileupdate: boolean=false;
-  disableCategoryfileupdate: boolean=false;
-  disableparametersbydepartmentfileupdate: boolean= false;
+  disableReservedfileupdate: boolean = false;
+  disableCategoryfileupdate: boolean = false;
+  disableparametersbydepartmentfileupdate: boolean = false;
   reserveRecordCount: any;
   parameterRecordCount: any;
   categoryRecordCount: any;
@@ -100,17 +100,17 @@ export class WorkloadsComponent implements OnInit {
   parametertimeElapsed: any;
   reservetimeElapsed: any;
   storeName: any;
-
+  sstockdate: any;
   printDate = new Date();
-  rangeList: any=formStore;
+  rangeList: any = formStore;
   printSectionId: any;
   category: any;
 
   constructor(private router: Router, private datepipe: DatePipe,
     private authenticationService: UserService,
     private spinner: NgxSpinnerService,
-    private toastrService : ToastrService, 
-    private fileservice : fileStoreService) {
+    private toastrService: ToastrService,
+    private fileservice: fileStoreService) {
     this.getallCustomList();
   }
 
@@ -151,29 +151,29 @@ export class WorkloadsComponent implements OnInit {
 
       case "stock":
         this.updateStockfile = true;
-         this.selectedStockFiles = event.target.files;
+        this.selectedStockFiles = event.target.files;
         break;
       case "department":
         this.selectedDepartmentFiles = event.target.files;
         this.updateDepartmentfile = true;
         break;
 
-     //
-        case "reserved":
+      //
+      case "reserved":
         this.selectedReservedFiles = event.target.files;
         this.updateReservedFile = true;
         break;
 
-        case "parametersByDepartment":
+      case "parametersByDepartment":
         this.selectedPerametrsByDepartmentsFiles = event.target.files;
         this.updateParametrsDepartmentFile = true;
         break;
 
-        case "categories":
+      case "categories":
         this.selectedCategoriesFiles = event.target.files;
         this.updateCategoriesFile = true;
         break;
-   //
+      //
     }
     // if (file == "master") {
     //   this.updatemasterfile = true;
@@ -236,8 +236,7 @@ export class WorkloadsComponent implements OnInit {
         this.authenticationService.setStockfileUploaddisable(false);
         this.authenticationService.uploadStockFile(formData).subscribe({
           next: (event: any) => {
-            if (event.success) 
-            {
+            if (event.success) {
               this.stockfileUploading = false;
               this.authenticationService.setStockUpload(this.stockfileUploading);
               this.stockRecordCount = event.stockRecordCount;
@@ -258,12 +257,12 @@ export class WorkloadsComponent implements OnInit {
               }, 3000);
               this.spinner.hide();
             }
-            else{
+            else {
               debugger;
-                 this.stockfileUploading = false;
-                 this.authenticationService.setStockUpload(this.stockfileUploading);
-                 this.toastrService.error(event.error);
-               }
+              this.stockfileUploading = false;
+              this.authenticationService.setStockUpload(this.stockfileUploading);
+              this.toastrService.error(event.error);
+            }
           },
           error: (err: any) => {
             this.progress = 0;
@@ -333,16 +332,16 @@ export class WorkloadsComponent implements OnInit {
               }, 150000);
               this.spinner.hide();
             }
-            else{
+            else {
               // debugger;
-                  this.masterfileUploading = false;
-                  this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
-                  this.toastrService.error(event.error);
-                  this.masterfileUpload = false;
-                  
-                  this.disablemasterfileupdate = true;
-                  this.authenticationService.setMasterfilbrowser(true);
-                }
+              this.masterfileUploading = false;
+              this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
+              this.toastrService.error(event.error);
+              this.masterfileUpload = false;
+
+              this.disablemasterfileupdate = true;
+              this.authenticationService.setMasterfilbrowser(true);
+            }
           },
           error: (err: any) => {
             if (err.error && err.error.message) {
@@ -409,15 +408,15 @@ export class WorkloadsComponent implements OnInit {
               }, 15000);
               this.spinner.hide();
             }
-            else{
+            else {
               // debugger;
-                  this.departmentfileUploading = false;
-                  this.authenticationService.setDepartmentfileUplaod(this.departmentfileUploading);
-                  this.toastrService.error(event.error);
-                  this.departmentFileUpload = true;
-                  this.disabledepartmentfileupdate = true;
-                  this.authenticationService.setDepartmentfilebrowser(true);
-                }
+              this.departmentfileUploading = false;
+              this.authenticationService.setDepartmentfileUplaod(this.departmentfileUploading);
+              this.toastrService.error(event.error);
+              this.departmentFileUpload = true;
+              this.disabledepartmentfileupdate = true;
+              this.authenticationService.setDepartmentfilebrowser(true);
+            }
           },
           error: (err: any) => {
             if (err.error && err.error.message) {
@@ -485,15 +484,15 @@ export class WorkloadsComponent implements OnInit {
               this.spinner.hide();
 
             }
-            else{
+            else {
               // debugger;
-                  this.salefileUploading = false;
-                  this.authenticationService.setSalefileUpload(this.salefileUploading);
-                  this.toastrService.error(event.error);
-                  this.saleFileUpload = true;
-                  this.disablestockfileupdate = true;
-                  this.authenticationService.setSalefileUploaddisable(true);
-                }
+              this.salefileUploading = false;
+              this.authenticationService.setSalefileUpload(this.salefileUploading);
+              this.toastrService.error(event.error);
+              this.saleFileUpload = true;
+              this.disablestockfileupdate = true;
+              this.authenticationService.setSalefileUploaddisable(true);
+            }
           },
           error: (err: any) => {
             if (err.error && err.error.message) {
@@ -537,8 +536,7 @@ export class WorkloadsComponent implements OnInit {
         this.authenticationService.setReservefileUploadDisable(false);
         this.authenticationService.uploadReservedFile(formData).subscribe({
           next: (event: any) => {
-            if (event.success) 
-            {
+            if (event.success) {
               this.reservefileUploading = false;
               this.authenticationService.setReservedfileUpload(false);
               this.reserveRecordCount = event.stockRecordCount;
@@ -558,14 +556,14 @@ export class WorkloadsComponent implements OnInit {
               }, 3000);
               this.spinner.hide();
             }
-            else{
+            else {
               // debugger;
-                  this.reservefileUploading = false;
-                  this.authenticationService.setReservedfileUpload(this.reservefileUploading);
-                  this.toastrService.error(event.error);
-                  this.reserveFileUpload = true;
-                  this.authenticationService.setReservefileUploadDisable(true);
-                }
+              this.reservefileUploading = false;
+              this.authenticationService.setReservedfileUpload(this.reservefileUploading);
+              this.toastrService.error(event.error);
+              this.reserveFileUpload = true;
+              this.authenticationService.setReservefileUploadDisable(true);
+            }
           },
           error: (err: any) => {
             if (err.error && err.error.message) {
@@ -629,14 +627,14 @@ export class WorkloadsComponent implements OnInit {
               }, 3000);
               this.spinner.hide();
             }
-            else{
+            else {
               // debugger;
-                  this.perametesByDepartmentfileUploading = false;
-                  this.authenticationService.setParameterBydepartmentfileUpload(this.perametesByDepartmentfileUploading);
-                  this.toastrService.error(event.error);
-                  this.perametersByDepartmentFileUpload = true;
-                  this.authenticationService.setparameterfileUploadDisable(true);
-                }
+              this.perametesByDepartmentfileUploading = false;
+              this.authenticationService.setParameterBydepartmentfileUpload(this.perametesByDepartmentfileUploading);
+              this.toastrService.error(event.error);
+              this.perametersByDepartmentFileUpload = true;
+              this.authenticationService.setparameterfileUploadDisable(true);
+            }
 
           },
           error: (err: any) => {
@@ -666,7 +664,7 @@ export class WorkloadsComponent implements OnInit {
     this.authenticationService.disablecategoryfileupdate.subscribe(user => this.disableCategoryfileupdate = user);
     if (this.selectedCategoriesFiles) {
       const file: File | null = this.selectedCategoriesFiles.item(0);
-        if (file) {
+      if (file) {
         this.currentFile = file;
         const formData: FormData = new FormData();
         var event = new Date(this.year);
@@ -704,14 +702,14 @@ export class WorkloadsComponent implements OnInit {
               }, 3000);
               this.spinner.hide();
             }
-            else{
+            else {
               // debugger;
-                  this.categoriesfileUploading = false;
-                  this.authenticationService.setCategoriesfileUpload(this.categoriesfileUploading);
-                  this.toastrService.error(event.error);
-                  this.categoriesFileUpload = true;
-                  this.authenticationService.setCategoryfileUploadDisable(true);
-                }
+              this.categoriesfileUploading = false;
+              this.authenticationService.setCategoriesfileUpload(this.categoriesfileUploading);
+              this.toastrService.error(event.error);
+              this.categoriesFileUpload = true;
+              this.authenticationService.setCategoryfileUploadDisable(true);
+            }
           },
           error: (err: any) => {
             if (err.error && err.error.message) {
@@ -796,32 +794,37 @@ export class WorkloadsComponent implements OnInit {
   //     }});
   // }
 
-  print(item:any)
-  {
-    
+  print(item: any) {
+    debugger;
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
-    this.authenticationService.stockDate.subscribe(user => this.year = user);
-
-    var print ={
-      Store: this.storeName,
-      date:this.datepipe.transform(this.year, 'MMyy'),
-      Category:item
+    this.authenticationService.stockDate.subscribe((user: Date) => this.year = user);
+    // var d = new Date(this.year);
+    // d.setMonth(d.getMonth() - 1);
+    // d.setDate(d.getDay() - 1);
+    this.year.setDate(this.year.getDate() - 1);
+    debugger;
+    const print = {
+      Store: this.storeName.substring(0, 4),
+      date: this.customDateFormat(this.year),
+      //date:'0221',
+      // date:d,
+      Category: item
     }
 
     this.fileservice.getInformation(print).subscribe({
-    //  this.fileservice.getInformation(this.storeName,'0920').subscribe({
-
+      //  this.fileservice.getInformation(this.storeName,'0920').subscribe({
       next: (response: any) => {
-       this.rangeList=response;
-      }})
+        this.rangeList = response;
+      }
+    })
 
-      debugger;
-       let printContents, popupWin;
-       printContents = document.getElementById('printSectionId')?.innerHTML;
-      
-      popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
-      popupWin?.document.open();
-      popupWin?.document.write(`
+    debugger;
+    let printContents, popupWin;
+    printContents = document.getElementById('printSectionId')?.innerHTML;
+
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin?.document.open();
+    popupWin?.document.write(`
         <html>
           <head>
             <title>Print tab</title>
@@ -831,65 +834,70 @@ export class WorkloadsComponent implements OnInit {
           </head>
       <body onload="window.print();window.close()">${printContents}</body>
         </html>`
-      );
-      popupWin?.document.close();
-    }
+    );
+    popupWin?.document.close();
+  }
   checkMasterfileUpload() {
     this.isMasterFileUpload = !this.isMasterFileUpload;
     this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
-  }                                                 
-  checkDepartmentFileupload(){
-    this.isDepartmentFileUpload= !this.isDepartmentFileUpload;
+  }
+  checkDepartmentFileupload() {
+    this.isDepartmentFileUpload = !this.isDepartmentFileUpload;
     this.authenticationService.disabledepartmentfileupdate.subscribe(user => this.disabledepartmentfileupdate = user);
   }
 
-  checkReservedFileupload(){
-    this.isReservedFileUpload= !this.isReservedFileUpload;
+  checkReservedFileupload() {
+    this.isReservedFileUpload = !this.isReservedFileUpload;
     this.authenticationService.disablereservedfileupdate.subscribe(user => this.disableReservedfileupdate = user);
   }
-  checkParameterFileupload(){
-    this.isParametersFilesUpload= !this.isParametersFilesUpload;
+  checkParameterFileupload() {
+    this.isParametersFilesUpload = !this.isParametersFilesUpload;
     this.authenticationService.disableparametersbydepartmentfileupdate.subscribe(user => this.disableparametersbydepartmentfileupdate = user);
   }
-  checkCategoryFileupload(){
-    this.isCategoriesFileUpload= !this.isCategoriesFileUpload;
+  checkCategoryFileupload() {
+    this.isCategoriesFileUpload = !this.isCategoriesFileUpload;
     this.authenticationService.disablecategoryfileupdate.subscribe(user => this.disableCategoryfileupdate = user);
   }
-  onDepartmentClick(){
+  onDepartmentClick() {
     this.authenticationService.disabledepartmentfileupdate.subscribe(user => this.disabledepartmentfileupdate = user);
-    if(!this.disabledepartmentfileupdate)
-    this.isDepartmentFileUpload = true;
+    if (!this.disabledepartmentfileupdate)
+      this.isDepartmentFileUpload = true;
     else
-    this.isDepartmentFileUpload = false;
+      this.isDepartmentFileUpload = false;
   }
-  onMenuClick(){
+  onMenuClick() {
 
     this.authenticationService.disablemasterfileupdate.subscribe(user => this.disablemasterfileupdate = user);
-    if(!this.disablemasterfileupdate)
-    this.isMasterFileUpload = true;
+    if (!this.disablemasterfileupdate)
+      this.isMasterFileUpload = true;
     else
-    this.isMasterFileUpload = false;
+      this.isMasterFileUpload = false;
   }
 
-  onReservedClick(){
+  onReservedClick() {
     this.authenticationService.disablereservedfileupdate.subscribe(user => this.disableReservedfileupdate = user);
-    if(!this.disableReservedfileupdate)
-    this.isReservedFileUpload = true;
+    if (!this.disableReservedfileupdate)
+      this.isReservedFileUpload = true;
     else
-    this.isReservedFileUpload = false;
+      this.isReservedFileUpload = false;
   }
-  onParametrByDepartmentClick(){
+  onParametrByDepartmentClick() {
     this.authenticationService.disableparametersbydepartmentfileupdate.subscribe(user => this.disableparametersbydepartmentfileupdate = user);
-    if(!this.disableparametersbydepartmentfileupdate)
-    this.isParametersFilesUpload = true;
+    if (!this.disableparametersbydepartmentfileupdate)
+      this.isParametersFilesUpload = true;
     else
-    this.isParametersFilesUpload = false;
+      this.isParametersFilesUpload = false;
   }
-  onCategoriesClick(){
+  onCategoriesClick() {
     this.authenticationService.disablecategoryfileupdate.subscribe(user => this.disableCategoryfileupdate = user);
-    if(!this.disableCategoryfileupdate)
-    this.isCategoriesFileUpload = true;
+    if (!this.disableCategoryfileupdate)
+      this.isCategoriesFileUpload = true;
     else
-    this.isCategoriesFileUpload = false;
+      this.isCategoriesFileUpload = false;
   }
+
+  customDateFormat(date: Date) {
+    return `${date.getMonth() < 10 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`}${date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`}`
+  }
+
 }

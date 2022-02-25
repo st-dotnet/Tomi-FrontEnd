@@ -7,8 +7,10 @@ import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
 import jsPDF from 'jspdf';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs';
+import { first, timer, timestamp } from 'rxjs';
 import html2canvas from 'html2canvas';
+
+
 
 @Component({
   selector: 'app-getLabelDetailsOption',
@@ -25,26 +27,18 @@ export class reportOptionComponents implements OnInit
   options:any;
   printDate = new Date();
   storeName: any;
+  stockDate:any;
   constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private authenticationService: UserService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.getLabelInformation();
 
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
+    this.authenticationService.stockDate.subscribe(user=> this.stockDate=user);
+ 
    }
 
   ngOnInit(): void 
   {
- // this.getLabelInformation()
-//   this.reportOptionLoadingServicesform=this.formbuilder.group({
-//   Terminal: ['', Validators.required],
-//   Tx:['',Validators.required],
-//   Employee:['',Validators.required],
-//   datetime:['',Validators.required],
-//   qty:['',Validators.required],
-//   Total:['',Validators.required],
-//   DownloadError:['']
-// })
-
-this.options = {
+  this.options = {
   fieldSeparator: ' ',
   quoteStrings: '',
   decimalseparator: '.',
@@ -68,7 +62,6 @@ this.options = {
       }
     });
   }
-
   openPDF() {
     const response = document.getElementById('htmlData') as HTMLElement;        
     html2canvas(response).then(canvas => { 
