@@ -26,7 +26,6 @@ export class CorrectionbydepartComponent implements OnInit {
   form: FormGroup;
   modalClass: string | undefined;
   departments: any;
-
   constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService,private fb: FormBuilder) {
     this.getLabelInformation();
     this.form = this.fb.group({
@@ -58,7 +57,6 @@ this.options = {
     .pipe(first())
     .subscribe({
       next: (response: any) => {
-        debugger
        this.reportList=response;
        this.departments = [...new Set(response.map((x: { department: any; }) => x.department))];       
        this.spinner.hide();
@@ -67,7 +65,6 @@ this.options = {
   }
 
   filterDepartment(){
-   
      this.reportOptionLoadingServices.getCorrectionsReportInformation()
     .pipe(first())
     .subscribe({
@@ -75,11 +72,8 @@ this.options = {
        this.reportList=response;
        this.departments = [...new Set(response.map((x: { department: any; }) => x.department))];       
        this.spinner.hide();
-       let s = this.form.value.checkArray;
-       var result = this.reportList.filter(function(e:any) {
-        return [s].includes(e.department.toString())
-      });
-      this.reportList = result;
+       const myArrayFiltered = this.reportList.filter((array:{ department: any; } ) => this.form.value.checkArray.some((filter:any ) => filter === array.department.toString()));
+      this.reportList = myArrayFiltered;
       this.modalService.dismissAll();
       }
       
@@ -111,18 +105,19 @@ this.options = {
       });
     }
     onCheckboxChange(e:any) {
-      const checkArray: any = this.form.get('checkArray') as FormArray;
+      debugger;
+      const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+     
       if (e.target.checked) {
-        checkArray.push(new FormControl(e.target.value));
+        const index = checkArray.controls.findIndex(x => x.value === e.target.value);
+        if(index==-1){
+          checkArray.push(new FormControl(e.target.value));
+        }
+   
       } else {
-        let i: number = 0;
-        checkArray.controls.forEach((item: any) => {
-          if (item.value == e.target.value) {
-            checkArray.removeAt(i);
-            return;
-          }
-          i++;
-        });
+         const index = checkArray.controls.findIndex(x => x.value === e.target.value);
+         checkArray.removeAt(index);
       }
     }
+
 }

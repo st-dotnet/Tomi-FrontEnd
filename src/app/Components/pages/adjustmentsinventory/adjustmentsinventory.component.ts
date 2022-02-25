@@ -34,13 +34,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
   editadjust: boolean= false;
   isTagvalueExist:  boolean= false;
   form: FormGroup;
-  Data: Array<any> = [
-    { name: 'Pear', value: 'pear' },
-    { name: 'Plum', value: 'plum' },
-    { name: 'Kiwi', value: 'kiwi' },
-    { name: 'Apple', value: 'apple' },
-    { name: 'Lime', value: 'lime' }
-  ];
   constructor(private formBuilder: FormBuilder, private modalService: NgbModal,
   private stockAdjustmentService: StockAdjustmentService,
   private spinner: NgxSpinnerService,
@@ -51,8 +44,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
   }
   adjustmentinventory!: false;
-
-
 
   // open(content: any) {
   //   this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
