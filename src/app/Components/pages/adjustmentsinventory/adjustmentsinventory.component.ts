@@ -34,6 +34,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
   editadjust: boolean= false;
   isTagvalueExist:  boolean= false;
   form: FormGroup;
+  loading: boolean = false;
   constructor(private formBuilder: FormBuilder, private modalService: NgbModal,
   private stockAdjustmentService: StockAdjustmentService,
   private spinner: NgxSpinnerService,
@@ -110,10 +111,13 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
 
   onSubmit() {
+    debugger;    
     this.submitted = true;
-    if (this.adjustmentform.invalid) {
+    if (this.adjustmentform.invalid || this.isTagvalueExist ||this.invalidsku) {
       return;
-    }
+    }    
+    this.loading = true;
+    this.spinner.show();
     this.adjustmentform.controls["nof"].setValue(0);
     this.stockAdjustmentService.addAdjustment(this.adjustmentform.value)
       .pipe(first())
@@ -121,6 +125,9 @@ export class AdjustmentsinventoryComponent implements OnInit {
         next: () => {
           this.getAdjustment();
           this.modalService.dismissAll();
+          this.submitted = false;
+          this.loading = false;
+          this.spinner.hide();
         }
       });
   }

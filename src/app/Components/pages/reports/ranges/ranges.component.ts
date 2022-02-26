@@ -23,9 +23,15 @@ export class RangeComponent implements OnInit {
   options:any;
   printDate = new Date();
   storeName: any;
+  year: any;
+  stockDate: Date = new Date();
   constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private rangesService: RangesService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.userService.storeName.subscribe(user => this.storeName = user);
-
+    this.userService.stockDate.subscribe((date: Date) => {
+      debugger
+     // this.stockDate =  date.setDate(date.getDate() - 1);
+     this.stockDate.setDate(date.getDate() - 1);
+    });
     this.getLabelInformation();
    }
 

@@ -140,7 +140,7 @@ export class RangesComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
-    if (this.rangeForm.invalid) {
+    if (this.rangeForm.invalid || this.rangeError) {
       return;
     }
 
@@ -167,6 +167,7 @@ export class RangesComponent implements OnInit {
           else
 
           this.getallCustomList();
+          this.getMaximumRange();
 
         }
 
@@ -224,13 +225,21 @@ export class RangesComponent implements OnInit {
 
   tagfromValue(){
     this.rangeError= false;
-    if(this.editRange){
+    if(this.editRange)
+    {
       debugger;
       if(this.tagformValue!="" && this.tagToValue !=""&& this.rangeForm.value.tagFrom !=null && this.rangeForm.value.tagTo)
       {
-        if(this.rangeForm.value.tagFrom > this.tagToValue ||this.rangeForm.value.tagFrom>this.rangeForm.value.tagTo)
-        { this.rangeErrorMessage="Tag From is not greater than tag to value";
-        this.rangeError = true;}
+        if(this.rangeForm.value.tagFrom>this.rangeForm.value.tagTo)
+        { 
+          this.rangeErrorMessage="Tag From is not greater than tag to value";
+          this.rangeError = true;
+        }
+       if(this.rangeForm.value.tagFrom<this.tagformValue)
+       {
+        this.rangeErrorMessage="Tag From is not greater than tag to value";
+        this.rangeError = true;
+       }
      
       else if(this.rangeForm.value.tagFrom >this.tagformValue && this.rangeForm.value.tagFrom <this.tagToValue)
            this.rangeError= false;
@@ -238,15 +247,17 @@ export class RangesComponent implements OnInit {
       }
     }
     if(this.rangeForm.value.tagFrom !=null && this.rangeForm.value.tagTo&& this.rangeForm.value.tagFrom>this.rangeForm.value.tagTo)
-    {this.rangeError = true;
-    this.rangeErrorMessage="Tag From is not greater than tag to value";
-  return;
-}
+      {
+      this.rangeError = true;
+      this.rangeErrorMessage="Tag From is not greater than tag to value";
+      return;
+      }
       if(this.rangeForm.value.tagFrom != null && this.maximumRange>this.rangeForm.value.tagFrom)
-      { this.rangeError= true;
+      { 
+        this.rangeError= true;
         this.rangeErrorMessage='Tag From is not less than '+this.maximumRange;
         return;
       }   
     
-  }
+    }
 }

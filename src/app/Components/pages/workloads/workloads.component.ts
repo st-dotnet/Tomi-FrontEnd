@@ -100,7 +100,7 @@ export class WorkloadsComponent implements OnInit {
   parametertimeElapsed: any;
   reservetimeElapsed: any;
   storeName: any;
-  sstockdate: any;
+  sstockDate: Date = new Date();
   printDate = new Date();
   rangeList: any = formStore;
   printSectionId: any;

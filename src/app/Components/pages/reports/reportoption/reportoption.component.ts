@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,ElementRef  } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '@app/_services';
 import { reportOptionLoadingServices } from '@app/_services/reportOptionLoadingServices';
@@ -10,71 +10,66 @@ import { ToastrService } from 'ngx-toastr';
 import { first, timer, timestamp } from 'rxjs';
 import html2canvas from 'html2canvas';
 
-
-
 @Component({
   selector: 'app-getLabelDetailsOption',
   templateUrl: './reportoption.component.html',
   styleUrls: ['./reportoption.component.css']
- 
-
 })
-export class reportOptionComponents implements OnInit 
-{
-  reportOptionLoadingServicesform!:FormGroup;
+
+export class reportOptionComponents implements OnInit {
+
+  reportOptionLoadingServicesform!: FormGroup;
   reportList: any;
   p: number = 1;
-  options:any;
+  options: any;
   printDate = new Date();
   storeName: any;
-  stockDate:any;
-  constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private authenticationService: UserService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
-    this.getLabelInformation();
+  stockDate: Date = new Date();
 
-    this.authenticationService.storeName.subscribe(user => this.storeName = user);
-    this.authenticationService.stockDate.subscribe(user=> this.stockDate=user);
- 
-   }
+  constructor(
+    private formbuilder: FormBuilder,
+    private modalService: NgbModal,
+    private authenticationService: UserService,
+    private reportOptionLoadingServices: reportOptionLoadingServices,
+    private spinner: NgxSpinnerService,
+    private toastrService: ToastrService,
+    private userService: UserService) {
 
-  ngOnInit(): void 
-  {
-  this.options = {
-  fieldSeparator: ' ',
-  quoteStrings: '',
-  decimalseparator: '.',
-  showLabels: false,
-  showTitle: false,
-  useBom: false,
-  noDownload: false,
-  useHeader: false,
-  //headers: ["sku","department","retailPrice"],
-  nullToEmptyString: true,
   }
-}
-  getLabelInformation(){
-    this.spinner.show();
-    this.reportOptionLoadingServices.getLabelDetailsInformation()
-    .pipe(first())
-    .subscribe({
-      next: (response: any) => {
-        this.spinner.hide();
-       this.reportList=response;
-      }
+
+  ngOnInit() {
+    this.getLabelInformation();
+    this.authenticationService.storeName.subscribe(user => this.storeName = user);
+    this.authenticationService.stockDate.subscribe((date: Date) => {
+      debugger
+     // this.stockDate =  date.setDate(date.getDate() - 1);
+     this.stockDate.setDate(date.getDate() - 1);
     });
   }
-  openPDF() {
-    const response = document.getElementById('htmlData') as HTMLElement;        
-    html2canvas(response).then(canvas => { 
 
-        let fileWidth = 208;
-        let fileHeight = canvas.height * fileWidth / canvas.width;
-        
-        const FILEURI = canvas.toDataURL('image/png')
-        let PDF = new jsPDF('p', 'mm', 'a4');
-        let position = 0;
-        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
-        
-        PDF.save('recordOptions.pdf');
-    });     
-    }
+  getLabelInformation() {
+    this.spinner.show();
+    this.reportOptionLoadingServices.getLabelDetailsInformation()
+      .pipe(first())
+      .subscribe({
+        next: (response: any) => {
+          this.spinner.hide();
+          this.reportList = response;
+        }
+      });
+  }
+
+  openPDF() {
+    const response = document.getElementById('htmlData') as HTMLElement;
+    html2canvas(response).then(canvas => {
+      let fileWidth = 208;
+      let fileHeight = canvas.height * fileWidth / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png')
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+      PDF.save('recordOptions.pdf');
+    });
+  }
+
 }

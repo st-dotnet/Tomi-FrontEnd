@@ -1082,3 +1082,68 @@ button.print-ico.ico {
     float: right;
     margin: 10px;
 }
+
+
+button.filter_records {
+    width: 38px;
+    height: 38px;
+    display: block;
+    color: #fff;
+    border-radius: 50%;
+    border: none;
+    background-color: #00a79e;
+    margin: 0;
+    position: relative;
+    
+}
+
+.more-opt.correc-icons {
+    width: 100%;
+    float: left;
+    padding: 10px 12px 0px;
+}
+
+.more-opt.correc-icons ul.opt-list-corr-icons {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+}
+
+.more-opt.correc-icons ul.opt-list-corr-icons .ico svg {
+    width: 20px;
+}
+
+.more-opt.correc-icons ul.opt-list-corr-icons a.pdf-download-ico {
+    width: 38px;
+    height: 38px;
+    display: block;
+    color: #fff;
+    border-radius: 50%;
+    border: none;
+    background-color: #3e9ef8;
+    margin: 0;
+    float: left;
+    position: relative;
+    cursor: pointer;
+}
+
+.more-opt.correc-icons ul.opt-list-corr-icons a.pdf-download-ico svg {
+    width: 21px;
+}
+
+.more-opt.correc-icons ul.opt-list-corr-icons a.pdf-download-ico span.svg-icon {
+    position: absolute;
+}
+
+.more-opt.correc-icons ul.opt-list-corr-icons span.svg-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.more-opt.correc-icons ul.opt-list-corr-icons li:not(:first-child) {
+    margin-left: 8px;
+}

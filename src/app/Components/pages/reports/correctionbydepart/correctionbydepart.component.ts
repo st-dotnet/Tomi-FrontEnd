@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 import html2canvas from 'html2canvas';
+import { isTemplateExpression } from 'typescript';
 
 @Component({
   selector: 'app-correctionbydepart',
@@ -22,22 +23,29 @@ export class CorrectionbydepartComponent implements OnInit {
   options:any;
   printDate = new Date();
   year: any;
+  stockDate: Date = new Date();
   storeName: any;
   form: FormGroup;
   modalClass: string | undefined;
   departments: any;
+  items:any=[];
   constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService,private fb: FormBuilder) {
+
     this.getLabelInformation();
     this.form = this.fb.group({
       checkArray: this.fb.array([])
     })
-    this.userService.stockDate.subscribe(user => this.year = user);
     this.userService.storeName.subscribe(user => this.storeName = user);
+    this.userService.stockDate.subscribe((date: Date) => {
+      debugger
+      this.stockDate.setDate(date.getDate() - 1);
+    });
+    
    }
 
   ngOnInit(): void 
   {
-
+    this.userService.stockDate.subscribe(user => this.year = user);
 this.options = {
   fieldSeparator: ' ',
   quoteStrings: '',
@@ -72,7 +80,7 @@ this.options = {
        this.reportList=response;
        this.departments = [...new Set(response.map((x: { department: any; }) => x.department))];       
        this.spinner.hide();
-       const myArrayFiltered = this.reportList.filter((array:{ department: any; } ) => this.form.value.checkArray.some((filter:any ) => filter === array.department.toString()));
+       const myArrayFiltered = this.reportList.filter((array:{ department: any; } ) => this.items.some((filter:any ) => filter.value === array.department.toString()));
       this.reportList = myArrayFiltered;
       this.modalService.dismissAll();
       }
@@ -96,6 +104,7 @@ this.options = {
     });     
     }
     open(content: any) {
+      this.items=[];
       this.modalClass = 'mymodal',
       this.modalService.open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -105,19 +114,22 @@ this.options = {
       });
     }
     onCheckboxChange(e:any) {
-      debugger;
-      const checkArray: FormArray = this.form.get('checkArray') as FormArray;
-     
       if (e.target.checked) {
-        const index = checkArray.controls.findIndex(x => x.value === e.target.value);
+
+        const index = this.items.findIndex((x:any) => x.value === e.target.value);
+
         if(index==-1){
-          checkArray.push(new FormControl(e.target.value));
+
+          this.items.push(new FormControl(e.target.value));
         }
-   
       } else {
-         const index = checkArray.controls.findIndex(x => x.value === e.target.value);
-         checkArray.removeAt(index);
+
+         const index = this.items.findIndex((x:any) => x.value === e.target.value);
+
+         this.items.removeAt(index);
+
       }
+
     }
 
 }

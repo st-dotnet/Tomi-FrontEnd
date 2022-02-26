@@ -24,8 +24,16 @@ export class DepsummaryComponent implements OnInit {
   options:any;
   printDate = new Date();
   storeName: any;
+  year: any;
+  stockDate: Date = new Date();
+
   constructor(private formbuilder:FormBuilder,private authenticationService: UserService, private modalService:NgbModal,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
+    this.authenticationService.stockDate.subscribe((date: Date) => {
+      debugger
+     // this.stockDate =  date.setDate(date.getDate() - 1);
+     this.stockDate.setDate(date.getDate() - 1);
+    });
     this.getLabelInformation();
    }
 
