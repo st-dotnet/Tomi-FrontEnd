@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild,ElementRef  } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '@app/_services';
 import { reportOptionLoadingServices } from '@app/_services/reportOptionLoadingServices';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -25,8 +25,15 @@ export class VariationbySKUComponent implements OnInit {
   storeName: any;
   year: any;
   stockDate: Date = new Date();
+  items: any;
+  modalClass: string | undefined;
+  departments: any;
+  form: FormGroup;
   constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private authenticationService: UserService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.getLabelInformation();
+    this.form = this.formbuilder.group({
+      checkArray: this.formbuilder.array([])
+    })
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe((date: Date) => {
       debugger
@@ -69,6 +76,7 @@ this.options = {
       next: (response: any) => {
         this.spinner.hide();
        this.reportList=response;
+       this.departments = [...new Set(response.map((x: { department: any; }) => x.department))];   
       }
     });
   }
@@ -88,4 +96,50 @@ this.options = {
         PDF.save('recordOptions.pdf');
     });     
     }
+    open(content: any) {
+      console.log("departments",this.departments)
+      this.items=[];
+      this.modalClass = 'mymodal',
+      this.modalService.open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        windowClass: 'modal-filteradd'
+      }).result.then((result) => {
+      }, (reason) => {
+      });
+    }
+    onCheckboxChange(e:any) {
+      if (e.target.checked) {
+
+        const index = this.items.findIndex((x:any) => x.value === e.target.value);
+
+        if(index==-1){
+
+          this.items.push(new FormControl(e.target.value));
+        }
+      } else {
+
+         const index = this.items.findIndex((x:any) => x.value === e.target.value);
+
+         this.items.removeAt(index);
+
+      }
+
+    }
+    filterDepartment(){
+      this.reportOptionLoadingServices.getVariationBySKUInformation()
+     .pipe(first())
+     .subscribe({
+       next: (response: any) => {
+        this.reportList=response;
+        console.log("res",response)
+        this.departments = [...new Set(response.map((x: { department: any; }) => x.department))];       
+        this.spinner.hide();
+        const myArrayFiltered = this.reportList.filter((array:{ department: any; } ) => this.items.some((filter:any ) => filter.value === array.department.toString()));
+       this.reportList = myArrayFiltered;
+       this.modalService.dismissAll();
+       }
+       
+     });
+ 
+   }
 }

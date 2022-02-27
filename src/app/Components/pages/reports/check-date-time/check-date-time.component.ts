@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
 import jsPDF from 'jspdf';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastrService } from 'ngx-toastr';
+import { Toast, ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 import html2canvas from 'html2canvas';
 
@@ -25,6 +25,8 @@ export class CheckDateTImeComponent implements OnInit {
   storeName: any;
   year: any;
   stockDate: Date = new Date();
+  from_date: any;
+  to_date: any;
 
   constructor(private formbuilder:FormBuilder,   private authenticationService: UserService,private modalService:NgbModal,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.getLabelInformation();
@@ -78,4 +80,15 @@ export class CheckDateTImeComponent implements OnInit {
         PDF.save('recordOptions.pdf');
     });     
     }
+    filterBydate(){
+      const fromdate =this.from_date;
+      const todate = this.to_date;
+      if(fromdate ==null || todate ==null){
+      this.toastrService.error("Please select  dates vlaues ");
+      }
+      else{
+
+      }
+    }
+    
 }

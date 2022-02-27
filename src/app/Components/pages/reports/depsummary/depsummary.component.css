@@ -29,3 +29,9 @@ img{
     margin-top: 10px;
     float: left;
   }
+  .icon-search{
+    position: absolute;
+    width: 14px;
+    top: 10px;
+    left: 10px;
+  }

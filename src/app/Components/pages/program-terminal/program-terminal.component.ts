@@ -57,8 +57,8 @@ export class ProgramTerminalComponent implements OnInit {
   }
 
   genratekey(){
-    Guid
-    this.uniqKey = Guid.create();
+    
+    this.uniqKey = Math.floor(Math.random() * 1000000);
   }
 
   genrateFiles(){

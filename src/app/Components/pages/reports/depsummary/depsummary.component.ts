@@ -51,6 +51,8 @@ export class DepsummaryComponent implements OnInit {
   //headers: ["sku","department","retailPrice"],
   nullToEmptyString: true,
   }
+  this.getLabelInformation();
+
 }
   getLabelInformation(){
     this.spinner.show();
