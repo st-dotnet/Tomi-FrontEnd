@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService, StockAdjustmentService, UserService } from '@app/_services';
+import { generateMF1Service } from '@app/_services/program-terminal.service';
 import { Guid } from 'guid-typescript';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
 
 @Component({
   selector: 'app-program-terminal',
@@ -13,17 +13,19 @@ import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
 export class ProgramTerminalComponent implements OnInit {
 
   uniqKey:any;
+  operation: any = 1;
   isgenrateFile:boolean=false;
   options:any;
   options2:any;
   data:any[]=[];
   customerId: undefined;
   storeId: undefined;
-  stockyear: undefined;
+  stockyear: undefined; 
   constructor( private stockadjustment: StockAdjustmentService,
     private spinner: NgxSpinnerService,
     private toastrService: ToastrService,
-    private accountService: SessionService, private authenticationService: UserService) { }
+    private accountService: SessionService, private authenticationService: UserService
+    ,private generateFilesService:generateMF1Service) { }
 
   ngOnInit(): void {
     this.options = {
@@ -56,28 +58,52 @@ export class ProgramTerminalComponent implements OnInit {
     //this.genratecsvFiles("B74DDD14-6340-4840-95C2-DB12554843E8");
   }
 
-  genratekey(){
-    
+  genratekey(){    
     this.uniqKey = Math.floor(Math.random() * 1000000);
   }
 
-  genrateFiles(){
-    this.authenticationService.customerId.subscribe(user => this.customerId = user);
-    this.authenticationService.storeId.subscribe(user => this.storeId = user);
-    this.authenticationService.stockDate.subscribe(user => this.stockyear = user);
-    if (this.customerId==undefined || this.storeId==undefined || this.stockyear ==undefined)
-    this.toastrService.error("Please select job order first");
-   else if(this.data.length>0)
-    {
-    this.isgenrateFile=true;
-    new AngularCsv(this.data,'TerminalSMF.csv',this.options);
-    new AngularCsv(this.data,'TerminalDepartments .csv',this.options2);
-    this.isgenrateFile=false;
+  // genrateFiles(){
+  // //   this.authenticationService.customerId.subscribe(user => this.customerId = user);
+  // //   this.authenticationService.storeId.subscribe(user => this.storeId = user);
+  // //   this.authenticationService.stockDate.subscribe(user => this.stockyear = user);
+  // //   if (this.customerId==undefined || this.storeId==undefined || this.stockyear ==undefined)
+  // //   this.toastrService.error("Please select job order first");
+  // //  else if(this.data.length>0)
+  // //   {
+  // //   this.isgenrateFile=true;
+  // //   new AngularCsv(this.data,'TerminalSMF.csv',this.options);
+  // //   new AngularCsv(this.data,'TerminalDepartments .csv',this.options2);
+  // //   this.isgenrateFile=false;
+  // //   }
+  // //   else{
+  // //     this.toastrService.error("Data Not Found.");
+  // //     this.isgenrateFile=false;
+  // //   }
+
+
+  // }
+
+  genrateFiles() {
+    debugger
+    this.spinner.show();
+    const model = {
+      operation : this.operation,
+      inventoryKey: this.uniqKey
     }
-    else{
-      this.toastrService.error("Data Not Found.");
-      this.isgenrateFile=false;
-    }
+
+    this.generateFilesService.GenerateMF1Information(model)
+      .subscribe({
+       next: (response: any) => {
+         this.spinner.hide();
+         this.data=response;
+       }
+     });
+  }
+
+
+  getAction(value: any){
+    debugger
+    this.operation = value;
   }
 
   genratecsvFiles(custid:any){

@@ -21,7 +21,7 @@ export class ExtendedPricesComponent implements OnInit {
   storeName: any;
   year: any;
   stockDate: Date = new Date();
-
+    priceValue:any;
   constructor(private reportOptionLoadingServices:reportOptionLoadingServices,private authenticationService: UserService,  private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe((date: Date) => {
@@ -34,17 +34,7 @@ export class ExtendedPricesComponent implements OnInit {
 
   ngOnInit(): void 
   {
-  this.options = {
-  fieldSeparator: '',
-  quoteStrings: '',
-  decimalseparator: '.',
-  showLabels: false,
-  showTitle: false,
-  useBom: false,
-  noDownload: false,
-  useHeader: false,
-  nullToEmptyString: true,
-   }
+ 
  }
  
   getLabelInformation(){
@@ -71,4 +61,22 @@ export class ExtendedPricesComponent implements OnInit {
         PDF.save('recordOptions.pdf');
     });     
     }
+
+    filterDepartment(){
+      debugger;
+      this.reportOptionLoadingServices.getExtendedPricesInformation()
+     .pipe(first())
+     .subscribe({
+       next: (response: any) => {
+        this.reportList=response;
+        console.log("res",response)
+            
+        this.spinner.hide();
+     
+        const myArrayFiltered = this.reportList.filter((x: any)=>x?.orderJob?.salePrice.indexOf(this.priceValue) > -1);
+       this.reportList = myArrayFiltered;
+     
+       }
+       
+     });}
 }

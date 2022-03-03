@@ -579,8 +579,6 @@ export class WorkloadsComponent implements OnInit {
       this.selectedFiles = undefined;
     }
   }
-
-
   uploadPerameterByDepartmentFile(): void {
     this.spinner.show();
     this.updateParametrsDepartmentFile = false;

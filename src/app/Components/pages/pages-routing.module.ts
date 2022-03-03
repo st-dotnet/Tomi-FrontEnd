@@ -21,6 +21,7 @@ import { DepsummaryComponent } from './reports/depsummary/depsummary.component';
 import { RangesComponent } from './ranges/ranges.component';
 import { RangeComponent } from './reports/ranges/ranges.component';
 import { CheckDateTImeComponent } from './reports/check-date-time/check-date-time.component';
+import { CustomerReportsComponent } from './reports/customer-reports/customer-reports.component';
 
 
 const routes: Routes = [{
@@ -52,6 +53,7 @@ const routes: Routes = [{
     {path:'reportdep',component:DepsummaryComponent},
     {path:'ranges',component:RangeComponent},
     {path:'checkDateTime',component:CheckDateTImeComponent},
+    {path:'customerReport',component:CustomerReportsComponent},
   ]
 }
 ];

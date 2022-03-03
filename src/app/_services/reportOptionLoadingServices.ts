@@ -34,8 +34,8 @@ export class reportOptionLoadingServices
         return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetCodeNotFoundAsync`);
       };
       
-      getLabelDetailsInformation() {
-        return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetLabelDetailsAsync`);
+      getLabelDetailsInformation(model:any,tagto:any) {
+        return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetLabelDetailsAsync/${model}/${tagto}`);
       };
 
       getExtendedPricesInformation() {
@@ -55,11 +55,34 @@ export class reportOptionLoadingServices
       getBreakDownReportInformation() {
         return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetBreakDownReportAsync`);
       };
-
-      
       getCheckDateTimeInformation() {
         return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetDateTimeCheckReport`);
       };
+      getInventoryFigureReport(model: any) {
+        return this.http.post<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}MarbeteDetailReport`, model);
+      };
+
+      getInventoryFigureReportCustom(model: any) { 
+        const url = `${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetInventoryFigureReport`;    
+        return this.http.post(url, model, {    
+          responseType: 'blob'    
+        });    
+      }
+      
+      getInventoryReportCustom(model: any) { 
+        const url = `${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}InventoryDetailReport`;    
+        return this.http.post(url, model, {    
+          responseType: 'blob'    
+        });    
+      }
+
+      getMarbeteFigureReportCustom(model: any) { 
+        const url = `${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}MarbeteDetailReport`;    
+        return this.http.post(url, model, {    
+          responseType: 'blob'    
+        });    
+      }
+      
     //   autoProcessing() {
     //     return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetAdjustmentInfoAsync`);
     //   };

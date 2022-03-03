@@ -25,6 +25,8 @@ export class reportOptionComponents implements OnInit {
   printDate = new Date();
   storeName: any;
   stockDate: Date = new Date();
+  search: any=0;
+  tagto: any=0;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -49,7 +51,7 @@ export class reportOptionComponents implements OnInit {
 
   getLabelInformation() {
     this.spinner.show();
-    this.reportOptionLoadingServices.getLabelDetailsInformation()
+    this.reportOptionLoadingServices.getLabelDetailsInformation(this.search,this.tagto)
       .pipe(first())
       .subscribe({
         next: (response: any) => {

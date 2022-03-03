@@ -40,6 +40,7 @@ import { CorrectionbydepartComponent } from './reports/correctionbydepart/correc
 import { DepsummaryComponent } from './reports/depsummary/depsummary.component';
 import { RangeComponent } from './reports/ranges/ranges.component';
 import { CheckDateTImeComponent } from './reports/check-date-time/check-date-time.component';
+import { CustomerReportsComponent } from './reports/customer-reports/customer-reports.component';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -70,7 +71,8 @@ import { CheckDateTImeComponent } from './reports/check-date-time/check-date-tim
     CorrectionbydepartComponent,
     DepsummaryComponent,
     RangeComponent,
-    CheckDateTImeComponent
+    CheckDateTImeComponent,
+    CustomerReportsComponent
   ],
   imports: [
     PageRoutingModule,
