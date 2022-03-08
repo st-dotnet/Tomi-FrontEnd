@@ -2,7 +2,7 @@
     <div class="more-opt">
         <ul class="opt-list-ranges">
             <li>
-                <a class="addplus-ico ico" (click)="open(mymodal)">
+                <a class="addplus-ico ico" (click)="generateRecordMFSummary()">
                     <span class="svg-icon">
                         <svg aria-hidden="true"
                             focusable="false" data-prefix="far" data-icon="plus" role="img"
@@ -19,15 +19,13 @@
         </ul>
     </div>
 </div>
-
 <section class="inner-content inner-pageview">
     <div class="card">
         <div class="card-body">
-
             <div class="content-body">
                 <table class="table table-ui-same">
                     <thead>
-                        <tr>
+                        <tr  *ngIf="informationList">
                             <th>Terminal</th>
                             <th>Send</th>
                             <th>Employee</th>
@@ -40,34 +38,27 @@
                     </thead>
                     <tbody>
 
-                        <tr>
-                            <td>A881</td>
-                            <td>1</td>
-                            <td>123456</td>
-                            <td>01 Ene 2022 10:33:00</td>
-                            <td>30</td>
-                            <td>313</td>
-                            <td>$42,565.23</td>
-                            <td>
+                        <tr *ngFor="let selectData of informationList; let i = index">
+                            <td>{{selectData.terminal}}</td>
+                            <td>{{selectData.totalSend}}</td>
+                            <td>{{selectData.employeeNumber}}</td>
+                            <td>{{selectData.creationTime | date:'d/MM/y'}}</td>
+                            <td>{{selectData.lines}}</td>
+                            <td>{{selectData.quantityCounted}}</td>
+                            <td>{{selectData.priceCounted}}</td>
+                            <td *ngIf="selectData.lines > 1">
                                 <ul class="action-dupli">
-                                    <li><a href=""><span class="icon-undo-trash"><img src="/assets/trash_undo.png"/></span></a></li>
+                                    <li><a href="" onclick="terminalDetails(selectData.tag)"><span class="icon-undo-trash"><img src="/assets/trash_undo.png"/></span></a></li>
                                 </ul>
                             </td>
                         </tr>
-
                     </tbody>
                 </table>
-
             </div>
         </div>
-
-
     </div>
-
 </section>
-
-
-<ng-template #mymodal let-modal>
+<!-- <ng-template #mymodal let-modal>
     <div class="modal-ui-same form-loadinfo">
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title"></h4>
@@ -86,4 +77,4 @@
         </div>
     </div>
 
-</ng-template>
+</ng-template> -->

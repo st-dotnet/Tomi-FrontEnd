@@ -8,11 +8,13 @@ import { HttpClient } from '@angular/common/http';
 import * as FileSaver from 'file-saver';
 import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-customer-reports',
   templateUrl: './customer-reports.component.html',
   styleUrls: ['./customer-reports.component.css']
 })
+
 export class CustomerReportsComponent implements OnInit {
   customerId: any;
   storeId: any;
