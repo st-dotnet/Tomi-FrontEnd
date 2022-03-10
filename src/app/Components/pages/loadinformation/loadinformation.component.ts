@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { UserService } from '@app/_services';
@@ -19,6 +20,8 @@ export class LoadinformationComponent implements OnInit {
   informationList: any;
   informationLoadingform!:FormGroup;
   storeId: any;
+  modalcontentList: any;
+  modalDetailsData: any;
 
 
   constructor(private modalService: NgbModal,private loadingformationService:loadingformationService, 
@@ -36,15 +39,67 @@ export class LoadinformationComponent implements OnInit {
     .pipe(first())
     .subscribe({
       next: (response: any) => {
+        debugger;
        this.informationList=response;
         this.modalService.dismissAll();
       }
     });
   }
-  terminalDetails(tagId: any)
-  {
+  // terminalDetails(tagId: any)
+  // {
+  //   debugger;
+  //   this.loadingformationService.getTerminalSummmaryByTag(tagId)
+  //   .pipe(first())
+  //   .subscribe({
+  //     next: (response: any) => {
+  //      this.modalcontentList=response;
 
-  }
+  //     }
+  //   });
+  // }
+
+//
+ terminalForExisting(tagId:any,empnumber:any,terminal:any)
+ {
+   debugger;
+   this.loadingformationService.getterminalsummarydetails(tagId,empnumber,terminal)
+   .pipe(first())
+   .subscribe({
+     next: (response: any) => {
+       debugger;
+      this.modalDetailsData=response;
+    
+     }
+   });
+ }
+
+  open(content:any,tagId:any,empnumber:any,terminal:any) {
+    debugger;
+    this.loadingformationService.getTerminalSummmaryByTag(tagId)
+    .pipe(first())
+    .subscribe({
+      next: (response: any) => 
+            {
+              this.terminalForExisting(tagId,empnumber,terminal);
+                          this.modalcontentList=response;
+                          this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title',windowClass: 'modal-loadinfo' }).result.then((result) => {
+                          }, (reason) => {
+                                          });
+            }
+          });
+        }
+      }
+  // open(content: any, tagId: any) {
+  //   debugger;
+  //   this.loadingformationService.getTerminalSummmaryByTag(tagId)
+  //   .pipe(first())
+  //   .subscribe({
+  //     next: (response: any) => {
+  //   this.modalService.open(response, { ariaLabelledBy: 'modal-basic-title',windowClass: 'modal-loadinfo' }).result.then((result) => {  
+  //   }, (reason) => {
+  //   });
+  // }});
+  // }
   // generateRecordMFSummary(){
   //   debugger;
   //   this.spinner.show();
@@ -89,4 +144,4 @@ export class LoadinformationComponent implements OnInit {
     //   this.toastrService.error("Please Select the Customer, Store and Date")
     // }
   //}
-}
+//}

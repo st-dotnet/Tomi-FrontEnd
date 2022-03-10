@@ -32,6 +32,20 @@ export class loadingformationService
       debugger;
       return this.http.get<any>(`${environment.apiUrl}${this.generateInformationLoadingEndPoint}GenerateTerminalSummary`);
       };
+    
+    getTerminalSummmaryByTag(tagId:any) 
+    {
+      debugger;
+      return this.http.get<any>(`${environment.apiUrl}${this.generateInformationLoadingEndPoint}ForOriginalTag/${tagId}`);
+      };
+
+      getterminalsummarydetails(tagId:any,empnumber:any,terminal:any) 
+      {
+        debugger;
+        return this.http.get<any>(`${environment.apiUrl}${this.generateInformationLoadingEndPoint}GetInformationdetails/${tagId}/${empnumber}/${terminal}`);
+        };
+
+      
     }
     
  
