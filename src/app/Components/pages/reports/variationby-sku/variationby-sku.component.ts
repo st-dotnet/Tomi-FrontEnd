@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,ElementRef  } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '@app/_services';
 import { reportOptionLoadingServices } from '@app/_services/reportOptionLoadingServices';
@@ -17,10 +17,10 @@ import html2canvas from 'html2canvas';
 })
 export class VariationbySKUComponent implements OnInit {
 
-  reportOptionLoadingServicesform!:FormGroup;
+  reportOptionLoadingServicesform!: FormGroup;
   reportList: any;
   p: number = 1;
-  options:any;
+  options: any;
   printDate = new Date();
   storeName: any;
   year: any;
@@ -29,7 +29,15 @@ export class VariationbySKUComponent implements OnInit {
   modalClass: string | undefined;
   departments: any;
   form: FormGroup;
-  constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private authenticationService: UserService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
+  filtervalue: any = [];
+  soh: number | any;
+  contado: number | any;
+  terico: number| any;
+  diff: number | any;
+  valuaction :number |any;
+  precVtaNorm :number |any;
+  absdiff : number | any;
+  constructor(private formbuilder: FormBuilder, private modalService: NgbModal, private authenticationService: UserService, private reportOptionLoadingServices: reportOptionLoadingServices, private spinner: NgxSpinnerService, private toastrService: ToastrService, private userService: UserService) {
     this.getLabelInformation();
     this.form = this.formbuilder.group({
       checkArray: this.formbuilder.array([])
@@ -40,106 +48,136 @@ export class VariationbySKUComponent implements OnInit {
       // this.stockDate =  date.setDate(date.getDate() - 1);
       this.stockDate.setDate(date.getDate() - 1);
     });
-   }
-
-  ngOnInit(): void 
-  {
- // this.getLabelInformation()
-//   this.reportOptionLoadingServicesform=this.formbuilder.group({
-//   Terminal: ['', Validators.required],
-//   Tx:['',Validators.required],
-//   Employee:['',Validators.required],
-//   datetime:['',Validators.required],
-//   qty:['',Validators.required],
-//   Total:['',Validators.required],
-//   DownloadError:['']
-// })
-
-this.options = {
-  fieldSeparator: ' ',
-  quoteStrings: '',
-  decimalseparator: '.',
-  showLabels: false,
-  showTitle: false,
-  useBom: false,
-  noDownload: false,
-  useHeader: false,
-  //headers: ["sku","department","retailPrice"],
-  nullToEmptyString: true,
   }
-}
-  getLabelInformation(){
+
+  ngOnInit(): void {
+
+    this.options = {
+      fieldSeparator: ' ',
+      quoteStrings: '',
+      decimalseparator: '.',
+      showLabels: false,
+      showTitle: false,
+      useBom: false,
+      noDownload: false,
+      useHeader: false,
+      //headers: ["sku","department","retailPrice"],
+      nullToEmptyString: true,
+    }
+  }
+  getLabelInformation() {
     this.spinner.show();
     this.reportOptionLoadingServices.getVariationBySKUInformation()
-    .pipe(first())
-    .subscribe({
-      next: (response: any) => {
-        this.spinner.hide();
-       this.reportList=response;
-       this.departments = [...new Set(response.map((x: { department: any; }) => x.department))];   
-      }
+      .pipe(first())
+      .subscribe({
+        next: (response: any) => {
+          debugger;
+          //this.findsum();
+          this.findsum(response);
+
+          this.spinner.hide();
+          this.reportList = response;
+          this.departments = [...new Set(response.map((x: { department: any; }) => x.department))];
+        }
+      });
+  }
+  findsum(data: any[]) {
+
+    this.filtervalue = data;
+    for (let j = 0; j < data.length; j++) {
+      debugger;
+     
+      //for contado Sum
+      var firstQty = parseInt(this.contado)
+      var secondQty = parseInt(this.filtervalue[j].quantity);
+      if (!firstQty)
+        firstQty = 0;
+      if (!secondQty)
+        secondQty = 0;
+     
+        //  for Teórico Sum 
+     var firstterico = parseInt(this.terico)
+     var secondterico = parseInt(this.filtervalue[j].soh);
+     if (!firstterico)
+       firstterico = 0;
+     if (!secondterico)
+       secondterico = 0;
+
+      var firstprecVtaNorm =parseFloat(this.valuaction)
+      var secondprecVtaNorm=parseFloat(this.filtervalue[j].precVtaNorm)
+      if (!firstprecVtaNorm)
+      firstprecVtaNorm = 0;
+     if (!secondprecVtaNorm)
+     secondprecVtaNorm = 0;
+      
+      this.precVtaNorm=firstprecVtaNorm+secondprecVtaNorm;
+      this.terico=firstterico+secondterico;
+      this.contado = firstQty + secondQty;
+      this.diff=this.contado-this.terico;
+      this.valuaction=this.diff*this.precVtaNorm;
+      this.absdiff=Math.abs(this.diff);
+
+    }
+  }
+  openPDF() {
+    const response = document.getElementById('htmlData') as HTMLElement;
+    html2canvas(response).then(canvas => {
+
+      let fileWidth = 208;
+      let fileHeight = canvas.height * fileWidth / canvas.width;
+
+      const FILEURI = canvas.toDataURL('image/png')
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+
+      PDF.save('recordOptions.pdf');
     });
   }
-
-  openPDF() {
-    const response = document.getElementById('htmlData') as HTMLElement;        
-    html2canvas(response).then(canvas => { 
-
-        let fileWidth = 208;
-        let fileHeight = canvas.height * fileWidth / canvas.width;
-        
-        const FILEURI = canvas.toDataURL('image/png')
-        let PDF = new jsPDF('p', 'mm', 'a4');
-        let position = 0;
-        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
-        
-        PDF.save('recordOptions.pdf');
-    });     
-    }
-    open(content: any) {
-      console.log("departments",this.departments)
-      this.items=[];
-      this.modalClass = 'mymodal',
+  open(content: any) {
+    console.log("departments", this.departments)
+    this.items = [];
+    this.modalClass = 'mymodal',
       this.modalService.open(content, {
         ariaLabelledBy: 'modal-basic-title',
         windowClass: 'modal-filteradd'
       }).result.then((result) => {
       }, (reason) => {
       });
-    }
-    onCheckboxChange(e:any) {
-      if (e.target.checked) {
+  }
+  onCheckboxChange(e: any) {
+    if (e.target.checked) {
 
-        const index = this.items.findIndex((x:any) => x.value === e.target.value);
+      const index = this.items.findIndex((x: any) => x.value === e.target.value);
 
-        if(index==-1){
+      if (index == -1) {
 
-          this.items.push(new FormControl(e.target.value));
-        }
-      } else {
-
-         const index = this.items.findIndex((x:any) => x.value === e.target.value);
-
-         this.items.removeAt(index);
-
+        this.items.push(new FormControl(e.target.value));
       }
+    } else {
+
+      const index = this.items.findIndex((x: any) => x.value === e.target.value);
+
+      this.items.removeAt(index);
 
     }
-    filterDepartment(){
-      this.reportOptionLoadingServices.getVariationBySKUInformation()
-     .pipe(first())
-     .subscribe({
-       next: (response: any) => {
-        this.reportList=response;
-        console.log("res",response)
-        this.departments = [...new Set(response.map((x: { department: any; }) => x.department))];       
-        this.spinner.hide();
-        const myArrayFiltered = this.reportList.filter((array:{ department: any; } ) => this.items.some((filter:any ) => filter.value === array.department.toString()));
-       this.reportList = myArrayFiltered;
-       this.modalService.dismissAll();
-       }
-       
-     });
- 
-   }
+
+  }
+  filterDepartment() {
+    this.reportOptionLoadingServices.getVariationBySKUInformation()
+      .pipe(first())
+      .subscribe({
+        next: (response: any) => {
+          this.reportList = response;
+          console.log("res", response)
+          this.departments = [...new Set(response.map((x: { department: any; }) => x.department))];
+          this.spinner.hide();
+          const myArrayFiltered = this.reportList.filter((array: { department: any; }) => this.items.some((filter: any) => filter.value === array.department.toString()));
+          this.reportList = myArrayFiltered;
+          this.modalService.dismissAll();
+        }
+
+      });
+
+  }
 }

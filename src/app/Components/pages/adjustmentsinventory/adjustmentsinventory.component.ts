@@ -164,9 +164,11 @@ export class AdjustmentsinventoryComponent implements OnInit {
       });
     this.spinner.hide();
   }
-  checkBarCodeData(sku: any) {
+
+  checkBarCodeData(barcode: any) {
+    debugger;
     this.spinner.show();
-    this.stockAdjustmentService.getStoreByBarCode(sku.target.value)
+    this.stockAdjustmentService.getStoreByBarCode(barcode.target.value)
       .pipe(first())
       .subscribe({
         next: (response) => {
@@ -180,6 +182,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
             this.isSubmit = true;
             this.invalidbarcode = false;
           }
+
           else {
             this.isSubmit = false;
             this.invalidbarcode = true;
@@ -189,6 +192,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
           }
           this.spinner.hide();
         }
+
       });
     this.spinner.hide();
   }

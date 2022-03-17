@@ -26,6 +26,8 @@ export class DepsummaryComponent implements OnInit {
   storeName: any;
   year: any;
   stockDate: Date = new Date();
+  grobybydata: any = [];
+  groupedData: any;
 
   constructor(private formbuilder:FormBuilder,private authenticationService: UserService, private modalService:NgbModal,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
@@ -35,8 +37,9 @@ export class DepsummaryComponent implements OnInit {
      this.stockDate.setDate(date.getDate() - 1);
     });
     this.getLabelInformation();
-   }
 
+    
+  }
   ngOnInit(): void 
   {
   this.options = {
@@ -60,11 +63,21 @@ export class DepsummaryComponent implements OnInit {
     .pipe(first())
     .subscribe({
       next: (response: any) => {
+    this.groupby(response);
+
         this.spinner.hide();
        this.reportList=response;
       }
     });
   }
+
+groupby(data: any[])
+{
+  
+}
+  // var results = this.grobybydata.Where((s: { department: string; }) => s.department =='260');
+  // var totalSum = results.Sum((x: { quantity: any; }) => (x.quantity));
+  
 
   openPDF() {
     const response = document.getElementById('htmlData') as HTMLElement;        

@@ -24,6 +24,7 @@ import { CheckDateTImeComponent } from './reports/check-date-time/check-date-tim
 import { CustomerReportsComponent } from './reports/customer-reports/customer-reports.component';
 import { LoadinformationComponent } from './loadinformation/loadinformation.component';
 import { loadingformationService } from '@app/_services/informationLoading.service';
+import { BillingReportComponent } from './reports/billing-report/billing-report.component';
 
 
 const routes: Routes = [{
@@ -56,7 +57,8 @@ const routes: Routes = [{
     {path:'ranges',component:RangeComponent},
     {path:'checkDateTime',component:CheckDateTImeComponent},
     {path:'customerReport',component:CustomerReportsComponent},
-    {path:'loadinformationService',component:loadingformationService}
+    {path:'loadinformationService',component:loadingformationService},
+    {path:'billingReport',component:BillingReportComponent}
   ]
 }
 ];

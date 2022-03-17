@@ -56,14 +56,23 @@
                               <td>{{reportData.orderJob.description}}</td>
                               <td>{{reportData.nof}}</td>
                               <td>{{reportData.department}}</td>
-                              <td>{{reportData.orderJob.salePrice}}</td>
+                              <td>${{reportData.orderJob.salePrice}}</td>
                               <td>{{reportData.quantity}}</td>
-                              <td>{{reportData.orderJob.salePrice * reportData.quantity}}</td>
+                              <td>${{reportData.orderJob.salePrice * reportData.quantity}}</td>
                              
                               <!-- <td>{{reportData.id}}</td> -->
                               <!--<td> {{information.DownloadError}}</td>-->
                             </tr>
+
+                            
                         </tbody>
+                        <div>
+                            <div>Total Tag Line={{linenumber}} </div> 
+                            <div>Qty={{total}}</div>  
+                            <div>Importe=${{exprice}}</div> 
+                            <div>Term={{term}}</div>   
+                            <div>Emp={{empno}}</div> 
+                        </div>
                     </table>
                   
                  

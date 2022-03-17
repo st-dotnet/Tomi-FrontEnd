@@ -46,7 +46,7 @@
                             <td>{{selectData.lines}}</td>
                             <td>{{selectData.quantityCounted}}</td>
                             <td>{{selectData.priceCounted}}  </td>
-                            <td *ngIf="selectData.lines > 1">
+                            <td *ngIf="selectData.duplicateTag==1">
                                 <ul class="action-dupli">
                                  <li>
                                    <!-- <a (click)="terminalDetails(selectData.tag)"><span class="icon-undo-trash"><img src="/assets/trash_undo.png"/></span></a></li> -->

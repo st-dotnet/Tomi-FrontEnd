@@ -66,15 +66,21 @@
                               <td>{{reportData.barcode}}</td>
                               <td>{{reportData.tag}}</td>
                               <td>{{reportData.quantity}}</td>
-                              <td>{{(reportData.quantity-reportData.soh) * reportData.precVtaNorm}}</td>
-                             <td>{{reportData.id}}</td>
+                              <td>{{(reportData.quantity-reportData.soh) * reportData.precVtaNorm | number:'1.0-3'}}</td>
+                             <td>{{reportData.rec}}</td>
                              
                               <!-- <td>{{reportData.id}}</td> -->
                               <!--<td> {{information.DownloadError}}</td>-->
                             </tr>
                         </tbody>
                     </table>
-                  
+                    <div>
+                        <div>Total Neto Contado= {{contado}}</div> 
+                        <div>Total Neto Teórico={{terico| number :'1.0-0'}}</div>  
+                        <div>Total Neto Dif={{diff}}</div> 
+                        <div>Total Neto valuación={{valuaction | number:'1.0-3' }}</div>   
+                        <div>Total Absoluto Dif ={{absdiff}}</div> 
+                    </div>
                  
                 </div>
                 <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
@@ -91,8 +97,7 @@
 <ng-template #voidTagModal let-modal>
     <div class="modal-ui-same form-ranges-add">
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title" style="margin-left: 110px;">{{'Filter By Department'}}
-                   
+            <h4 class="modal-title" id="modal-basic-title" style="margin-left: 110px;">{{'Filter By Department'}} 
             </h4>
   
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">

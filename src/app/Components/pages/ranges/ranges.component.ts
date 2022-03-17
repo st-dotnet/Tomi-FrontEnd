@@ -35,6 +35,7 @@ export class RangesComponent implements OnInit {
   tagformValue:  string = "";
   tagToValue:  string = "";
   storeName: any;
+  stockDate: Date = new Date();
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -47,6 +48,10 @@ export class RangesComponent implements OnInit {
   ngOnInit() {
     this.rangesService.rangeList.subscribe(user => this.rangeList = user);
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
+    this.authenticationService.stockDate.subscribe((date: Date) => {
+      debugger
+      this.stockDate.setDate(date.getDate() - 1);
+    });
     this.rangeForm = this.formBuilder.group({
       id: [''],
       name: ['', Validators.required],
@@ -224,40 +229,58 @@ export class RangesComponent implements OnInit {
   }
 
   tagfromValue(){
-    this.rangeError= false;
+    this.rangeError=false;
     if(this.editRange)
     {
-      debugger;
       if(this.tagformValue!="" && this.tagToValue !=""&& this.rangeForm.value.tagFrom !=null && this.rangeForm.value.tagTo)
       {
-        if(this.rangeForm.value.tagFrom>this.rangeForm.value.tagTo)
-        { 
-          this.rangeErrorMessage="Tag From is not greater than tag to value";
+        if(this.rangeForm.value.tagFrom==this.rangeForm.value.tagTo)
+        {
+          this.rangeErrorMessage="TagFrom shouldn't be equal to TagTo value";
           this.rangeError = true;
         }
-       if(this.rangeForm.value.tagFrom<this.tagformValue)
-       {
-        this.rangeErrorMessage="Tag From is not greater than tag to value";
-        this.rangeError = true;
-       }
+
+      }
+
+    }
+
+  }
+
+//   tagfromValue(){
+//     this.rangeError= false;
+//     if(this.editRange)
+//     {
+//       debugger;
+//       if(this.tagformValue!="" && this.tagToValue !=""&& this.rangeForm.value.tagFrom !=null && this.rangeForm.value.tagTo)
+//       {
+//         if(this.rangeForm.value.tagFrom>this.rangeForm.value.tagTo)
+//         { 
+//           this.rangeErrorMessage="Tag From is not greater than tag to value";
+//           this.rangeError = true;
+//         }
+//        if(this.rangeForm.value.tagFrom<this.tagformValue)
+//        {
+//         this.rangeErrorMessage="Tag From is not greater than tag to value";
+//         this.rangeError = true;
+//        }
      
-      else if(this.rangeForm.value.tagFrom >this.tagformValue && this.rangeForm.value.tagFrom <this.tagToValue)
-           this.rangeError= false;
-      return;
-      }
-    }
-    if(this.rangeForm.value.tagFrom !=null && this.rangeForm.value.tagTo&& this.rangeForm.value.tagFrom>this.rangeForm.value.tagTo)
-      {
-      this.rangeError = true;
-      this.rangeErrorMessage="Tag From is not greater than tag to value";
-      return;
-      }
-      if(this.rangeForm.value.tagFrom != null && this.maximumRange>this.rangeForm.value.tagFrom)
-      { 
-        this.rangeError= true;
-        this.rangeErrorMessage='Tag From is not less than '+this.maximumRange;
-        return;
-      }   
+//       else if(this.rangeForm.value.tagFrom >this.tagformValue && this.rangeForm.value.tagFrom <this.tagToValue)
+//            this.rangeError= false;
+//       return;
+//       }
+//     }
+//     if(this.rangeForm.value.tagFrom !=null && this.rangeForm.value.tagTo&& this.rangeForm.value.tagFrom>this.rangeForm.value.tagTo)
+//       {
+//       this.rangeError = true;
+//       this.rangeErrorMessage="Tag From is not greater than tag to value";
+//       return;
+//       }
+//       if(this.rangeForm.value.tagFrom != null && this.maximumRange>this.rangeForm.value.tagFrom)
+//       { 
+//         this.rangeError= true;
+//         this.rangeErrorMessage='Tag From is not less than '+this.maximumRange;
+//         return;
+//       }   
     
-    }
-}
+//     }
+ }

@@ -470,7 +470,7 @@
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-4 col-form-label">barcode:</label>
           <div class="col-sm-8 adjust-from">
-            <input type="text" formControlName="barcode" placeholder="Barcode"  (blur)="checkBarCodeData($event)"  class="form-control"
+            <input type="text" formControlName="barcode" placeholder="Barcode"  (blur)="checkBarCodeData($event)" class="form-control"
               [ngClass]="{ 'is-invalid': submitted && f['barcode'].errors }" />
               <div *ngIf="invalidbarcode" style="color: red;">Barcode is not Valid</div>
                <div *ngIf="submitted && f['barcode'].errors" class="invalid-feedback">

@@ -28,6 +28,10 @@ export class ReportCodeNotFoundComponent implements OnInit {
   departments: any;
   modalClass: string | undefined;
   items:any=[]
+  //total: any;
+  value:any=[];
+  total: number | any;
+  price: number | any;
   constructor(private modalService:NgbModal,private formbuilder:FormBuilder ,private reportOptionLoadingServices:reportOptionLoadingServices,private authenticationService: UserService, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.getLabelInformation();
     this.form = this.formbuilder.group({
@@ -73,13 +77,38 @@ this.options = {
     .pipe(first())
     .subscribe({
       next: (response: any) => {
+       this.findsum(response);  
         this.spinner.hide();
        this.reportList=response;
        this.departments = [...new Set(response.map((x: { department: any; }) => x.department))];   
       }
     });
   }
+  findsum(data:any[])
+  { 
+      this.value=data     
+      for(let j=0;j<data.length;j++)
+    {   
+      debugger;
+      var firstprice=parseFloat(this.price)
+      var secondprice=parseFloat(this.value[j].orderJob.salePrice);
+      
+      if (!firstprice)
+        firstprice = 0;
+      if (!secondprice)
+         secondprice = 0;
 
+      var firstNum = parseInt(this.total) 
+      var secondNum = parseInt(this.value[j].quantity);
+      if (!firstNum)
+        firstNum = 0;
+      if (!secondNum)
+        secondNum = 0;
+      this.total = firstNum + secondNum;
+      this.price=firstprice + secondprice;
+    }
+  }
+ 
   openPDF() {
     const response = document.getElementById('htmlData') as HTMLElement;        
     html2canvas(response).then(canvas => { 

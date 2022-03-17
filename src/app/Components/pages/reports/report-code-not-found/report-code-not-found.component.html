@@ -54,21 +54,26 @@
                             <tr *ngFor="let reportData of reportList | paginate: { itemsPerPage: 10, currentPage: p };; let i = index">
                               <td>{{reportData.tag}}</td>
                               <td>{{reportData.shelf}}</td>
-                              <td>{{reportData.recNo}}</td>
+                              <td>{{reportData.rec}}</td>
                               <td>{{reportData.barcode}}</td>
                               <td>{{reportData.department}}</td>
-                              <td>{{reportData.salePrice}}</td>
+                              <td>{{reportData.orderJob.salePrice}}</td>
                               <td>{{reportData.quantity}}</td>
-                              <td>{{reportData.extPrice}}</td>
+                              <td>{{reportData.orderJob.salePrice * reportData.quantity}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5"></td>
+                                <td>Total Price: {{price}}</td>
+                                <td>Total Quantity: {{total}}</td>
+                               
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                    <div  *ngFor="let reportDatafooter of reportList | paginate: { itemsPerPage: 10, currentPage: p };; let i = index">
-                            <div>Total Quantity: {{reportDatafooter.total_Quantity}}</div>
-                            <div>Price: {{reportDatafooter.total_Ext_Price}}</div>
-
-                </div>
+                     <!-- <div>
+                            <div>Total Quantity: {{total}}</div> 
+                            <div>Total Price: {{price}}</div>  
+                </div> -->
                 <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
                     <p style="color: white">Loading...</p>
                 </ngx-spinner>

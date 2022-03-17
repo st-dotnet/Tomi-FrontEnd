@@ -51,10 +51,15 @@ export class StockAdjustmentService {
     return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}GetDeletedRecord`);
   }
   getStoreBySku(sku: string) {
+
     return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}MasterDataBySku/${sku}`);
+
   }
-  getStoreByBarCode(sku: string) {
-    return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}MasterDataByBarCode/${sku}`);
+
+  getStoreByBarCode(barcode:any) {
+
+    return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}MasterDataByBarCode/${barcode}`);
+
   }
 
   gotoRecordId(id:any) {

@@ -29,7 +29,7 @@
                             <td style="font-weight:bold;">                        
                                     <p>Inventory Date: <br>{{stockDate| date:'d/MM/y'}}</p>
                             </td>
-                            <td style="font-weight:bold; padding-left: 80px;">Variation by SKU</td>
+                            <td style="font-weight:bold; padding-left: 80px;">Reporte de Correcciones por Departamento</td>
                         </tr>
                         <tr>
                             <td style="font-weight:bold;">Print Date/Time: {{printDate | date:'d/MM/y h:mm'}}</td>
@@ -47,16 +47,18 @@
                                 <th>Shelf</th>
                                 <th>Dept</th>
                                 <th>Rec#</th>
-                                <th>Captured </th> 
+                                <th>Captured </th>
                                 <th>Description</th>
+                                <th>Orig Qty</th>
                                 <th>Qty</th>
-                               <th>Var</th>
+                                <th>Var</th>
                                 <th>Dif$</th>
                                 <!-- <th>AuditId</th> -->
                                 <!-- <th>Total</th> -->
                             </tr>
                         </thead>
                         <tbody>
+
                             <tr *ngFor="let reportData of reportList ; let i = index">
                               <td>{{reportData.tag}}</td>
                               <td>{{reportData.shelf}}</td>
@@ -64,16 +66,14 @@
                               <td>{{reportData.rec}}</td>
                               <td>{{reportData.barcode}}</td>
                               <td>{{reportData.orderJob.description}}</td>
+                              <td>{{reportData.shelf=='50'? '0' : reportData.quantity }} </td>
                               <td>{{reportData.quantity}}</td>
-                              <td>{{reportData.quantity}}</td>
-                              <td>{{reportData.orderJob.salePrice * reportData.quantity}}</td>
-                            
+                              <td>{{(reportData.shelf=='50'? '0' : reportData.quantity)-(reportData.quantity)}}</td>
+                              <td>{{(reportData.shelf=='50'? '0' : reportData.quantity)-(reportData.quantity) * (reportData.orderJob.salePrice) }}</td>
+                              <!-- <td>{{reportData.orderJob.salePrice * reportData.quantity}}</td> -->
                             </tr>
                         </tbody>
                     </table>
-                  
-                  
-                 
                 </div>
                 <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
                     <p style="color: white">Loading...</p>

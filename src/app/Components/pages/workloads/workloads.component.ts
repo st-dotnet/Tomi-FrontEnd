@@ -175,16 +175,7 @@ export class WorkloadsComponent implements OnInit {
         break;
       //
     }
-    // if (file == "master") {
-    //   this.updatemasterfile = true;
-    //   this.selectedMasterFiles = event.target.files;
-    // } else if (file == "sales") {
-    //   this.selectedFiles = event.target.files;
-    //   this.updateSalefile = true;
-    // }
-    // else if (file == "stock") {
-    //   this.updateStockfile = true;
-    //   this.selectedStockFiles = event.target.files;
+ this.selectedStockFiles = event.target.files;
     // }
 
 
@@ -796,21 +787,15 @@ export class WorkloadsComponent implements OnInit {
     debugger;
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe((user: Date) => this.year = user);
-    // var d = new Date(this.year);
-    // d.setMonth(d.getMonth() - 1);
-    // d.setDate(d.getDay() - 1);
     this.year.setDate(this.year.getDate() - 1);
     debugger;
     const print = {
       Store: this.storeName.substring(0, 4),
       date: this.customDateFormat(this.year),
-      //date:'0221',
-      // date:d,
       Category: item
     }
 
     this.fileservice.getInformation(print).subscribe({
-      //  this.fileservice.getInformation(this.storeName,'0920').subscribe({
       next: (response: any) => {
         this.rangeList = response;
       }
@@ -819,7 +804,6 @@ export class WorkloadsComponent implements OnInit {
     debugger;
     let printContents, popupWin;
     printContents = document.getElementById('printSectionId')?.innerHTML;
-
     popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
     popupWin?.document.open();
     popupWin?.document.write(`
@@ -833,7 +817,7 @@ export class WorkloadsComponent implements OnInit {
       <body onload="window.print();window.close()">${printContents}</body>
         </html>`
     );
-    popupWin?.document.close();
+   // popupWin?.document.close();
   }
   checkMasterfileUpload() {
     this.isMasterFileUpload = !this.isMasterFileUpload;

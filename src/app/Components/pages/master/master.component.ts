@@ -19,9 +19,11 @@ export class MasterComponent implements OnInit {
   storeName: any;
   printDate = new Date();
   modalService: any;
+  validationSummaryList: any;
   constructor(
     private router: Router,
     private authenticationService: UserService,
+    private filestoreService:fileStoreService,
     private fileStore:fileStoreService,
     private spinner: NgxSpinnerService,
   ){ }
@@ -68,11 +70,11 @@ export class MasterComponent implements OnInit {
     this.authenticationService.getMasterList(workload).subscribe({
       next: (event: any) => {
         this.masterList = event;
+        
         this.spinner.hide();
       }
     });
   }
-
   onlogout() {
     this.authenticationService.logout();
   }

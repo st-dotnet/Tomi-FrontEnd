@@ -48,6 +48,7 @@ export class reportOptionLoadingServices
       getVariationBySKUInformation() {
         return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetVariationBySKUAsync`);
       };
+    
       getCorrectionsReportInformation() {
         return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetCorrectionsReportAsync`);
       };
@@ -61,7 +62,10 @@ export class reportOptionLoadingServices
       getInventoryFigureReport(model: any) {
         return this.http.post<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}MarbeteDetailReport`, model);
       };
-
+      getInventoryBillingReport() {
+        debugger;
+        return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}BillingReport`);
+      };
       getInventoryFigureReportCustom(model: any) { 
         const url = `${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetInventoryFigureReport`;    
         return this.http.post(url, model, {    

@@ -41,6 +41,7 @@ import { DepsummaryComponent } from './reports/depsummary/depsummary.component';
 import { RangeComponent } from './reports/ranges/ranges.component';
 import { CheckDateTImeComponent } from './reports/check-date-time/check-date-time.component';
 import { CustomerReportsComponent } from './reports/customer-reports/customer-reports.component';
+import { BillingReportComponent } from './reports/billing-report/billing-report.component';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -72,7 +73,8 @@ import { CustomerReportsComponent } from './reports/customer-reports/customer-re
     DepsummaryComponent,
     RangeComponent,
     CheckDateTImeComponent,
-    CustomerReportsComponent
+    CustomerReportsComponent,
+    BillingReportComponent
   ],
   imports: [
     PageRoutingModule,

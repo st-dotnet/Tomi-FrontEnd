@@ -27,7 +27,13 @@ export class reportOptionComponents implements OnInit {
   stockDate: Date = new Date();
   search: any=0;
   tagto: any=0;
-
+  value:any=[];
+  total: number | any;
+  price: number | any;
+  term: any;
+  empno: any;
+  linenumber: number| any;
+  exprice: number| any;
   constructor(
     private formbuilder: FormBuilder,
     private modalService: NgbModal,
@@ -55,12 +61,63 @@ export class reportOptionComponents implements OnInit {
       .pipe(first())
       .subscribe({
         next: (response: any) => {
+          this.findsum(response);  
           this.spinner.hide();
           this.reportList = response;
         }
       });
   }
+  findsum(data:any[])
+  { 
+    debugger;
+      this.value=data    
+      this.term=this.value[0].term;
+      this.empno=this.value[0].empno;
+      
+    for(let j=0;j<data.length;j++)
+    {   
+      debugger;
+      //for Quantity Price
+      var firstprice=parseFloat(this.price)
+      var secondprice=parseFloat(this.value[j].orderJob.salePrice);
+      var firstlinenumber=1;
+     
+// for importe
+var firstimporte=parseFloat(this.exprice)
+var secondimporte=parseFloat(this.value[j].orderJob.salePrice);
+var finalimporte=secondimporte* parseInt(this.value[j].quantity);
 
+
+if (!firstimporte)
+      firstimporte = 0;
+      if (!secondimporte)
+      secondimporte = 0;
+
+
+      if (!firstprice)
+        firstprice = 0;
+      if (!secondprice)
+         secondprice = 0;
+
+//for Quantity Sum
+      var firstNum = parseInt(this.total) 
+      var secondNum = parseInt(this.value[j].quantity);
+     
+
+      if (!firstNum)
+        firstNum = 0;
+      if (!secondNum)
+        secondNum = 0;
+        
+debugger;
+      this.exprice=firstimporte+secondimporte;
+      this.total=firstNum + secondNum;
+      this.price=firstprice + secondprice;
+      this.linenumber=firstlinenumber+firstlinenumber;
+      this.exprice=firstimporte+finalimporte;
+
+    }
+  }
   openPDF() {
     const response = document.getElementById('htmlData') as HTMLElement;
     html2canvas(response).then(canvas => {

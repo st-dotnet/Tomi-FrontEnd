@@ -85,12 +85,12 @@ export class ProgramTerminalComponent implements OnInit {
 
   genrateFiles() {
     debugger
-    this.spinner.show();
+  
     const model = {
       operation : this.operation,
       inventoryKey: this.uniqKey
     }
-
+    this.spinner.show();
     this.generateFilesService.GenerateMF1Information(model)
       .subscribe({
        next: (response: any) => {
