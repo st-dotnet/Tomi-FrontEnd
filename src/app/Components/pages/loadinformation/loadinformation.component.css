@@ -91,3 +91,22 @@
     width: 100%;
     border-radius: 30px;
 }
+.fl-bx {
+    float: left;
+    width: 165px;
+    height: 90px;
+    margin: 0px;
+    border-right: 1px solid #d4d7d4;
+    border-bottom: 1px solid #d4d7d4;
+    text-align: center;
+}
+/* load info css */
+.infoRow {
+    max-width: 736px;
+    margin: 0 auto;
+    padding-top: 30px !important;
+  }
+  .infoRow  button {
+    height: 44px !important;
+  }
+  

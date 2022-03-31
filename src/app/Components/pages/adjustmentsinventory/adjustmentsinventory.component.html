@@ -123,6 +123,7 @@
       <div class="lastBtn">
         <button class="voidBtn"  (click)="open(voidTagModal)">VOID TAG</button>
         <!-- <button class="recountBtn"><input type="checkbox"> Show Recount Data</button> -->
+        <!-- <button class="voidBtn"  (click)="getVoidTag(voidTagModal)">VOID TAG</button> -->
       </div>
     </ul>
   </div>
@@ -605,28 +606,29 @@
             
               <table class="table table-ui-same" id="datatableexample">
                 <thead>
-                    <tr>
-                        <th></th>
-                      <th> Tag</th>
-                      <th>Bar Code</th>
-                      <th>Desc</th>
-                    </tr>
+                  <tr>
+                    <!-- <th>#Registros</th> -->
+                    <th></th>
+                    <th>Tags</th>
+                    <th>TagStatus</th>
+                    <th>RangeName</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of adjustmentList; let i = index">
-                        <td>  <input type="checkbox" [value]="item.tag" (change)="onCheckboxChange($event)" />
-                          </td>
-                          <td>{{item.tag}}</td>
-                          <td>{{item.barcode}}</td>
-                          <td>{{item.orderJob.description}}</td>
-                    </tr>
+                  <tr *ngFor="let range of voidTagList; let i = index">
+                    <td>  <input type="checkbox" [value]="range.id" (change)="onCheckboxChange($event)" />
+                    </td>
+                    <td>{{range.tagFrom}}-{{range.tagTo}}</td>
+                  <td>{{range.tagStatus}}</td>
+                  <td>{{range.name}}</td>
+                </tr>
                 </tbody>
             </table>
               <input type="submit" value="Submit">
             </form>
           </div>
-
       </div>
+
   </div>
 
 </ng-template>

@@ -37,12 +37,16 @@ export class VariationbySKUComponent implements OnInit {
   valuaction :number |any;
   precVtaNorm :number |any;
   absdiff : number | any;
+  storeAddress: any;
+  finalqty: number | any;
+
   constructor(private formbuilder: FormBuilder, private modalService: NgbModal, private authenticationService: UserService, private reportOptionLoadingServices: reportOptionLoadingServices, private spinner: NgxSpinnerService, private toastrService: ToastrService, private userService: UserService) {
     this.getLabelInformation();
     this.form = this.formbuilder.group({
       checkArray: this.formbuilder.array([])
     })
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
+    this.authenticationService.storeAddress.subscribe(user => this.storeAddress = user);
     this.authenticationService.stockDate.subscribe((date: Date) => {
       debugger
       // this.stockDate =  date.setDate(date.getDate() - 1);
@@ -71,7 +75,7 @@ export class VariationbySKUComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: (response: any) => {
-          debugger;
+
           //this.findsum();
           this.findsum(response);
 
@@ -84,9 +88,11 @@ export class VariationbySKUComponent implements OnInit {
   findsum(data: any[]) {
 
     this.filtervalue = data;
+    
+   
+
     for (let j = 0; j < data.length; j++) {
-      debugger;
-     
+  
       //for contado Sum
       var firstQty = parseInt(this.contado)
       var secondQty = parseInt(this.filtervalue[j].quantity);
@@ -102,21 +108,29 @@ export class VariationbySKUComponent implements OnInit {
        firstterico = 0;
      if (!secondterico)
        secondterico = 0;
-
       var firstprecVtaNorm =parseFloat(this.valuaction)
       var secondprecVtaNorm=parseFloat(this.filtervalue[j].precVtaNorm)
+
       if (!firstprecVtaNorm)
       firstprecVtaNorm = 0;
      if (!secondprecVtaNorm)
      secondprecVtaNorm = 0;
+
+      this.valuaction= firstprecVtaNorm+secondprecVtaNorm;
+      this.precVtaNorm=secondprecVtaNorm;
       
-      this.precVtaNorm=firstprecVtaNorm+secondprecVtaNorm;
       this.terico=firstterico+secondterico;
       this.contado = firstQty + secondQty;
-      this.diff=this.contado-this.terico;
-      this.valuaction=this.diff*this.precVtaNorm;
+      this.diff=this.filtervalue[j].quantity-this.filtervalue[j].soh;
+ debugger;
+      var  myfirstqty= this.finalqty;
+      var mysecondqty=this.diff * this.filtervalue[j].precVtaNorm;
+      if (!myfirstqty)
+        myfirstqty = 0;
+      if (!mysecondqty)
+        mysecondqty = 0;
+     this.finalqty= myfirstqty+mysecondqty;
       this.absdiff=Math.abs(this.diff);
-
     }
   }
   openPDF() {

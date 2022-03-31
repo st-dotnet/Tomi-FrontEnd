@@ -27,8 +27,9 @@ export class generateMF1Service
         return this.currentUserSubject.value;
       }
 
-      GenerateMF1Information(model:any) {
-        return this.http.post<any>(`${environment.apiUrl}${this.generateMF1LoadingServicesEndPoint}GenerateMF1`,model);
+      GenerateMF1Information(operation:any, uniqKey:any) {
+        debugger;
+          return this.http.get<any>(`${environment.apiUrl}${this.generateMF1LoadingServicesEndPoint}GenerateMF1/${operation}/${uniqKey}`);
       };
       
     }

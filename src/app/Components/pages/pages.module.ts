@@ -38,10 +38,11 @@ import { VariationbySKUComponent } from './reports/variationby-sku/variationby-s
 import { SummarybyDepartmentComponent } from './reports/summaryby-department/summaryby-department.component';
 import { CorrectionbydepartComponent } from './reports/correctionbydepart/correctionbydepart.component';
 import { DepsummaryComponent } from './reports/depsummary/depsummary.component';
-import { RangeComponent } from './reports/ranges/ranges.component';
 import { CheckDateTImeComponent } from './reports/check-date-time/check-date-time.component';
 import { CustomerReportsComponent } from './reports/customer-reports/customer-reports.component';
 import { BillingReportComponent } from './reports/billing-report/billing-report.component';
+import { ValidationReportComponent } from './reports/validation-report/validation-report.component';
+import { TagsNotCountedComponent } from './reports/tags-not-counted/tags-not-counted.component';
 @NgModule({
   declarations: [
     CustomerComponent,
@@ -71,10 +72,11 @@ import { BillingReportComponent } from './reports/billing-report/billing-report.
     SummarybyDepartmentComponent,
     CorrectionbydepartComponent,
     DepsummaryComponent,
-    RangeComponent,
     CheckDateTImeComponent,
     CustomerReportsComponent,
-    BillingReportComponent
+    BillingReportComponent,
+    ValidationReportComponent,
+    TagsNotCountedComponent
   ],
   imports: [
     PageRoutingModule,

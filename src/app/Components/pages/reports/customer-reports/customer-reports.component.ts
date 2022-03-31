@@ -39,7 +39,8 @@ export class CustomerReportsComponent implements OnInit {
   inventoryFigure() {
     debugger;
     this.spinner.show();
-    if (this.customerId && this.storeName && this.year) {
+    if (this.customerId && this.storeName && this.year) 
+    {
       const formData: FormData = new FormData();
       var event = new Date(this.year);
       let date = JSON.stringify(event)

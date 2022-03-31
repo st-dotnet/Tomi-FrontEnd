@@ -7,6 +7,7 @@ import { environment } from '@environments/environment';
 import { Master, Sales, User, WorkLoad } from '@app/_models';
 import { SessionService } from '.';
 import { Router } from '@angular/router';
+import { disableDebugTools } from '@angular/platform-browser';
 
 @Injectable({ providedIn: 'root' })
 export class StockAdjustmentService {
@@ -77,7 +78,14 @@ export class StockAdjustmentService {
   };
 
   getTagValue(tagValue:any){
+    debugger;
     return this.http.get<any>(`${environment.apiUrl}${this.rangeEndPoint}GetTagValue/${tagValue}`);
   }
+  VoidTagData(id:any){
+    debugger;
+    return this.http.get<any>(`${environment.apiUrl}${this.StockAdjustmentEndPoint}VoidTagData/${id}`);
+  }
   //
-}
+
+  }
+  

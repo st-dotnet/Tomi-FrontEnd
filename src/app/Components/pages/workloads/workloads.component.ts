@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { bufferToggle, first, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { disableDebugTools } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-workloads',
@@ -115,6 +116,7 @@ export class WorkloadsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.authenticationService.activeTab.subscribe(activetab => this.activeTab = activetab);
   }
 
@@ -213,9 +215,9 @@ export class WorkloadsComponent implements OnInit {
         this.currentFile = file;
         const formData: FormData = new FormData();
         var event = new Date(this.year);
-
         let date = JSON.stringify(event)
         date = date.slice(1, 11)
+        
         formData.append('file', file);
         formData.append('storeId', this.storeId);
         formData.append('customerId', this.customerId);
@@ -274,6 +276,7 @@ export class WorkloadsComponent implements OnInit {
   }
 
   uploadMasterFile(): void {
+  debugger;
     this.spinner.show();
     this.updatemasterfile = false;
     this.authenticationService.customerId.subscribe(user => this.customerId = user);
@@ -286,17 +289,22 @@ export class WorkloadsComponent implements OnInit {
       if (file) {
         this.currentFile = file;
         this.disablemasterfileupdate = false;
+        debugger;
+
         const formData: FormData = new FormData();
         var event = new Date(this.year);
         let date = JSON.stringify(event)
         date = date.slice(1, 11)
+
+        
+
         formData.append('file', file);
         formData.append('storeId', this.storeId);
         formData.append('storeName', this.storeName);
         formData.append('customerId', this.customerId);
         formData.append('stockDate', date);
-        this.masterfileUploading = true;
 
+        this.masterfileUploading = true;
         this.authenticationService.setMasterfileUplaod(this.masterfileUploading);
         this.authenticationService.setMasterfilbrowser(false);
         this.authenticationService.uploadMasterFile(formData).subscribe({
@@ -348,6 +356,21 @@ export class WorkloadsComponent implements OnInit {
       this.selectedFiles = undefined;
     }
   }
+ calcTime(offset: number) {
+
+    // create Date object for current location
+   var d = new Date();
+    // convert to msec
+    // add local time zone offset
+    // get UTC time in msec
+     var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+    // create new Date object for different city
+    // using supplied offset
+     var nd = new Date(utc + (3600000*offset));
+    // return time as a string
+    return  nd.toLocaleString();
+
+}
 
   uploadDepartmentFile(): void {
     this.spinner.show();
@@ -783,7 +806,8 @@ export class WorkloadsComponent implements OnInit {
   //     }});
   // }
 
-  print(item: any) {
+  print(item: any) 
+  {
     debugger;
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe((user: Date) => this.year = user);
@@ -802,21 +826,28 @@ export class WorkloadsComponent implements OnInit {
     })
 
     debugger;
-    let printContents, popupWin;
-    printContents = document.getElementById('printSectionId')?.innerHTML;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
-    popupWin?.document.open();
-    popupWin?.document.write(`
-        <html>
-          <head>
-            <title>Print tab</title>
-            <style>
-            //........Customized style.......
-            </style>
-          </head>
-      <body onload="window.print();window.close()">${printContents}</body>
-        </html>`
-    );
+ 
+
+
+    // let printContents, popupWin;
+    // printContents = document.getElementById('printSectionId')?.innerHTML;
+    // popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    // popupWin?.document.open();
+    
+   
+    // popupWin?.document.write(`
+    //     <html>
+    //       <head>
+    //         <title>Print tab</title>
+    //         <style>
+    //         ........Customized style.......
+    //         </style>
+    //       </head>
+    //   <body onload="window.print();window.close()">${printContents}</body>
+    //     </html>`
+  
+    // );
+    // window.print();
    // popupWin?.document.close();
   }
   checkMasterfileUpload() {
@@ -883,3 +914,7 @@ export class WorkloadsComponent implements OnInit {
   }
 
 }
+function convertMinuteToMillisecond(mins: number) {
+  return mins * 60 * 1000;
+}
+

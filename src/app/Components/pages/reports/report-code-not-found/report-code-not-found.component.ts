@@ -32,12 +32,15 @@ export class ReportCodeNotFoundComponent implements OnInit {
   value:any=[];
   total: number | any;
   price: number | any;
-  constructor(private modalService:NgbModal,private formbuilder:FormBuilder ,private reportOptionLoadingServices:reportOptionLoadingServices,private authenticationService: UserService, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
+  storeAddress: any;
+  constructor(private modalService:NgbModal,private formbuilder:FormBuilder ,private reportOptionLoadingServices:reportOptionLoadingServices,private authenticationService: UserService, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) 
+  {
     this.getLabelInformation();
     this.form = this.formbuilder.group({
       checkArray: this.formbuilder.array([])
     })
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
+    this.authenticationService.storeAddress.subscribe(user => this.storeAddress = user);
     this.authenticationService.stockDate.subscribe((date: Date) => {
       debugger
       // this.stockDate =  date.setDate(date.getDate() - 1);
@@ -47,6 +50,7 @@ export class ReportCodeNotFoundComponent implements OnInit {
 
   ngOnInit(): void 
   {
+
  // this.getLabelInformation()
 //   this.reportOptionLoadingServicesform=this.formbuilder.group({
 //   Terminal: ['', Validators.required],
@@ -86,29 +90,32 @@ this.options = {
   }
   findsum(data:any[])
   { 
+    debugger;
       this.value=data     
       for(let j=0;j<data.length;j++)
-    {   
-      debugger;
-      var firstprice=parseFloat(this.price)
-      var secondprice=parseFloat(this.value[j].orderJob.salePrice);
-      
-      if (!firstprice)
-        firstprice = 0;
-      if (!secondprice)
-         secondprice = 0;
+        {   
+          debugger;
+          var firstprice=parseFloat(this.price)
+          var secondprice=parseFloat(this.value[j].orderJob.salePrice);
+         
+          //
 
-      var firstNum = parseInt(this.total) 
-      var secondNum = parseInt(this.value[j].quantity);
-      if (!firstNum)
-        firstNum = 0;
-      if (!secondNum)
-        secondNum = 0;
-      this.total = firstNum + secondNum;
-      this.price=firstprice + secondprice;
-    }
+          if (!firstprice)
+            firstprice = 0;
+          if (!secondprice)
+            secondprice = 0;
+
+          var firstNum = parseInt(this.total) 
+          var secondNum = parseInt(this.value[j].quantity);
+          if (!firstNum)
+            firstNum = 0;
+
+          if (!secondNum)
+            secondNum = 0;
+          this.total = firstNum + secondNum;
+          this.price=firstprice + secondprice;
+        }
   }
- 
   openPDF() {
     const response = document.getElementById('htmlData') as HTMLElement;        
     html2canvas(response).then(canvas => { 

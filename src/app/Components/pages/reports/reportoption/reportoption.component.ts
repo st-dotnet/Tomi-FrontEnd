@@ -34,6 +34,7 @@ export class reportOptionComponents implements OnInit {
   empno: any;
   linenumber: number| any;
   exprice: number| any;
+  storeAddress: any;
   constructor(
     private formbuilder: FormBuilder,
     private modalService: NgbModal,
@@ -46,7 +47,9 @@ export class reportOptionComponents implements OnInit {
   }
 
   ngOnInit() {
+
     this.getLabelInformation();
+    this.authenticationService.storeAddress.subscribe(user => this.storeAddress = user);
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
     this.authenticationService.stockDate.subscribe((date: Date) => {
       debugger
@@ -73,14 +76,17 @@ export class reportOptionComponents implements OnInit {
       this.value=data    
       this.term=this.value[0].term;
       this.empno=this.value[0].empno;
-      
+      this.linenumber= data.length;
+
+
     for(let j=0;j<data.length;j++)
     {   
       debugger;
       //for Quantity Price
       var firstprice=parseFloat(this.price)
       var secondprice=parseFloat(this.value[j].orderJob.salePrice);
-      var firstlinenumber=1;
+     
+    
      
 // for importe
 var firstimporte=parseFloat(this.exprice)
@@ -113,7 +119,6 @@ debugger;
       this.exprice=firstimporte+secondimporte;
       this.total=firstNum + secondNum;
       this.price=firstprice + secondprice;
-      this.linenumber=firstlinenumber+firstlinenumber;
       this.exprice=firstimporte+finalimporte;
 
     }
@@ -130,5 +135,4 @@ debugger;
       PDF.save('recordOptions.pdf');
     });
   }
-
 }

@@ -66,7 +66,8 @@ export class reportOptionLoadingServices
         debugger;
         return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}BillingReport`);
       };
-      getInventoryFigureReportCustom(model: any) { 
+      getInventoryFigureReportCustom(model: any) 
+      { 
         const url = `${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetInventoryFigureReport`;    
         return this.http.post(url, model, {    
           responseType: 'blob'    
@@ -80,13 +81,25 @@ export class reportOptionLoadingServices
         });    
       }
 
+      getVoidTagDataAsync() {
+      debugger;
+        return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetVoidTagDataAsync`);
+      };
       getMarbeteFigureReportCustom(model: any) { 
         const url = `${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}MarbeteDetailReport`;    
         return this.http.post(url, model, {    
           responseType: 'blob'    
         });    
       }
-      
+      getInformation(model:any) { 
+        debugger;
+        return this.http.post<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetInfoFileLoadedListAsync`, model);
+      };
+      OffSet(model:any) 
+      { 
+          debugger;
+          return this.http.post<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}SendOffsetvalue`, model);
+      };
     //   autoProcessing() {
     //     return this.http.get<any>(`${environment.apiUrl}${this.reportOptionLoadingServicesEndPoint}GetAdjustmentInfoAsync`);
     //   };

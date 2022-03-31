@@ -42,11 +42,15 @@ export class UserService {
 
   private _customerId = new BehaviorSubject<any>('');
   customerId = this._customerId.asObservable();
+
   private _storeId: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   public storeId: Observable<any> = this._storeId.asObservable();
-
+  
   private _storeName: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   public storeName: Observable<any> = this._storeName.asObservable();
+
+  private _storeAddress: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
+  public storeAddress: Observable<any> = this._storeAddress.asObservable();
 
  
 
@@ -100,8 +104,7 @@ export class UserService {
 
   private _disableparametersbydepartmentfileupdate= new BehaviorSubject<boolean>(false);
   disableparametersbydepartmentfileupdate = this._disableparametersbydepartmentfileupdate.asObservable();
-
-
+ 
   constructor(private http: HttpClient,
     private sessionService: SessionService,
     private router: Router,
@@ -332,6 +335,10 @@ export class UserService {
  setStoreName(object: any) {
     this._storeName.next(object);
  }
+
+ setStoreAddress(object: any) {
+  this._storeAddress.next(object);
+}
   setStockUpload(object: boolean) {
     this._stockfileUplaod.next(object);
   }

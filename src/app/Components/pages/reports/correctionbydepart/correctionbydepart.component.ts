@@ -29,6 +29,7 @@ export class CorrectionbydepartComponent implements OnInit {
   modalClass: string | undefined;
   departments: any;
   items:any=[];
+  storeAddress: any;
   constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService,private fb: FormBuilder) {
 
     this.getLabelInformation();
@@ -36,6 +37,7 @@ export class CorrectionbydepartComponent implements OnInit {
       checkArray: this.fb.array([])
     })
     this.userService.storeName.subscribe(user => this.storeName = user);
+    this.userService.storeAddress.subscribe(user => this.storeAddress = user);
     this.userService.stockDate.subscribe((date: Date) => {
       debugger
       this.stockDate.setDate(date.getDate() - 1);

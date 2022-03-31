@@ -39,13 +39,30 @@ export class loadingformationService
       return this.http.get<any>(`${environment.apiUrl}${this.generateInformationLoadingEndPoint}ForOriginalTag/${tagId}`);
       };
 
-      getterminalsummarydetails(tagId:any,empnumber:any,terminal:any) 
+    getterminalsummaryforfirstdetails(tagId:any,empNumber:any) 
       {
         debugger;
-        return this.http.get<any>(`${environment.apiUrl}${this.generateInformationLoadingEndPoint}GetInformationdetails/${tagId}/${empnumber}/${terminal}`);
+        return this.http.get<any>(`${environment.apiUrl}${this.generateInformationLoadingEndPoint}GetInformationfirstSectiondetails/${tagId}/${empNumber}`);
         };
-
-      
-    }
-    
+    getterminalsummaryforseconddetails(tagId:any,empNumber:any) 
+        {
+          debugger;
+          return this.http.get<any>(`${environment.apiUrl}${this.generateInformationLoadingEndPoint}GetInformationsecondSectiondetails/${tagId}/${empNumber}`);
+          };  
+    getterminalsummaryKeepOriginal(tagid:any,empNumber:any,terminal:any)
+      {
+        debugger;
+        return this.http.delete<any>(`${environment.apiUrl}${this.generateInformationLoadingEndPoint}DeleteOriginalRecord/${tagid}/${empNumber}/${terminal}`);
+      }
+    updateTag(model:any)
+      {
+        debugger;
+        return this.http.post<any>(`${environment.apiUrl}${this.generateInformationLoadingEndPoint}UpdateTag`, model);
+      }
+      mergeNewRecords(modelparam:any)
+      {
+        debugger;
+        return this.http.post<any>(`${environment.apiUrl}${this.generateInformationLoadingEndPoint}MergeNewRecordWithOriginal`, modelparam);
+      }
+  }
  

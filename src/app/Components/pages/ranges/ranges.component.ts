@@ -36,6 +36,7 @@ export class RangesComponent implements OnInit {
   tagToValue:  string = "";
   storeName: any;
   stockDate: Date = new Date();
+  storeAddress: any;
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -46,8 +47,11 @@ export class RangesComponent implements OnInit {
     private toastrService: ToastrService) { }
 
   ngOnInit() {
+    debugger;
     this.rangesService.rangeList.subscribe(user => this.rangeList = user);
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
+    this.authenticationService.storeAddress.subscribe(user => this.storeAddress = user);
+
     this.authenticationService.stockDate.subscribe((date: Date) => {
       debugger
       this.stockDate.setDate(date.getDate() - 1);
@@ -65,7 +69,7 @@ export class RangesComponent implements OnInit {
     });
     this.getallRangeList();
     this.getallGroupList();
-    this.getMaximumRange();
+   // this.getMaximumRange();
   }
 
   getallCustomList() {
@@ -156,7 +160,7 @@ export class RangesComponent implements OnInit {
         next: () => {
           this.modalService.dismissAll();
           this.getallCustomList();
-          this.getMaximumRange();
+         // this.getMaximumRange();
         }
       });
   }
@@ -168,11 +172,9 @@ export class RangesComponent implements OnInit {
         next: (res) => {
           if(res.error)
           this.toastrService.error(res.error);
-
           else
-
           this.getallCustomList();
-          this.getMaximumRange();
+         // this.getMaximumRange();
 
         }
 

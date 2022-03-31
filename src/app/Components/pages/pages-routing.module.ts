@@ -19,12 +19,13 @@ import { ExtendedPricesComponent } from './reports/extended-prices/extended-pric
 import { CorrectionbydepartComponent } from './reports/correctionbydepart/correctionbydepart.component';
 import { DepsummaryComponent } from './reports/depsummary/depsummary.component';
 import { RangesComponent } from './ranges/ranges.component';
-import { RangeComponent } from './reports/ranges/ranges.component';
 import { CheckDateTImeComponent } from './reports/check-date-time/check-date-time.component';
 import { CustomerReportsComponent } from './reports/customer-reports/customer-reports.component';
 import { LoadinformationComponent } from './loadinformation/loadinformation.component';
 import { loadingformationService } from '@app/_services/informationLoading.service';
 import { BillingReportComponent } from './reports/billing-report/billing-report.component';
+import { ValidationReportComponent } from './reports/validation-report/validation-report.component';
+import { TagsNotCountedComponent } from './reports/tags-not-counted/tags-not-counted.component';
 
 
 const routes: Routes = [{
@@ -54,11 +55,12 @@ const routes: Routes = [{
     {path:'summarybyDepartment',component:SummarybyDepartmentComponent},
     {path:'correctionsbyDepartment',component:CorrectionbydepartComponent},
     {path:'reportdep',component:DepsummaryComponent},
-    {path:'ranges',component:RangeComponent},
     {path:'checkDateTime',component:CheckDateTImeComponent},
     {path:'customerReport',component:CustomerReportsComponent},
     {path:'loadinformationService',component:loadingformationService},
-    {path:'billingReport',component:BillingReportComponent}
+    {path:'billingReport',component:BillingReportComponent},
+    {path:'validationReport',component: ValidationReportComponent},
+    {path:'tagsnotcounted',component: TagsNotCountedComponent}
   ]
 }
 ];

@@ -24,6 +24,7 @@ export class BillingReportComponent implements OnInit {
   modalClass: string | undefined;
   departments: any;
   form: FormGroup | undefined ;
+  storeAddress: any;
   constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private authenticationService: UserService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) 
   {
     this.getBillingReportInformation(); 
@@ -32,6 +33,7 @@ export class BillingReportComponent implements OnInit {
     })
     
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
+    this.authenticationService.storeAddress.subscribe(user => this.storeAddress = user);
     this.authenticationService.stockDate.subscribe((date: Date) => {
       debugger
       // this.stockDate =  date.setDate(date.getDate() - 1);

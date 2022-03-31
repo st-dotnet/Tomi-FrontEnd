@@ -4,8 +4,7 @@
             <li>
                 <a class="addplus-ico ico" (click)="generateRecordMFSummary()">
                     <span class="svg-icon">
-                        <svg aria-hidden="true"
-                            focusable="false" data-prefix="far" data-icon="plus" role="img"
+                        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="plus" role="img"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
                             class="svg-inline--fa fa-plus fa-w-12 fa-2x">
                             <path fill="currentColor"
@@ -25,7 +24,7 @@
             <div class="content-body">
                 <table class="table table-ui-same">
                     <thead>
-                        <tr  *ngIf="informationList">
+                        <tr *ngIf="informationList">
                             <th>Terminal</th>
                             <th>Send</th>
                             <th>Employee</th>
@@ -39,20 +38,21 @@
                     <tbody>
 
                         <tr *ngFor="let selectData of informationList; let i = index">
+                            <td id="printTabSection" style="display:none;">{{selectData.tag}}</td>
                             <td>{{selectData.terminal}}</td>
                             <td>{{selectData.totalSend}}</td>
                             <td>{{selectData.employeeNumber}}</td>
                             <td>{{selectData.creationTime | date:'d/MM/y'}}</td>
                             <td>{{selectData.lines}}</td>
                             <td>{{selectData.quantityCounted}}</td>
-                            <td>{{selectData.priceCounted}}  </td>
-                            <td *ngIf="selectData.duplicateTag==1">
+                            <td>{{selectData.priceCounted}} </td>
+                            <td *ngIf="selectData.duplicateTag==2">
                                 <ul class="action-dupli">
-                                 <li>
-                                   <!-- <a (click)="terminalDetails(selectData.tag)"><span class="icon-undo-trash"><img src="/assets/trash_undo.png"/></span></a></li> -->
-                                   <!-- <a (click)="terminalDetails(selectData.tag)"><span class="icon-undo-trash"><img src="/assets/trash_undo.png"/></span></a></li> -->
-                                   <li><a (click)="open(mymodal,selectData.tag,selectData.employeeNumber,selectData.terminal)"><span class="icon-undo-trash"><img src="/assets/trash_undo.png"/></span></a></li>
-                                   
+                                    <li>
+                                        <!-- <a (click)="terminalDetails(selectData.tag)"><span class="icon-undo-trash"><img src="/assets/trash_undo.png"/></span></a></li> -->
+                                        <!-- <a (click)="terminalDetails(selectData.tag)"><span class="icon-undo-trash"><img src="/assets/trash_undo.png"/></span></a></li> -->
+                                    <li><a (click)="open(mymodal,selectData.tag)"><span class="icon-undo-trash"><img
+                                                    src="/assets/trash_undo.png" /></span></a></li>
                                 </ul>
                             </td>
                         </tr>
@@ -62,119 +62,235 @@
         </div>
     </div>
 </section>
-
-
-
-<ng-template #mymodal let-modal >
-
-    <div class="modal-ui-same form-loadinfo" *ngFor="let modalGroupData of modalcontentList; let i = index">
-        <h2></h2>
+<ng-template #mymodal let-modal>
+    <div class="modal-ui-same form-loadinfo">
+        <h2> TAG:{{ temptagInfo}}</h2>
         <div class="modal-body py-0">
             <div class="container p-0">
                 <div class="row">
-
-                    <div class="col-sm-6 p-0">
+                    <div class="col-sm-6 p-0" *ngFor="let headerSetionData of modalcontentList;">
+                        <h2></h2>
                         <div class=" table-wraper">
                             <div class="heading-wraper">
                                 <div class="orignal-heading">
-                                    <h4>Original Tag Totals</h4>
                                 </div>
                                 <div class="origanlTotls-wraper">
                                     <div class="orignal-totls">
-                                        <span>Lines:  {{modalGroupData.lines}}</span><br>
-                                        <span>Qty:  {{modalGroupData.quantityCounted}}</span><br>
-                                        <span>Ext.Price:  {{modalGroupData.priceCounted}}</span><br>
+                                        <span>Lines:{{headerSetionData.lines}} </span><br>
+                                        <span>Qty: {{headerSetionData.quantityCounted}} </span><br>
+                                        <span>Ext.Price:{{headerSetionData.priceCounted}}</span><br>
                                     </div>
                                     <div class="orignal-totls">
-                                        <span>Employee:  {{modalGroupData.employeeNumber}}</span><br>
-                                        <span>Name:  {{modalGroupData.employeeName}}</span><br>
-                                        <span>Terminal:  {{modalGroupData.terminal}}</span><br>
+                                        <td>Employee: <span
+                                                id="{{headerSetionData.id=='1'? 'printfirstEmplNumberSection' : 'printsecondEmplNumberSection'}}">{{headerSetionData.employeeNumber}}</span>
+                                        </td>
+                                        <span>Name:{{headerSetionData.employeeName}}</span><br>
+                                        <td>Terminal:<span
+                                                id="{{headerSetionData.id=='1'? 'printfirstTerminalSection' : 'printsecondTerminalSection'}}">{{headerSetionData.terminal}}</span>
+                                        </td>
                                     </div>
                                 </div>
                             </div>
-                            <table>
-                                <tr >
-                                    <th>Shelf</th>
-                                    <th>Code</th>
-                                    <th>Qty</th>
-                                    <th>Desc</th>
-                                </tr>
-                                <tr *ngFor="let selectDetailsData of modalDetailsData; let i = index">
-                                    <td>{{selectDetailsData.shelf}}</td>
-                                    <td>{{selectDetailsData.code}}</td>
-                                    <td>{{selectDetailsData.quantity}}</td>
-                                    <td>{{selectDetailsData.description}}</td>
-
-                                </tr>
-                            </table>
                         </div>
                     </div>
-                    <div class="col-sm-6 p-0">
-                        <div class=" table-wraper">
-                            <div class="heading-wraper">
-                                <div class="orignal-heading">
-                                    <h4>New Tag Totals</h4>
-                                </div>
-                                <div class="origanlTotls-wraper">
-                                    <div class="orignal-totls">
-                                        <span>Lines:  {{modalGroupData.lines}}</span><br>
-                                        <span>Qty:  {{modalGroupData.quantityCounted}}</span><br>
-                                        <span>Ext.Price:  {{modalGroupData.priceCounted}}</span><br>
+                    <table style="width:100%;">
+                        <tr>
+                            <td>
+                                <table style="width:100%;">
+                                    <tr>
+                                        <th>Shelf</th>
+                                        <th>Code</th>
+                                        <th>Qty</th>
+                                        <th>Desc</th>
+                                    </tr>
+                                    <tr
+                                        *ngFor="let selectfirstDetailsSection of modalFirstoptionDetailsData; let i = index">
+                                        <td>{{selectfirstDetailsSection.shelf}}</td>
+                                        <td>{{selectfirstDetailsSection.code}}</td>
+                                        <td>{{selectfirstDetailsSection.quantity}}</td>
+                                        <td>{{selectfirstDetailsSection.description}}</td>
+                                    </tr>
+                                    <tr>
+                                        <br>
+
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table style="width:100%;">
+                                    <tr>
+                                        <th>Shelf</th>
+                                        <th>Code</th>
+                                        <th>Qty</th>
+                                        <th>Desc</th>
+                                    </tr>
+                                    <tr
+                                        *ngFor="let selectsecondDetailsSection of  modalSecondoptionDetailsData; let i = index">
+                                        <td>{{selectsecondDetailsSection.shelf}}</td>
+                                        <td>{{selectsecondDetailsSection.code}}</td>
+                                        <td>{{selectsecondDetailsSection.quantity}}</td>
+                                        <td>{{selectsecondDetailsSection.description}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="loadinfoDiv">
+                        <div class="container">
+                            <div class="row p-0 infoRow">
+
+                                <!-- <input type="text" name="name" id="multi-files"> -->
+                                <!-- <div class="col">
+                                    
+                                </div> -->
+                                        <button printSectionId="printTagSectionId" ngxPrint class="print-ico ico" style="margin-top: inherit;"><span class="svg-icon"><svg
+                                            aria-hidden="true" focusable="false" data-prefix="far" data-icon="print" role="img"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                            class="svg-inline--fa fa-print fa-w-16 fa-2x">
+                                            <path fill="currentColor"
+                                                d="M400 264c-13.25 0-24 10.74-24 24 0 13.25 10.75 24 24 24s24-10.75 24-24c0-13.26-10.75-24-24-24zm32-88V99.88c0-12.73-5.06-24.94-14.06-33.94l-51.88-51.88c-9-9-21.21-14.06-33.94-14.06H110.48C93.64 0 80 14.33 80 32v144c-44.18 0-80 35.82-80 80v128c0 8.84 7.16 16 16 16h64v96c0 8.84 7.16 16 16 16h320c8.84 0 16-7.16 16-16v-96h64c8.84 0 16-7.16 16-16V256c0-44.18-35.82-80-80-80zM128 48h192v48c0 8.84 7.16 16 16 16h48v64H128V48zm256 416H128v-64h256v64zm80-112H48v-96c0-17.64 14.36-32 32-32h352c17.64 0 32 14.36 32 32v96z"
+                                                class=""></path>
+                                        </svg></span></button>
+                                <div class="col">
+                                    <div class="bottom-btn">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="keepOriginalChange()">Keep Orignal</button>
                                     </div>
-                                    <div class="orignal-totls">
-                                        <span>Employee:  {{modalGroupData.employeeNumber}}</span><br>
-                                        <span>Name:  {{modalGroupData.employeeName}}</span><br>
-                                        <span>Terminal:  {{modalGroupData.terminal}}</span><br>
+                                </div>
+                                <div class="col">
+                                    <div class="bottom-btn">
+                                        <button type="button" class="btn btn-primary" (click)="keepNewChange()">Keep
+                                            new</button>
                                     </div>
                                 </div>
+                                <div class="col">
+                                    <div class="bottom-btn">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="mergeNewRecords()">merge</button>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="bottom-btn">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="renumberTag(renumberModel)">RenumberTag</button>
+                                    </div>
+                                </div>
+                                <!-- <div class="col">
+                                                        <div class="bottom-btn">
+                                                            <button type="button" class="btn btn-danger">Apply</button></div>
+                                                    </div> -->
                             </div>
-
-
-                            <table>
-                                <tr >
-                                    <th>Shelf</th>
-                                    <th>Code</th>
-                                    <th>Qty</th>
-                                    <th>Desc</th>
-                                </tr>
-                                <tr *ngFor="let selectDetailsData of modalDetailsData; let i = index">
-                                    <td>{{selectDetailsData.shelf}}</td>
-                                    <td>{{selectDetailsData.code}}</td>
-                                    <td>{{selectDetailsData.quantity}}</td>
-                                    <td>{{selectDetailsData.description}}</td>
-
-                                </tr>
-                            </table>
                         </div>
                     </div>
-                    <div class="col">
-
-
-                    </div>
-                    <div class="col">
-                        <div class="bottom-btn">
-                            <button type="button" class="btn btn-primary">Keep Orignal</button></div>
-                    </div>
-                    <div class="col">
-                        <div class="bottom-btn">
-                            <button type="button" class="btn btn-primary">Keep new</button></div>
-                    </div>
-                    <div class="col">
-                        <div class="bottom-btn">
-                            <button type="button" class="btn btn-primary">merge</button></div>
-                    </div>
-                    <div class="col">
-                        <div class="bottom-btn">
-                            <button type="button" class="btn btn-primary">renumber Tag</button></div>
-                    </div>
-                    <div class="col">
-                        <div class="bottom-btn">
-                            <button type="button" class="btn btn-danger">Apply</button></div>
-                    </div>
-
-
                 </div>
             </div>
         </div>
     </div>
 </ng-template>
+<ng-template #renumberModel let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Re-Number Tag Option</h4>
+    </div>
+    <div class="modal-body">
+        <form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
+            <input class="form-control" type="text" name="tag" placeholder="tag" ngModel>
+            <br />
+            <input type="submit" value="submit" class="btn btn-primary">
+        </form>
+    </div>
+</ng-template>
+<section  id="printTagSectionId"  style="display: none;">
+    <div class="modal-ui-same form-loadinfo">
+        <h2> TAG:{{ temptagInfo}}</h2>
+        <div class="modal-body py-0">
+            <div class="container p-0">
+                <div class="row">
+                    <div class="col-sm-6 p-0" *ngFor="let headerSetionData of modalcontentList;">
+                        <div class=" table-wraper">
+                            <div class="heading-wraper">
+                                <div class="orignal-heading">
+                                    <h4>{{headerSetionData.id=='1'? 'Original Tag Totals' : 'New Tag Totals'}}</h4>
+                                </div>
+                                <div class="origanlTotls-wraper">
+                                    <div class="orignal-totls">
+                                        <span>Lines:{{headerSetionData.lines}} </span><br>
+                                        <span>Qty: {{headerSetionData.quantityCounted}} </span><br>
+                                        <span>Ext.Price:{{headerSetionData.priceCounted}}</span><br>
+                                    </div>
+                                    <div class="orignal-totls">
+                                        <td>Employee: <span
+                                                id="{{headerSetionData.id=='1'? 'printfirstEmplNumberSection' : 'printsecondEmplNumberSection'}}">{{headerSetionData.employeeNumber}}</span>
+                                        </td>
+                                        <span>Name:{{headerSetionData.employeeName}}</span><br>
+                                        <td>Terminal:<span
+                                                id="{{headerSetionData.id=='1'? 'printfirstTerminalSection' : 'printsecondTerminalSection'}}">{{headerSetionData.terminal}}</span>
+                                        </td>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table style="width:100%;">
+                        <tr>
+                            <td>
+                                <table style="width:100%;">
+                                    <tr>
+                                        <th>Shelf</th>
+                                        <th>Code</th>
+                                        <th>Qty</th>
+                                        <th>Desc</th>
+                                    </tr>
+                                    <tr
+                                        *ngFor="let selectfirstDetailsSection of modalFirstoptionDetailsData; let i = index">
+                                        <td>{{selectfirstDetailsSection.shelf}}</td>
+                                        <td>{{selectfirstDetailsSection.code}}</td>
+                                        <td>{{selectfirstDetailsSection.quantity}}</td>
+                                        <td>{{selectfirstDetailsSection.description}}</td>
+                                    </tr>
+                                    <tr>
+                                        <br>
+
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table style="width:100%;">
+                                    <tr>
+                                        <th>Shelf</th>
+                                        <th>Code</th>
+                                        <th>Qty</th>
+                                        <th>Desc</th>
+                                    </tr>
+                                    <tr
+                                        *ngFor="let selectsecondDetailsSection of  modalSecondoptionDetailsData; let i = index">
+                                        <td>{{selectsecondDetailsSection.shelf}}</td>
+                                        <td>{{selectsecondDetailsSection.code}}</td>
+                                        <td>{{selectsecondDetailsSection.quantity}}</td>
+                                        <td>{{selectsecondDetailsSection.description}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

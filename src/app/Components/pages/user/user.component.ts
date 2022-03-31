@@ -7,7 +7,6 @@ import { UserService } from '@app/_services';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { first } from 'rxjs';
-
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -55,13 +54,11 @@ export class UserComponent implements OnInit {
       if(result){
         this.users = result.users;
         this.customerName =result.name;
+       
       }
       this.spinner.hide();
-    })
-    
+    }) 
   }
-
-  
   open(content:any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
   

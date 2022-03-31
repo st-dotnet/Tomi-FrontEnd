@@ -21,21 +21,23 @@
         <div class="card carddetails" >        
             <div class="card-body">
                 <div class="content-body"  id="htmlData">
-                    <table width="100%">
+                    <table  width="100%"  style="border: 1px solid">
                         <tr>
-                            <td style="font-weight:bold;">
-                                <p>Inventory Date: <br>{{stockDate| date:'d/MM/y'}}</p>
-                            </td>
-                            <td style="font-weight:bold; padding-left: 80px;">Variation by SKU</td>
+                          <th></th>
+                          <th>Variation by SKU</th>
+                          <th></th>
                         </tr>
                         <tr>
-                            <td style="font-weight:bold;">Print Date/Time: {{printDate | date:'d/MM/y h:mm'}}</td>
-                            <td  style="font-weight:bold; padding-left: 80px;">
-                              
-                            </td>
+                          <td style="width: 600px;"><b>Inventory Date: </b>{{stockDate| date:'d/MM/y'}}</td>
+                          <td></td>
+                          <td>{{storeName}}</td>
                         </tr>
-    
-                    </table>
+                        <tr>
+                          <td style="width: 600px;"><b>Print Date/Time:</b> {{printDate | date:'d/MM/y h:mm'}}</td>
+                          <td></td>
+                          <td>{{storeAddress}}</td>
+                        </tr>
+                      </table>
                     <table class="table table-striped table-ui-same" id="datatableexample" >
                         <thead>
                             <tr>
@@ -56,7 +58,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let reportData of reportList; let i = index">
+                            <tr *ngFor="let reportData of reportList | paginate: { itemsPerPage: 15, currentPage: p };; let i = index">
                               <td>{{reportData.sku}}</td>
                               <td>{{reportData.description}}</td>
                               <td>{{reportData.soh}}</td>
@@ -72,23 +74,28 @@
                               <!-- <td>{{reportData.id}}</td> -->
                               <!--<td> {{information.DownloadError}}</td>-->
                             </tr>
+                            <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Neto Teórico={{terico| number :'1.0-0'}}</td>
+                            <td>Neto Contado= {{contado}}</td>
+                            <td>Neto Dif={{diff}}</td>
+                            <td>Precio: {{valuaction}}</td>
+                            <td>Absoluto Dif ={{absdiff}}</td>
+                            <td></td>
+                            <td>Neto valuación={{finalqty | number :'1.0-3' }}</td>
+                            <td></td>
+                            
+                            </tr>
                         </tbody>
                     </table>
-                    <div>
-                        <div>Total Neto Contado= {{contado}}</div> 
-                        <div>Total Neto Teórico={{terico| number :'1.0-0'}}</div>  
-                        <div>Total Neto Dif={{diff}}</div> 
-                        <div>Total Neto valuación={{valuaction | number:'1.0-3' }}</div>   
-                        <div>Total Absoluto Dif ={{absdiff}}</div> 
-                    </div>
-                 
                 </div>
                 <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
                     <p style="color: white">Loading...</p>
                 </ngx-spinner>
-                <!-- <div class="pagination-ui">
+                <div class="pagination-ui">
                     <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
-                </div> -->
+                </div>
             </div>
         </div>   
   </div>

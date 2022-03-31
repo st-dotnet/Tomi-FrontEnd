@@ -31,6 +31,7 @@ export class SidebarComponent implements OnInit {
   reservedfileUpload: boolean= false;
   parametersByDepartmentfileUpload: boolean= false;
   categoriesfileUpload: boolean= false;
+  storeAddress: any;
   constructor(private accountService: SessionService, private authenticationService: UserService,
     private spinner: NgxSpinnerService, private router: Router,private toastrService: ToastrService) {
 
@@ -41,7 +42,6 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
 
     this.authenticationService.customerId.subscribe(user => this.customer = user);
-
     this.authenticationService.masterfileUplaod.subscribe(file => this.masterfileUpload = file);
     this.authenticationService.categoriesfileUpload.subscribe(file => this.categoriesfileUpload = file);
     this.authenticationService.departmentfileUplaod.subscribe(file => this.departmentfileUpload = file);
@@ -49,7 +49,8 @@ export class SidebarComponent implements OnInit {
     this.authenticationService.parametersByDepartmentfileUpload.subscribe(file => this.parametersByDepartmentfileUpload = file);
     this.authenticationService.stockfileUplaod.subscribe(file => this.stockfileUpload = file);
     this.authenticationService.salefileUpload.subscribe(file => this.salefileUpload = file);
-    if (this.customer != "") {
+    if (this.customer != "")
+    {
       this.customerId = this.customer;
     }
    
@@ -116,11 +117,15 @@ export class SidebarComponent implements OnInit {
 
   onChange() {
     debugger;
+    
     this.storeName = this.stores.find((x: { id: any; })=>x.id == this.storeId)?.name;
+    this.storeAddress=this.stores.find((x: { id: any; })=>x.id == this.storeId)?.storeAddress;
+
     if (this.customerId!=undefined && this.storeId!=undefined &&  this.stockyear!= undefined) {
       this.isFileUploadOption= true ;
       let stockdate = new Date(this.stockyear.year, this.stockyear.month - 1, this.stockyear.day + 1);
       this.stockyear.day = this.stockyear.day + 1;
+     
       var event = new Date(stockdate);
       let date = JSON.stringify(event)
       date = date.slice(1, 11)
@@ -130,10 +135,14 @@ export class SidebarComponent implements OnInit {
         storeId: this.storeId,
         stockDate: date,
         storeName:this.storeName,
+        storeAddress:this.storeAddress,
       };
+
       this.authenticationService.setCustomerId(this.customerId);
       this.authenticationService.setStoreId(this.storeId);
       this.authenticationService.setStoreName(this.storeName);
+      this.authenticationService.setStoreAddress(this.storeAddress);
+
       this.authenticationService.setStockDate(stockdate);
       this.authenticationService.getstockData(workload);
       this.authenticationService.getMasterData(workload);

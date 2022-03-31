@@ -28,6 +28,12 @@ export class SummarybyDepartmentComponent implements OnInit {
   modalClass: string | undefined;
   departments: any;
   form: FormGroup ;
+  storeAddress: any;
+  total: number | any;
+  price: number | any;
+  value:any=[];
+  soh: number| any;
+  exprice: number| any;
   constructor(private formbuilder:FormBuilder, private modalService:NgbModal,private authenticationService: UserService,private reportOptionLoadingServices:reportOptionLoadingServices, private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) 
   {
     this.getLabelInformation();
@@ -36,6 +42,7 @@ export class SummarybyDepartmentComponent implements OnInit {
     })
     
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
+    this.authenticationService.storeAddress.subscribe(user => this.storeAddress = user);
     this.authenticationService.stockDate.subscribe((date: Date) => {
       debugger
       // this.stockDate =  date.setDate(date.getDate() - 1);
@@ -64,14 +71,50 @@ export class SummarybyDepartmentComponent implements OnInit {
     .pipe(first())
     .subscribe({
       next: (response: any) => {
-        console.log("response : ",response);
         this.spinner.hide();
        this.reportList=response;
+       this.findsum(response);  
        this.departments = [...new Set(response.map((x: { department: any; }) => x.department))]; 
       }
     });
   }
+  findsum(data:any[])
+  { 
+    debugger;
+      this.value=data    
+    
+    for(let j=0;j<data.length;j++)
+    {   
+      debugger;
+      //for Quantity Price
+      var firstprice=parseFloat(this.price)
+      var secondprice=parseFloat(this.value[j].soh);
+     
+    
+     
+// for importe
+var firstimporte=parseFloat(this.exprice)
+var secondimporte=parseFloat(this.value[j].soh);
+var finalimporte=secondimporte* parseInt(this.value[j].precVtaNorm) *-1;
 
+
+if (!firstimporte)
+      firstimporte = 0;
+      if (!secondimporte)
+      secondimporte = 0;
+
+
+      if (!firstprice)
+        firstprice = 0;
+      if (!secondprice)
+         secondprice = 0;     
+debugger;
+
+      this.price=firstprice + secondprice;
+      this.exprice=firstimporte+finalimporte;
+
+    }
+  }
   
   openPDF() {
     const response = document.getElementById('htmlData') as HTMLElement;        

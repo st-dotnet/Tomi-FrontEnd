@@ -21,9 +21,11 @@ export class ExtendedPricesComponent implements OnInit {
   storeName: any;
   year: any;
   stockDate: Date = new Date();
-    priceValue:any;
+  priceValue:any;
+  storeAddress: any;
   constructor(private reportOptionLoadingServices:reportOptionLoadingServices,private authenticationService: UserService,  private spinner: NgxSpinnerService,private toastrService: ToastrService,private userService:UserService ) {
     this.authenticationService.storeName.subscribe(user => this.storeName = user);
+    this.authenticationService.storeAddress.subscribe(user => this.storeAddress = user);
     this.authenticationService.stockDate.subscribe((date: Date) => {
       debugger
      // this.stockDate =  date.setDate(date.getDate() - 1);
@@ -70,9 +72,7 @@ export class ExtendedPricesComponent implements OnInit {
        next: (response: any) => {
         this.reportList=response;
         console.log("res",response)
-            
         this.spinner.hide();
-     
         const myArrayFiltered = this.reportList.filter((x: any)=>x?.orderJob?.salePrice.indexOf(this.priceValue) > -1);
        this.reportList = myArrayFiltered;
      

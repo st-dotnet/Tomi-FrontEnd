@@ -7,6 +7,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
+import { reportOptionLoadingServices } from '@app/_services/reportOptionLoadingServices';
+import { DEBUG } from '@angular/compiler-cli/src/ngtsc/logging/src/console_logger';
 
 @Component({
   selector: 'app-adjustmentsinventory',
@@ -35,8 +37,12 @@ export class AdjustmentsinventoryComponent implements OnInit {
   isTagvalueExist:  boolean= false;
   form: FormGroup;
   loading: boolean = false;
+  voidTagList: any;
+  c_value: any;
+  charts_selected: any;
   constructor(private formBuilder: FormBuilder, private modalService: NgbModal,
   private stockAdjustmentService: StockAdjustmentService,
+  private reportOptionLoadingServices:reportOptionLoadingServices,
   private spinner: NgxSpinnerService,
   private toastrService: ToastrService, private userservice: UserService,private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -55,6 +61,7 @@ export class AdjustmentsinventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAdjustment();
+  
 
     // this.getAdjustmentById("9FC3863D-28D9-46B1-71BE-08D9DF53FEED");
     this.adjustmentform = this.formBuilder.group({
@@ -89,8 +96,23 @@ export class AdjustmentsinventoryComponent implements OnInit {
       rec: ['', Validators.required]
     })
   }
+  getVoidTag()
+  {
+    debugger;
+    this.spinner.show();
+    this.reportOptionLoadingServices.getVoidTagDataAsync()
+      .pipe(first())
+      .subscribe({
+        next: (response: any) => 
+        {
+          this.voidTagList=response;
+          this.spinner.hide();
+        }
+      });
+  }
 
   open(content: any) {
+    this.getVoidTag();
     this.modalClass = 'mymodal',
     this.submitted = false;
     this.isSubmit = false;
@@ -100,9 +122,12 @@ export class AdjustmentsinventoryComponent implements OnInit {
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       windowClass: 'modal-filteradd'
-    }).result.then((result) => {
-    }, (reason) => {
+    }).result.then((result) => 
+    {
+    }, (reason) => 
+    {
     });
+   
   }
 
   get f() { return this.adjustmentform.controls; }
@@ -152,7 +177,8 @@ export class AdjustmentsinventoryComponent implements OnInit {
             this.isSubmit = true;
             this.invalidsku = false;
           }
-          else {
+          else 
+          {
             this.isSubmit = false;
             this.invalidsku = true;
             this.adjustmentform.controls["department"].setValue('');
@@ -164,7 +190,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
       });
     this.spinner.hide();
   }
-
   checkBarCodeData(barcode: any) {
     debugger;
     this.spinner.show();
@@ -196,7 +221,6 @@ export class AdjustmentsinventoryComponent implements OnInit {
       });
     this.spinner.hide();
   }
-
   checkTagValue(tagValue: any){
     this.isTagvalueExist= false;
     this.stockAdjustmentService.getTagValue(tagValue.target.value)
@@ -206,7 +230,9 @@ export class AdjustmentsinventoryComponent implements OnInit {
         this.isTagvalueExist= response;
       }});
   }
+
   getAdjustment() {
+    debugger;
     this.spinner.show();
     this.stockAdjustmentService.getAdjustment()
       .pipe(first())
@@ -367,30 +393,50 @@ export class AdjustmentsinventoryComponent implements OnInit {
     this.stockFilter = new StockFilterModel();
   }
 
-  onCheckboxChange(e:any) {
-    const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+  onCheckboxChange(e:any) 
+  {
+  debugger;
+ 
     if (e.target.checked) {
-      checkArray.push(new FormControl(e.target.value));
-    } else {
-      let i: number = 0;
-      checkArray.controls.forEach((item: any) => {
-        if (item.value == e.target.value) {
-          checkArray.removeAt(i);
-          return;
-        }
-        i++;
-      });
+        this.c_value = e.target.value;
+       // this.charts_selected.push(this.c_value);
+}
+    // const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+    // if (e.target.checked)
+    //  {
+    //   checkArray.push(new FormControl(e.target.value));
+    // } else {
+    //   let i: number = 0;
+    //   checkArray.controls.forEach((item: any) => {
+    //     if (item.value == e.target.value) 
+    //     {
+    //       checkArray.removeAt(i);
+    //       return;
+    //     }
+    //     i++;
+    //   });
+    //   this.form.reset(); 
     }
-  }
-
+  // submitForm() {
+  //   this.stockAdjustmentService.VoidTag(this.form.value.checkArray)
+  //   .pipe(first())
+  //   .subscribe({
+  //     next: (response) => {
+  //       this.getAdjustment();
+  //       this.modalService.dismissAll();
+  //     }
+  //   });
+  // }
   submitForm() {
-    this.stockAdjustmentService.VoidTag(this.form.value.checkArray)
+    debugger;
+    this.stockAdjustmentService.VoidTagData(this.c_value)
     .pipe(first())
     .subscribe({
       next: (response) => {
-        this.getAdjustment();
         this.modalService.dismissAll();
       }
     });
   }
 }
+
+

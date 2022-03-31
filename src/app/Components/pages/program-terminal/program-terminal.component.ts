@@ -21,12 +21,13 @@ export class ProgramTerminalComponent implements OnInit {
   customerId: undefined;
   storeId: undefined;
   stockyear: undefined; 
+  storeName: any;
+  year: any;
   constructor( private stockadjustment: StockAdjustmentService,
     private spinner: NgxSpinnerService,
     private toastrService: ToastrService,
     private accountService: SessionService, private authenticationService: UserService
     ,private generateFilesService:generateMF1Service) { }
-
   ngOnInit(): void {
     this.options = {
     fieldSeparator: ' ',
@@ -40,7 +41,7 @@ export class ProgramTerminalComponent implements OnInit {
     headers: ["sku", "department", "retailPrice"],
     nullToEmptyString: true,
     };
-
+    
     this.options2 = {
       fieldSeparator: ' ',
       quoteStrings: '',
@@ -57,11 +58,10 @@ export class ProgramTerminalComponent implements OnInit {
     this.genratecsvFiles(user.user.customerId);
     //this.genratecsvFiles("B74DDD14-6340-4840-95C2-DB12554843E8");
   }
-
-  genratekey(){    
+  genratekey()
+  {    
     this.uniqKey = Math.floor(Math.random() * 1000000);
   }
-
   // genrateFiles(){
   // //   this.authenticationService.customerId.subscribe(user => this.customerId = user);
   // //   this.authenticationService.storeId.subscribe(user => this.storeId = user);
@@ -79,34 +79,36 @@ export class ProgramTerminalComponent implements OnInit {
   // //     this.toastrService.error("Data Not Found.");
   // //     this.isgenrateFile=false;
   // //   }
-
-
   // }
-
-  genrateFiles() {
+  genrateFiles() 
+  {
     debugger
-  
     const model = {
       operation : this.operation,
       inventoryKey: this.uniqKey
     }
     this.spinner.show();
-    this.generateFilesService.GenerateMF1Information(model)
+    if(model.operation==null)
+    {this.toastrService.error("Please select the operation first.");}
+  
+    this.generateFilesService.GenerateMF1Information(this.operation,this.uniqKey)
       .subscribe({
        next: (response: any) => {
+        if(response.error)
+          this.toastrService.error(response.error);
+          else
          this.spinner.hide();
+         this.toastrService.success("Terminal Data is generated for SMF & Department.");
          this.data=response;
        }
      });
-  }
-
-
+    }
   getAction(value: any){
     debugger
     this.operation = value;
   }
-
-  genratecsvFiles(custid:any){
+  genratecsvFiles(custid:any)
+  {
     this.spinner.show();
      this.stockadjustment.getAdjustmentByCustomerId(custid).subscribe((response=>{
        this.data=response;

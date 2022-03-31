@@ -20,20 +20,23 @@
         <div class="card carddetails" >        
             <div class="card-body">
                 <div class="content-body"  id="htmlData">
-                    <table width="100%">
+                    <table  width="100%"  style="border: 1px solid">
                         <tr>
-                            <td style="font-weight:bold;">
-                                <p>Inventory Date: <br>{{stockDate| date:'d/MM/y'}}</p>
-                            </td>
-                            <td style="font-weight:bold; padding-left: 80px;">Code Not Found Details</td>
+                          <th></th>
+                          <th>Code Not Found Details</th>
+                          <th></th>
                         </tr>
                         <tr>
-                            <td style="font-weight:bold;">Print Date/Time: {{printDate | date:'d/MM/y h:mm'}}</td>
-                            <td  style="font-weight:bold; padding-left: 80px;">{{storeName}}
-                            </td>
+                          <td style="width: 600px;"><b>Inventory Date: </b>{{stockDate| date:'d/MM/y'}}</td>
+                          <td></td>
+                          <td>{{storeName}}</td>
                         </tr>
-    
-                    </table>
+                        <tr>
+                          <td style="width: 600px;"><b>Print Date/Time:</b> {{printDate | date:'d/MM/y h:mm'}}</td>
+                          <td></td>
+                          <td>{{storeAddress}}</td>
+                        </tr>
+                      </table>
                     <table class="table table-striped table-ui-same" id="datatableexample" >
                         <thead>
                             <tr>
@@ -51,21 +54,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let reportData of reportList | paginate: { itemsPerPage: 10, currentPage: p };; let i = index">
+                            <tr *ngFor="let reportData of reportList | paginate: { itemsPerPage: 15, currentPage: p }; let i = index">
                               <td>{{reportData.tag}}</td>
                               <td>{{reportData.shelf}}</td>
                               <td>{{reportData.rec}}</td>
                               <td>{{reportData.barcode}}</td>
                               <td>{{reportData.department}}</td>
-                              <td>{{reportData.orderJob.salePrice}}</td>
+                              <td>${{reportData.orderJob.salePrice}}</td>
                               <td>{{reportData.quantity}}</td>
-                              <td>{{reportData.orderJob.salePrice * reportData.quantity}}</td>
+                              <td>${{reportData.orderJob.salePrice * reportData.quantity}}</td>
                             </tr>
                             <tr>
-                                <td colspan="5"></td>
-                                <td>Total Price: {{price}}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td>Total Quantity: {{total}}</td>
-                               
+                                <td>Total Price: ${{price}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -77,6 +84,9 @@
                 <ngx-spinner class="custom-loader" type = "square-jelly-box" size = "medium" [fullScreen]="false" style="top:auto;">
                     <p style="color: white">Loading...</p>
                 </ngx-spinner>
+                <div class="pagination-ui">
+                    <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+                </div>
             </div>
         </div>   
   </div>

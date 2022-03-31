@@ -25,7 +25,8 @@
               </button>
 
         </div>
-
+        <br>
+        <textarea class="form-control" id="storeAddress" rows="3" *ngFor="let store of stores" [value]="store.storeAddress">{{store.storeAddress}}></textarea>
     </div>
     <div class="listing">
         <h3 class="head-listing">Before Starting</h3>
@@ -60,10 +61,11 @@
             <li><a [routerLink]="['/summarybyDepartment']"><span class="list-ico icon5"></span>Items Not Counted</a></li>
             <li><a [routerLink]="['/correctionsbyDepartment']"><span class="list-ico icon5"></span>Corrections by Department</a></li>
             <li><a [routerLink]="['/reportdep']"><span class="list-ico icon5"></span>Dept BreakDown Report</a></li>
-            <li><a [routerLink]="['/ranges']"><span class="list-ico icon5"></span>Ranges</a></li>
+            <li><a [routerLink]="['/tagsnotcounted']"><span class="list-ico icon5"></span>Tags Not Counted</a></li>
             <li><a [routerLink]="['/checkDateTime']"><span class="list-ico icon5"></span>Check Date Time</a></li>
             <li><a [routerLink]="['/customerReport']"><span class="list-ico icon5"></span>Customer Report</a></li>
             <li><a [routerLink]="['/billingReport']"><span class="list-ico icon5"></span>Billing Report</a></li>
+            <li><a [routerLink]="['/validationReport']"><span class="list-ico icon5"></span>Validation Reports</a></li>
            
         </ul>
     </div>
